@@ -1,0 +1,31 @@
+{
+  "name": "auto-content-pipeline",
+  "version": "1.0.0",
+  "description": "Pipeline completo de criação e publicação automática de vídeos YouTube e TikTok",
+  "type": "module",
+  "scripts": {
+    "pipeline": "node pipeline/index.js",
+    "research": "node pipeline/1-research.js",
+    "script": "node pipeline/2-script.js",
+    "voice": "node pipeline/3-voice.js",
+    "media": "node pipeline/4-media.js",
+    "thumbnail": "node pipeline/5-thumbnail.js",
+    "video": "node pipeline/6-video.js",
+    "publish": "node pipeline/7-publish.js",
+    "dashboard": "next dev dashboard"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.40.0",
+    "axios": "^1.7.0",
+    "dotenv": "^16.4.0",
+    "form-data": "^4.0.0",
+    "node-fetch": "^3.3.2",
+    "openai": "^4.67.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

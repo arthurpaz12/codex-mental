@@ -1,0 +1,121 @@
+{
+  "pipeline": {
+    "frequency": "daily",
+    "publishTime": "10:00",
+    "timezone": "America/Sao_Paulo",
+    "outputDir": "./output",
+    "requireApproval": false
+  },
+
+  "niche": {
+    "name": "Psicologia Obscura e Comportamento Humano",
+    "brand": "Codex Mental",
+    "categories": ["leitura de pessoas", "linguagem corporal", "persuasão", "influência", "psicologia cognitiva"],
+    "language": "pt-BR",
+    "targetAudience": "adultos 20-40 anos interessados em entender e influenciar pessoas",
+    "style": "intrigante, revelador, levemente obscuro — como revelar segredos que poucos conhecem",
+    "contentPillars": [
+      "leitura de pessoas e detecção de mentiras",
+      "linguagem corporal e poder",
+      "persuasão e influência psicológica",
+      "atração e carisma",
+      "manipulação e como se defender"
+    ],
+    "hotmartProducts": [
+      {
+        "name": "O Código da Leitura Mental",
+        "id": "6073525",
+        "cta": "Aprenda a ler qualquer pessoa: link na bio",
+        "pillars": ["leitura de pessoas", "linguagem corporal", "psicologia cognitiva"]
+      },
+      {
+        "name": "A Arte da Sedução",
+        "id": "6918368",
+        "cta": "Técnica completa no link da bio",
+        "pillars": ["atração e carisma", "persuasão e influência psicológica"]
+      }
+    ]
+  },
+
+  "script": {
+    "model": "claude-opus-4-8",
+    "durationSeconds": 60,
+    "wordCount": { "min": 120, "max": 160 },
+    "tone": "misterioso, revelador e direto — como alguém compartilhando um segredo poderoso",
+    "hooks": [
+      "Existe um truque psicológico que...",
+      "Neurocientistas descobriram que...",
+      "O lado obscuro da psicologia revela que...",
+      "90% das pessoas não sabem que...",
+      "Você consegue identificar quando alguém está..."
+    ],
+    "cta": "Siga o Codex Mental para dominar a psicologia humana."
+  },
+
+  "voice": {
+    "provider": "elevenlabs",
+    "stability": 0.5,
+    "similarityBoost": 0.75,
+    "style": 0.3,
+    "speakerBoost": true
+  },
+
+  "media": {
+    "provider": "pexels",
+    "perPage": 15,
+    "orientation": "landscape",
+    "minWidth": 1920,
+    "videoMaxDuration": 30,
+    "preferVideo": true
+  },
+
+  "thumbnail": {
+    "provider": "dalle3",
+    "youtube": { "width": 1280, "height": 720, "quality": "hd" },
+    "tiktok": { "width": 1080, "height": 1920, "quality": "hd" },
+    "style": "dark dramatic atmosphere, deep purple and black tones, mysterious silhouettes, cinematic lighting, bold white text overlay, psychological thriller aesthetic"
+  },
+
+  "video": {
+    "provider": "creatomate",
+    "subtitles": {
+      "enabled": true,
+      "style": "animated",
+      "fontSize": 48,
+      "fontColor": "#FFFFFF",
+      "strokeColor": "#000000",
+      "strokeWidth": 3,
+      "highlight": true,
+      "highlightColor": "#FFD700"
+    },
+    "music": {
+      "enabled": true,
+      "volume": 0.15,
+      "fadeIn": 2,
+      "fadeOut": 3
+    }
+  },
+
+  "youtube": {
+    "enabled": true,
+    "category": "27",
+    "privacyStatus": "public",
+    "defaultTags": ["psicologia", "comportamento humano", "leitura de pessoas", "linguagem corporal", "persuasão", "psicologia obscura", "codex mental"],
+    "language": "pt"
+  },
+
+  "tiktok": {
+    "enabled": true,
+    "privacyLevel": "PUBLIC_TO_EVERYONE",
+    "disableDuet": false,
+    "disableStitch": false,
+    "disableComment": false,
+    "defaultHashtags": ["#psicologia", "#comportamentohumano", "#leituradevessoas", "#linguagemcorporal", "#psicologiaobscura", "#codexmental", "#persuasao"]
+  },
+
+  "trending": {
+    "sources": ["google_trends", "youtube_trending", "reddit"],
+    "regions": ["BR"],
+    "refreshHours": 6
+  }
+}
