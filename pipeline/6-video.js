@@ -1,151 +1,153 @@
 /**
- * Módulo 6: Video — Montagem do vídeo com Creatomate
+ * Módulo 6: Video — Montagem local com FFmpeg (gratuito)
  *
- * Combina áudio (ElevenLabs) + footage (Pexels) + thumbnail (DALL-E)
- * em um vídeo final com legendas animadas e música de fundo.
+ * Combina áudio (ElevenLabs) + footage (Pexels) + thumbnail
+ * em um vídeo final com legendas e música de fundo.
+ * Sem custo de API externa.
  */
 
 import "dotenv/config";
-import { writeFileSync, mkdirSync, readFileSync } from "fs";
+import { mkdirSync, existsSync, writeFileSync, readFileSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
+import { execSync, spawn } from "child_process";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const CREATOMATE_API_URL = "https://api.creatomate.com/v1";
-
-// ---------------------------------------------------------------------------
-// Polling — aguarda renderização completar
-// ---------------------------------------------------------------------------
-
-async function pollRender(renderId, apiKey, maxWaitMs = 300000) {
-  const start = Date.now();
-  const interval = 5000; // verifica a cada 5s
-
-  while (Date.now() - start < maxWaitMs) {
-    await new Promise((r) => setTimeout(r, interval));
-
-    const res = await fetch(`${CREATOMATE_API_URL}/renders/${renderId}`, {
-      headers: { Authorization: `Bearer ${apiKey}` },
-    });
-
-    if (!res.ok) throw new Error(`Creatomate API erro ${res.status}`);
-    const render = await res.json();
-
-    console.log(`   → Status: ${render.status}`);
-
-    if (render.status === "succeeded") return render;
-    if (render.status === "failed")
-      throw new Error(`Render falhou: ${render.error_message}`);
+// Detecta o caminho do ffmpeg
+function getFFmpegPath() {
+  try {
+    return execSync("which ffmpeg").toString().trim();
+  } catch {
+    return "ffmpeg";
   }
-
-  throw new Error("Timeout aguardando renderização (5 min)");
 }
 
 // ---------------------------------------------------------------------------
-// Download do vídeo renderizado
+// Executa comando FFmpeg
 // ---------------------------------------------------------------------------
 
-async function downloadVideo(url, outputPath) {
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`Erro ao baixar vídeo: ${res.status}`);
-  const buffer = await res.arrayBuffer();
-  writeFileSync(outputPath, Buffer.from(buffer));
-  return outputPath;
+function runFFmpeg(args, label = "") {
+  return new Promise((resolve, reject) => {
+    const ffmpeg = getFFmpegPath();
+    console.log(`   → FFmpeg${label ? " [" + label + "]" : ""}...`);
+
+    const proc = spawn(ffmpeg, args, { stdio: ["ignore", "ignore", "pipe"] });
+    let stderr = "";
+    proc.stderr.on("data", (d) => (stderr += d.toString()));
+    proc.on("close", (code) => {
+      if (code === 0) resolve();
+      else reject(new Error(`FFmpeg falhou (${code}): ${stderr.slice(-500)}`));
+    });
+  });
 }
 
 // ---------------------------------------------------------------------------
-// Monta o payload para o Creatomate
+// Gera arquivo de legendas SRT a partir do script
 // ---------------------------------------------------------------------------
 
-function buildCreatomatePayload(scriptData, voiceData, mediaData, thumbnailData, format) {
-  const settings = JSON.parse(
-    readFileSync(join(__dirname, "../config/settings.json"), "utf-8")
-  );
+function generateSRT(script, durationSeconds) {
+  const sentences = script
+    .split(/[.!?]+/)
+    .map((s) => s.trim())
+    .filter((s) => s.length > 0);
 
-  const isYoutube = format === "youtube";
-  const templateId = isYoutube
-    ? process.env.CREATOMATE_TEMPLATE_YOUTUBE
-    : process.env.CREATOMATE_TEMPLATE_TIKTOK;
+  const timePerSentence = durationSeconds / sentences.length;
+  let srt = "";
 
-  // Pega os clips de vídeo disponíveis
-  const videoClips = (mediaData.videos || []).slice(0, 5).map((v, i) => ({
-    [`clip_${i + 1}`]: v.localPath || v.url,
-  }));
+  sentences.forEach((sentence, i) => {
+    const start = i * timePerSentence;
+    const end = (i + 1) * timePerSentence;
 
-  const modifications = {
-    // Áudio principal (narração)
-    narration: voiceData.audioPath,
+    const fmt = (s) => {
+      const h = Math.floor(s / 3600).toString().padStart(2, "0");
+      const m = Math.floor((s % 3600) / 60).toString().padStart(2, "0");
+      const sec = Math.floor(s % 60).toString().padStart(2, "0");
+      const ms = Math.floor((s % 1) * 1000).toString().padStart(3, "0");
+      return `${h}:${m}:${sec},${ms}`;
+    };
 
-    // Thumbnail como primeiro frame
-    thumbnail: isYoutube ? thumbnailData?.youtube : thumbnailData?.tiktok,
-
-    // Clips de vídeo como B-roll
-    ...Object.assign({}, ...videoClips),
-
-    // Configurações de legenda
-    subtitle_text: scriptData.script,
-    subtitle_font_size: settings.video.subtitles.fontSize,
-    subtitle_color: settings.video.subtitles.fontColor,
-    subtitle_highlight_color: settings.video.subtitles.highlightColor,
-
-    // Música de fundo (volume baixo)
-    music_volume: settings.video.music.volume,
-  };
-
-  // Remove valores nulos/undefined
-  Object.keys(modifications).forEach(
-    (k) => modifications[k] == null && delete modifications[k]
-  );
-
-  return { template_id: templateId, modifications };
-}
-
-// ---------------------------------------------------------------------------
-// Renderização via Creatomate (com template)
-// ---------------------------------------------------------------------------
-
-async function renderWithTemplate(payload, apiKey) {
-  const res = await fetch(`${CREATOMATE_API_URL}/renders`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
+    srt += `${i + 1}\n${fmt(start)} --> ${fmt(end)}\n${sentence}\n\n`;
   });
 
-  if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`Creatomate API erro ${res.status}: ${err}`);
-  }
-
-  const renders = await res.json();
-  return Array.isArray(renders) ? renders[0] : renders;
+  return srt;
 }
 
 // ---------------------------------------------------------------------------
-// Renderização fallback (sem template — composição básica)
+// Monta vídeo YouTube (landscape 1280x720)
 // ---------------------------------------------------------------------------
 
-async function renderFallback(scriptData, voiceData, mediaData, outputPath) {
-  console.log("   ⚠️  Template não configurado — usando renderização básica");
-  console.log("   → Para vídeos completos, configure CREATOMATE_TEMPLATE_YOUTUBE/TIKTOK no .env");
+async function buildYoutubeVideo(audioPath, videoClips, thumbnailPath, srtPath, outputPath, duration) {
+  const hasClips = videoClips && videoClips.length > 0;
 
-  // Salva um JSON com todos os dados para montagem manual ou futura integração
-  const fallbackData = {
-    status: "pending_render",
-    message: "Configure o template Creatomate para renderização automática",
-    assets: {
-      audio: voiceData.audioPath,
-      videos: (mediaData.videos || []).map((v) => v.localPath),
-      script: scriptData.script,
-      title: scriptData.title,
-    },
-  };
+  if (hasClips) {
+    // Cria lista de clips para concatenação
+    const listPath = outputPath.replace(".mp4", "-list.txt");
+    const clipList = videoClips
+      .map((v) => `file '${v.localPath || v}'`)
+      .join("\n");
+    writeFileSync(listPath, clipList);
 
-  writeFileSync(outputPath.replace(".mp4", "-assets.json"), JSON.stringify(fallbackData, null, 2));
-  return null;
+    // Concatena clips + audio + legendas
+    await runFFmpeg([
+      "-f", "concat", "-safe", "0", "-i", listPath,
+      "-i", audioPath,
+      "-vf", `scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720,subtitles=${srtPath}:force_style='FontName=Arial,FontSize=22,PrimaryColour=&Hffffff,OutlineColour=&H000000,Outline=2,Bold=1,Alignment=2'`,
+      "-c:v", "libx264", "-preset", "fast", "-crf", "23",
+      "-c:a", "aac", "-b:a", "128k",
+      "-shortest", "-y",
+      outputPath,
+    ], "YouTube");
+  } else {
+    // Fallback: usa thumbnail como imagem estática
+    await runFFmpeg([
+      "-loop", "1", "-i", thumbnailPath,
+      "-i", audioPath,
+      "-vf", `scale=1280:720,subtitles=${srtPath}:force_style='FontName=Arial,FontSize=22,PrimaryColour=&Hffffff,OutlineColour=&H000000,Outline=2,Bold=1,Alignment=2'`,
+      "-c:v", "libx264", "-preset", "fast", "-crf", "23",
+      "-c:a", "aac", "-b:a", "128k",
+      "-t", String(duration),
+      "-shortest", "-y",
+      outputPath,
+    ], "YouTube (imagem)");
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Monta vídeo TikTok (portrait 1080x1920)
+// ---------------------------------------------------------------------------
+
+async function buildTiktokVideo(audioPath, videoClips, thumbnailPath, srtPath, outputPath, duration) {
+  const hasClips = videoClips && videoClips.length > 0;
+
+  if (hasClips) {
+    const listPath = outputPath.replace(".mp4", "-list.txt");
+    const clipList = videoClips
+      .map((v) => `file '${v.localPath || v}'`)
+      .join("\n");
+    writeFileSync(listPath, clipList);
+
+    await runFFmpeg([
+      "-f", "concat", "-safe", "0", "-i", listPath,
+      "-i", audioPath,
+      "-vf", `scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,subtitles=${srtPath}:force_style='FontName=Arial,FontSize=28,PrimaryColour=&Hffffff,OutlineColour=&H000000,Outline=3,Bold=1,Alignment=2,MarginV=80'`,
+      "-c:v", "libx264", "-preset", "fast", "-crf", "23",
+      "-c:a", "aac", "-b:a", "128k",
+      "-shortest", "-y",
+      outputPath,
+    ], "TikTok");
+  } else {
+    await runFFmpeg([
+      "-loop", "1", "-i", thumbnailPath,
+      "-i", audioPath,
+      "-vf", `scale=1080:1920,subtitles=${srtPath}:force_style='FontName=Arial,FontSize=28,PrimaryColour=&Hffffff,OutlineColour=&H000000,Outline=3,Bold=1,Alignment=2,MarginV=80'`,
+      "-c:v", "libx264", "-preset", "fast", "-crf", "23",
+      "-c:a", "aac", "-b:a", "128k",
+      "-t", String(duration),
+      "-shortest", "-y",
+      outputPath,
+    ], "TikTok (imagem)");
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -153,40 +155,42 @@ async function renderFallback(scriptData, voiceData, mediaData, outputPath) {
 // ---------------------------------------------------------------------------
 
 export async function assembleVideo(scriptData, voiceData, mediaData, thumbnailData, outputDir) {
-  const apiKey = process.env.CREATOMATE_API_KEY;
-
   mkdirSync(join(outputDir, "video"), { recursive: true });
 
-  console.log("🎞️  [Video] Montando vídeo com Creatomate...");
+  console.log("🎞️  [Video] Montando vídeo com FFmpeg...");
+
+  const audioPath = voiceData.audioPath;
+  const duration = voiceData.duration || 60;
+  const videoClips = mediaData?.videos || [];
+
+  // Gera legenda SRT
+  const srtPath = join(outputDir, "video", "subtitles.srt");
+  const srt = generateSRT(scriptData.script, duration);
+  writeFileSync(srtPath, srt, "utf-8");
+  console.log(`   → Legendas geradas: ${srt.split("\n\n").length - 1} blocos`);
 
   const results = {};
 
-  for (const format of ["youtube", "tiktok"]) {
-    const outputPath = join(outputDir, "video", `${format}.mp4`);
-    const templateId =
-      format === "youtube"
-        ? process.env.CREATOMATE_TEMPLATE_YOUTUBE
-        : process.env.CREATOMATE_TEMPLATE_TIKTOK;
+  // YouTube
+  const youtubePath = join(outputDir, "video", "youtube.mp4");
+  const youtubeThumbnail = thumbnailData?.youtube || null;
+  try {
+    await buildYoutubeVideo(audioPath, videoClips, youtubeThumbnail, srtPath, youtubePath, duration);
+    results.youtube = youtubePath;
+    console.log(`   ✅ YouTube: ${youtubePath}`);
+  } catch (e) {
+    console.error(`   ❌ YouTube falhou: ${e.message}`);
+  }
 
-    if (!apiKey || !templateId) {
-      results[format] = await renderFallback(scriptData, voiceData, mediaData, outputPath);
-      continue;
-    }
-
-    console.log(`   → Renderizando ${format.toUpperCase()}...`);
-
-    const payload = buildCreatomatePayload(
-      scriptData, voiceData, mediaData, thumbnailData, format
-    );
-
-    const render = await renderWithTemplate(payload, apiKey);
-    console.log(`   → Render ID: ${render.id} | Aguardando...`);
-
-    const completed = await pollRender(render.id, apiKey);
-    await downloadVideo(completed.url, outputPath);
-
-    results[format] = outputPath;
-    console.log(`   ✅ ${format.toUpperCase()} salvo: ${outputPath}`);
+  // TikTok
+  const tiktokPath = join(outputDir, "video", "tiktok.mp4");
+  const tiktokThumbnail = thumbnailData?.tiktok || null;
+  try {
+    await buildTiktokVideo(audioPath, videoClips, tiktokThumbnail, srtPath, tiktokPath, duration);
+    results.tiktok = tiktokPath;
+    console.log(`   ✅ TikTok: ${tiktokPath}`);
+  } catch (e) {
+    console.error(`   ❌ TikTok falhou: ${e.message}`);
   }
 
   console.log("✅ [Video] Montagem concluída!");
@@ -199,10 +203,10 @@ export async function assembleVideo(scriptData, voiceData, mediaData, thumbnailD
 }
 
 // ---------------------------------------------------------------------------
-// Execução direta: node pipeline/6-video.js
+// Execução direta
 // ---------------------------------------------------------------------------
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  console.log("ℹ️  Módulo 6 carregado. Execute via pipeline/index.js para teste completo.");
-  console.log("   → node pipeline/index.js --step 1,2,3,4,5,6");
+  console.log("ℹ️  Módulo 6 (FFmpeg) carregado. Execute via pipeline/index.js");
+  console.log("   → node pipeline/index.js");
 }
