@@ -213,13 +213,17 @@ function buildTiktokSVG(title) {
 // Export principal
 // ---------------------------------------------------------------------------
 
+function stripEmojis(str) {
+  return str.replace(/[\u{1F300}-\u{1FFFF}|\u{2600}-\u{27FF}|\u{2300}-\u{23FF}|\u{FE00}-\u{FEFF}|\u{1F000}-\u{1F02F}|\u{1F0A0}-\u{1F0FF}|\u{1F100}-\u{1F1FF}|\u{1F200}-\u{1F2FF}|\u{1F900}-\u{1F9FF}|\u{1FA00}-\u{1FA6F}|\u{1FA70}-\u{1FAFF}]/gu, "").trim();
+}
+
 export async function generateThumbnail(topicData, scriptData, outputDir) {
   mkdirSync(join(outputDir, "thumbnails"), { recursive: true });
 
   console.log("🖼️  [Thumbnail] Gerando thumbnails com Sharp...");
 
-  const title = scriptData.title?.youtube || topicData.topic || "Codex Mental";
-  const tiktokTitle = scriptData.title?.tiktok || title;
+  const title = stripEmojis(scriptData.title?.youtube || topicData.topic || "Codex Mental");
+  const tiktokTitle = stripEmojis(scriptData.title?.tiktok || title);
 
   const results = {};
 

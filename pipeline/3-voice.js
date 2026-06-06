@@ -64,6 +64,18 @@ async function generateAudio(text, outputPath) {
   const buffer = await response.arrayBuffer();
   writeFileSync(outputPath, Buffer.from(buffer));
 
+  // Acelera o áudio via FFmpeg (1.2x = mais natural para narração)
+  const speedPath = outputPath.replace(".mp3", "-fast.mp3");
+  const { execSync } = await import("child_process");
+  try {
+    execSync(`ffmpeg -i "${outputPath}" -filter:a "atempo=1.2" -y "${speedPath}" 2>/dev/null`);
+    // Substitui o original pelo acelerado
+    execSync(`mv "${speedPath}" "${outputPath}"`);
+    console.log(`   → Velocidade ajustada: 1.2x`);
+  } catch {
+    console.warn("   ⚠️  FFmpeg não disponível, mantendo velocidade original");
+  }
+
   const sizeKB = Math.round(buffer.byteLength / 1024);
   console.log(`✅ [Voice] Áudio salvo: ${outputPath} (${sizeKB} KB)`);
 
