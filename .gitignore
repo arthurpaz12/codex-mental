@@ -6,6 +6,7 @@ output/
 *.jpg
 *.jpeg
 *.png
+!dashboard/*.png
 .next/
 dashboard/.next/
 .env
