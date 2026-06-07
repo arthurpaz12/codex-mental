@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-07T22:40:04.528Z",
+  "lastUpdated": "2026-06-07T23:45:01.748Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -61,12 +61,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 351,
-          "likes": 7,
+          "views": 371,
+          "likes": 8,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-07T22:40:04.512Z"
+      "statsUpdatedAt": "2026-06-07T23:45:01.740Z"
     }
   ],
   "revenueProjection": {
