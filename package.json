@@ -12,7 +12,8 @@
     "thumbnail": "node pipeline/5-thumbnail.js",
     "video": "node pipeline/6-video.js",
     "publish": "node pipeline/7-publish.js",
-    "dashboard": "next dev dashboard"
+    "sound": "node pipeline/8-sound.js",
+    "dashboard": "npx serve dashboard"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.40.0",

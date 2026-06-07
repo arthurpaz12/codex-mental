@@ -28,6 +28,7 @@ import { generateThumbnail } from "./5-thumbnail.js";
 import { assembleVideo } from "./6-video.js";
 import { publishVideos } from "./7-publish.js";
 import { suggestSound } from "./8-sound.js";
+import { updateDashboard } from "./9-dashboard.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -165,10 +166,25 @@ async function run() {
       console.log(`   → Dica: ${state.sound.tip}`);
     }
 
+    // ── Atualiza dashboard (Vercel) ─────────────────────────────
+    try {
+      await updateDashboard(state);
+    } catch (e) {
+      console.warn(`   ⚠️  Falha ao atualizar dashboard: ${e.message}`);
+    }
+
   } catch (err) {
     console.error(`\n❌ Pipeline falhou no módulo: ${err.message}`);
     state.error = err.message;
+    state.completedAt = new Date().toISOString();
     save(outputDir, "pipeline-state.json", state);
+
+    try {
+      await updateDashboard(state);
+    } catch (e) {
+      console.warn(`   ⚠️  Falha ao atualizar dashboard: ${e.message}`);
+    }
+
     process.exit(1);
   }
 }
