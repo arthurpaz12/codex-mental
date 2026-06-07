@@ -13,7 +13,7 @@
 
 import "dotenv/config";
 import { mkdirSync, writeFileSync, existsSync, readdirSync } from "fs";
-import { join, dirname } from "path";
+import { join, dirname, basename } from "path";
 import { fileURLToPath } from "url";
 import { execSync, spawn } from "child_process";
 import sharp from "sharp";
@@ -451,6 +451,23 @@ export async function assembleVideo(scriptData, voiceData, mediaData, thumbnailD
   const title = stripEmojis(scriptData.title?.youtube || scriptData.title || "Codex Mental");
   const tiktokTitle = stripEmojis(scriptData.title?.tiktok || title);
 
+  // ── Nome de arquivo único por run ───────────────────────────────────────
+  // Importante: TikTok e YouTube podem barrar/sinalizar uploads repetidos
+  // quando o arquivo enviado tem sempre o mesmo nome (ex: sempre "tiktok.mp4")
+  // — gera fingerprint de "conteúdo duplicado". Por isso cada run grava com
+  // um nome único, baseado no ID do run (a pasta de output já tem timestamp)
+  // + um slug curto do título.
+  const runId = basename(outputDir);
+  const slugify = (s) =>
+    stripEmojis(s)
+      .toLowerCase()
+      .normalize("NFD").replace(/[̀-ͯ]/g, "") // remove acentos
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "")
+      .slice(0, 40);
+  const fileSlug = slugify(title) || "codex-mental";
+  const uniqueSuffix = `${fileSlug}-${runId}`;
+
   // Música ambiente (YouTube only) — coloca um arquivo em assets/music.mp3
   const musicPath = join(ASSETS_DIR, "music.mp3");
 
@@ -509,7 +526,7 @@ export async function assembleVideo(scriptData, voiceData, mediaData, thumbnailD
     console.warn(`   ⚠️  Legendas YT falhou: ${e.message}`);
   }
 
-  const youtubePath = join(outputDir, "video", "youtube.mp4");
+  const youtubePath = join(outputDir, "video", `youtube-${uniqueSuffix}.mp4`);
   try {
     await buildFinalVideo(ytListPath, audioPath, ytCaptions, youtubePath, musicPath, "YouTube", false);
     results.youtube = youtubePath;
@@ -556,7 +573,7 @@ export async function assembleVideo(scriptData, voiceData, mediaData, thumbnailD
     console.warn(`   ⚠️  Legendas TK falhou: ${e.message}`);
   }
 
-  const tiktokPath = join(outputDir, "video", "tiktok.mp4");
+  const tiktokPath = join(outputDir, "video", `tiktok-${uniqueSuffix}.mp4`);
   try {
     // TikTok sem música (vai adicionar som nativo no app)
     await buildFinalVideo(tkListPath, audioPath, tkCaptions, tiktokPath, null, "TikTok", true);
