@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-07T16:16:10.637Z",
+  "lastUpdated": "2026-06-07T19:53:55.942Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -33,11 +33,40 @@
       "topic": "O Gesto Secreto que Revela Quando Alguém Está Mentindo",
       "category": "ciência",
       "viralScore": 88,
-      "publish": [],
+      "publish": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=tOTJEifsk_o",
+          "videoId": "tOTJEifsk_o"
+        },
+        {
+          "platform": "youtube_shorts",
+          "url": "https://www.youtube.com/shorts/rcUQMbi4VXY",
+          "videoId": "rcUQMbi4VXY"
+        },
+        {
+          "platform": "tiktok",
+          "url": "https://www.tiktok.com/@codexmentalbr",
+          "publishId": "v_pub_file~v2-1.7648731970193164306"
+        }
+      ],
       "sound": {
         "category": "trending_viral",
         "sound": "Som em alta da semana (genérico)"
-      }
+      },
+      "stats": {
+        "youtube": {
+          "views": 1,
+          "likes": 0,
+          "comments": 0
+        },
+        "youtube_shorts": {
+          "views": 23,
+          "likes": 0,
+          "comments": 0
+        }
+      },
+      "statsUpdatedAt": "2026-06-07T19:53:55.935Z"
     }
   ],
   "revenueProjection": {
