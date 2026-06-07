@@ -29,6 +29,8 @@ import { assembleVideo } from "./6-video.js";
 import { publishVideos } from "./7-publish.js";
 import { suggestSound } from "./8-sound.js";
 import { updateDashboard } from "./9-dashboard.js";
+import { refreshAnalytics } from "./10-analytics.js";
+import { refreshHotmartRevenue } from "./11-hotmart.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -171,6 +173,20 @@ async function run() {
       await updateDashboard(state);
     } catch (e) {
       console.warn(`   ⚠️  Falha ao atualizar dashboard: ${e.message}`);
+    }
+
+    // ── Atualiza métricas dos vídeos (views/likes/comentários) ──
+    try {
+      await refreshAnalytics();
+    } catch (e) {
+      console.warn(`   ⚠️  Falha ao atualizar analytics: ${e.message}`);
+    }
+
+    // ── Atualiza receita real da Hotmart (se configurado) ───────
+    try {
+      await refreshHotmartRevenue();
+    } catch (e) {
+      console.warn(`   ⚠️  Falha ao atualizar receita Hotmart: ${e.message}`);
     }
 
   } catch (err) {

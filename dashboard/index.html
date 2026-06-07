@@ -16,6 +16,7 @@
     --green: #5fe3a1;
     --red: #ff6b81;
     --yellow: #ffd166;
+    --blue: #6f9bff;
   }
   * { box-sizing: border-box; }
   body {
@@ -26,7 +27,7 @@
     min-height: 100vh;
     padding: 32px 20px 80px;
   }
-  .wrap { max-width: 980px; margin: 0 auto; }
+  .wrap { max-width: 1080px; margin: 0 auto; }
   header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; flex-wrap: wrap; gap: 12px; }
   h1 {
     font-size: 28px; margin: 0;
@@ -39,22 +40,27 @@
     font-size: 12px; color: var(--muted); border: 1px solid var(--border);
     border-radius: 20px; padding: 6px 14px; background: rgba(255,255,255,0.02);
   }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px; }
-  .stat-card {
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 28px; }
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 28px; }
+  .stat-card, .panel-card {
     background: var(--card); border: 1px solid var(--border); border-radius: 14px;
     padding: 20px; position: relative; overflow: hidden;
   }
-  .stat-card::before {
+  .stat-card::before, .panel-card::before {
     content: ""; position: absolute; inset: 0;
-    background: radial-gradient(circle at top right, rgba(155,109,255,0.12), transparent 60%);
+    background: radial-gradient(circle at top right, rgba(155,109,255,0.10), transparent 60%);
+    pointer-events: none;
   }
   .stat-label { font-size: 13px; color: var(--muted); position: relative; }
-  .stat-value { font-size: 30px; font-weight: 700; margin-top: 6px; position: relative; }
+  .stat-value { font-size: 28px; font-weight: 700; margin-top: 6px; position: relative; }
+  .stat-sub { font-size: 11px; color: var(--muted); margin-top: 4px; position: relative; }
   .stat-value.purple { color: var(--purple-glow); }
   .stat-value.green { color: var(--green); }
   .stat-value.yellow { color: var(--yellow); }
+  .stat-value.blue { color: var(--blue); }
+  .stat-value.red { color: var(--red); }
 
-  h2 { font-size: 18px; margin: 0 0 14px; color: var(--text); }
+  h2 { font-size: 17px; margin: 0 0 14px; color: var(--text); position: relative; }
   .runs { display: flex; flex-direction: column; gap: 12px; }
   .run-card {
     background: var(--card); border: 1px solid var(--border); border-radius: 14px;
@@ -69,21 +75,47 @@
   }
   .status-ok { background: rgba(95,227,161,0.15); color: var(--green); }
   .status-error { background: rgba(255,107,129,0.15); color: var(--red); }
-  .links { margin-top: 12px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .links { margin-top: 12px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
   .links a {
     font-size: 12px; color: var(--purple-glow); text-decoration: none;
     border: 1px solid var(--border); border-radius: 20px; padding: 5px 12px;
     transition: background 0.15s;
   }
   .links a:hover { background: rgba(155,109,255,0.1); }
+  .metric-pill {
+    font-size: 11px; color: var(--muted); border: 1px solid var(--border);
+    border-radius: 20px; padding: 5px 12px; background: rgba(255,255,255,0.02);
+  }
   .sound-tag {
     font-size: 12px; color: var(--muted); margin-top: 10px;
     border-top: 1px dashed var(--border); padding-top: 10px;
   }
   .empty {
-    text-align: center; color: var(--muted); padding: 60px 20px;
+    text-align: center; color: var(--muted); padding: 50px 20px;
     border: 1px dashed var(--border); border-radius: 14px;
   }
+
+  /* Top video */
+  .top-video-name { font-size: 16px; font-weight: 700; margin: 6px 0 10px; max-width: 90%; }
+  .top-video-stats { display: flex; gap: 18px; flex-wrap: wrap; }
+  .tvs-item { font-size: 13px; color: var(--muted); }
+  .tvs-item strong { color: var(--text); font-size: 16px; display: block; }
+
+  /* Calendar heatmap */
+  .calendar { display: grid; grid-template-columns: repeat(auto-fill, 14px); gap: 4px; margin-top: 10px; position: relative; }
+  .cal-cell { width: 14px; height: 14px; border-radius: 3px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); }
+  .cal-cell[data-level="1"] { background: rgba(155,109,255,0.25); }
+  .cal-cell[data-level="2"] { background: rgba(155,109,255,0.5); }
+  .cal-cell[data-level="3"] { background: rgba(155,109,255,0.85); }
+  .cal-legend { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); margin-top: 10px; }
+
+  /* Category breakdown */
+  .cat-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .cat-name { font-size: 13px; width: 160px; flex-shrink: 0; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cat-bar-wrap { flex: 1; background: rgba(255,255,255,0.04); border-radius: 8px; height: 10px; overflow: hidden; }
+  .cat-bar { height: 100%; background: linear-gradient(90deg, var(--purple), var(--blue)); border-radius: 8px; }
+  .cat-count { font-size: 12px; color: var(--muted); width: 70px; text-align: right; flex-shrink: 0; }
+
   footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 50px; }
 </style>
 </head>
@@ -99,6 +131,32 @@
 
     <div class="grid" id="stats"></div>
 
+    <div class="grid-2">
+      <div class="panel-card">
+        <h2>🏆 Vídeo com melhor desempenho</h2>
+        <div id="top-video"><div class="empty">Sem dados de métricas ainda.</div></div>
+      </div>
+      <div class="panel-card">
+        <h2>🔥 Sequência de publicações</h2>
+        <div id="streak"></div>
+        <div id="calendar" class="calendar"></div>
+        <div class="cal-legend">
+          <span>menos</span>
+          <span class="cal-cell"></span>
+          <span class="cal-cell" data-level="1"></span>
+          <span class="cal-cell" data-level="2"></span>
+          <span class="cal-cell" data-level="3"></span>
+          <span>mais</span>
+          <span style="margin-left:8px">— últimos ~70 dias</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-card" style="margin-bottom:28px">
+      <h2>🧩 Desempenho por categoria de tema</h2>
+      <div id="categories"><div class="empty">Sem execuções suficientes ainda.</div></div>
+    </div>
+
     <h2>Execuções recentes</h2>
     <div class="runs" id="runs"><div class="empty">Carregando dados…</div></div>
 
@@ -113,30 +171,173 @@
     const d = new Date(iso);
     return d.toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" });
   }
-
+  function fmtDateShort(iso) {
+    if (!iso) return "—";
+    return new Date(iso).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" });
+  }
+  function fmtNumber(n) {
+    return new Intl.NumberFormat("pt-BR").format(n || 0);
+  }
   function fmtCurrency(value, currency) {
     return new Intl.NumberFormat("pt-BR", { style: "currency", currency: currency || "BRL" }).format(value);
+  }
+  function dayKey(iso) {
+    if (!iso) return null;
+    return new Date(iso).toISOString().slice(0, 10);
+  }
+
+  function aggregateStats(run) {
+    const yt = run.stats?.youtube || {};
+    const tk = run.stats?.tiktok || {};
+    return {
+      views: (yt.views || 0) + (tk.views || 0),
+      likes: (yt.likes || 0) + (tk.likes || 0),
+      comments: (yt.comments || 0) + (tk.comments || 0),
+    };
   }
 
   function renderStats(data) {
     const runs = data.runs || [];
     const ok = runs.filter(r => r.status === "ok");
     const totalVideos = ok.reduce((acc, r) => acc + (r.publish?.length || 0), 0);
+
+    let totalViews = 0, totalLikes = 0;
+    runs.forEach(r => {
+      const a = aggregateStats(r);
+      totalViews += a.views;
+      totalLikes += a.likes;
+    });
+
     const perVideo = data.settings?.estimatedRevenuePerVideo ?? 0;
-    const currency = data.settings?.currency ?? "BRL";
-    const estimatedRevenue = totalVideos * perVideo;
+    const currency = data.hotmart?.currency || data.settings?.currency || "BRL";
+
+    let revenueLabel, revenueValue, revenueSub;
+    if (data.hotmart && data.hotmart.source === "api") {
+      revenueValue = fmtCurrency(data.hotmart.revenueLast30Days, currency);
+      revenueSub = `${data.hotmart.salesLast30Days} venda(s) · últimos 30 dias (Hotmart API)`;
+    } else {
+      revenueValue = fmtCurrency(totalVideos * perVideo, currency);
+      revenueSub = `estimativa: ${totalVideos} vídeo(s) × ${fmtCurrency(perVideo, currency)}`;
+    }
 
     const stats = [
       { label: "Execuções totais", value: runs.length, cls: "" },
       { label: "Concluídas com sucesso", value: ok.length, cls: "green" },
       { label: "Vídeos publicados", value: totalVideos, cls: "purple" },
-      { label: "Receita estimada (Hotmart)", value: fmtCurrency(estimatedRevenue, currency), cls: "yellow" },
+      { label: "Views totais", value: fmtNumber(totalViews), cls: "blue", sub: `${fmtNumber(totalLikes)} curtidas no total` },
+      { label: "Receita (Hotmart)", value: revenueValue, cls: "yellow", sub: revenueSub },
     ];
 
     document.getElementById("stats").innerHTML = stats.map(s => `
       <div class="stat-card">
         <div class="stat-label">${s.label}</div>
         <div class="stat-value ${s.cls}">${s.value}</div>
+        ${s.sub ? `<div class="stat-sub">${s.sub}</div>` : ""}
+      </div>
+    `).join("");
+  }
+
+  function renderTopVideo(data) {
+    const el = document.getElementById("top-video");
+    const runs = (data.runs || []).filter(r => r.stats);
+    if (runs.length === 0) {
+      el.innerHTML = `<div class="empty">Sem dados de métricas ainda. As views/likes aparecem aqui após o módulo de analytics rodar.</div>`;
+      return;
+    }
+
+    let best = null, bestViews = -1;
+    for (const r of runs) {
+      const a = aggregateStats(r);
+      if (a.views > bestViews) { bestViews = a.views; best = { run: r, agg: a }; }
+    }
+    if (!best) { el.innerHTML = `<div class="empty">Sem dados suficientes.</div>`; return; }
+
+    const { run, agg } = best;
+    const engagement = agg.views > 0 ? ((agg.likes / agg.views) * 100).toFixed(1) : "0.0";
+    const links = (run.publish || []).map(p =>
+      `<a href="${p.url}" target="_blank" rel="noopener">${p.platform === "youtube" ? "▶️ YouTube" : "🎵 TikTok"}</a>`
+    ).join("");
+
+    el.innerHTML = `
+      <div class="top-video-name">${run.topic || "(sem título)"}</div>
+      <div class="top-video-stats">
+        <div class="tvs-item"><strong>${fmtNumber(agg.views)}</strong>views</div>
+        <div class="tvs-item"><strong>${fmtNumber(agg.likes)}</strong>curtidas</div>
+        <div class="tvs-item"><strong>${fmtNumber(agg.comments)}</strong>comentários</div>
+        <div class="tvs-item"><strong>${engagement}%</strong>engajamento</div>
+      </div>
+      <div class="links">${links}</div>
+    `;
+  }
+
+  function renderStreakAndCalendar(data) {
+    const runs = (data.runs || []).filter(r => r.status === "ok" && r.completedAt);
+    const days = new Set(runs.map(r => dayKey(r.completedAt)));
+
+    // Streak: conta dias consecutivos terminando hoje (ou ontem)
+    let streak = 0;
+    let cursor = new Date();
+    // se não publicou hoje, mas publicou ontem, a sequência ainda conta a partir de ontem
+    if (!days.has(dayKey(cursor.toISOString()))) {
+      cursor.setDate(cursor.getDate() - 1);
+    }
+    while (days.has(dayKey(cursor.toISOString()))) {
+      streak++;
+      cursor.setDate(cursor.getDate() - 1);
+    }
+
+    document.getElementById("streak").innerHTML = `
+      <div class="stat-value purple">${streak} dia${streak === 1 ? "" : "s"}</div>
+      <div class="stat-sub">de publicações consecutivas</div>
+    `;
+
+    // Calendário: últimos ~70 dias, contagem de runs OK por dia
+    const counts = {};
+    runs.forEach(r => {
+      const k = dayKey(r.completedAt);
+      counts[k] = (counts[k] || 0) + 1;
+    });
+
+    const cells = [];
+    const todayCursor = new Date();
+    const totalDays = 70;
+    for (let i = totalDays - 1; i >= 0; i--) {
+      const d = new Date(todayCursor);
+      d.setDate(d.getDate() - i);
+      const k = dayKey(d.toISOString());
+      const c = counts[k] || 0;
+      let level = 0;
+      if (c >= 3) level = 3;
+      else if (c === 2) level = 2;
+      else if (c === 1) level = 1;
+      cells.push(`<div class="cal-cell" data-level="${level}" title="${k}: ${c} execução(ões)"></div>`);
+    }
+    document.getElementById("calendar").innerHTML = cells.join("");
+  }
+
+  function renderCategories(data) {
+    const el = document.getElementById("categories");
+    const runs = (data.runs || []).filter(r => r.status === "ok" && r.category);
+    if (runs.length === 0) {
+      el.innerHTML = `<div class="empty">Sem execuções suficientes ainda — essa visão aparece conforme o pipeline roda e categoriza os temas.</div>`;
+      return;
+    }
+
+    const byCat = {};
+    runs.forEach(r => {
+      byCat[r.category] = byCat[r.category] || { count: 0, views: 0 };
+      byCat[r.category].count++;
+      byCat[r.category].views += aggregateStats(r).views;
+    });
+
+    const entries = Object.entries(byCat).sort((a, b) => b[1].count - a[1].count);
+    const max = Math.max(...entries.map(([, v]) => v.count));
+
+    el.innerHTML = entries.map(([cat, v]) => `
+      <div class="cat-row">
+        <div class="cat-name">${cat}</div>
+        <div class="cat-bar-wrap"><div class="cat-bar" style="width:${(v.count / max) * 100}%"></div></div>
+        <div class="cat-count">${v.count} vídeo(s)${v.views ? ` · ${fmtNumber(v.views)} views` : ""}</div>
       </div>
     `).join("");
   }
@@ -156,6 +357,14 @@
         `<a href="${p.url}" target="_blank" rel="noopener">${p.platform === "youtube" ? "▶️ YouTube" : "🎵 TikTok"}</a>`
       ).join("");
 
+      const agg = aggregateStats(r);
+      const hasStats = r.stats && (agg.views || agg.likes || agg.comments);
+      const metricPills = hasStats
+        ? `<span class="metric-pill">👁️ ${fmtNumber(agg.views)} views</span>
+           <span class="metric-pill">❤️ ${fmtNumber(agg.likes)} curtidas</span>
+           <span class="metric-pill">💬 ${fmtNumber(agg.comments)} comentários</span>`
+        : "";
+
       const sound = r.sound
         ? `<div class="sound-tag">🎵 Sugestão de som do dia: <strong>${r.sound.sound}</strong> (${r.sound.category})</div>`
         : "";
@@ -168,10 +377,11 @@
               <span class="status-pill ${isOk ? "status-ok" : "status-error"}">
                 ${isOk ? "✅ concluído" : "❌ falhou"}
               </span>
+              ${r.category ? `<span class="metric-pill" style="margin-left:6px">${r.category}</span>` : ""}
             </div>
             <div class="run-date">${fmtDate(r.completedAt || r.startedAt)}</div>
           </div>
-          ${links ? `<div class="links">${links}</div>` : ""}
+          ${links || metricPills ? `<div class="links">${links}${metricPills}</div>` : ""}
           ${!isOk && r.error ? `<div class="sound-tag" style="color: var(--red)">⚠️ ${r.error}</div>` : ""}
           ${sound}
         </div>
@@ -185,6 +395,9 @@
       document.getElementById("updated").textContent =
         data.lastUpdated ? `atualizado em ${fmtDate(data.lastUpdated)}` : "sem dados ainda";
       renderStats(data);
+      renderTopVideo(data);
+      renderStreakAndCalendar(data);
+      renderCategories(data);
       renderRuns(data);
     })
     .catch(err => {

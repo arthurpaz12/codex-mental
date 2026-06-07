@@ -13,6 +13,8 @@
     "video": "node pipeline/6-video.js",
     "publish": "node pipeline/7-publish.js",
     "sound": "node pipeline/8-sound.js",
+    "analytics": "node pipeline/10-analytics.js",
+    "hotmart": "node pipeline/11-hotmart.js",
     "dashboard": "npx serve dashboard"
   },
   "dependencies": {

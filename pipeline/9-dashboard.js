@@ -44,8 +44,13 @@ function summarizeRun(state) {
     status: state.error ? "error" : "ok",
     error: state.error || null,
     topic: state.topic?.topic || null,
+    category: state.topic?.category || null,
     viralScore: state.topic?.viralScore ?? null,
-    publish: (state.publish || []).map((p) => ({ platform: p.platform, url: p.url })),
+    publish: (state.publish || []).map((p) => ({
+      platform: p.platform,
+      url: p.url,
+      publishId: p.publishId || null,
+    })),
     sound: state.sound
       ? { category: state.sound.category, sound: state.sound.sound }
       : null,
@@ -65,9 +70,15 @@ export async function updateDashboard(state) {
   const entry = summarizeRun(state);
 
   // Substitui se já existir um registro para o mesmo runId (reexecução), senão adiciona
+  // — preserva métricas (stats) já buscadas pelo módulo de analytics, se existirem
   const idx = data.runs.findIndex((r) => r.runId === entry.runId);
-  if (idx >= 0) data.runs[idx] = entry;
-  else data.runs.push(entry);
+  if (idx >= 0) {
+    if (data.runs[idx].stats) entry.stats = data.runs[idx].stats;
+    if (data.runs[idx].statsUpdatedAt) entry.statsUpdatedAt = data.runs[idx].statsUpdatedAt;
+    data.runs[idx] = entry;
+  } else {
+    data.runs.push(entry);
+  }
 
   // Mantém só as últimas MAX_RUNS execuções
   if (data.runs.length > MAX_RUNS) {
