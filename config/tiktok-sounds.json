@@ -1,0 +1,60 @@
+{
+  "_comment": "Lista curada e rotativa de sons/áudios do TikTok para usar nos vídeos do Codex Mental. O TikTok não permite anexar som via API de publicação — o áudio precisa ser adicionado manualmente no app na hora de postar (ou editado depois). Esta lista serve como sugestão diária gerada pelo pipeline. Atualize periodicamente com sons em alta pesquisados (ex: via Claude web search) nos nichos de psicologia / storytelling / motivacional / suspense.",
+
+  "lastUpdated": "2026-06-06",
+
+  "rotation": {
+    "strategy": "round_robin_by_day",
+    "note": "O índice do som usado a cada dia é calculado a partir do dia-do-ano (dayOfYear % length), garantindo rotação automática sem repetição imediata."
+  },
+
+  "categories": {
+    "suspense_misterio": [
+      {
+        "name": "Tense/suspenseful background hum",
+        "searchHint": "procure por 'suspenseful', 'mystery', 'dark ambient' no catálogo de sons do TikTok",
+        "tip": "ótimo para hooks de psicologia obscura e revelações — combina com o tom misterioso do Codex Mental"
+      },
+      {
+        "name": "Dramatic reveal sting / whoosh transition",
+        "searchHint": "procure por 'dramatic reveal', 'cinematic transition'",
+        "tip": "use no momento da virada/punchline do vídeo"
+      }
+    ],
+    "storytelling_motivacional": [
+      {
+        "name": "Soft piano storytelling loop",
+        "searchHint": "procure por 'storytelling piano', 'emotional soft piano'",
+        "tip": "funciona bem em vídeos que terminam com reflexão ou CTA emocional"
+      },
+      {
+        "name": "Lo-fi motivational beat",
+        "searchHint": "procure por 'lofi motivation', 'calm focus beat'",
+        "tip": "boa pedida para conteúdo de autoconhecimento e desenvolvimento pessoal"
+      }
+    ],
+    "trending_viral": [
+      {
+        "name": "Som em alta da semana (genérico)",
+        "searchHint": "abra a aba 'Sons em alta' no TikTok Creation/Discover antes de postar e escolha um com a tag de seta para cima (📈 trending)",
+        "tip": "priorize sons com poucas semanas de uso — alto potencial de alcance via algoritmo; evite sons saturados"
+      },
+      {
+        "name": "Voiceover/remix trend do nicho de psicologia",
+        "searchHint": "pesquise por '#psicologia', '#darkpsychology', '#mindset' na aba de sons para achar trends específicas do nicho",
+        "tip": "trends de nicho tendem a converter melhor que trends genéricas para o nosso público-alvo"
+      }
+    ]
+  },
+
+  "instructions": {
+    "fluxo_recomendado": [
+      "1. O pipeline gera o vídeo SEM música embutida para o TikTok (arquivo limpo)",
+      "2. Ao publicar manualmente (ou via automação futura com Research API), abra a aba de sons em alta no TikTok",
+      "3. Use a sugestão de categoria do dia (gerada em '8-sound.json' de cada run) como direção de busca",
+      "4. Escolha um som com tendência de crescimento (ícone de seta para cima) dentro da categoria sugerida",
+      "5. Ajuste o volume do som para ficar baixo (15-20%) para não sobrepor a narração"
+    ],
+    "atualizacao_da_lista": "Periodicamente, peça para o Claude pesquisar sons em alta no TikTok Brasil (web search) nas categorias de psicologia/motivacional/suspense e atualizar este arquivo com nomes e dicas atuais."
+  }
+}

@@ -27,6 +27,7 @@ import { fetchMedia } from "./4-media.js";
 import { generateThumbnail } from "./5-thumbnail.js";
 import { assembleVideo } from "./6-video.js";
 import { publishVideos } from "./7-publish.js";
+import { suggestSound } from "./8-sound.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -34,7 +35,7 @@ const args = process.argv.slice(2);
 const stepArg =
   args.find((a) => a.startsWith("--step"))?.split("=")[1] ||
   args[args.indexOf("--step") + 1];
-const steps = stepArg ? stepArg.split(",").map(Number) : [1, 2, 3, 4, 5, 6, 7];
+const steps = stepArg ? stepArg.split(",").map(Number) : [1, 2, 3, 4, 5, 6, 7, 8];
 const runStep = (n) => steps.includes(n);
 
 function save(dir, filename, data) {
@@ -127,6 +128,13 @@ async function run() {
       save(outputDir, "7-publish.json", state.publish);
     }
 
+    // ── Módulo 8: Sound (sugestão de áudio para o TikTok) ───────
+    if (runStep(8)) {
+      printSeparator(8, "SOUND — Sugestão de som para o TikTok");
+      state.sound = await suggestSound(outputDir);
+      save(outputDir, "8-sound.json", state.sound);
+    }
+
     // ── Sumário final ───────────────────────────────────────────
     const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
     state.completedAt = new Date().toISOString();
@@ -147,6 +155,14 @@ async function run() {
     if (state.publish?.length > 0) {
       console.log("\n🔗 Publicado em:");
       state.publish.forEach((p) => console.log(`   → ${p.platform}: ${p.url}`));
+    }
+
+    if (state.sound) {
+      console.log("\n🎵 Sugestão de som para o TikTok (adicionar manualmente ao postar):");
+      console.log(`   → Categoria: ${state.sound.category}`);
+      console.log(`   → Som: ${state.sound.sound}`);
+      console.log(`   → Busque por: ${state.sound.searchHint}`);
+      console.log(`   → Dica: ${state.sound.tip}`);
     }
 
   } catch (err) {
