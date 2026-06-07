@@ -187,6 +187,11 @@
 
     <div class="grid" id="stats"></div>
 
+    <div class="panel-card" style="margin-bottom:28px">
+      <h2>📡 Desempenho por plataforma</h2>
+      <div class="grid" id="platform-breakdown"></div>
+    </div>
+
     <div class="grid-2">
       <div class="panel-card">
         <h2>🏆 Vídeo com melhor desempenho</h2>
@@ -276,14 +281,44 @@
     return new Date(iso).toISOString().slice(0, 10);
   }
 
+  const PLATFORM_META = {
+    youtube: { label: "YouTube", short: "▶️ YouTube", icon: "▶️", color: CHART_COLORS.accent, colorSoft: CHART_COLORS.accentSoft },
+    youtube_shorts: { label: "YouTube Shorts", short: "🩳 Shorts", icon: "🩳", color: CHART_COLORS.blue, colorSoft: "rgba(111,168,255,0.15)" },
+    tiktok: { label: "TikTok", short: "🎵 TikTok", icon: "🎵", color: CHART_COLORS.teal, colorSoft: CHART_COLORS.tealSoft },
+  };
+
+  function platformLink(p) {
+    const meta = PLATFORM_META[p.platform] || { short: p.platform };
+    return `<a href="${p.url}" target="_blank" rel="noopener">${meta.short}</a>`;
+  }
+
   function aggregateStats(run) {
     const yt = run.stats?.youtube || {};
+    const sh = run.stats?.youtube_shorts || {};
     const tk = run.stats?.tiktok || {};
     return {
-      views: (yt.views || 0) + (tk.views || 0),
-      likes: (yt.likes || 0) + (tk.likes || 0),
-      comments: (yt.comments || 0) + (tk.comments || 0),
+      views: (yt.views || 0) + (sh.views || 0) + (tk.views || 0),
+      likes: (yt.likes || 0) + (sh.likes || 0) + (tk.likes || 0),
+      comments: (yt.comments || 0) + (sh.comments || 0) + (tk.comments || 0),
+      byPlatform: { youtube: yt, youtube_shorts: sh, tiktok: tk },
     };
+  }
+
+  // Soma estatísticas de uma plataforma específica em todas as execuções
+  function platformTotals(data, platform) {
+    const runs = data.runs || [];
+    let views = 0, likes = 0, comments = 0, videos = 0;
+    runs.forEach(r => {
+      const hasPublish = (r.publish || []).some(p => p.platform === platform);
+      if (hasPublish) videos++;
+      const s = r.stats?.[platform];
+      if (s) {
+        views += s.views || 0;
+        likes += s.likes || 0;
+        comments += s.comments || 0;
+      }
+    });
+    return { views, likes, comments, videos };
   }
 
   function renderStats(data) {
@@ -327,6 +362,28 @@
     `).join("");
   }
 
+  function renderPlatformBreakdown(data) {
+    const el = document.getElementById("platform-breakdown");
+    if (!el) return;
+
+    const cards = ["youtube", "youtube_shorts", "tiktok"].map(platform => {
+      const meta = PLATFORM_META[platform];
+      const t = platformTotals(data, platform);
+      const engagement = t.views > 0 ? ((t.likes / t.views) * 100).toFixed(1) : "0.0";
+      return `
+        <div class="stat-card" style="border-left: 3px solid ${meta.color}">
+          <div class="stat-label">${meta.icon} ${meta.label}</div>
+          <div class="stat-value">${fmtNumber(t.views)} <span style="font-size:13px; color:var(--muted); font-weight:500">views</span></div>
+          <div class="stat-sub">
+            ${fmtNumber(t.videos)} vídeo(s) publicado(s) · ${fmtNumber(t.likes)} curtidas · ${fmtNumber(t.comments)} comentários · ${engagement}% engajamento
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    el.innerHTML = cards;
+  }
+
   function renderTopVideo(data) {
     const el = document.getElementById("top-video");
     const runs = (data.runs || []).filter(r => r.stats);
@@ -344,9 +401,7 @@
 
     const { run, agg } = best;
     const engagement = agg.views > 0 ? ((agg.likes / agg.views) * 100).toFixed(1) : "0.0";
-    const links = (run.publish || []).map(p =>
-      `<a href="${p.url}" target="_blank" rel="noopener">${p.platform === "youtube" ? "▶️ YouTube" : "🎵 TikTok"}</a>`
-    ).join("");
+    const links = (run.publish || []).map(platformLink).join("");
 
     el.innerHTML = `
       <div class="top-video-name">${run.topic || "(sem título)"}</div>
@@ -447,6 +502,7 @@
 
     const labels = runs.map(r => fmtDateShort(r.completedAt));
     const yt = runs.map(r => r.stats?.youtube?.views || 0);
+    const sh = runs.map(r => r.stats?.youtube_shorts?.views || 0);
     const tk = runs.map(r => r.stats?.tiktok?.views || 0);
 
     new Chart(canvas.getContext("2d"), {
@@ -463,6 +519,17 @@
             tension: 0.35,
             pointRadius: 3,
             pointBackgroundColor: CHART_COLORS.accent,
+            borderWidth: 2,
+          },
+          {
+            label: "YouTube Shorts",
+            data: sh,
+            borderColor: CHART_COLORS.blue,
+            backgroundColor: "rgba(111,168,255,0.15)",
+            fill: true,
+            tension: 0.35,
+            pointRadius: 3,
+            pointBackgroundColor: CHART_COLORS.blue,
             borderWidth: 2,
           },
           {
@@ -600,9 +667,7 @@
 
     el.innerHTML = runs.map(r => {
       const isOk = r.status === "ok";
-      const links = (r.publish || []).map(p =>
-        `<a href="${p.url}" target="_blank" rel="noopener">${p.platform === "youtube" ? "▶️ YouTube" : "🎵 TikTok"}</a>`
-      ).join("");
+      const links = (r.publish || []).map(platformLink).join("");
 
       const agg = aggregateStats(r);
       const hasStats = r.stats && (agg.views || agg.likes || agg.comments);
@@ -691,6 +756,7 @@
       document.getElementById("updated").textContent =
         data.lastUpdated ? `atualizado em ${fmtDate(data.lastUpdated)}` : "sem dados ainda";
       renderStats(data);
+      renderPlatformBreakdown(data);
       renderTopVideo(data);
       renderStreakAndCalendar(data);
       renderViewsChart(data);

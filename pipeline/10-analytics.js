@@ -113,8 +113,10 @@ export async function refreshAnalytics() {
   const data = JSON.parse(readFileSync(DATA_PATH, "utf-8"));
   const runs = data.runs || [];
 
-  // Coleta IDs de vídeos do histórico
+  // Coleta IDs de vídeos do histórico — YouTube "tradicional", YouTube Shorts
+  // e TikTok são tratados como plataformas distintas pra métricas separadas
   const ytIdsByRun = {};
+  const ytShortsIdsByRun = {};
   const ytIds = [];
   const tkIdsByRun = {};
   const tkIds = [];
@@ -125,6 +127,13 @@ export async function refreshAnalytics() {
         const id = extractYouTubeVideoId(p.url);
         if (id) {
           ytIdsByRun[run.runId] = id;
+          ytIds.push(id);
+        }
+      }
+      if (p.platform === "youtube_shorts") {
+        const id = extractYouTubeVideoId(p.url);
+        if (id) {
+          ytShortsIdsByRun[run.runId] = id;
           ytIds.push(id);
         }
       }
@@ -143,10 +152,12 @@ export async function refreshAnalytics() {
   let updated = 0;
   for (const run of runs) {
     const ytId = ytIdsByRun[run.runId];
+    const ytShortsId = ytShortsIdsByRun[run.runId];
     const tkId = tkIdsByRun[run.runId];
 
     const newStats = {};
     if (ytId && ytStats[ytId]) newStats.youtube = ytStats[ytId];
+    if (ytShortsId && ytStats[ytShortsId]) newStats.youtube_shorts = ytStats[ytShortsId];
     if (tkId && tkStats[tkId]) newStats.tiktok = tkStats[tkId];
 
     if (Object.keys(newStats).length > 0) {
@@ -159,7 +170,7 @@ export async function refreshAnalytics() {
   data.lastUpdated = new Date().toISOString();
   writeFileSync(DATA_PATH, JSON.stringify(data, null, 2));
 
-  console.log(`   → ${Object.keys(ytStats).length} vídeo(s) do YouTube com métricas atualizadas`);
+  console.log(`   → ${Object.keys(ytStats).length} vídeo(s) do YouTube/Shorts com métricas atualizadas`);
   console.log(`   → ${Object.keys(tkStats).length} vídeo(s) do TikTok com métricas atualizadas`);
   console.log(`✅ [Analytics] ${updated} execuções atualizadas no dashboard`);
 
