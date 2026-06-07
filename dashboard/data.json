@@ -1,9 +1,15 @@
 {
-  "lastUpdated": null,
+  "lastUpdated": "2026-06-07T02:26:42.370Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
   },
-  "hotmart": null,
+  "hotmart": {
+    "source": "api",
+    "revenueLast30Days": 0,
+    "salesLast30Days": 0,
+    "currency": "BRL",
+    "updatedAt": "2026-06-07T02:26:42.369Z"
+  },
   "runs": []
 }
