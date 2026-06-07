@@ -4,119 +4,175 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Codex Mental — Painel do Pipeline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0c0a14;
-    --card: #16121f;
-    --border: #2a2440;
-    --purple: #9b6dff;
-    --purple-glow: #b794ff;
-    --text: #e8e4f5;
-    --muted: #9b94b3;
-    --green: #5fe3a1;
-    --red: #ff6b81;
-    --yellow: #ffd166;
-    --blue: #6f9bff;
+    --bg: #0b0f1a;
+    --card: #131826;
+    --card-2: #1a2032;
+    --border: #2a3149;
+    --border-soft: #1d2335;
+    --accent: #ff9f5a;
+    --accent-soft: #c97f4a;
+    --teal: #5fd4c0;
+    --text: #eef1f7;
+    --muted: #818ba3;
+    --green: #5fd4a0;
+    --red: #f0707a;
+    --yellow: #ff9f5a;
+    --blue: #6fa8ff;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: radial-gradient(circle at top, #1a1530 0%, var(--bg) 60%);
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(255,159,90,0.06), transparent 60%),
+      radial-gradient(ellipse 900px 600px at 100% 0%, rgba(95,212,192,0.05), transparent 55%),
+      var(--bg);
     color: var(--text);
     min-height: 100vh;
-    padding: 32px 20px 80px;
+    padding: 40px 24px 80px;
+    -webkit-font-smoothing: antialiased;
   }
   .wrap { max-width: 1080px; margin: 0 auto; }
-  header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; flex-wrap: wrap; gap: 12px; }
+  header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; gap: 12px;
+    border-bottom: 1px solid var(--border-soft); padding-bottom: 24px; }
   h1 {
-    font-size: 28px; margin: 0;
-    background: linear-gradient(90deg, var(--purple-glow), #6f9bff);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-    letter-spacing: 0.5px;
+    font-size: 22px; margin: 0; font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.4px;
   }
-  .subtitle { color: var(--muted); font-size: 14px; margin-top: 4px; }
+  .subtitle {
+    color: var(--muted); font-size: 13px; margin-top: 6px; letter-spacing: 0;
+    font-weight: 400;
+  }
   .badge {
     font-size: 12px; color: var(--muted); border: 1px solid var(--border);
-    border-radius: 20px; padding: 6px 14px; background: rgba(255,255,255,0.02);
+    border-radius: 6px; padding: 6px 12px; background: var(--card);
+    letter-spacing: 0;
   }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 28px; }
-  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 28px; }
+  .grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px;
+    margin-bottom: 32px; background: var(--border-soft);
+    border: 1px solid var(--border-soft); border-radius: 12px; overflow: hidden;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.02) inset, 0 12px 32px -16px rgba(0,0,0,0.5);
+  }
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 32px; }
   .stat-card, .panel-card {
-    background: var(--card); border: 1px solid var(--border); border-radius: 14px;
-    padding: 20px; position: relative; overflow: hidden;
+    background: var(--card);
+    border: 1px solid var(--border-soft); border-radius: 12px;
+    padding: 22px; position: relative; overflow: hidden;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.025) inset, 0 16px 40px -22px rgba(0,0,0,0.6);
+    transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
   }
-  .stat-card::before, .panel-card::before {
-    content: ""; position: absolute; inset: 0;
-    background: radial-gradient(circle at top right, rgba(155,109,255,0.10), transparent 60%);
+  .grid .stat-card { border: none; border-radius: 0; box-shadow: none; }
+  .stat-card:hover, .panel-card:hover {
+    border-color: var(--border);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset, 0 20px 48px -20px rgba(0,0,0,0.7);
+  }
+  .panel-card:hover { transform: translateY(-2px); }
+  .stat-card::before, .panel-card::before { content: none; }
+  .stat-card::after { content: none; }
+  .panel-card::after {
+    content: ""; position: absolute; top: 0; left: 16px; right: 16px; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent);
     pointer-events: none;
   }
-  .stat-label { font-size: 13px; color: var(--muted); position: relative; }
-  .stat-value { font-size: 28px; font-weight: 700; margin-top: 6px; position: relative; }
-  .stat-sub { font-size: 11px; color: var(--muted); margin-top: 4px; position: relative; }
-  .stat-value.purple { color: var(--purple-glow); }
+  .stat-label {
+    font-size: 12px; color: var(--muted); position: relative; letter-spacing: 0.2px; text-transform: none; font-weight: 400;
+  }
+  .stat-value {
+    font-size: 28px; font-weight: 600;
+    margin-top: 8px; position: relative; letter-spacing: -0.6px;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-sub { font-size: 12px; color: var(--muted); margin-top: 6px; position: relative; letter-spacing: 0.1px; }
+  .stat-value.purple { color: var(--text); }
   .stat-value.green { color: var(--green); }
   .stat-value.yellow { color: var(--yellow); }
   .stat-value.blue { color: var(--blue); }
   .stat-value.red { color: var(--red); }
 
-  h2 { font-size: 17px; margin: 0 0 14px; color: var(--text); position: relative; }
-  .runs { display: flex; flex-direction: column; gap: 12px; }
+  h2 {
+    font-size: 14px; margin: 0 0 18px;
+    color: var(--text); position: relative; font-weight: 600; letter-spacing: -0.1px;
+    display: flex; align-items: center; gap: 8px;
+    text-transform: uppercase; letter-spacing: 0.6px;
+  }
+  h2 .h2-icon { font-size: 14px; -webkit-text-stroke: 0; filter: grayscale(0.15) opacity(0.92); }
+  h2::after { content: none; }
+  .runs { display: flex; flex-direction: column; gap: 10px; }
   .run-card {
-    background: var(--card); border: 1px solid var(--border); border-radius: 14px;
-    padding: 18px 20px;
+    background: var(--card);
+    border: 1px solid var(--border-soft); border-radius: 10px;
+    padding: 18px 20px; position: relative;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.02) inset;
+    transition: border-color 0.18s ease, background 0.18s ease;
   }
+  .run-card:hover { border-color: var(--border); background: var(--card-2); }
   .run-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
-  .run-topic { font-weight: 600; font-size: 15px; max-width: 620px; }
-  .run-date { font-size: 12px; color: var(--muted); white-space: nowrap; }
+  .run-topic { font-weight: 500; font-size: 14px; max-width: 620px; color: var(--text); letter-spacing: -0.1px; }
+  .run-date {
+    font-size: 11px; color: var(--muted); white-space: nowrap;
+    font-variant-numeric: tabular-nums; letter-spacing: 0.2px;
+    border: 1px solid var(--border-soft); border-radius: 6px; padding: 3px 9px;
+  }
   .status-pill {
-    display: inline-block; font-size: 11px; font-weight: 600; padding: 4px 10px;
-    border-radius: 20px; margin-top: 8px; letter-spacing: 0.3px;
+    display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 500; padding: 3px 10px;
+    border-radius: 20px; margin-top: 10px; letter-spacing: 0.1px;
   }
-  .status-ok { background: rgba(95,227,161,0.15); color: var(--green); }
-  .status-error { background: rgba(255,107,129,0.15); color: var(--red); }
-  .links { margin-top: 12px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .status-pill::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: currentColor; display: inline-block; }
+  .status-ok { background: rgba(70,167,88,0.1); color: var(--green); border: 1px solid rgba(70,167,88,0.22); }
+  .status-error { background: rgba(229,72,77,0.1); color: var(--red); border: 1px solid rgba(229,72,77,0.22); }
+  .links { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
   .links a {
-    font-size: 12px; color: var(--purple-glow); text-decoration: none;
-    border: 1px solid var(--border); border-radius: 20px; padding: 5px 12px;
-    transition: background 0.15s;
+    font-size: 12px; color: var(--text); text-decoration: none; font-weight: 500;
+    border: 1px solid var(--border); border-radius: 7px; padding: 6px 13px;
+    transition: background 0.15s, border-color 0.15s, transform 0.15s;
+    letter-spacing: 0.1px;
   }
-  .links a:hover { background: rgba(155,109,255,0.1); }
+  .links a:hover { background: var(--card-2); border-color: var(--accent-soft); transform: translateY(-1px); }
   .metric-pill {
-    font-size: 11px; color: var(--muted); border: 1px solid var(--border);
-    border-radius: 20px; padding: 5px 12px; background: rgba(255,255,255,0.02);
+    font-size: 11px; color: var(--muted); border: 1px solid var(--border-soft);
+    border-radius: 7px; padding: 6px 11px; background: var(--card-2);
+    font-variant-numeric: tabular-nums; letter-spacing: 0.1px;
   }
   .sound-tag {
-    font-size: 12px; color: var(--muted); margin-top: 10px;
-    border-top: 1px dashed var(--border); padding-top: 10px;
+    font-size: 12px; color: var(--muted); margin-top: 14px;
+    border-top: 1px solid var(--border-soft); padding-top: 14px;
+    display: flex; align-items: center; gap: 6px;
   }
   .empty {
-    text-align: center; color: var(--muted); padding: 50px 20px;
-    border: 1px dashed var(--border); border-radius: 14px;
+    text-align: center; color: var(--muted); padding: 56px 20px; font-size: 13px;
+    border: 1px dashed var(--border-soft); border-radius: 10px; letter-spacing: 0.1px;
   }
 
   /* Top video */
-  .top-video-name { font-size: 16px; font-weight: 700; margin: 6px 0 10px; max-width: 90%; }
-  .top-video-stats { display: flex; gap: 18px; flex-wrap: wrap; }
-  .tvs-item { font-size: 13px; color: var(--muted); }
-  .tvs-item strong { color: var(--text); font-size: 16px; display: block; }
+  .top-video-name { font-size: 15px; font-weight: 500; margin: 6px 0 14px; max-width: 90%; color: var(--text); }
+  .top-video-stats { display: flex; gap: 24px; flex-wrap: wrap; }
+  .tvs-item { font-size: 12px; color: var(--muted); letter-spacing: 0; }
+  .tvs-item strong { color: var(--text); font-size: 18px; display: block; font-weight: 600; margin-bottom: 2px; }
 
   /* Calendar heatmap */
-  .calendar { display: grid; grid-template-columns: repeat(auto-fill, 14px); gap: 4px; margin-top: 10px; position: relative; }
-  .cal-cell { width: 14px; height: 14px; border-radius: 3px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); }
-  .cal-cell[data-level="1"] { background: rgba(155,109,255,0.25); }
-  .cal-cell[data-level="2"] { background: rgba(155,109,255,0.5); }
-  .cal-cell[data-level="3"] { background: rgba(155,109,255,0.85); }
+  .calendar { display: grid; grid-template-columns: repeat(auto-fill, 13px); gap: 3px; margin-top: 10px; position: relative; }
+  .cal-cell { width: 13px; height: 13px; border-radius: 2px; background: var(--card-2); border: 1px solid var(--border-soft); }
+  .cal-cell[data-level="1"] { background: rgba(255,159,90,0.22); border-color: rgba(255,159,90,0.22); }
+  .cal-cell[data-level="2"] { background: rgba(255,159,90,0.5); border-color: rgba(255,159,90,0.5); }
+  .cal-cell[data-level="3"] { background: rgba(255,159,90,0.9); border-color: rgba(255,159,90,0.9); }
   .cal-legend { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); margin-top: 10px; }
 
   /* Category breakdown */
   .cat-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
   .cat-name { font-size: 13px; width: 160px; flex-shrink: 0; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .cat-bar-wrap { flex: 1; background: rgba(255,255,255,0.04); border-radius: 8px; height: 10px; overflow: hidden; }
-  .cat-bar { height: 100%; background: linear-gradient(90deg, var(--purple), var(--blue)); border-radius: 8px; }
-  .cat-count { font-size: 12px; color: var(--muted); width: 70px; text-align: right; flex-shrink: 0; }
+  .cat-bar-wrap { flex: 1; background: var(--card-2); border-radius: 4px; height: 8px; overflow: hidden; border: 1px solid var(--border-soft); }
+  .cat-bar { height: 100%; background: linear-gradient(90deg, var(--teal), var(--accent)); border-radius: 4px; }
+  .cat-count { font-size: 12px; color: var(--muted); width: 90px; text-align: right; flex-shrink: 0; }
 
-  footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 50px; }
+  footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 50px; letter-spacing: 0; }
+  footer::before { content: none; }
 </style>
 </head>
 <body>
@@ -152,6 +208,20 @@
       </div>
     </div>
 
+    <div class="grid-2">
+      <div class="panel-card">
+        <h2>📈 Views por plataforma</h2>
+        <div style="position:relative; height:220px"><canvas id="chart-views"></canvas></div>
+      </div>
+      <div class="panel-card">
+        <h2>💰 Vendas Hotmart (últimos 30 dias)</h2>
+        <div style="position:relative; height:220px; display:flex; align-items:center; justify-content:center">
+          <canvas id="chart-sales"></canvas>
+        </div>
+        <div id="sales-legend" style="margin-top:14px"></div>
+      </div>
+    </div>
+
     <div class="panel-card" style="margin-bottom:28px">
       <h2>🧩 Desempenho por categoria de tema</h2>
       <div id="categories"><div class="empty">Sem execuções suficientes ainda.</div></div>
@@ -163,8 +233,23 @@
     <footer>Codex Mental · dados atualizados automaticamente a cada execução do pipeline</footer>
   </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script>
   const DATA_URL = "./data.json";
+  const CHART_COLORS = {
+    accent: "#ff9f5a",
+    accentSoft: "rgba(255,159,90,0.15)",
+    teal: "#5fd4c0",
+    tealSoft: "rgba(95,212,192,0.15)",
+    blue: "#6fa8ff",
+    grid: "rgba(255,255,255,0.06)",
+    text: "#818ba3",
+  };
+  if (window.Chart) {
+    Chart.defaults.font.family = "'Inter', sans-serif";
+    Chart.defaults.font.size = 11;
+    Chart.defaults.color = CHART_COLORS.text;
+  }
 
   function fmtDate(iso) {
     if (!iso) return "—";
@@ -342,6 +427,163 @@
     `).join("");
   }
 
+  function renderViewsChart(data) {
+    const canvas = document.getElementById("chart-views");
+    if (!canvas || !window.Chart) return;
+    const runs = [...(data.runs || [])]
+      .filter(r => r.completedAt)
+      .sort((a, b) => new Date(a.completedAt) - new Date(b.completedAt))
+      .slice(-12);
+
+    if (runs.length === 0) {
+      canvas.parentElement.innerHTML = `<div class="empty">Sem dados de views ainda — aparece após o módulo de analytics rodar.</div>`;
+      return;
+    }
+
+    const labels = runs.map(r => fmtDateShort(r.completedAt));
+    const yt = runs.map(r => r.stats?.youtube?.views || 0);
+    const tk = runs.map(r => r.stats?.tiktok?.views || 0);
+
+    new Chart(canvas.getContext("2d"), {
+      type: "line",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "YouTube",
+            data: yt,
+            borderColor: CHART_COLORS.accent,
+            backgroundColor: CHART_COLORS.accentSoft,
+            fill: true,
+            tension: 0.35,
+            pointRadius: 3,
+            pointBackgroundColor: CHART_COLORS.accent,
+            borderWidth: 2,
+          },
+          {
+            label: "TikTok",
+            data: tk,
+            borderColor: CHART_COLORS.teal,
+            backgroundColor: CHART_COLORS.tealSoft,
+            fill: true,
+            tension: 0.35,
+            pointRadius: 3,
+            pointBackgroundColor: CHART_COLORS.teal,
+            borderWidth: 2,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: {
+            position: "top", align: "end",
+            labels: { boxWidth: 10, boxHeight: 10, usePointStyle: true, pointStyle: "circle", padding: 16 },
+          },
+          tooltip: {
+            backgroundColor: "#1a2032",
+            borderColor: "rgba(255,255,255,0.08)",
+            borderWidth: 1,
+            padding: 10,
+            titleColor: "#eef1f7",
+            bodyColor: "#c3cad9",
+            callbacks: { label: (ctx) => ` ${ctx.dataset.label}: ${fmtNumber(ctx.parsed.y)} views` },
+          },
+        },
+        scales: {
+          x: { grid: { display: false }, border: { color: CHART_COLORS.grid } },
+          y: {
+            grid: { color: CHART_COLORS.grid },
+            border: { display: false },
+            ticks: { callback: (v) => fmtNumber(v) },
+          },
+        },
+      },
+    });
+  }
+
+  function renderSalesChart(data) {
+    const canvas = document.getElementById("chart-sales");
+    const legendEl = document.getElementById("sales-legend");
+    if (!canvas || !window.Chart) return;
+
+    const hotmart = data.hotmart;
+    if (!hotmart || (hotmart.source === "api" && !hotmart.salesLast30Days)) {
+      canvas.parentElement.innerHTML = `<div class="empty">Sem vendas registradas nos últimos 30 dias.</div>`;
+      legendEl.innerHTML = "";
+      return;
+    }
+
+    const sales = hotmart.salesLast30Days || 0;
+    const revenue = hotmart.revenueLast30Days || 0;
+    const currency = hotmart.currency || "BRL";
+    const avgTicket = sales > 0 ? revenue / sales : 0;
+
+    new Chart(canvas.getContext("2d"), {
+      type: "doughnut",
+      data: {
+        labels: ["Receita gerada", "Ticket médio (referência)"],
+        datasets: [{
+          data: [revenue, avgTicket],
+          backgroundColor: [CHART_COLORS.accent, CHART_COLORS.teal],
+          borderColor: "#131826",
+          borderWidth: 3,
+          hoverOffset: 6,
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: "72%",
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: "#1a2032",
+            borderColor: "rgba(255,255,255,0.08)",
+            borderWidth: 1,
+            padding: 10,
+            titleColor: "#eef1f7",
+            bodyColor: "#c3cad9",
+            callbacks: { label: (ctx) => ` ${ctx.label}: ${fmtCurrency(ctx.parsed, currency)}` },
+          },
+        },
+      },
+      plugins: [{
+        id: "centerText",
+        afterDraw(chart) {
+          const { ctx, chartArea: { left, right, top, bottom } } = chart;
+          const x = (left + right) / 2;
+          const y = (top + bottom) / 2;
+          ctx.save();
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillStyle = "#eef1f7";
+          ctx.font = "600 22px Inter, sans-serif";
+          ctx.fillText(fmtCurrency(revenue, currency), x, y - 10);
+          ctx.fillStyle = "#818ba3";
+          ctx.font = "400 11px Inter, sans-serif";
+          ctx.fillText(`${sales} venda(s) · 30 dias`, x, y + 14);
+          ctx.restore();
+        },
+      }],
+    });
+
+    legendEl.innerHTML = `
+      <div style="display:flex; gap:20px; flex-wrap:wrap">
+        <div style="display:flex; align-items:center; gap:8px">
+          <span style="width:10px;height:10px;border-radius:3px;background:${CHART_COLORS.accent};display:inline-block"></span>
+          <span style="font-size:12px;color:var(--muted)">Receita total · <strong style="color:var(--text)">${fmtCurrency(revenue, currency)}</strong></span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px">
+          <span style="width:10px;height:10px;border-radius:3px;background:${CHART_COLORS.teal};display:inline-block"></span>
+          <span style="font-size:12px;color:var(--muted)">Ticket médio · <strong style="color:var(--text)">${fmtCurrency(avgTicket, currency)}</strong></span>
+        </div>
+      </div>
+    `;
+  }
+
   function renderRuns(data) {
     const el = document.getElementById("runs");
     const runs = [...(data.runs || [])].reverse();
@@ -397,6 +639,8 @@
       renderStats(data);
       renderTopVideo(data);
       renderStreakAndCalendar(data);
+      renderViewsChart(data);
+      renderSalesChart(data);
       renderCategories(data);
       renderRuns(data);
     })
