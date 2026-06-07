@@ -37,30 +37,39 @@ async function refreshYouTubeToken() {
   return data.access_token;
 }
 
-async function uploadToYouTube(videoPath, scriptData, topicData) {
+async function uploadToYouTube(videoPath, scriptData, topicData, isShorts = false) {
   if (!process.env.YOUTUBE_CLIENT_ID || !process.env.YOUTUBE_REFRESH_TOKEN) {
     console.log("   ⚠️  YouTube não configurado — pulando");
     return null;
   }
 
-  console.log("📺 [Publish] Fazendo upload para YouTube...");
+  console.log(`📺 [Publish] Fazendo upload para YouTube${isShorts ? " (Shorts)" : ""}...`);
 
   const accessToken = await refreshYouTubeToken();
 
-  // Monta a descrição com CTA do Hotmart
+  const linktree = settings.niche.links?.linktree;
+
+  // Monta a descrição com link do Linktree + CTA do Hotmart
   const description = [
     scriptData.description?.youtube || scriptData.script.slice(0, 200) + "...",
     "",
+    ...(linktree ? [`🔗 Acesse: ${linktree}`, ""] : []),
     "━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
     topicData.hotmartCta || settings.niche.hotmartProducts[0].cta,
     "━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
     "",
     "#" + (settings.youtube.defaultTags || []).join(" #"),
+    ...(isShorts ? ["#Shorts"] : []),
   ].join("\n");
+
+  // No título dos Shorts, garante a hashtag #Shorts pra ajudar o YouTube a
+  // classificar corretamente o vídeo vertical como Short.
+  const baseTitle = scriptData.title?.youtube || topicData.topic;
+  const title = isShorts && !/#shorts/i.test(baseTitle) ? `${baseTitle} #Shorts` : baseTitle;
 
   const metadata = {
     snippet: {
-      title: scriptData.title?.youtube || topicData.topic,
+      title,
       description,
       tags: [
         ...(settings.youtube.defaultTags || []),
@@ -116,10 +125,15 @@ async function uploadToYouTube(videoPath, scriptData, topicData) {
 
   const video = await uploadRes.json();
   const videoId = video.id;
-  const videoUrl = `https://www.youtube.com/shorts/${videoId}`;
+  // Vídeos verticais/curtos só viram Shorts de fato no link /shorts/...;
+  // o vídeo horizontal "tradicional" usa /watch — o YouTube redireciona
+  // sozinho caso o formato não seja compatível com Shorts.
+  const videoUrl = isShorts
+    ? `https://www.youtube.com/shorts/${videoId}`
+    : `https://www.youtube.com/watch?v=${videoId}`;
 
-  console.log(`✅ [YouTube] Upload concluído: ${videoUrl}`);
-  return { videoId, url: videoUrl, platform: "youtube" };
+  console.log(`✅ [YouTube${isShorts ? " Shorts" : ""}] Upload concluído: ${videoUrl}`);
+  return { videoId, url: videoUrl, platform: isShorts ? "youtube_shorts" : "youtube" };
 }
 
 // ---------------------------------------------------------------------------
@@ -197,7 +211,12 @@ async function uploadToTikTok(videoPath, scriptData, topicData) {
     .slice(0, 10)
     .join(" ");
 
-  const caption = `${scriptData.title?.tiktok || topicData.topic} ${hashtags}`;
+  const linktree = settings.niche.links?.linktree;
+  const linkLine = linktree ? `🔗 ${linktree.replace(/^https?:\/\//, "")}` : "";
+
+  const caption = [scriptData.title?.tiktok || topicData.topic, linkLine, hashtags]
+    .filter(Boolean)
+    .join(" ");
 
   // Passo 1: Iniciar upload
   const initRes = await fetch(
@@ -271,17 +290,38 @@ export async function publishVideos(videoData, scriptData, topicData) {
 
   const results = [];
 
-  // YouTube
+  // YouTube — vídeo "tradicional" (horizontal)
   if (settings.youtube.enabled && videoData.youtube) {
     try {
       const ytResult = await uploadToYouTube(
         videoData.youtube,
         scriptData,
-        topicData
+        topicData,
+        false
       );
       if (ytResult) results.push(ytResult);
     } catch (e) {
       console.error(`❌ Erro YouTube: ${e.message}`);
+    }
+  }
+
+  // YouTube Shorts — versão vertical (mesmo arquivo usado no TikTok), só
+  // sobe se for um arquivo diferente do "tradicional" pra não duplicar.
+  if (
+    settings.youtube.enabled &&
+    videoData.youtubeShorts &&
+    videoData.youtubeShorts !== videoData.youtube
+  ) {
+    try {
+      const ytShortsResult = await uploadToYouTube(
+        videoData.youtubeShorts,
+        scriptData,
+        topicData,
+        true
+      );
+      if (ytShortsResult) results.push(ytShortsResult);
+    } catch (e) {
+      console.error(`❌ Erro YouTube Shorts: ${e.message}`);
     }
   }
 
