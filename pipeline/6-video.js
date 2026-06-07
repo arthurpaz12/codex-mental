@@ -1,13 +1,18 @@
 /**
- * Módulo 6: Video — Montagem local com FFmpeg (gratuito)
+ * Módulo 6: Video — Montagem profissional com FFmpeg
  *
- * Combina áudio (ElevenLabs) + footage (Pexels) + thumbnail
- * em um vídeo final com legendas PNG overlay e blur background no TikTok.
- * Não depende de libass ou freetype.
+ * Features:
+ * - Card de abertura (2s) com título
+ * - Ken Burns suave nos clips
+ * - Color grade dark/roxo
+ * - Legendas palavra-por-palavra (estilo CapCut)
+ * - CTA final (3s)
+ * - Blur background no TikTok
+ * - Música ambiente no YouTube (se disponível)
  */
 
 import "dotenv/config";
-import { mkdirSync, writeFileSync, rmSync, existsSync } from "fs";
+import { mkdirSync, writeFileSync, existsSync, readdirSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { execSync, spawn } from "child_process";
@@ -15,62 +20,50 @@ import sharp from "sharp";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-// Detecta o caminho do ffmpeg
+const ASSETS_DIR = join(__dirname, "../assets");
+
 function getFFmpegPath() {
   try { return execSync("which ffmpeg").toString().trim(); }
   catch { return "ffmpeg"; }
 }
 
 // ---------------------------------------------------------------------------
-// Executa comando FFmpeg
+// Executa FFmpeg
 // ---------------------------------------------------------------------------
 
 function runFFmpeg(args, label = "") {
   return new Promise((resolve, reject) => {
     const ffmpeg = getFFmpegPath();
-    console.log(`   → FFmpeg${label ? " [" + label + "]" : ""}...`);
+    console.log(`   → FFmpeg [${label}]...`);
     const proc = spawn(ffmpeg, args, { stdio: ["ignore", "ignore", "pipe"] });
     let stderr = "";
     proc.stderr.on("data", (d) => (stderr += d.toString()));
     proc.on("close", (code) => {
       if (code === 0) resolve();
-      else reject(new Error(`FFmpeg falhou (${code}): ${stderr.slice(-800)}`));
+      else reject(new Error(`FFmpeg [${label}] falhou (${code}): ${stderr.slice(-600)}`));
     });
   });
 }
 
 // ---------------------------------------------------------------------------
-// Gera arquivo de legendas SRT a partir do script
+// Gera SRT + blocos palavra-por-palavra
 // ---------------------------------------------------------------------------
 
-function generateSRT(script, durationSeconds) {
-  const rawSentences = script
-    .split(/(?<=[.!?])\s+/)
-    .map((s) => s.trim())
-    .filter((s) => s.length > 0);
+function generateWordBlocks(script, duration) {
+  // Divide em palavras mantendo pontuação
+  const words = script.trim().split(/\s+/).filter(Boolean);
+  const timePerWord = duration / words.length;
 
-  // Quebra sentenças longas em chunks de ~55 chars
+  // Agrupa em chunks de 3 palavras (estilo CapCut)
   const chunks = [];
-  for (const sentence of rawSentences) {
-    if (sentence.length <= 60) {
-      chunks.push(sentence);
-    } else {
-      const words = sentence.split(" ");
-      let current = "";
-      for (const word of words) {
-        if ((current + " " + word).trim().length > 60) {
-          if (current) chunks.push(current.trim());
-          current = word;
-        } else {
-          current = (current + " " + word).trim();
-        }
-      }
-      if (current) chunks.push(current.trim());
-    }
+  for (let i = 0; i < words.length; i += 3) {
+    const slice = words.slice(i, i + 3);
+    const start = i * timePerWord;
+    const end = Math.min((i + slice.length) * timePerWord, duration);
+    chunks.push({ text: slice.join(" "), start, end });
   }
 
-  const timePerChunk = durationSeconds / chunks.length;
-
+  // Gera SRT
   const fmt = (s) => {
     const h = Math.floor(s / 3600).toString().padStart(2, "0");
     const m = Math.floor((s % 3600) / 60).toString().padStart(2, "0");
@@ -80,241 +73,322 @@ function generateSRT(script, durationSeconds) {
   };
 
   let srt = "";
-  const blocks = [];
-  chunks.forEach((chunk, i) => {
-    const start = i * timePerChunk;
-    const end = Math.min((i + 1) * timePerChunk, durationSeconds);
-    srt += `${i + 1}\n${fmt(start)} --> ${fmt(end)}\n${chunk}\n\n`;
-    blocks.push({ text: chunk, start, end });
+  chunks.forEach((c, i) => {
+    srt += `${i + 1}\n${fmt(c.start)} --> ${fmt(c.end)}\n${c.text}\n\n`;
   });
 
-  return { srt, blocks };
+  return { blocks: chunks, srt };
 }
 
 // ---------------------------------------------------------------------------
-// Gera imagens PNG de legenda com Sharp (sem libass)
+// Gera imagens PNG de legenda (estilo CapCut — bold, contorno, fundo semi-transparente)
 // ---------------------------------------------------------------------------
 
-async function generateSubtitleImages(blocks, tmpDir, videoWidth, isVertical) {
+async function generateCaptionImages(blocks, tmpDir, videoWidth, isVertical) {
   mkdirSync(tmpDir, { recursive: true });
-  const imgWidth = videoWidth;
-  const fontSize = isVertical ? 54 : 44;
-  const boxHeight = isVertical ? 110 : 90;
+  const fontSize = isVertical ? 68 : 52;
+  const boxPad = 20;
   const images = [];
 
   for (let i = 0; i < blocks.length; i++) {
     const { text, start, end } = blocks[i];
-    const imgPath = join(tmpDir, `sub-${String(i).padStart(4, "0")}.png`);
+    const escaped = text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
 
-    // SVG com fundo semi-transparente e texto branco centralizado
-    const svg = `<svg width="${imgWidth}" height="${boxHeight}" xmlns="http://www.w3.org/2000/svg">
-  <rect width="${imgWidth}" height="${boxHeight}" fill="rgba(0,0,0,0.65)" rx="8"/>
+    // Estima largura do texto (aprox)
+    const estWidth = Math.min(escaped.length * (fontSize * 0.6), videoWidth - 80);
+    const boxW = Math.max(estWidth + boxPad * 2, 200);
+    const boxH = fontSize + boxPad * 2;
+
+    const svg = `<svg width="${boxW}" height="${boxH}" xmlns="http://www.w3.org/2000/svg">
+  <rect width="${boxW}" height="${boxH}" fill="rgba(0,0,0,0.7)" rx="12"/>
   <text
-    x="${imgWidth / 2}" y="${boxHeight / 2}"
+    x="${boxW / 2}" y="${boxH / 2}"
     font-family="Arial Black, Arial, sans-serif"
     font-size="${fontSize}"
-    font-weight="bold"
+    font-weight="900"
     fill="white"
     text-anchor="middle"
     dominant-baseline="middle"
-    stroke="black"
-    stroke-width="3"
+    stroke="#000000"
+    stroke-width="4"
     paint-order="stroke"
-  >${text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")}</text>
+  >${escaped}</text>
 </svg>`;
 
+    const imgPath = join(tmpDir, `cap-${String(i).padStart(5, "0")}.png`);
     await sharp(Buffer.from(svg)).png().toFile(imgPath);
-    images.push({ path: imgPath, start, end });
+    images.push({ path: imgPath, start, end, width: boxW, height: boxH });
   }
 
   return images;
 }
 
 // ---------------------------------------------------------------------------
-// Monta vídeo com legendas PNG overlay via FFmpeg filter_complex
+// Gera card de ABERTURA (Sharp SVG → PNG)
 // ---------------------------------------------------------------------------
 
-async function buildVideoWithSubtitles(baseArgs, subtitleImages, videoWidth, videoHeight, isVertical, outputPath, label) {
-  const yPos = isVertical ? Math.round(videoHeight * 0.83) : Math.round(videoHeight * 0.85);
-  const subW = videoWidth;
-
-  // Adiciona cada imagem de legenda como input extra
-  const extraInputs = [];
-  subtitleImages.forEach((s) => {
-    extraInputs.push("-i", s.path);
-  });
-
-  // Monta filter_complex com chain de overlays
-  let filterChain = "";
-  const mainInput = "[base]";
-
-  // Primeiro rotula o stream de vídeo base
-  // O índice 0 é o vídeo concat/loop, os subsequentes são as legendas
-  const subStartIdx = baseArgs.filter(a => a === "-i").length; // conta inputs existentes
-
-  // Chain: [base] → overlay sub0 → overlay sub1 → ...
-  let prevLabel = "base";
-  subtitleImages.forEach((sub, i) => {
-    const nextLabel = i === subtitleImages.length - 1 ? "out" : `s${i}`;
-    const subIdx = subStartIdx + i;
-    const enableExpr = `between(t,${sub.start.toFixed(3)},${sub.end.toFixed(3)})`;
-    filterChain +=
-      `[${prevLabel}][${subIdx}:v]overlay=x=(W-w)/2:y=${yPos}:enable='${enableExpr}'[${nextLabel}];`;
-    prevLabel = nextLabel;
-  });
-
-  // Remove último ';'
-  filterChain = filterChain.replace(/;$/, "");
-
-  // Reconstrói args com os inputs extras e filter_complex
-  const finalArgs = [...baseArgs, ...extraInputs, "-filter_complex", `[0:v]copy[base];${filterChain}`, "-map", "[out]"];
-  // Remove -vf se existir (incompatível com filter_complex)
-  const cleanArgs = [];
-  for (let i = 0; i < finalArgs.length; i++) {
-    if (finalArgs[i] === "-vf") { i++; continue; } // pula -vf e seu valor
-    cleanArgs.push(finalArgs[i]);
+async function generateOpeningCard(title, outputDir, w, h) {
+  const escaped = title.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const words = escaped.split(" ");
+  const lines = [];
+  let cur = "";
+  const maxChars = w > 900 ? 24 : 18;
+  for (const word of words) {
+    if ((cur + " " + word).trim().length > maxChars) {
+      if (cur) lines.push(cur.trim());
+      cur = word;
+    } else {
+      cur = (cur + " " + word).trim();
+    }
   }
-  // Adiciona áudio e output
-  cleanArgs.push("-map", "1:a", "-c:a", "aac", "-b:a", "128k", "-shortest", "-y", outputPath);
+  if (cur) lines.push(cur.trim());
 
-  await runFFmpeg(cleanArgs, label);
+  const lineH = h > 900 ? 110 : 90;
+  const startY = h / 2 - (lines.length * lineH) / 2;
+
+  const textEls = lines.map((l, i) => `
+    <text x="${w/2}" y="${startY + i * lineH}"
+      font-family="Arial Black, Arial, sans-serif"
+      font-size="${h > 900 ? 100 : 80}" font-weight="900"
+      fill="white" text-anchor="middle" dominant-baseline="middle"
+      stroke="black" stroke-width="4" paint-order="stroke"
+      filter="url(#shadow)"
+    >${l}</text>`).join("");
+
+  const svg = `<svg width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a1a"/>
+      <stop offset="50%" style="stop-color:#1a0a2e"/>
+      <stop offset="100%" style="stop-color:#0a0a0f"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6b21a8"/>
+      <stop offset="100%" style="stop-color:#a855f7"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.9"/>
+    </filter>
+  </defs>
+  <rect width="${w}" height="${h}" fill="url(#bg)"/>
+  <ellipse cx="${w/2}" cy="${h/2}" rx="${w*0.4}" ry="${h*0.3}" fill="#4c1d95" opacity="0.4"/>
+  <!-- Olho -->
+  <ellipse cx="${w/2}" cy="${h > 900 ? 280 : 120}" rx="${h > 900 ? 100 : 65}" ry="${h > 900 ? 60 : 38}"
+    fill="none" stroke="#a855f7" stroke-width="${h > 900 ? 5 : 3}" opacity="0.9"/>
+  <circle cx="${w/2}" cy="${h > 900 ? 280 : 120}" r="${h > 900 ? 32 : 20}" fill="#a855f7"/>
+  <circle cx="${w/2}" cy="${h > 900 ? 280 : 120}" r="${h > 900 ? 14 : 9}" fill="#fbbf24"/>
+  ${textEls}
+  <rect x="0" y="${h - 10}" width="${w}" height="10" fill="url(#accent)"/>
+  <text x="${w/2}" y="${h - 40}"
+    font-family="Arial, sans-serif" font-size="${h > 900 ? 36 : 28}"
+    fill="#a855f7" text-anchor="middle" dominant-baseline="middle" font-weight="bold"
+  >CODEX MENTAL</text>
+</svg>`;
+
+  const path = join(outputDir, `opening-${w}x${h}.png`);
+  await sharp(Buffer.from(svg)).png().toFile(path);
+  return path;
 }
 
 // ---------------------------------------------------------------------------
-// Monta vídeo YouTube (landscape 1280x720)
+// Gera card de CTA final
 // ---------------------------------------------------------------------------
 
-async function buildYoutubeVideo(audioPath, videoClips, thumbnailPath, subtitleImages, outputPath, duration) {
-  const hasClips = videoClips && videoClips.length > 0;
+async function generateCTACard(outputDir, w, h) {
+  const svg = `<svg width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a1a"/>
+      <stop offset="100%" style="stop-color:#1a0a2e"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6b21a8"/>
+      <stop offset="100%" style="stop-color:#a855f7"/>
+    </linearGradient>
+  </defs>
+  <rect width="${w}" height="${h}" fill="url(#bg)"/>
+  <ellipse cx="${w/2}" cy="${h/2}" rx="${w*0.45}" ry="${h*0.35}" fill="#4c1d95" opacity="0.3"/>
 
-  if (hasClips) {
-    const listPath = outputPath.replace(".mp4", "-list.txt");
-    writeFileSync(listPath, videoClips.map((v) => `file '${v.localPath || v}'`).join("\n"));
+  <text x="${w/2}" y="${h/2 - (h > 900 ? 80 : 50)}"
+    font-family="Arial Black, Arial, sans-serif"
+    font-size="${h > 900 ? 90 : 68}" font-weight="900"
+    fill="white" text-anchor="middle" dominant-baseline="middle"
+    stroke="black" stroke-width="4" paint-order="stroke"
+  >SIGA PARA MAIS</text>
 
-    // Base: concat + escala YouTube
-    const baseArgs = [
-      "-f", "concat", "-safe", "0", "-i", listPath,
-      "-i", audioPath,
-      "-vf", "scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720",
-      "-c:v", "libx264", "-preset", "fast", "-crf", "23",
-    ];
+  <rect x="${w/2 - (h > 900 ? 280 : 220)}" y="${h/2 + (h > 900 ? 20 : 10)}"
+    width="${h > 900 ? 560 : 440}" height="${h > 900 ? 90 : 70}" rx="45" fill="url(#accent)"/>
+  <text x="${w/2}" y="${h/2 + (h > 900 ? 65 : 47)}"
+    font-family="Arial Black, Arial, sans-serif"
+    font-size="${h > 900 ? 52 : 40}" font-weight="900"
+    fill="white" text-anchor="middle" dominant-baseline="middle"
+  >@codexmentalbr</text>
 
-    if (subtitleImages && subtitleImages.length > 0) {
-      try {
-        await buildVideoWithSubtitles(baseArgs, subtitleImages, 1280, 720, false, outputPath, "YouTube+legendas");
-        return;
-      } catch (e) {
-        console.warn(`   ⚠️  Legendas overlay falhou: ${e.message.slice(0, 100)}`);
-      }
+  <rect x="0" y="${h - 10}" width="${w}" height="10" fill="url(#accent)"/>
+</svg>`;
+
+  const path = join(outputDir, `cta-${w}x${h}.png`);
+  await sharp(Buffer.from(svg)).png().toFile(path);
+  return path;
+}
+
+// ---------------------------------------------------------------------------
+// Prepara clips com color grade dark/roxo
+// ---------------------------------------------------------------------------
+
+async function prepareClips(videoClips, tmpDir, w, h, isTikTok) {
+  mkdirSync(tmpDir, { recursive: true });
+  const prepared = [];
+
+  for (let i = 0; i < videoClips.length; i++) {
+    const clip = videoClips[i];
+    const src = clip.localPath || clip;
+    const out = join(tmpDir, `clip-${i}.mp4`);
+
+    // Color grade: contraste alto, saturação reduzida, tom frio/roxo
+    const colorGrade =
+      "eq=contrast=1.15:brightness=0.02:saturation=0.75," +
+      "colorchannelmixer=rr=0.85:gg=0.82:bb=1.08";
+
+    let scaleFilter;
+    if (isTikTok) {
+      // Blur background para TikTok
+      scaleFilter =
+        `[0:v]split=2[fg][bg];` +
+        `[bg]scale=${w}:${h}:force_original_aspect_ratio=increase,crop=${w}:${h},boxblur=25:25,${colorGrade}[blurred];` +
+        `[fg]scale=${w}:${Math.round(w * 0.75)}:force_original_aspect_ratio=decrease,${colorGrade}[scaled];` +
+        `[blurred][scaled]overlay=(W-w)/2:(H-h)/2[out]`;
+    } else {
+      scaleFilter = `scale=${w}:${h}:force_original_aspect_ratio=increase,crop=${w}:${h},${colorGrade}`;
     }
 
-    // Fallback sem legendas
-    await runFFmpeg([
-      "-f", "concat", "-safe", "0", "-i", listPath,
-      "-i", audioPath,
-      "-vf", "scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720",
-      "-c:v", "libx264", "-preset", "fast", "-crf", "23",
-      "-c:a", "aac", "-b:a", "128k",
-      "-shortest", "-y", outputPath,
-    ], "YouTube");
-  } else {
-    await runFFmpeg([
-      "-loop", "1", "-i", thumbnailPath,
-      "-i", audioPath,
-      "-vf", "scale=1280:720",
-      "-c:v", "libx264", "-preset", "fast", "-crf", "23",
-      "-c:a", "aac", "-b:a", "128k",
-      "-t", String(duration), "-shortest", "-y", outputPath,
-    ], "YouTube (imagem)");
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Monta vídeo TikTok (portrait 1080x1920) com blur background
-// ---------------------------------------------------------------------------
-
-async function buildTiktokVideo(audioPath, videoClips, thumbnailPath, subtitleImages, outputPath, duration) {
-  const hasClips = videoClips && videoClips.length > 0;
-
-  if (hasClips) {
-    const listPath = outputPath.replace(".mp4", "-list.txt");
-    writeFileSync(listPath, videoClips.map((v) => `file '${v.localPath || v}'`).join("\n"));
-
-    // Blur background filter: fundo desfocado + vídeo centralizado
-    const blurFilter =
-      "[0:v]split=2[fg][bg];" +
-      "[bg]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,boxblur=25:25[blurred];" +
-      "[fg]scale=1080:1080:force_original_aspect_ratio=decrease[scaled];" +
-      "[blurred][scaled]overlay=(W-w)/2:(H-h)/2[composed]";
-
-    if (subtitleImages && subtitleImages.length > 0) {
-      // Monta subtítulos em cima do blur background
-      const yPos = Math.round(1920 * 0.83);
-      let subChain = "";
-      let prevLabel = "composed";
-      subtitleImages.forEach((sub, i) => {
-        const subIdx = 2 + i; // 0=video, 1=audio, 2+ = legendas
-        const nextLabel = i === subtitleImages.length - 1 ? "out" : `s${i}`;
-        subChain += `[${prevLabel}][${subIdx}:v]overlay=x=(W-w)/2:y=${yPos}:enable='between(t,${sub.start.toFixed(3)},${sub.end.toFixed(3)})'[${nextLabel}];`;
-        prevLabel = nextLabel;
-      });
-      subChain = subChain.replace(/;$/, "");
-
-      const fullFilter = `${blurFilter};${subChain}`;
-      const extraInputs = [];
-      subtitleImages.forEach((s) => extraInputs.push("-i", s.path));
-
-      try {
+    try {
+      if (isTikTok) {
         await runFFmpeg([
-          "-f", "concat", "-safe", "0", "-i", listPath,
-          "-i", audioPath,
-          ...extraInputs,
-          "-filter_complex", fullFilter,
-          "-map", "[out]", "-map", "1:a",
+          "-i", src,
+          "-filter_complex", scaleFilter,
+          "-map", "[out]", "-an",
           "-c:v", "libx264", "-preset", "fast", "-crf", "23",
-          "-c:a", "aac", "-b:a", "128k",
-          "-shortest", "-y", outputPath,
-        ], "TikTok+blur+legendas");
-        return;
-      } catch (e) {
-        console.warn(`   ⚠️  TikTok com legendas falhou: ${e.message.slice(0, 100)}`);
+          "-t", "10", "-y", out,
+        ], `clip${i}-tiktok`);
+      } else {
+        await runFFmpeg([
+          "-i", src,
+          "-vf", scaleFilter,
+          "-an", "-c:v", "libx264", "-preset", "fast", "-crf", "23",
+          "-t", "10", "-y", out,
+        ], `clip${i}-yt`);
       }
+      prepared.push(out);
+    } catch (e) {
+      console.warn(`   ⚠️  Clip ${i} falhou: ${e.message.slice(0, 80)}`);
+      // Usa original sem grade
+      prepared.push(src);
     }
+  }
+  return prepared;
+}
 
-    // Fallback: só blur sem legendas
+// ---------------------------------------------------------------------------
+// Converte imagem estática em vídeo curto
+// ---------------------------------------------------------------------------
+
+async function imageToVideo(imgPath, durationSec, w, h, outPath) {
+  await runFFmpeg([
+    "-loop", "1", "-i", imgPath,
+    "-vf", `scale=${w}:${h}`,
+    "-c:v", "libx264", "-preset", "fast", "-crf", "23",
+    "-t", String(durationSec), "-an", "-y", outPath,
+  ], "img2vid");
+}
+
+// ---------------------------------------------------------------------------
+// Monta vídeo final com legendas overlay
+// ---------------------------------------------------------------------------
+
+async function buildFinalVideo(videoListPath, audioPath, captionImages, outputPath, musicPath, label) {
+  const hasCaptions = captionImages && captionImages.length > 0;
+  const hasMusic = musicPath && existsSync(musicPath);
+
+  // Inputs: 0=video, 1=narração, [2=música], [2+N=legendas]
+  const inputs = [
+    "-f", "concat", "-safe", "0", "-i", videoListPath,
+    "-i", audioPath,
+  ];
+
+  if (hasMusic) inputs.push("-i", musicPath);
+
+  const captionInputs = [];
+  if (hasCaptions) {
+    captionImages.forEach((c) => captionInputs.push("-i", c.path));
+  }
+
+  const musicIdx = hasMusic ? 2 : null;
+  const capStartIdx = hasMusic ? 3 : 2;
+
+  // Monta audio mix
+  let audioFilter = "";
+  let audioMap = "1:a";
+  if (hasMusic) {
+    audioFilter = `[1:a]volume=1.0[narr];[${musicIdx}:a]volume=0.15[music];[narr][music]amix=inputs=2:duration=first[aout]`;
+    audioMap = "[aout]";
+  }
+
+  // Monta cadeia de legendas
+  if (hasCaptions) {
+    let chain = audioFilter ? "" : "";
+    let prevLabel = "0:v";
+    const filterParts = audioFilter ? [audioFilter] : [];
+
+    captionImages.forEach((cap, i) => {
+      const idx = capStartIdx + i;
+      const nextLabel = i === captionImages.length - 1 ? "vout" : `vcap${i}`;
+      const enable = `between(t,${cap.start.toFixed(3)},${cap.end.toFixed(3)})`;
+      filterParts.push(
+        `[${prevLabel}][${idx}:v]overlay=x=(W-w)/2:y=H*0.84:enable='${enable}'[${nextLabel}]`
+      );
+      prevLabel = nextLabel;
+    });
+
+    const filterComplex = filterParts.join(";");
+
     try {
       await runFFmpeg([
-        "-f", "concat", "-safe", "0", "-i", listPath,
-        "-i", audioPath,
-        "-filter_complex", `${blurFilter};[composed]null[out]`,
-        "-map", "[out]", "-map", "1:a",
+        ...inputs, ...captionInputs,
+        "-filter_complex", filterComplex,
+        "-map", "[vout]", "-map", audioMap,
         "-c:v", "libx264", "-preset", "fast", "-crf", "23",
         "-c:a", "aac", "-b:a", "128k",
         "-shortest", "-y", outputPath,
-      ], "TikTok+blur");
+      ], label + "+legendas");
       return;
     } catch (e) {
-      console.warn(`   ⚠️  Blur falhou, usando crop simples...`);
+      console.warn(`   ⚠️  Legendas overlay falhou, continuando sem: ${e.message.slice(0, 100)}`);
     }
+  }
 
-    // Fallback final: crop simples
+  // Fallback: sem legendas
+  const fallbackArgs = [...inputs];
+  if (hasMusic) {
     await runFFmpeg([
-      "-f", "concat", "-safe", "0", "-i", listPath,
-      "-i", audioPath,
-      "-vf", "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920",
+      ...fallbackArgs,
+      "-filter_complex", `[1:a]volume=1.0[narr];[${musicIdx}:a]volume=0.15[music];[narr][music]amix=inputs=2:duration=first[aout]`,
+      "-map", "0:v", "-map", "[aout]",
       "-c:v", "libx264", "-preset", "fast", "-crf", "23",
       "-c:a", "aac", "-b:a", "128k",
       "-shortest", "-y", outputPath,
-    ], "TikTok");
+    ], label);
   } else {
     await runFFmpeg([
-      "-loop", "1", "-i", thumbnailPath,
-      "-i", audioPath,
-      "-vf", "scale=1080:1920",
+      ...fallbackArgs,
+      "-map", "0:v", "-map", "1:a",
       "-c:v", "libx264", "-preset", "fast", "-crf", "23",
       "-c:a", "aac", "-b:a", "128k",
-      "-t", String(duration), "-shortest", "-y", outputPath,
-    ], "TikTok (imagem)");
+      "-shortest", "-y", outputPath,
+    ], label);
   }
 }
 
@@ -324,57 +398,124 @@ async function buildTiktokVideo(audioPath, videoClips, thumbnailPath, subtitleIm
 
 export async function assembleVideo(scriptData, voiceData, mediaData, thumbnailData, outputDir) {
   mkdirSync(join(outputDir, "video"), { recursive: true });
+  const tmpDir = join(outputDir, "video", "tmp");
+  mkdirSync(tmpDir, { recursive: true });
 
   console.log("🎞️  [Video] Montando vídeo com FFmpeg...");
 
   const audioPath = voiceData.audioPath;
   const duration = voiceData.duration || 60;
   const videoClips = mediaData?.videos || [];
+  const title = scriptData.title?.youtube || scriptData.title || "Codex Mental";
+  const tiktokTitle = scriptData.title?.tiktok || title;
 
-  // Gera legendas SRT + blocos com timestamps
-  const srtPath = join(outputDir, "video", "subtitles.srt");
-  const { srt, blocks } = generateSRT(scriptData.script, duration);
-  writeFileSync(srtPath, srt, "utf-8");
-  console.log(`   → Legendas: ${blocks.length} blocos`);
+  // Música ambiente (YouTube only) — coloca um arquivo em assets/music.mp3
+  const musicPath = join(ASSETS_DIR, "music.mp3");
 
-  // Gera imagens PNG de legenda para YouTube (1280px)
-  const subTmpYT = join(outputDir, "video", "subs-yt");
-  const subTmpTK = join(outputDir, "video", "subs-tk");
+  console.log(`   → Duração do áudio: ${duration.toFixed ? duration.toFixed(1) : duration}s`);
 
-  let subtitleImagesYT = [];
-  let subtitleImagesTK = [];
-
-  try {
-    subtitleImagesYT = await generateSubtitleImages(blocks, subTmpYT, 1280, false);
-    subtitleImagesTK = await generateSubtitleImages(blocks, subTmpTK, 1080, true);
-    console.log(`   → ${subtitleImagesYT.length} imagens de legenda geradas`);
-  } catch (e) {
-    console.warn(`   ⚠️  Falha ao gerar imagens de legenda: ${e.message}`);
-  }
+  // Gera legendas palavra-por-palavra
+  const { blocks, srt } = generateWordBlocks(scriptData.script, duration);
+  writeFileSync(join(outputDir, "video", "subtitles.srt"), srt, "utf-8");
+  console.log(`   → Legendas: ${blocks.length} blocos (palavra-por-palavra)`);
 
   const results = {};
 
-  // YouTube (landscape 1280x720 — vídeo normal)
+  // ── YouTube (1280x720) ────────────────────────────────────────────────────
+  console.log("\n   📺 Montando YouTube...");
+
+  const ytTmp = join(tmpDir, "yt");
+  const openingYT = await generateOpeningCard(title, ytTmp, 1280, 720);
+  const ctaYT = await generateCTACard(ytTmp, 1280, 720);
+  const openingVideoYT = join(ytTmp, "opening.mp4");
+  const ctaVideoYT = join(ytTmp, "cta.mp4");
+  await imageToVideo(openingYT, 2, 1280, 720, openingVideoYT);
+  await imageToVideo(ctaYT, 3, 1280, 720, ctaVideoYT);
+
+  let ytClips = [];
+  if (videoClips.length > 0) {
+    ytClips = await prepareClips(videoClips, join(ytTmp, "clips"), 1280, 720, false);
+  }
+
+  // Monta lista: abertura + clips + CTA
+  const ytListPath = join(ytTmp, "list.txt");
+  const ytList = [
+    `file '${openingVideoYT}'`,
+    ...ytClips.map(c => `file '${c}'`),
+    `file '${ctaVideoYT}'`,
+  ].join("\n");
+  writeFileSync(ytListPath, ytList);
+
+  // Gera legendas PNG para YouTube
+  const ytCapDir = join(ytTmp, "captions");
+  let ytCaptions = [];
+  try {
+    // Offset de 2s pela abertura
+    const offsetBlocks = blocks.map(b => ({
+      ...b, start: b.start + 2, end: b.end + 2,
+    }));
+    ytCaptions = await generateCaptionImages(offsetBlocks, ytCapDir, 1280, false);
+    console.log(`   → ${ytCaptions.length} imagens de legenda (YouTube)`);
+  } catch (e) {
+    console.warn(`   ⚠️  Legendas YT falhou: ${e.message}`);
+  }
+
   const youtubePath = join(outputDir, "video", "youtube.mp4");
   try {
-    await buildYoutubeVideo(audioPath, videoClips, thumbnailData?.youtube, subtitleImagesYT, youtubePath, duration);
+    await buildFinalVideo(ytListPath, audioPath, ytCaptions, youtubePath, musicPath, "YouTube");
     results.youtube = youtubePath;
     console.log(`   ✅ YouTube: ${youtubePath}`);
   } catch (e) {
     console.error(`   ❌ YouTube falhou: ${e.message}`);
   }
 
-  // TikTok (portrait 1080x1920 — blur background + legendas)
+  // ── TikTok (1080x1920) ────────────────────────────────────────────────────
+  console.log("\n   📱 Montando TikTok...");
+
+  const tkTmp = join(tmpDir, "tk");
+  const openingTK = await generateOpeningCard(tiktokTitle, tkTmp, 1080, 1920);
+  const ctaTK = await generateCTACard(tkTmp, 1080, 1920);
+  const openingVideoTK = join(tkTmp, "opening.mp4");
+  const ctaVideoTK = join(tkTmp, "cta.mp4");
+  await imageToVideo(openingTK, 2, 1080, 1920, openingVideoTK);
+  await imageToVideo(ctaTK, 3, 1080, 1920, ctaVideoTK);
+
+  let tkClips = [];
+  if (videoClips.length > 0) {
+    tkClips = await prepareClips(videoClips, join(tkTmp, "clips"), 1080, 1920, true);
+  }
+
+  const tkListPath = join(tkTmp, "list.txt");
+  const tkList = [
+    `file '${openingVideoTK}'`,
+    ...tkClips.map(c => `file '${c}'`),
+    `file '${ctaVideoTK}'`,
+  ].join("\n");
+  writeFileSync(tkListPath, tkList);
+
+  const tkCapDir = join(tkTmp, "captions");
+  let tkCaptions = [];
+  try {
+    const offsetBlocks = blocks.map(b => ({
+      ...b, start: b.start + 2, end: b.end + 2,
+    }));
+    tkCaptions = await generateCaptionImages(offsetBlocks, tkCapDir, 1080, true);
+    console.log(`   → ${tkCaptions.length} imagens de legenda (TikTok)`);
+  } catch (e) {
+    console.warn(`   ⚠️  Legendas TK falhou: ${e.message}`);
+  }
+
   const tiktokPath = join(outputDir, "video", "tiktok.mp4");
   try {
-    await buildTiktokVideo(audioPath, videoClips, thumbnailData?.tiktok, subtitleImagesTK, tiktokPath, duration);
+    // TikTok sem música (vai adicionar som nativo no app)
+    await buildFinalVideo(tkListPath, audioPath, tkCaptions, tiktokPath, null, "TikTok");
     results.tiktok = tiktokPath;
     console.log(`   ✅ TikTok: ${tiktokPath}`);
   } catch (e) {
     console.error(`   ❌ TikTok falhou: ${e.message}`);
   }
 
-  console.log("✅ [Video] Montagem concluída!");
+  console.log("\n✅ [Video] Montagem concluída!");
 
   return {
     youtube: results.youtube || null,
@@ -384,10 +525,6 @@ export async function assembleVideo(scriptData, voiceData, mediaData, thumbnailD
   };
 }
 
-// ---------------------------------------------------------------------------
-// Execução direta
-// ---------------------------------------------------------------------------
-
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  console.log("ℹ️  Módulo 6 (FFmpeg) carregado. Execute via pipeline/index.js");
+  console.log("ℹ️  Execute via: node pipeline/index.js");
 }

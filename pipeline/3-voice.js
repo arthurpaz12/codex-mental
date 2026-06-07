@@ -69,7 +69,6 @@ async function generateAudio(text, outputPath) {
   const { execSync } = await import("child_process");
   try {
     execSync(`ffmpeg -i "${outputPath}" -filter:a "atempo=1.2" -y "${speedPath}" 2>/dev/null`);
-    // Substitui o original pelo acelerado
     execSync(`mv "${speedPath}" "${outputPath}"`);
     console.log(`   → Velocidade ajustada: 1.2x`);
   } catch {
@@ -129,12 +128,22 @@ export async function generateVoice(scriptData, outputDir) {
 
   await generateAudio(text, audioPath);
 
-  const durationEstimate = Math.round(text.length / 15); // ~15 chars/segundo em PT-BR
-  console.log(`   → Duração estimada: ~${durationEstimate}s`);
+  // Usa ffprobe para medir a duração REAL do áudio (já com 1.2x aplicado)
+  let duration = Math.round(text.length / 18); // fallback estimado (1.2x = ~18 chars/s)
+  try {
+    const { execSync } = await import("child_process");
+    const probe = execSync(
+      `ffprobe -v quiet -show_entries format=duration -of csv=p=0 "${audioPath}"`
+    ).toString().trim();
+    duration = parseFloat(probe);
+    console.log(`   → Duração real (ffprobe): ${duration.toFixed(1)}s`);
+  } catch {
+    console.warn(`   ⚠️  ffprobe falhou, usando estimativa: ${duration}s`);
+  }
 
   return {
     audioPath,
-    duration: durationEstimate,
+    duration,
     characters: text.length,
     voiceId: process.env.ELEVENLABS_VOICE_ID,
   };
