@@ -48,6 +48,11 @@
     font-size: 22px; margin: 0; font-weight: 600;
     color: var(--text);
     letter-spacing: -0.4px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  h1 .logo {
+    width: 28px; height: 28px; border-radius: 50%;
+    object-fit: cover; display: inline-block;
   }
   .subtitle {
     color: var(--muted); font-size: 13px; margin-top: 6px; letter-spacing: 0;
@@ -183,7 +188,7 @@
   <div class="wrap">
     <header>
       <div>
-        <h1>🧠 Codex Mental — Painel</h1>
+        <h1><img src="./apple-touch-icon.png" alt="Codex Mental" class="logo"> Dashboard</h1>
         <div class="subtitle">Acompanhamento do pipeline de conteúdo automatizado</div>
       </div>
       <div class="badge" id="updated">carregando...</div>
