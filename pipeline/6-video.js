@@ -22,6 +22,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const ASSETS_DIR = join(__dirname, "../assets");
 
+function stripEmojis(str) {
+  return str.replace(/[\u{1F300}-\u{1FFFF}|\u{2600}-\u{27FF}|\u{2300}-\u{23FF}|\u{FE00}-\u{FEFF}|\u{1F000}-\u{1F02F}|\u{1F0A0}-\u{1F0FF}|\u{1F100}-\u{1F1FF}|\u{1F200}-\u{1F2FF}|\u{1F900}-\u{1F9FF}|\u{1FA00}-\u{1FA6F}|\u{1FA70}-\u{1FAFF}]/gu, "").trim();
+}
+
 function getFFmpegPath() {
   try { return execSync("which ffmpeg").toString().trim(); }
   catch { return "ffmpeg"; }
@@ -131,7 +135,7 @@ async function generateCaptionImages(blocks, tmpDir, videoWidth, isVertical) {
 // ---------------------------------------------------------------------------
 
 async function generateOpeningCard(title, outputDir, w, h) {
-  const escaped = title.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const escaped = stripEmojis(title).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   const words = escaped.split(" ");
   const lines = [];
   let cur = "";
@@ -406,8 +410,8 @@ export async function assembleVideo(scriptData, voiceData, mediaData, thumbnailD
   const audioPath = voiceData.audioPath;
   const duration = voiceData.duration || 60;
   const videoClips = mediaData?.videos || [];
-  const title = scriptData.title?.youtube || scriptData.title || "Codex Mental";
-  const tiktokTitle = scriptData.title?.tiktok || title;
+  const title = stripEmojis(scriptData.title?.youtube || scriptData.title || "Codex Mental");
+  const tiktokTitle = stripEmojis(scriptData.title?.tiktok || title);
 
   // Música ambiente (YouTube only) — coloca um arquivo em assets/music.mp3
   const musicPath = join(ASSETS_DIR, "music.mp3");
@@ -425,6 +429,7 @@ export async function assembleVideo(scriptData, voiceData, mediaData, thumbnailD
   console.log("\n   📺 Montando YouTube...");
 
   const ytTmp = join(tmpDir, "yt");
+  mkdirSync(ytTmp, { recursive: true });
   const openingYT = await generateOpeningCard(title, ytTmp, 1280, 720);
   const ctaYT = await generateCTACard(ytTmp, 1280, 720);
   const openingVideoYT = join(ytTmp, "opening.mp4");
@@ -473,6 +478,7 @@ export async function assembleVideo(scriptData, voiceData, mediaData, thumbnailD
   console.log("\n   📱 Montando TikTok...");
 
   const tkTmp = join(tmpDir, "tk");
+  mkdirSync(tkTmp, { recursive: true });
   const openingTK = await generateOpeningCard(tiktokTitle, tkTmp, 1080, 1920);
   const ctaTK = await generateCTACard(tkTmp, 1080, 1920);
   const openingVideoTK = join(tkTmp, "opening.mp4");
