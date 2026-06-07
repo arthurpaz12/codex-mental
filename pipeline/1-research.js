@@ -128,7 +128,7 @@ Retorne APENAS um JSON válido neste formato:
   "angle": "ângulo único e surpreendente para abordar o tema",
   "hook": "frase de abertura impactante (máx 15 palavras)",
   "searchQuery": "query para buscar mídia no Pexels",
-  "thumbnailPrompt": "descrição visual para gerar thumbnail no DALL-E",
+  "thumbnailPrompt": "descrição visual de referência para a thumbnail (não usada na geração atual, que é local via Sharp/SVG)",
   "keywords": ["palavra1", "palavra2", "palavra3", "palavra4", "palavra5"],
   "viralScore": 0-100,
   "reasoning": "por que este tema vai bombar hoje",

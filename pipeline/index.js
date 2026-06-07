@@ -2,13 +2,17 @@
  * Pipeline Codex Mental — Orquestrador Principal
  *
  * Executa todos os módulos em sequência:
- * 1. Research  — escolhe o tema do dia
- * 2. Script    — gera o roteiro com Claude
- * 3. Voice     — narra com ElevenLabs
- * 4. Media     — busca footage no Pexels
- * 5. Thumbnail — gera thumbnail com DALL-E 3
- * 6. Video     — monta o vídeo com Creatomate
- * 7. Publish   — publica no YouTube e TikTok
+ * 1.  Research   — escolhe o tema do dia (Claude API)
+ * 2.  Script     — gera o roteiro com Claude (Claude API)
+ * 3.  Voice      — narra com ElevenLabs
+ * 4.  Media      — busca footage no Pexels
+ * 5.  Thumbnail  — gera thumbnail localmente com Sharp/SVG (sem custo de API)
+ * 6.  Video      — monta o vídeo localmente com FFmpeg + Sharp (sem custo de API)
+ * 7.  Publish    — publica no YouTube e TikTok
+ * 8.  Sound      — sugere som do dia para o TikTok (rotação própria, sem API)
+ * 9.  Dashboard  — atualiza dashboard estático (Vercel)
+ * 10. Analytics  — busca métricas (views/likes) via YouTube e TikTok APIs
+ * 11. Hotmart    — busca receita real via Hotmart Sales API
  *
  * Uso:
  *   node pipeline/index.js              → roda tudo
@@ -101,7 +105,7 @@ async function run() {
 
     // ── Módulo 5: Thumbnail ─────────────────────────────────────
     if (runStep(5)) {
-      printSeparator(5, "THUMBNAIL — Gerando com DALL-E 3");
+      printSeparator(5, "THUMBNAIL — Gerando localmente com Sharp/SVG");
       if (!state.topic || !state.script) throw new Error("Módulos 1 e 2 não executados.");
       state.thumbnail = await generateThumbnail(state.topic, state.script, outputDir);
       save(outputDir, "5-thumbnail.json", state.thumbnail);
@@ -109,7 +113,7 @@ async function run() {
 
     // ── Módulo 6: Video ─────────────────────────────────────────
     if (runStep(6)) {
-      printSeparator(6, "VIDEO — Montando com Creatomate");
+      printSeparator(6, "VIDEO — Montando localmente com FFmpeg");
       if (!state.script || !state.voice || !state.media) {
         throw new Error("Módulos 2, 3 e 4 são necessários para montar o vídeo.");
       }
