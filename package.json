@@ -11,10 +11,12 @@
     "media": "node pipeline/4-media.js",
     "thumbnail": "node pipeline/5-thumbnail.js",
     "video": "node pipeline/6-video.js",
+    "re-edit": "node pipeline/re-edit.js",
     "publish": "node pipeline/7-publish.js",
     "sound": "node pipeline/8-sound.js",
     "analytics": "node pipeline/10-analytics.js",
     "hotmart": "node pipeline/11-hotmart.js",
+    "revenue": "node pipeline/12-revenue-estimate.js",
     "dashboard": "npx serve dashboard"
   },
   "dependencies": {

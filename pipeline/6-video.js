@@ -90,7 +90,10 @@ function generateWordBlocks(script, duration) {
 
 async function generateCaptionImages(blocks, tmpDir, videoWidth, isVertical) {
   mkdirSync(tmpDir, { recursive: true });
-  const fontSize = isVertical ? 68 : 52;
+  // Legendas maiores e mais "chamativas" no formato vertical (TikTok/Shorts):
+  // fonte maior + cor dourada em destaque (estilo CapCut/Reels), com
+  // contorno grosso pra garantir leitura sobre qualquer fundo.
+  const fontSize = isVertical ? 78 : 52;
   const boxPad = 20;
   const images = [];
 
@@ -106,18 +109,33 @@ async function generateCaptionImages(blocks, tmpDir, videoWidth, isVertical) {
     const boxW = Math.max(estWidth + boxPad * 2, 200);
     const boxH = fontSize + boxPad * 2;
 
+    // No formato vertical usamos um gradiente dourado vibrante (estilo
+    // legenda "chamativa" de Shorts/Reels/TikTok); no horizontal mantemos
+    // o branco clássico, mais discreto, sobre a faixa semitransparente.
+    const fillValue = isVertical ? "url(#capGold)" : "white";
+    const defs = isVertical
+      ? `<defs>
+        <linearGradient id="capGold" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#fff7d6"/>
+          <stop offset="45%" style="stop-color:#fde047"/>
+          <stop offset="100%" style="stop-color:#f59e0b"/>
+        </linearGradient>
+      </defs>`
+      : "";
+
     const svg = `<svg width="${boxW}" height="${boxH}" xmlns="http://www.w3.org/2000/svg">
+  ${defs}
   <rect width="${boxW}" height="${boxH}" fill="rgba(0,0,0,0.7)" rx="12"/>
   <text
     x="${boxW / 2}" y="${boxH / 2}"
     font-family="Arial Black, Arial, sans-serif"
     font-size="${fontSize}"
     font-weight="900"
-    fill="white"
+    fill="${fillValue}"
     text-anchor="middle"
     dominant-baseline="middle"
     stroke="#000000"
-    stroke-width="4"
+    stroke-width="${isVertical ? 6 : 4}"
     paint-order="stroke"
   >${escaped}</text>
 </svg>`;
@@ -139,7 +157,12 @@ async function generateOpeningCard(title, outputDir, w, h) {
   const words = escaped.split(" ");
   const lines = [];
   let cur = "";
-  const maxChars = w > 900 ? 24 : 18;
+  const fontSize = h > 900 ? 100 : 80;
+  // Calcula o nº de caracteres por linha com base na largura real do canvas
+  // e no tamanho da fonte (evita texto cortado nas bordas — ex: TikTok
+  // vertical é mais estreito, mas usava o mesmo limite de caracteres do
+  // YouTube com fonte maior, o que estourava a largura e cortava o título).
+  const maxChars = Math.floor((w - 100) / (fontSize * 0.62));
   for (const word of words) {
     if ((cur + " " + word).trim().length > maxChars) {
       if (cur) lines.push(cur.trim());
@@ -156,7 +179,7 @@ async function generateOpeningCard(title, outputDir, w, h) {
   const textEls = lines.map((l, i) => `
     <text x="${w/2}" y="${startY + i * lineH}"
       font-family="Arial Black, Arial, sans-serif"
-      font-size="${h > 900 ? 100 : 80}" font-weight="900"
+      font-size="${fontSize}" font-weight="900"
       fill="white" text-anchor="middle" dominant-baseline="middle"
       stroke="black" stroke-width="4" paint-order="stroke"
       filter="url(#shadow)"
@@ -275,14 +298,14 @@ async function prepareClips(videoClips, tmpDir, w, h, isTikTok) {
           "-i", src,
           "-filter_complex", scaleFilter,
           "-map", "[out]", "-an",
-          "-c:v", "libx264", "-preset", "fast", "-crf", "23",
+          "-c:v", "libx264", "-preset", "fast", "-crf", "23", "-pix_fmt", "yuv420p",
           "-t", "10", "-y", out,
         ], `clip${i}-tiktok`);
       } else {
         await runFFmpeg([
           "-i", src,
           "-vf", scaleFilter,
-          "-an", "-c:v", "libx264", "-preset", "fast", "-crf", "23",
+          "-an", "-c:v", "libx264", "-preset", "fast", "-crf", "23", "-pix_fmt", "yuv420p",
           "-t", "10", "-y", out,
         ], `clip${i}-yt`);
       }
@@ -303,8 +326,8 @@ async function prepareClips(videoClips, tmpDir, w, h, isTikTok) {
 async function imageToVideo(imgPath, durationSec, w, h, outPath) {
   await runFFmpeg([
     "-loop", "1", "-i", imgPath,
-    "-vf", `scale=${w}:${h}`,
-    "-c:v", "libx264", "-preset", "fast", "-crf", "23",
+    "-vf", `scale=${w}:${h},format=yuv420p`,
+    "-c:v", "libx264", "-preset", "fast", "-crf", "23", "-pix_fmt", "yuv420p",
     "-t", String(durationSec), "-an", "-y", outPath,
   ], "img2vid");
 }
@@ -313,7 +336,7 @@ async function imageToVideo(imgPath, durationSec, w, h, outPath) {
 // Monta vídeo final com legendas overlay
 // ---------------------------------------------------------------------------
 
-async function buildFinalVideo(videoListPath, audioPath, captionImages, outputPath, musicPath, label) {
+async function buildFinalVideo(videoListPath, audioPath, captionImages, outputPath, musicPath, label, isVertical = false) {
   const hasCaptions = captionImages && captionImages.length > 0;
   const hasMusic = musicPath && existsSync(musicPath);
 
@@ -327,7 +350,12 @@ async function buildFinalVideo(videoListPath, audioPath, captionImages, outputPa
 
   const captionInputs = [];
   if (hasCaptions) {
-    captionImages.forEach((c) => captionInputs.push("-i", c.path));
+    // IMPORTANTE: usar -loop 1 -framerate 25 para que cada legenda vire um
+    // stream de vídeo contínuo. Sem isso, o ffmpeg só fornece UM frame (em
+    // t=0) para cada imagem — depois que esse frame é consumido no início
+    // do encode, o overlay não tem mais nada pra compor nas janelas
+    // enable=between(t,...) que ocorrem mais tarde, e a legenda some.
+    captionImages.forEach((c) => captionInputs.push("-loop", "1", "-framerate", "25", "-i", c.path));
   }
 
   const musicIdx = hasMusic ? 2 : null;
@@ -344,15 +372,25 @@ async function buildFinalVideo(videoListPath, audioPath, captionImages, outputPa
   // Monta cadeia de legendas
   if (hasCaptions) {
     let chain = audioFilter ? "" : "";
-    let prevLabel = "0:v";
+    // Normaliza o formato de pixel do vídeo base ANTES da cadeia de overlays.
+    // Sem isso, o ffmpeg "reconfigura" o filtro overlay quando o formato muda
+    // entre os segmentos concatenados (ex: abertura em yuv420p → clipes em
+    // yuv444p), e o overlay para de compor a partir daí — legendas somem.
     const filterParts = audioFilter ? [audioFilter] : [];
+    filterParts.push("[0:v]format=yuv420p[vbase]");
+    let prevLabel = "vbase";
+
+    // No formato vertical (TikTok/Shorts) o usuário pediu legendas mais
+    // pra cima — em telas de celular a parte de baixo costuma ficar coberta
+    // pela barra de interações/descrição, então subimos a faixa de overlay.
+    const captionY = isVertical ? "H*0.70" : "H*0.84";
 
     captionImages.forEach((cap, i) => {
       const idx = capStartIdx + i;
       const nextLabel = i === captionImages.length - 1 ? "vout" : `vcap${i}`;
       const enable = `between(t,${cap.start.toFixed(3)},${cap.end.toFixed(3)})`;
       filterParts.push(
-        `[${prevLabel}][${idx}:v]overlay=x=(W-w)/2:y=H*0.84:enable='${enable}'[${nextLabel}]`
+        `[${prevLabel}][${idx}:v]overlay=x=(W-w)/2:y=${captionY}:enable='${enable}':shortest=0[${nextLabel}]`
       );
       prevLabel = nextLabel;
     });
@@ -364,13 +402,13 @@ async function buildFinalVideo(videoListPath, audioPath, captionImages, outputPa
         ...inputs, ...captionInputs,
         "-filter_complex", filterComplex,
         "-map", "[vout]", "-map", audioMap,
-        "-c:v", "libx264", "-preset", "fast", "-crf", "23",
+        "-c:v", "libx264", "-preset", "fast", "-crf", "23", "-pix_fmt", "yuv420p",
         "-c:a", "aac", "-b:a", "128k",
         "-shortest", "-y", outputPath,
       ], label + "+legendas");
       return;
     } catch (e) {
-      console.warn(`   ⚠️  Legendas overlay falhou, continuando sem: ${e.message.slice(0, 100)}`);
+      console.warn(`   ⚠️  Legendas overlay falhou, continuando sem:\n${e.message.slice(0, 400)}`);
     }
   }
 
@@ -430,7 +468,12 @@ export async function assembleVideo(scriptData, voiceData, mediaData, thumbnailD
 
   const ytTmp = join(tmpDir, "yt");
   mkdirSync(ytTmp, { recursive: true });
-  const openingYT = await generateOpeningCard(title, ytTmp, 1280, 720);
+  // Usa a THUMBNAIL real (com foto de fundo) como card de abertura, em vez
+  // do card genérico em SVG — assim o vídeo abre já com a mesma arte que o
+  // usuário vê na thumbnail (ela já vem no tamanho exato 1280x720).
+  const openingYT = (thumbnailData?.youtube && existsSync(thumbnailData.youtube))
+    ? thumbnailData.youtube
+    : await generateOpeningCard(title, ytTmp, 1280, 720);
   const ctaYT = await generateCTACard(ytTmp, 1280, 720);
   const openingVideoYT = join(ytTmp, "opening.mp4");
   const ctaVideoYT = join(ytTmp, "cta.mp4");
@@ -455,11 +498,12 @@ export async function assembleVideo(scriptData, voiceData, mediaData, thumbnailD
   const ytCapDir = join(ytTmp, "captions");
   let ytCaptions = [];
   try {
-    // Offset de 2s pela abertura
-    const offsetBlocks = blocks.map(b => ({
-      ...b, start: b.start + 2, end: b.end + 2,
-    }));
-    ytCaptions = await generateCaptionImages(offsetBlocks, ytCapDir, 1280, false);
+    // A narração é mapeada direto (audioMap = "1:a"), sem delay — ou seja,
+    // ela começa a tocar em t=0 do vídeo final (durante o card de abertura),
+    // não depois dele. Por isso as legendas usam os tempos originais dos
+    // blocos, sem nenhum offset — caso contrário ficam atrasadas em relação
+    // ao áudio (era o que o usuário estava percebendo: +2s de atraso).
+    ytCaptions = await generateCaptionImages(blocks, ytCapDir, 1280, false);
     console.log(`   → ${ytCaptions.length} imagens de legenda (YouTube)`);
   } catch (e) {
     console.warn(`   ⚠️  Legendas YT falhou: ${e.message}`);
@@ -467,7 +511,7 @@ export async function assembleVideo(scriptData, voiceData, mediaData, thumbnailD
 
   const youtubePath = join(outputDir, "video", "youtube.mp4");
   try {
-    await buildFinalVideo(ytListPath, audioPath, ytCaptions, youtubePath, musicPath, "YouTube");
+    await buildFinalVideo(ytListPath, audioPath, ytCaptions, youtubePath, musicPath, "YouTube", false);
     results.youtube = youtubePath;
     console.log(`   ✅ YouTube: ${youtubePath}`);
   } catch (e) {
@@ -479,7 +523,9 @@ export async function assembleVideo(scriptData, voiceData, mediaData, thumbnailD
 
   const tkTmp = join(tmpDir, "tk");
   mkdirSync(tkTmp, { recursive: true });
-  const openingTK = await generateOpeningCard(tiktokTitle, tkTmp, 1080, 1920);
+  const openingTK = (thumbnailData?.tiktok && existsSync(thumbnailData.tiktok))
+    ? thumbnailData.tiktok
+    : await generateOpeningCard(tiktokTitle, tkTmp, 1080, 1920);
   const ctaTK = await generateCTACard(tkTmp, 1080, 1920);
   const openingVideoTK = join(tkTmp, "opening.mp4");
   const ctaVideoTK = join(tkTmp, "cta.mp4");
@@ -502,10 +548,9 @@ export async function assembleVideo(scriptData, voiceData, mediaData, thumbnailD
   const tkCapDir = join(tkTmp, "captions");
   let tkCaptions = [];
   try {
-    const offsetBlocks = blocks.map(b => ({
-      ...b, start: b.start + 2, end: b.end + 2,
-    }));
-    tkCaptions = await generateCaptionImages(offsetBlocks, tkCapDir, 1080, true);
+    // Mesmo motivo do YouTube: a narração começa em t=0 do vídeo final
+    // (sem delay), então as legendas usam os tempos originais sem offset.
+    tkCaptions = await generateCaptionImages(blocks, tkCapDir, 1080, true);
     console.log(`   → ${tkCaptions.length} imagens de legenda (TikTok)`);
   } catch (e) {
     console.warn(`   ⚠️  Legendas TK falhou: ${e.message}`);
@@ -514,7 +559,7 @@ export async function assembleVideo(scriptData, voiceData, mediaData, thumbnailD
   const tiktokPath = join(outputDir, "video", "tiktok.mp4");
   try {
     // TikTok sem música (vai adicionar som nativo no app)
-    await buildFinalVideo(tkListPath, audioPath, tkCaptions, tiktokPath, null, "TikTok");
+    await buildFinalVideo(tkListPath, audioPath, tkCaptions, tiktokPath, null, "TikTok", true);
     results.tiktok = tiktokPath;
     console.log(`   ✅ TikTok: ${tiktokPath}`);
   } catch (e) {

@@ -35,6 +35,7 @@ import { suggestSound } from "./8-sound.js";
 import { updateDashboard } from "./9-dashboard.js";
 import { refreshAnalytics } from "./10-analytics.js";
 import { refreshHotmartRevenue } from "./11-hotmart.js";
+import { estimateRevenue } from "./12-revenue-estimate.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -107,7 +108,7 @@ async function run() {
     if (runStep(5)) {
       printSeparator(5, "THUMBNAIL — Gerando localmente com Sharp/SVG");
       if (!state.topic || !state.script) throw new Error("Módulos 1 e 2 não executados.");
-      state.thumbnail = await generateThumbnail(state.topic, state.script, outputDir);
+      state.thumbnail = await generateThumbnail(state.topic, state.script, outputDir, state.media);
       save(outputDir, "5-thumbnail.json", state.thumbnail);
     }
 
@@ -191,6 +192,14 @@ async function run() {
       await refreshHotmartRevenue();
     } catch (e) {
       console.warn(`   ⚠️  Falha ao atualizar receita Hotmart: ${e.message}`);
+    }
+
+    // ── Recalcula a projeção de ganhos com os números mais recentes ─
+    // (grátis, local — atualiza a seção "🔮 Projeção de receita" do dashboard)
+    try {
+      estimateRevenue();
+    } catch (e) {
+      console.warn(`   ⚠️  Falha ao recalcular projeção de receita: ${e.message}`);
     }
 
   } catch (err) {

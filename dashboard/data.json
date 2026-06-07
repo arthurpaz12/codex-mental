@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-07T02:26:42.370Z",
+  "lastUpdated": "2026-06-07T16:16:10.637Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -9,7 +9,79 @@
     "revenueLast30Days": 0,
     "salesLast30Days": 0,
     "currency": "BRL",
-    "updatedAt": "2026-06-07T02:26:42.369Z"
+    "updatedAt": "2026-06-07T16:16:10.622Z"
   },
-  "runs": []
+  "runs": [
+    {
+      "runId": "2026-06-07T06-20-29",
+      "startedAt": "2026-06-07T06:20:29.107Z",
+      "completedAt": "2026-06-07T06:38:00.378Z",
+      "status": "error",
+      "error": "read ECONNRESET",
+      "topic": "3 Microexpressões Que Revelam Quando Alguém Está Mentindo Para Você",
+      "category": "ciência",
+      "viralScore": 88,
+      "publish": [],
+      "sound": null
+    },
+    {
+      "runId": "2026-06-07T16-09-07",
+      "startedAt": "2026-06-07T16:09:07.380Z",
+      "completedAt": "2026-06-07T16:16:09.342Z",
+      "status": "ok",
+      "error": null,
+      "topic": "O Gesto Secreto que Revela Quando Alguém Está Mentindo",
+      "category": "ciência",
+      "viralScore": 88,
+      "publish": [],
+      "sound": {
+        "category": "trending_viral",
+        "sound": "Som em alta da semana (genérico)"
+      }
+    }
+  ],
+  "revenueProjection": {
+    "realStats": {
+      "youtube": 0,
+      "tiktok": 0,
+      "total": 0,
+      "videosPublicados": 0,
+      "hotmart": {
+        "source": "api",
+        "revenueLast30Days": 0,
+        "salesLast30Days": 0,
+        "currency": "BRL",
+        "updatedAt": "2026-06-07T16:16:10.622Z"
+      }
+    },
+    "custoTotal": 0,
+    "baseMonthlyViews": 100000,
+    "generatedAt": "2026-06-07T16:16:10.637Z",
+    "scenarios": {
+      "conservador": {
+        "rpm": 4,
+        "conv": 0.0005,
+        "adRevenue": 400,
+        "sales": 50,
+        "affiliateRevenue": 3350,
+        "total": 3750
+      },
+      "moderado": {
+        "rpm": 8,
+        "conv": 0.001,
+        "adRevenue": 800,
+        "sales": 100,
+        "affiliateRevenue": 6700,
+        "total": 7500
+      },
+      "otimista": {
+        "rpm": 14,
+        "conv": 0.002,
+        "adRevenue": 1400,
+        "sales": 200,
+        "affiliateRevenue": 13400,
+        "total": 14800
+      }
+    }
+  }
 }

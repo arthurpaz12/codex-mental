@@ -227,6 +227,11 @@
       <div id="categories"><div class="empty">Sem execuções suficientes ainda.</div></div>
     </div>
 
+    <div class="panel-card" style="margin-bottom:28px">
+      <h2>🔮 Projeção de receita (estimativa)</h2>
+      <div id="projection"><div class="empty">Rode <code>npm run revenue</code> pra gerar a projeção.</div></div>
+    </div>
+
     <h2>Execuções recentes</h2>
     <div class="runs" id="runs"><div class="empty">Carregando dados…</div></div>
 
@@ -631,6 +636,55 @@
     }).join("");
   }
 
+  function renderProjection(data) {
+    const el = document.getElementById("projection");
+    const proj = data.revenueProjection;
+    if (!proj || !proj.scenarios) return; // mantém o placeholder padrão
+
+    const currency = "BRL";
+    const labels = { conservador: "Conservador", moderado: "Moderado", otimista: "Otimista" };
+    const rows = ["conservador", "moderado", "otimista"].map((key) => {
+      const s = proj.scenarios[key];
+      if (!s) return "";
+      return `
+        <tr>
+          <td style="font-weight:600">${labels[key]}</td>
+          <td>${fmtCurrency(s.rpm, currency)}</td>
+          <td>${(s.conv * 100).toFixed(2)}%</td>
+          <td>${fmtCurrency(s.adRevenue, currency)}</td>
+          <td>${fmtCurrency(s.affiliateRevenue, currency)}</td>
+          <td style="font-weight:700; color:var(--accent, #a855f7)">${fmtCurrency(s.total, currency)}</td>
+        </tr>`;
+    }).join("");
+
+    el.innerHTML = `
+      <div style="font-size:13px;color:var(--muted);margin-bottom:12px">
+        Baseado em ~${fmtNumber(proj.baseMonthlyViews)} views/mês ·
+        custo estimado de geração: ${fmtCurrency(proj.custoTotal, currency)} ·
+        gerado em ${fmtDate(proj.generatedAt)}
+      </div>
+      <div style="overflow-x:auto">
+        <table style="width:100%; border-collapse:collapse; font-size:13px">
+          <thead>
+            <tr style="text-align:left;color:var(--muted)">
+              <th style="padding:6px 10px">Cenário</th>
+              <th style="padding:6px 10px">RPM</th>
+              <th style="padding:6px 10px">Conv. afiliado</th>
+              <th style="padding:6px 10px">Receita anúncios</th>
+              <th style="padding:6px 10px">Receita afiliado</th>
+              <th style="padding:6px 10px">Total/mês</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-top:10px">
+        ⚠️ Estimativa especulativa baseada em médias de mercado — não é garantia de resultado.
+        Atualize com <code>npm run revenue</code>.
+      </div>
+    `;
+  }
+
   fetch(DATA_URL, { cache: "no-store" })
     .then(r => r.json())
     .then(data => {
@@ -642,6 +696,7 @@
       renderViewsChart(data);
       renderSalesChart(data);
       renderCategories(data);
+      renderProjection(data);
       renderRuns(data);
     })
     .catch(err => {

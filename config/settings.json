@@ -106,7 +106,7 @@
 
   "tiktok": {
     "enabled": true,
-    "privacyLevel": "PUBLIC_TO_EVERYONE",
+    "privacyLevel": "SELF_ONLY",
     "disableDuet": false,
     "disableStitch": false,
     "disableComment": false,

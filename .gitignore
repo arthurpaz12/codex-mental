@@ -12,3 +12,4 @@ dashboard/.next/
 .env.local
 .env*.local
 config/settings.json
+logs/

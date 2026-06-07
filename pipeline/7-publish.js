@@ -6,11 +6,12 @@
  */
 
 import "dotenv/config";
-import { readFileSync, statSync } from "fs";
+import { readFileSync, writeFileSync, existsSync, statSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const ENV_PATH = join(__dirname, "../.env");
 const settings = JSON.parse(
   readFileSync(join(__dirname, "../config/settings.json"), "utf-8")
 );
@@ -125,15 +126,68 @@ async function uploadToYouTube(videoPath, scriptData, topicData) {
 // TikTok Upload
 // ---------------------------------------------------------------------------
 
+// Atualiza (ou adiciona) uma variável no arquivo .env, preservando o resto.
+function updateEnvVar(key, value) {
+  if (!existsSync(ENV_PATH)) return;
+  let content = readFileSync(ENV_PATH, "utf-8");
+  const re = new RegExp(`^${key}=.*$`, "m");
+  content = re.test(content)
+    ? content.replace(re, `${key}=${value}`)
+    : content.trimEnd() + `\n${key}=${value}\n`;
+  writeFileSync(ENV_PATH, content);
+}
+
+// Renova o access_token do TikTok usando o refresh_token salvo. O TikTok
+// pode rotacionar o refresh_token a cada renovação — por isso gravamos os
+// dois de volta no .env e também no process.env (pra valer no run atual).
+async function refreshTikTokToken() {
+  const res = await fetch("https://open.tiktokapis.com/v2/oauth/token/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Cache-Control": "no-cache",
+    },
+    body: new URLSearchParams({
+      client_key: process.env.TIKTOK_CLIENT_KEY,
+      client_secret: process.env.TIKTOK_CLIENT_SECRET,
+      grant_type: "refresh_token",
+      refresh_token: process.env.TIKTOK_REFRESH_TOKEN,
+    }),
+  });
+
+  if (!res.ok) throw new Error(`Erro ao renovar token TikTok: ${res.status}`);
+  const data = await res.json();
+  if (!data.access_token) throw new Error(`Erro ao renovar token TikTok: ${JSON.stringify(data)}`);
+
+  process.env.TIKTOK_ACCESS_TOKEN = data.access_token;
+  updateEnvVar("TIKTOK_ACCESS_TOKEN", data.access_token);
+
+  if (data.refresh_token) {
+    process.env.TIKTOK_REFRESH_TOKEN = data.refresh_token;
+    updateEnvVar("TIKTOK_REFRESH_TOKEN", data.refresh_token);
+  }
+
+  return data.access_token;
+}
+
 async function uploadToTikTok(videoPath, scriptData, topicData) {
-  if (!process.env.TIKTOK_ACCESS_TOKEN) {
+  if (!process.env.TIKTOK_ACCESS_TOKEN && !process.env.TIKTOK_REFRESH_TOKEN) {
     console.log("   ⚠️  TikTok não configurado — pulando");
     return null;
   }
 
   console.log("🎵 [Publish] Fazendo upload para TikTok...");
 
-  const accessToken = process.env.TIKTOK_ACCESS_TOKEN;
+  // Sempre renova o token antes de publicar — evita falhas por expiração
+  // (o access_token do TikTok dura só ~24h).
+  let accessToken;
+  try {
+    accessToken = await refreshTikTokToken();
+  } catch (e) {
+    console.warn(`   ⚠️  Não foi possível renovar o token do TikTok (${e.message}) — tentando com o token atual...`);
+    accessToken = process.env.TIKTOK_ACCESS_TOKEN;
+    if (!accessToken) throw e;
+  }
 
   // Monta a descrição com hashtags
   const hashtags = [
