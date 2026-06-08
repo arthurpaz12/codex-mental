@@ -755,29 +755,49 @@
       return;
     }
     if (byProduct.length === 0) {
-      el.innerHTML = `<div class="empty">Sem vendas detalhadas por produto nos últimos 30 dias ainda.</div>`;
+      el.innerHTML = `<div class="empty">Sem produtos configurados ainda — adicione-os em config/settings.json (niche.hotmartProducts).</div>`;
       return;
     }
 
     const totalRevenue = byProduct.reduce((acc, p) => acc + (p.revenue || 0), 0);
+    const totalSales = byProduct.reduce((acc, p) => acc + (p.sales || 0), 0);
     const palette = [CHART_COLORS.accent, CHART_COLORS.teal, CHART_COLORS.blue, "#c792ea", "#f07178"];
 
     el.innerHTML = `
-      <div class="grid">
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))">
         ${byProduct.map((p, idx) => {
           const share = totalRevenue > 0 ? (p.revenue / totalRevenue) * 100 : 0;
+          const avgTicket = p.sales > 0 ? p.revenue / p.sales : 0;
           const color = palette[idx % palette.length];
+          const pillarsHtml = (p.pillars || []).length
+            ? `<div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:6px">
+                ${p.pillars.map((pi) => `<span style="font-size:10px; padding:3px 8px; border-radius:999px; background:rgba(255,255,255,0.06); color:var(--muted)">${pi}</span>`).join("")}
+               </div>`
+            : "";
+          const ctaHtml = p.cta
+            ? `<div class="stat-sub" style="margin-top:8px; font-style:italic; opacity:0.8">CTA: "${p.cta}"</div>`
+            : "";
+          const noSales = !p.sales;
           return `
             <div class="stat-card">
               <div class="stat-label">${p.name}</div>
-              <div class="stat-value" style="color:${color}">${fmtCurrency(p.revenue, p.currency || currency)}</div>
-              <div class="stat-sub">${fmtNumber(p.sales)} venda(s) · ${share.toFixed(1)}% da receita</div>
-              <div style="margin-top:8px; height:6px; border-radius:3px; background:rgba(255,255,255,0.06); overflow:hidden">
-                <div style="height:100%; width:${share}%; background:${color}; border-radius:3px"></div>
+              <div class="stat-value" style="color:${noSales ? "var(--muted)" : color}">${fmtCurrency(p.revenue, p.currency || currency)}</div>
+              <div class="stat-sub">
+                ${fmtNumber(p.sales)} venda(s)${totalSales > 0 ? ` · ${share.toFixed(1)}% da receita` : ""}
+                ${avgTicket > 0 ? ` · ticket médio ${fmtCurrency(avgTicket, p.currency || currency)}` : ""}
               </div>
+              <div style="margin-top:8px; height:6px; border-radius:3px; background:rgba(255,255,255,0.06); overflow:hidden">
+                <div style="height:100%; width:${Math.max(share, noSales ? 0 : 2)}%; background:${color}; border-radius:3px"></div>
+              </div>
+              ${pillarsHtml}
+              ${ctaHtml}
             </div>
           `;
         }).join("")}
+      </div>
+      <div class="stat-sub" style="margin-top:14px; opacity:0.7">
+        Receita total nos últimos 30 dias: <strong style="color:var(--text)">${fmtCurrency(totalRevenue, currency)}</strong>
+        · ${fmtNumber(totalSales)} venda(s) no total
       </div>
     `;
   }

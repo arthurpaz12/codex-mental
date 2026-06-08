@@ -21,6 +21,21 @@ import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_PATH = join(__dirname, "../dashboard/data.json");
+const SETTINGS_PATH = join(__dirname, "../config/settings.json");
+
+function loadConfiguredProducts() {
+  try {
+    const settings = JSON.parse(readFileSync(SETTINGS_PATH, "utf-8"));
+    return (settings.niche?.hotmartProducts || []).map((p) => ({
+      id: String(p.id),
+      name: p.name,
+      cta: p.cta || null,
+      pillars: p.pillars || [],
+    }));
+  } catch {
+    return [];
+  }
+}
 
 const AUTH_URL = "https://api-sec-vlc.hotmart.com/security/oauth/token";
 const SALES_SUMMARY_URL = "https://developers.hotmart.com/payments/api/v1/sales/summary";
@@ -173,6 +188,33 @@ export async function refreshHotmartRevenue() {
       console.warn(`   ⚠️  Não foi possível detalhar vendas por produto: ${e.message}`);
     }
 
+    // Mescla com o catálogo configurado (config/settings.json) — assim o
+    // dashboard sempre mostra os produtos do canal, mesmo sem vendas ainda,
+    // junto de CTA e pilares de conteúdo associados a cada um.
+    const configuredProducts = loadConfiguredProducts();
+    const byProductMerged = configuredProducts.map((cfg) => {
+      const match = byProduct.find(
+        (p) => String(p.id) === cfg.id || (p.name || "").toLowerCase() === cfg.name.toLowerCase()
+      );
+      return {
+        id: cfg.id,
+        name: cfg.name,
+        cta: cfg.cta,
+        pillars: cfg.pillars,
+        sales: match?.sales || 0,
+        revenue: match?.revenue || 0,
+        currency: match?.currency || currency,
+      };
+    });
+    // Inclui também produtos vendidos que não estão no catálogo configurado
+    for (const p of byProduct) {
+      const known = configuredProducts.some(
+        (cfg) => cfg.id === String(p.id) || cfg.name.toLowerCase() === (p.name || "").toLowerCase()
+      );
+      if (!known) byProductMerged.push({ ...p, cta: null, pillars: [] });
+    }
+    byProductMerged.sort((a, b) => b.revenue - a.revenue);
+
     if (!existsSync(DATA_PATH)) {
       console.warn("   ⚠️  dashboard/data.json não encontrado — rode o módulo 9 primeiro");
       return null;
@@ -184,7 +226,7 @@ export async function refreshHotmartRevenue() {
       revenueLast30Days: totalRevenue,
       salesLast30Days: totalSales,
       currency,
-      byProduct,
+      byProduct: byProductMerged,
       updatedAt: new Date().toISOString(),
     };
     data.lastUpdated = new Date().toISOString();

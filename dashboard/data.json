@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-08T03:22:29.868Z",
+  "lastUpdated": "2026-06-08T05:02:30.212Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -9,8 +9,34 @@
     "revenueLast30Days": 0,
     "salesLast30Days": 0,
     "currency": "BRL",
-    "byProduct": [],
-    "updatedAt": "2026-06-08T03:22:29.862Z"
+    "byProduct": [
+      {
+        "id": "6073525",
+        "name": "O Código da Leitura Mental",
+        "cta": "Aprenda a ler qualquer pessoa: link na bio",
+        "pillars": [
+          "leitura de pessoas",
+          "linguagem corporal",
+          "psicologia cognitiva"
+        ],
+        "sales": 0,
+        "revenue": 0,
+        "currency": "BRL"
+      },
+      {
+        "id": "6918368",
+        "name": "A Arte da Sedução",
+        "cta": "Técnica completa no link da bio",
+        "pillars": [
+          "atração e carisma",
+          "persuasão e influência psicológica"
+        ],
+        "sales": 0,
+        "revenue": 0,
+        "currency": "BRL"
+      }
+    ],
+    "updatedAt": "2026-06-08T05:02:30.183Z"
   },
   "runs": [
     {
