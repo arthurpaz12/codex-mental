@@ -34,6 +34,7 @@ import { publishVideos } from "./7-publish.js";
 import { suggestSound } from "./8-sound.js";
 import { updateDashboard } from "./9-dashboard.js";
 import { refreshAnalytics } from "./10-analytics.js";
+import { generateInsights } from "./13-performance-insights.js";
 import { refreshHotmartRevenue } from "./11-hotmart.js";
 import { estimateRevenue } from "./12-revenue-estimate.js";
 
@@ -200,6 +201,13 @@ async function run() {
       estimateRevenue();
     } catch (e) {
       console.warn(`   ⚠️  Falha ao recalcular projeção de receita: ${e.message}`);
+    }
+
+    // ── Gera insights de performance (o que está funcionando melhor) ─
+    try {
+      await generateInsights();
+    } catch (e) {
+      console.warn(`   ⚠️  Falha ao gerar insights de performance: ${e.message}`);
     }
 
   } catch (err) {
