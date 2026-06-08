@@ -255,6 +255,78 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script>
   const DATA_URL = "./data.json";
+  // Chave pública (somente leitura) da YouTube Data API v3 — restrita por domínio
+  // no Google Cloud Console para funcionar apenas em codex-mental.vercel.app
+  const YOUTUBE_API_KEY = "AIzaSyCxGtmSugA2UUMEzFO4kh8AHy2xX8zb30I";
+  const LIVE_REFRESH_MS = 5 * 60 * 1000; // re-busca métricas ao vivo a cada 5 min
+
+  function extractYouTubeVideoId(url) {
+    if (!url) return null;
+    const m = url.match(/(?:shorts\/|watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{6,})/);
+    return m ? m[1] : null;
+  }
+
+  // Busca estatísticas atuais direto da API do YouTube (tempo real, sem
+  // depender de nenhum processo intermediário atualizar o data.json)
+  async function fetchLiveYouTubeStats(data) {
+    if (!YOUTUBE_API_KEY) return data;
+    const runs = data.runs || [];
+    const idsByRun = {}; // runId -> { youtube?: id, youtube_shorts?: id }
+    const allIds = new Set();
+
+    for (const run of runs) {
+      for (const p of run.publish || []) {
+        if (p.platform === "youtube" || p.platform === "youtube_shorts") {
+          const id = extractYouTubeVideoId(p.url);
+          if (id) {
+            idsByRun[run.runId] = idsByRun[run.runId] || {};
+            idsByRun[run.runId][p.platform] = id;
+            allIds.add(id);
+          }
+        }
+      }
+    }
+
+    const ids = [...allIds];
+    if (ids.length === 0) return data;
+
+    const stats = {};
+    try {
+      for (let i = 0; i < ids.length; i += 50) {
+        const batch = ids.slice(i, i + 50);
+        const url = `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${batch.join(",")}&key=${YOUTUBE_API_KEY}`;
+        const res = await fetch(url);
+        if (!res.ok) continue;
+        const json = await res.json();
+        for (const item of json.items || []) {
+          stats[item.id] = {
+            views: parseInt(item.statistics?.viewCount || "0", 10),
+            likes: parseInt(item.statistics?.likeCount || "0", 10),
+            comments: parseInt(item.statistics?.commentCount || "0", 10),
+          };
+        }
+      }
+    } catch (e) {
+      console.warn("Não foi possível buscar métricas ao vivo do YouTube:", e.message);
+      return data;
+    }
+
+    if (Object.keys(stats).length === 0) return data;
+
+    let liveUpdatedAt = null;
+    for (const run of runs) {
+      const ref = idsByRun[run.runId];
+      if (!ref) continue;
+      const newStats = { ...(run.stats || {}) };
+      if (ref.youtube && stats[ref.youtube]) newStats.youtube = stats[ref.youtube];
+      if (ref.youtube_shorts && stats[ref.youtube_shorts]) newStats.youtube_shorts = stats[ref.youtube_shorts];
+      run.stats = newStats;
+      liveUpdatedAt = new Date().toISOString();
+    }
+    if (liveUpdatedAt) data.lastUpdated = liveUpdatedAt;
+    return data;
+  }
+
   const CHART_COLORS = {
     accent: "#ff9f5a",
     accentSoft: "rgba(255,159,90,0.15)",
@@ -759,20 +831,37 @@
     `;
   }
 
+  function renderAll(data) {
+    document.getElementById("updated").textContent =
+      data.lastUpdated ? `atualizado em ${fmtDate(data.lastUpdated)} (ao vivo)` : "sem dados ainda";
+    renderStats(data);
+    renderPlatformBreakdown(data);
+    renderTopVideo(data);
+    renderStreakAndCalendar(data);
+    renderViewsChart(data);
+    renderSalesChart(data);
+    renderCategories(data);
+    renderProjection(data);
+    renderRuns(data);
+  }
+
+  let baseData = null;
+
+  function refreshLiveStats() {
+    if (!baseData) return;
+    fetchLiveYouTubeStats(JSON.parse(JSON.stringify(baseData))).then(renderAll);
+  }
+
   fetch(DATA_URL, { cache: "no-store" })
     .then(r => r.json())
     .then(data => {
-      document.getElementById("updated").textContent =
-        data.lastUpdated ? `atualizado em ${fmtDate(data.lastUpdated)}` : "sem dados ainda";
-      renderStats(data);
-      renderPlatformBreakdown(data);
-      renderTopVideo(data);
-      renderStreakAndCalendar(data);
-      renderViewsChart(data);
-      renderSalesChart(data);
-      renderCategories(data);
-      renderProjection(data);
-      renderRuns(data);
+      baseData = data;
+      return fetchLiveYouTubeStats(JSON.parse(JSON.stringify(data)));
+    })
+    .then(data => {
+      renderAll(data);
+      // Re-busca as métricas ao vivo periodicamente, sem precisar recarregar a página
+      setInterval(refreshLiveStats, LIVE_REFRESH_MS);
     })
     .catch(err => {
       document.getElementById("runs").innerHTML =
