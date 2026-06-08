@@ -1,0 +1,78 @@
+{
+  "generatedAt": "2026-06-08T00:56:19.083Z",
+  "sampleSize": 1,
+  "topByViews": [
+    {
+      "topic": "O Gesto Secreto que Revela Quando Alguém Está Mentindo",
+      "category": "ciência",
+      "views": 406,
+      "engagement": 1.72,
+      "platforms": [
+        "youtube",
+        "youtube_shorts",
+        "tiktok"
+      ]
+    }
+  ],
+  "topByEngagement": [
+    {
+      "topic": "O Gesto Secreto que Revela Quando Alguém Está Mentindo",
+      "category": "ciência",
+      "views": 406,
+      "engagement": 1.72,
+      "platforms": [
+        "youtube",
+        "youtube_shorts",
+        "tiktok"
+      ]
+    }
+  ],
+  "byCategory": [
+    {
+      "key": "ciência",
+      "videos": 1,
+      "totalViews": 406,
+      "avgViews": 406,
+      "avgEngagement": 1.72
+    }
+  ],
+  "byPlatform": [
+    {
+      "key": "youtube_shorts",
+      "videos": 1,
+      "totalViews": 404,
+      "avgViews": 404,
+      "avgEngagement": 1.73
+    },
+    {
+      "key": "youtube",
+      "videos": 1,
+      "totalViews": 2,
+      "avgViews": 2,
+      "avgEngagement": 0
+    }
+  ],
+  "byHourUTC": [
+    {
+      "key": "16h",
+      "videos": 1,
+      "totalViews": 406,
+      "avgViews": 406,
+      "avgEngagement": 1.72
+    }
+  ],
+  "byWeekday": [
+    {
+      "key": "Domingo",
+      "videos": 1,
+      "totalViews": 406,
+      "avgViews": 406,
+      "avgEngagement": 1.72
+    }
+  ],
+  "viralScoreCorrelation": null,
+  "recommendations": [
+    "\"youtube_shorts\" é a plataforma com melhor desempenho médio — considere adaptar mais conteúdo pro formato dela.",
+    "Amostra ainda pequena — esses padrões vão ficar mais confiáveis conforme mais vídeos forem publicados e medidos."
+  ]
+}
