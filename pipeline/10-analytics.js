@@ -15,6 +15,7 @@ import "dotenv/config";
 import { readFileSync, writeFileSync, existsSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
+import { estimateRevenue } from "./12-revenue-estimate.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_PATH = join(__dirname, "../dashboard/data.json");
@@ -183,7 +184,17 @@ export async function refreshAnalytics() {
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   refreshAnalytics()
-    .then((r) => console.log("\n📦 Resultado:", JSON.stringify(r, null, 2)))
+    .then((r) => {
+      console.log("\n📦 Resultado:", JSON.stringify(r, null, 2));
+      // Recalcula a projeção de receita com os números recém-atualizados —
+      // assim o cron de analytics (que roda mais vezes que o pipeline
+      // completo) também mantém a seção "🔮 Projeção de receita" fresca.
+      try {
+        estimateRevenue();
+      } catch (e) {
+        console.warn(`   ⚠️  Falha ao recalcular projeção de receita: ${e.message}`);
+      }
+    })
     .catch((e) => {
       console.error("❌ Erro no analytics:", e.message);
       process.exit(1);
