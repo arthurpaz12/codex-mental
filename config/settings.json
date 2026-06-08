@@ -1,7 +1,7 @@
 {
   "pipeline": {
-    "frequency": "daily",
-    "publishTime": "10:00",
+    "frequency": "twice-daily",
+    "publishTimes": ["13:00", "20:00"],
     "timezone": "America/Sao_Paulo",
     "outputDir": "./output",
     "requireApproval": false
