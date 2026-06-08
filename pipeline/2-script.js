@@ -14,6 +14,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { readFileSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
+import { loadPerformanceContext } from "./insights-context.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const settings = JSON.parse(
@@ -42,6 +43,8 @@ Você é um roteirista expert em vídeos virais para YouTube Shorts e TikTok.
 - **Hook sugerido**: ${topic.hook}
 - **Palavras-chave**: ${topic.keywords.join(", ")}
 
+${loadPerformanceContext()}
+
 ## Requisitos do roteiro:
 - Duração: ~60 segundos de narração
 - Palavras: ${wordCount.min}–${wordCount.max} palavras
@@ -65,6 +68,16 @@ Você é um roteirista expert em vídeos virais para YouTube Shorts e TikTok.
 - Use números específicos (não "muito" mas "3,7 bilhões")
 - Crie suspense e antecipação entre os fatos
 - Nunca mencione "vídeo" ou "assista" — fale direto com o ouvinte
+
+## Otimização de SEO (título, descrição, tags):
+- Se houver dados reais de performance acima, use-os como referência: replique
+  padrões de título/gancho dos vídeos que mais geraram views e engajamento
+  (sem repetir o mesmo tema), e priorize formatos/categorias que já funcionaram
+- Título do YouTube: comece com gancho/curiosidade forte, use palavras de alta
+  busca relacionadas ao tema, emoji relevante no início
+- Descrição: primeiras 1–2 linhas devem reforçar o gancho (aparecem no preview),
+  inclua palavras-chave naturalmente, finalize com hashtags relevantes
+- Tags: combine termos amplos (categoria, nicho) com termos específicos do tema
 
 ---
 

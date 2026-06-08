@@ -10,6 +10,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { readFileSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
+import { loadPerformanceContext } from "./insights-context.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const settings = JSON.parse(
@@ -118,6 +119,8 @@ Categorias aceitas: ${categories.join(", ")}
 Idioma: ${language}
 Público: ${targetAudience}
 Estilo: ${style}
+
+${loadPerformanceContext()}
 
 Escolha o MELHOR tema para um vídeo de 60 segundos hoje.
 Retorne APENAS um JSON válido neste formato:
