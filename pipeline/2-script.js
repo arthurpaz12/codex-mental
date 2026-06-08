@@ -27,11 +27,55 @@ const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 // Prompt do roteiro
 // ---------------------------------------------------------------------------
 
-function buildScriptPrompt(topic) {
+// ---------------------------------------------------------------------------
+// Escolhe o produto Hotmart mais alinhado ao tema do vídeo
+// ---------------------------------------------------------------------------
+//
+// Cada produto em settings.niche.hotmartProducts tem uma lista de "pillars"
+// (pilares de conteúdo). Comparamos o tema (categoria, ângulo, hook, keywords)
+// com essas pillars e escolhemos o produto com maior afinidade — assim,
+// vídeos sobre "linguagem corporal"/"leitura de pessoas" promovem o
+// "Código da Leitura Mental", e vídeos sobre "atração"/"sedução"/"carisma"
+// promovem "A Arte da Sedução".
+
+export function pickProductForTopic(topic) {
+  const products = settings.niche.hotmartProducts || [];
+  if (!products.length) return null;
+
+  const haystack = [topic.category, topic.angle, topic.hook, ...(topic.keywords || [])]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+  let best = null;
+  let bestScore = 0;
+
+  for (const product of products) {
+    let score = 0;
+    for (const pillar of product.pillars || []) {
+      for (const word of pillar.toLowerCase().split(/\s+/)) {
+        if (word.length > 3 && haystack.includes(word)) score++;
+      }
+    }
+    if (score > bestScore) {
+      bestScore = score;
+      best = product;
+    }
+  }
+
+  // Sem afinidade clara — usa o primeiro produto como padrão
+  return best || products[0];
+}
+
+function buildScriptPrompt(topic, product) {
   const { wordCount, tone, cta } = settings.script;
   const { language, targetAudience, style } = settings.niche;
   const { defaultTags } = settings.youtube;
   const { defaultHashtags } = settings.tiktok;
+
+  const ctaLine = product
+    ? `"${product.cta}" — promovendo o produto "${product.name}" (alinhado ao tema deste vídeo)`
+    : `"${cta}"`;
 
   return `
 Você é um roteirista expert em vídeos virais para YouTube Shorts e TikTok.
@@ -52,14 +96,14 @@ ${loadPerformanceContext()}
 - Idioma: ${language}
 - Público-alvo: ${targetAudience}
 - Estilo: ${style}
-- CTA final: "${cta}"
+- CTA final: ${ctaLine}
 
 ## Estrutura obrigatória:
 1. **HOOK** (0–5s): Frase de abertura que prende o espectador IMEDIATAMENTE
 2. **CONTEXTO** (5–15s): Informação surpresa que gera curiosidade
 3. **DESENVOLVIMENTO** (15–45s): 2–3 fatos fascinantes e verificáveis
 4. **CLÍMAX** (45–55s): O fato mais surpreendente / reviravolta
-5. **CTA** (55–60s): Call to action para seguir o canal
+5. **CTA** (55–60s): Call to action para seguir o canal${product ? ` e, de forma natural (sem soar como propaganda forçada), mencionar que existe um material completo sobre o tema (link na bio) — referência indireta ao produto "${product.name}"` : ""}
 
 ## Regras de escrita:
 - Use linguagem simples e direta
@@ -115,6 +159,11 @@ Retorne APENAS um JSON válido neste formato:
 export async function generateScript(topic) {
   console.log(`📝 [Script] Gerando roteiro para: "${topic.topic}"...`);
 
+  const product = pickProductForTopic(topic);
+  if (product) {
+    console.log(`   🛒 Produto Hotmart selecionado para CTA: "${product.name}" (pillars: ${(product.pillars || []).join(", ")})`);
+  }
+
   const systemPrompt = `Você é um roteirista expert em vídeos virais para YouTube Shorts e TikTok.
 Sua especialidade é criar roteiros de 60 segundos que prendem o espectador do início ao fim.
 Você sempre retorna JSON válido conforme solicitado, sem texto adicional antes ou depois.`;
@@ -127,7 +176,7 @@ Você sempre retorna JSON válido conforme solicitado, sem texto adicional antes
     max_tokens: 4096,
     thinking: { type: "adaptive" },
     system: systemPrompt,
-    messages: [{ role: "user", content: buildScriptPrompt(topic) }],
+    messages: [{ role: "user", content: buildScriptPrompt(topic, product) }],
   });
 
   process.stdout.write("   Gerando");
@@ -151,6 +200,9 @@ Você sempre retorna JSON válido conforme solicitado, sem texto adicional antes
   // Injeta metadados do tema
   result.topic = topic;
   result.generatedAt = new Date().toISOString();
+  result.promotedProduct = product
+    ? { id: product.id, name: product.name, cta: product.cta }
+    : null;
 
   console.log(`✅ [Script] Roteiro gerado!`);
   console.log(`   Título YT: ${result.title.youtube}`);
