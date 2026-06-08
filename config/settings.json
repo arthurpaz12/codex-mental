@@ -42,6 +42,28 @@
         "price": 47.00,
         "commissionPercent": 50,
         "earningsPerSale": 23.50
+      },
+      {
+        "name": "Homem Inesquecível: Como desenvolver presença, confiança e valor",
+        "id": "R106196697S",
+        "link": "https://go.hotmart.com/R106196697S",
+        "cta": "Descubra como desenvolver presença e confiança: link na bio",
+        "pillars": ["atração e carisma", "persuasão e influência psicológica"],
+        "price": 90.09,
+        "commissionPercent": 72,
+        "earningsPerSale": 64.54,
+        "type": "afiliado"
+      },
+      {
+        "name": "DESAFIO 21 DIAS: Reprogramação de Apego",
+        "id": "R106196711X",
+        "link": "https://go.hotmart.com/R106196711X?ap=ef21",
+        "cta": "Existe um desafio de 21 dias pra reprogramar isso: link na bio",
+        "pillars": ["manipulação e como se defender", "psicologia cognitiva"],
+        "price": 497.00,
+        "commissionPercent": 27,
+        "earningsPerSale": 134.19,
+        "type": "afiliado"
       }
     ]
   },
