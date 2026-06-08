@@ -237,6 +237,11 @@
     </div>
 
     <div class="panel-card" style="margin-bottom:28px">
+      <h2>🛒 Vendas por produto (últimos 30 dias)</h2>
+      <div id="sales-by-product"></div>
+    </div>
+
+    <div class="panel-card" style="margin-bottom:28px">
       <h2>🧩 Desempenho por categoria de tema</h2>
       <div id="categories"><div class="empty">Sem execuções suficientes ainda.</div></div>
     </div>
@@ -737,6 +742,46 @@
     `;
   }
 
+  function renderSalesByProduct(data) {
+    const el = document.getElementById("sales-by-product");
+    if (!el) return;
+
+    const hotmart = data.hotmart;
+    const byProduct = hotmart?.byProduct || [];
+    const currency = hotmart?.currency || "BRL";
+
+    if (!hotmart || hotmart.source !== "api") {
+      el.innerHTML = `<div class="empty">Conecte a API da Hotmart para ver o detalhamento por produto.</div>`;
+      return;
+    }
+    if (byProduct.length === 0) {
+      el.innerHTML = `<div class="empty">Sem vendas detalhadas por produto nos últimos 30 dias ainda.</div>`;
+      return;
+    }
+
+    const totalRevenue = byProduct.reduce((acc, p) => acc + (p.revenue || 0), 0);
+    const palette = [CHART_COLORS.accent, CHART_COLORS.teal, CHART_COLORS.blue, "#c792ea", "#f07178"];
+
+    el.innerHTML = `
+      <div class="grid">
+        ${byProduct.map((p, idx) => {
+          const share = totalRevenue > 0 ? (p.revenue / totalRevenue) * 100 : 0;
+          const color = palette[idx % palette.length];
+          return `
+            <div class="stat-card">
+              <div class="stat-label">${p.name}</div>
+              <div class="stat-value" style="color:${color}">${fmtCurrency(p.revenue, p.currency || currency)}</div>
+              <div class="stat-sub">${fmtNumber(p.sales)} venda(s) · ${share.toFixed(1)}% da receita</div>
+              <div style="margin-top:8px; height:6px; border-radius:3px; background:rgba(255,255,255,0.06); overflow:hidden">
+                <div style="height:100%; width:${share}%; background:${color}; border-radius:3px"></div>
+              </div>
+            </div>
+          `;
+        }).join("")}
+      </div>
+    `;
+  }
+
   function renderRuns(data) {
     const el = document.getElementById("runs");
     const runs = [...(data.runs || [])].reverse();
@@ -840,6 +885,7 @@
     renderStreakAndCalendar(data);
     renderViewsChart(data);
     renderSalesChart(data);
+    renderSalesByProduct(data);
     renderCategories(data);
     renderProjection(data);
     renderRuns(data);

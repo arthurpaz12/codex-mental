@@ -24,6 +24,7 @@ const DATA_PATH = join(__dirname, "../dashboard/data.json");
 
 const AUTH_URL = "https://api-sec-vlc.hotmart.com/security/oauth/token";
 const SALES_SUMMARY_URL = "https://developers.hotmart.com/payments/api/v1/sales/summary";
+const SALES_HISTORY_URL = "https://developers.hotmart.com/payments/api/v1/sales/history";
 
 // ---------------------------------------------------------------------------
 // Autenticação OAuth2 (Client Credentials)
@@ -87,6 +88,60 @@ async function fetchSalesSummary(accessToken) {
 }
 
 // ---------------------------------------------------------------------------
+// Histórico de vendas (últimos 30 dias) — usado para agregar por produto
+// ---------------------------------------------------------------------------
+
+async function fetchSalesByProduct(accessToken) {
+  const now = Date.now();
+  const thirtyDaysAgo = now - 30 * 24 * 60 * 60 * 1000;
+
+  const byProduct = {}; // id -> { id, name, sales, revenue, currency }
+  let pageToken = null;
+  let pages = 0;
+  const MAX_PAGES = 20; // proteção contra loop infinito / contas com muito histórico
+
+  do {
+    const params = new URLSearchParams({
+      start_date: String(thirtyDaysAgo),
+      end_date: String(now),
+      max_results: "100",
+    });
+    if (pageToken) params.set("page_token", pageToken);
+
+    const res = await fetch(`${SALES_HISTORY_URL}?${params.toString()}`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+
+    if (!res.ok) {
+      const err = await res.text();
+      throw new Error(`Hotmart sales history erro ${res.status}: ${err}`);
+    }
+
+    const json = await res.json();
+    const items = json.items || json.data || [];
+
+    for (const item of items) {
+      const product = item.product || item.subscription?.product || {};
+      const id = product.id ?? product.ucode ?? product.name ?? "desconhecido";
+      const name = product.name ?? "Produto desconhecido";
+
+      const price = item.purchase?.price ?? item.purchase?.full_price ?? {};
+      const value = price.value ?? price.amount ?? 0;
+      const currency = price.currency_value ?? price.currency_code ?? "BRL";
+
+      byProduct[id] = byProduct[id] || { id, name, sales: 0, revenue: 0, currency };
+      byProduct[id].sales += 1;
+      byProduct[id].revenue += Number(value) || 0;
+    }
+
+    pageToken = json.page_info?.next_page_token || json.page_info?.nextPageToken || null;
+    pages++;
+  } while (pageToken && pages < MAX_PAGES);
+
+  return Object.values(byProduct).sort((a, b) => b.revenue - a.revenue);
+}
+
+// ---------------------------------------------------------------------------
 // Export principal
 // ---------------------------------------------------------------------------
 
@@ -110,6 +165,14 @@ export async function refreshHotmartRevenue() {
     const totalSales = summary.total_sales ?? summary.totalSales ?? summary.sum_sales ?? 0;
     const currency = summary.currency_code ?? summary.currencyCode ?? "BRL";
 
+    // Busca o detalhamento por produto (best-effort — não quebra se falhar)
+    let byProduct = [];
+    try {
+      byProduct = await fetchSalesByProduct(accessToken);
+    } catch (e) {
+      console.warn(`   ⚠️  Não foi possível detalhar vendas por produto: ${e.message}`);
+    }
+
     if (!existsSync(DATA_PATH)) {
       console.warn("   ⚠️  dashboard/data.json não encontrado — rode o módulo 9 primeiro");
       return null;
@@ -121,6 +184,7 @@ export async function refreshHotmartRevenue() {
       revenueLast30Days: totalRevenue,
       salesLast30Days: totalSales,
       currency,
+      byProduct,
       updatedAt: new Date().toISOString(),
     };
     data.lastUpdated = new Date().toISOString();
@@ -128,6 +192,10 @@ export async function refreshHotmartRevenue() {
 
     console.log(`   → Vendas (30 dias): ${totalSales}`);
     console.log(`   → Faturamento (30 dias): ${totalRevenue} ${currency}`);
+    if (byProduct.length) {
+      console.log("   → Por produto:");
+      byProduct.forEach((p) => console.log(`      • ${p.name}: ${p.sales} venda(s), ${p.revenue} ${p.currency}`));
+    }
     console.log("✅ [Hotmart] Dashboard atualizado com dados reais");
 
     return data.hotmart;

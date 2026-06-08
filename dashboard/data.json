@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-08T00:25:01.123Z",
+  "lastUpdated": "2026-06-08T03:22:29.868Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -9,7 +9,8 @@
     "revenueLast30Days": 0,
     "salesLast30Days": 0,
     "currency": "BRL",
-    "updatedAt": "2026-06-07T16:16:10.622Z"
+    "byProduct": [],
+    "updatedAt": "2026-06-08T03:22:29.862Z"
   },
   "runs": [
     {
