@@ -219,8 +219,13 @@ async function uploadToTikTok(videoPath, scriptData, topicData) {
     .join(" ");
 
   // Passo 1: Iniciar upload
+  // Usa o endpoint de "inbox" (rascunho) enquanto o app não estiver auditado
+  // pelo TikTok. O vídeo vai para a caixa de entrada do criador e pode ser
+  // revisado/publicado manualmente. Quando o app for aprovado, basta trocar
+  // a URL para "post/publish/video/init/" e adicionar post_info de volta.
+  const videoSize = statSync(videoPath).size;
   const initRes = await fetch(
-    "https://open.tiktokapis.com/v2/post/publish/video/init/",
+    "https://open.tiktokapis.com/v2/post/publish/inbox/video/init/",
     {
       method: "POST",
       headers: {
@@ -228,18 +233,10 @@ async function uploadToTikTok(videoPath, scriptData, topicData) {
         "Content-Type": "application/json; charset=UTF-8",
       },
       body: JSON.stringify({
-        post_info: {
-          title: caption.slice(0, 2200),
-          privacy_level: settings.tiktok.privacyLevel || "PUBLIC_TO_EVERYONE",
-          disable_duet: settings.tiktok.disableDuet || false,
-          disable_stitch: settings.tiktok.disableStitch || false,
-          disable_comment: settings.tiktok.disableComment || false,
-          video_cover_timestamp_ms: 1000,
-        },
         source_info: {
           source: "FILE_UPLOAD",
-          video_size: statSync(videoPath).size,
-          chunk_size: statSync(videoPath).size,
+          video_size: videoSize,
+          chunk_size: videoSize,
           total_chunk_count: 1,
         },
       }),
@@ -273,7 +270,8 @@ async function uploadToTikTok(videoPath, scriptData, topicData) {
     throw new Error(`TikTok upload erro: ${err}`);
   }
 
-  console.log(`✅ [TikTok] Upload concluído | Publish ID: ${publishId}`);
+  console.log(`✅ [TikTok] Vídeo enviado como rascunho (inbox) | Publish ID: ${publishId}`);
+  console.log(`   → Abra o app do TikTok → Inbox → revise e publique manualmente`);
   return {
     publishId,
     url: `https://www.tiktok.com/@codexmentalbr`,
