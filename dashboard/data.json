@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-08T16:23:42.738Z",
+  "lastUpdated": "2026-06-08T23:22:08.666Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -72,7 +72,7 @@
         "currency": "BRL"
       }
     ],
-    "updatedAt": "2026-06-08T16:23:42.722Z"
+    "updatedAt": "2026-06-08T23:22:08.650Z"
   },
   "runs": [
     {
@@ -156,6 +156,37 @@
         "category": "suspense_misterio",
         "sound": "Dramatic reveal sting / whoosh transition"
       }
+    },
+    {
+      "runId": "2026-06-08T23-02-20",
+      "startedAt": "2026-06-08T23:02:20.707Z",
+      "completedAt": "2026-06-08T23:22:06.310Z",
+      "status": "ok",
+      "error": null,
+      "topic": "O Olhar de 3 Segundos que Revela Atração Imediata",
+      "category": "ciência",
+      "viralScore": 84,
+      "publish": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=JzWKguCMxGI",
+          "publishId": null
+        },
+        {
+          "platform": "youtube_shorts",
+          "url": "https://www.youtube.com/shorts/R6xSlgFwo2Q",
+          "publishId": null
+        },
+        {
+          "platform": "tiktok",
+          "url": "https://www.tiktok.com/@codexmentalbr",
+          "publishId": "v_inbox_file~v2.7649167476709787665"
+        }
+      ],
+      "sound": {
+        "category": "suspense_misterio",
+        "sound": "Dramatic reveal sting / whoosh transition"
+      }
     }
   ],
   "revenueProjection": {
@@ -163,7 +194,7 @@
       "youtube": 2,
       "tiktok": 0,
       "total": 2,
-      "videosPublicados": 2,
+      "videosPublicados": 3,
       "hotmart": {
         "source": "api",
         "revenueLast30Days": 0,
@@ -232,12 +263,12 @@
             "currency": "BRL"
           }
         ],
-        "updatedAt": "2026-06-08T16:23:42.722Z"
+        "updatedAt": "2026-06-08T23:22:08.650Z"
       }
     },
-    "custoTotal": 7,
+    "custoTotal": 10.5,
     "baseMonthlyViews": 2,
-    "generatedAt": "2026-06-08T16:23:42.738Z",
+    "generatedAt": "2026-06-08T23:22:08.666Z",
     "scenarios": {
       "conservador": {
         "rpm": 4,
