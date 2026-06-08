@@ -23,6 +23,7 @@ import "dotenv/config";
 import { writeFileSync, mkdirSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
+import { execFile } from "child_process";
 
 import { runResearch } from "./1-research.js";
 import { generateScript } from "./2-script.js";
@@ -51,6 +52,19 @@ function save(dir, filename, data) {
   writeFileSync(join(dir, filename), JSON.stringify(data, null, 2));
 }
 
+// ---------------------------------------------------------------------------
+// Notificação nativa do macOS (Centro de Notificações) via osascript
+// — best-effort: se o Mac estiver bloqueado/sem permissão, não quebra o pipeline
+// ---------------------------------------------------------------------------
+function notify(title, message, subtitle = "") {
+  const script = `display notification ${JSON.stringify(message)} with title ${JSON.stringify(title)}${
+    subtitle ? ` subtitle ${JSON.stringify(subtitle)}` : ""
+  } sound name "Glass"`;
+  execFile("osascript", ["-e", script], (err) => {
+    if (err) console.warn(`   ⚠️  Não foi possível enviar notificação: ${err.message}`);
+  });
+}
+
 function printSeparator(step, title) {
   console.log("\n" + "═".repeat(52));
   console.log(`  MÓDULO ${step}: ${title}`);
@@ -68,6 +82,8 @@ async function run() {
   console.log(`📁 Output: ${outputDir}`);
 
   const state = { runId, outputDir, startedAt: new Date().toISOString() };
+
+  notify("🎬 Codex Mental", "Começando a preparar um novo vídeo...", "Pipeline iniciado");
 
   try {
     // ── Módulo 1: Research ──────────────────────────────────────
@@ -135,6 +151,17 @@ async function run() {
       if (!state.video) throw new Error("Módulo 6 não executado.");
       state.publish = await publishVideos(state.video, state.script, state.topic);
       save(outputDir, "7-publish.json", state.publish);
+
+      if (state.publish?.length > 0) {
+        const platforms = state.publish.map((p) => p.platform).join(", ");
+        notify(
+          "✅ Codex Mental — Publicado!",
+          state.topic?.topic || "Novo vídeo no ar",
+          `Plataformas: ${platforms}`
+        );
+      } else {
+        notify("⚠️ Codex Mental", "Vídeo gerado, mas nenhuma plataforma publicou", "Verifique as credenciais");
+      }
     }
 
     // ── Módulo 8: Sound (sugestão de áudio para o TikTok) ───────
