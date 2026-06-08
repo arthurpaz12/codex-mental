@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-08T06:21:30.725Z",
+  "lastUpdated": "2026-06-08T16:23:42.738Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -72,7 +72,7 @@
         "currency": "BRL"
       }
     ],
-    "updatedAt": "2026-06-08T06:21:30.719Z"
+    "updatedAt": "2026-06-08T16:23:42.722Z"
   },
   "runs": [
     {
@@ -130,49 +130,138 @@
         }
       },
       "statsUpdatedAt": "2026-06-08T00:25:01.114Z"
+    },
+    {
+      "runId": "2026-06-08T16-15-58",
+      "startedAt": "2026-06-08T16:15:58.484Z",
+      "completedAt": "2026-06-08T16:23:40.650Z",
+      "status": "ok",
+      "error": null,
+      "topic": "A Microexpressão que Denuncia Quando Alguém Te Despreza em Silêncio",
+      "category": "ciência",
+      "viralScore": 82,
+      "publish": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=7_U6ZZED9Gk",
+          "publishId": null
+        },
+        {
+          "platform": "youtube_shorts",
+          "url": "https://www.youtube.com/shorts/6zM13NtYki8",
+          "publishId": null
+        }
+      ],
+      "sound": {
+        "category": "suspense_misterio",
+        "sound": "Dramatic reveal sting / whoosh transition"
+      }
     }
   ],
   "revenueProjection": {
     "realStats": {
-      "youtube": 0,
+      "youtube": 2,
       "tiktok": 0,
-      "total": 0,
-      "videosPublicados": 0,
+      "total": 2,
+      "videosPublicados": 2,
       "hotmart": {
         "source": "api",
         "revenueLast30Days": 0,
         "salesLast30Days": 0,
         "currency": "BRL",
-        "updatedAt": "2026-06-07T16:16:10.622Z"
+        "byProduct": [
+          {
+            "id": "6073525",
+            "name": "O Código da Leitura Mental",
+            "cta": "Aprenda a ler qualquer pessoa: link na bio",
+            "pillars": [
+              "leitura de pessoas",
+              "linguagem corporal",
+              "psicologia cognitiva"
+            ],
+            "price": 67,
+            "commissionPercent": 50,
+            "earningsPerSale": 33.5,
+            "sales": 0,
+            "revenue": 0,
+            "currency": "BRL"
+          },
+          {
+            "id": "6918368",
+            "name": "A Arte da Sedução",
+            "cta": "Técnica completa no link da bio",
+            "pillars": [
+              "atração e carisma",
+              "persuasão e influência psicológica"
+            ],
+            "price": 47,
+            "commissionPercent": 50,
+            "earningsPerSale": 23.5,
+            "sales": 0,
+            "revenue": 0,
+            "currency": "BRL"
+          },
+          {
+            "id": "R106196697S",
+            "name": "Homem Inesquecível: Como desenvolver presença, confiança e valor",
+            "cta": "Descubra como desenvolver presença e confiança: link na bio",
+            "pillars": [
+              "atração e carisma",
+              "persuasão e influência psicológica"
+            ],
+            "price": 90.09,
+            "commissionPercent": 72,
+            "earningsPerSale": 64.54,
+            "sales": 0,
+            "revenue": 0,
+            "currency": "BRL"
+          },
+          {
+            "id": "R106196711X",
+            "name": "DESAFIO 21 DIAS: Reprogramação de Apego",
+            "cta": "Existe um desafio de 21 dias pra reprogramar isso: link na bio",
+            "pillars": [
+              "manipulação e como se defender",
+              "psicologia cognitiva"
+            ],
+            "price": 497,
+            "commissionPercent": 27,
+            "earningsPerSale": 134.19,
+            "sales": 0,
+            "revenue": 0,
+            "currency": "BRL"
+          }
+        ],
+        "updatedAt": "2026-06-08T16:23:42.722Z"
       }
     },
-    "custoTotal": 0,
-    "baseMonthlyViews": 100000,
-    "generatedAt": "2026-06-07T16:16:10.637Z",
+    "custoTotal": 7,
+    "baseMonthlyViews": 2,
+    "generatedAt": "2026-06-08T16:23:42.738Z",
     "scenarios": {
       "conservador": {
         "rpm": 4,
         "conv": 0.0005,
-        "adRevenue": 400,
-        "sales": 50,
-        "affiliateRevenue": 3350,
-        "total": 3750
+        "adRevenue": 0.008,
+        "sales": 0.001,
+        "affiliateRevenue": 0.067,
+        "total": 0.07500000000000001
       },
       "moderado": {
         "rpm": 8,
         "conv": 0.001,
-        "adRevenue": 800,
-        "sales": 100,
-        "affiliateRevenue": 6700,
-        "total": 7500
+        "adRevenue": 0.016,
+        "sales": 0.002,
+        "affiliateRevenue": 0.134,
+        "total": 0.15000000000000002
       },
       "otimista": {
         "rpm": 14,
         "conv": 0.002,
-        "adRevenue": 1400,
-        "sales": 200,
-        "affiliateRevenue": 13400,
-        "total": 14800
+        "adRevenue": 0.028,
+        "sales": 0.004,
+        "affiliateRevenue": 0.268,
+        "total": 0.29600000000000004
       }
     }
   }
