@@ -55,7 +55,7 @@ async function uploadToYouTube(videoPath, scriptData, topicData, isShorts = fals
     "",
     ...(linktree ? [`🔗 Acesse: ${linktree}`, ""] : []),
     "━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-    topicData.hotmartCta || settings.niche.hotmartProducts[0].cta,
+    scriptData.promotedProduct?.cta || topicData.hotmartCta || settings.niche.hotmartProducts[0].cta,
     "━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
     "",
     "#" + (settings.youtube.defaultTags || []).join(" #"),
