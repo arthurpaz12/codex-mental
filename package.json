@@ -17,6 +17,7 @@
     "analytics": "node pipeline/10-analytics.js",
     "hotmart": "node pipeline/11-hotmart.js",
     "revenue": "node pipeline/12-revenue-estimate.js",
+    "insights": "node pipeline/13-performance-insights.js",
     "dashboard": "npx serve dashboard"
   },
   "dependencies": {
