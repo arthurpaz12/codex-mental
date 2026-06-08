@@ -777,6 +777,12 @@
           const ctaHtml = p.cta
             ? `<div class="stat-sub" style="margin-top:8px; font-style:italic; opacity:0.8">CTA: "${p.cta}"</div>`
             : "";
+          const earningsHtml = p.earningsPerSale
+            ? `<div class="stat-sub" style="margin-top:4px">
+                 💵 Você ganha <strong style="color:var(--text)">${fmtCurrency(p.earningsPerSale, p.currency || currency)}</strong> por venda
+                 ${p.price ? ` <span style="opacity:0.6">(produto a ${fmtCurrency(p.price, p.currency || currency)} · comissão ${p.commissionPercent}%)</span>` : ""}
+               </div>`
+            : "";
           const noSales = !p.sales;
           return `
             <div class="stat-card">
@@ -789,6 +795,7 @@
               <div style="margin-top:8px; height:6px; border-radius:3px; background:rgba(255,255,255,0.06); overflow:hidden">
                 <div style="height:100%; width:${Math.max(share, noSales ? 0 : 2)}%; background:${color}; border-radius:3px"></div>
               </div>
+              ${earningsHtml}
               ${pillarsHtml}
               ${ctaHtml}
             </div>

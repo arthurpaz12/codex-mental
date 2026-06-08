@@ -29,13 +29,19 @@
         "name": "O Código da Leitura Mental",
         "id": "6073525",
         "cta": "Aprenda a ler qualquer pessoa: link na bio",
-        "pillars": ["leitura de pessoas", "linguagem corporal", "psicologia cognitiva"]
+        "pillars": ["leitura de pessoas", "linguagem corporal", "psicologia cognitiva"],
+        "price": 67.00,
+        "commissionPercent": 50,
+        "earningsPerSale": 33.50
       },
       {
         "name": "A Arte da Sedução",
         "id": "6918368",
         "cta": "Técnica completa no link da bio",
-        "pillars": ["atração e carisma", "persuasão e influência psicológica"]
+        "pillars": ["atração e carisma", "persuasão e influência psicológica"],
+        "price": 47.00,
+        "commissionPercent": 50,
+        "earningsPerSale": 23.50
       }
     ]
   },

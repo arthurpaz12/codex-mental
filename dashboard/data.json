@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-08T05:02:30.212Z",
+  "lastUpdated": "2026-06-08T05:39:18.530Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -19,6 +19,9 @@
           "linguagem corporal",
           "psicologia cognitiva"
         ],
+        "price": 67,
+        "commissionPercent": 50,
+        "earningsPerSale": 33.5,
         "sales": 0,
         "revenue": 0,
         "currency": "BRL"
@@ -31,12 +34,15 @@
           "atração e carisma",
           "persuasão e influência psicológica"
         ],
+        "price": 47,
+        "commissionPercent": 50,
+        "earningsPerSale": 23.5,
         "sales": 0,
         "revenue": 0,
         "currency": "BRL"
       }
     ],
-    "updatedAt": "2026-06-08T05:02:30.183Z"
+    "updatedAt": "2026-06-08T05:39:18.520Z"
   },
   "runs": [
     {

@@ -31,6 +31,9 @@ function loadConfiguredProducts() {
       name: p.name,
       cta: p.cta || null,
       pillars: p.pillars || [],
+      price: p.price ?? null,
+      commissionPercent: p.commissionPercent ?? null,
+      earningsPerSale: p.earningsPerSale ?? null,
     }));
   } catch {
     return [];
@@ -201,6 +204,9 @@ export async function refreshHotmartRevenue() {
         name: cfg.name,
         cta: cfg.cta,
         pillars: cfg.pillars,
+        price: cfg.price,
+        commissionPercent: cfg.commissionPercent,
+        earningsPerSale: cfg.earningsPerSale,
         sales: match?.sales || 0,
         revenue: match?.revenue || 0,
         currency: match?.currency || currency,
