@@ -764,7 +764,7 @@
     const palette = [CHART_COLORS.accent, CHART_COLORS.teal, CHART_COLORS.blue, "#c792ea", "#f07178"];
 
     el.innerHTML = `
-      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))">
+      <div class="grid" style="display:flex; flex-wrap:wrap">
         ${byProduct.map((p, idx) => {
           const share = totalRevenue > 0 ? (p.revenue / totalRevenue) * 100 : 0;
           const avgTicket = p.sales > 0 ? p.revenue / p.sales : 0;
@@ -785,7 +785,7 @@
             : "";
           const noSales = !p.sales;
           return `
-            <div class="stat-card">
+            <div class="stat-card" style="flex:1 1 280px; min-width:280px">
               <div class="stat-label">${p.name}</div>
               <div class="stat-value" style="color:${noSales ? "var(--muted)" : color}">${fmtCurrency(p.revenue, p.currency || currency)}</div>
               <div class="stat-sub">
