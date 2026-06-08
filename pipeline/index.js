@@ -23,7 +23,7 @@ import "dotenv/config";
 import { writeFileSync, mkdirSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
-import { execFile } from "child_process";
+import { execFile, execSync } from "child_process";
 
 import { runResearch } from "./1-research.js";
 import { generateScript } from "./2-script.js";
@@ -63,6 +63,38 @@ function notify(title, message, subtitle = "") {
   execFile("osascript", ["-e", script], (err) => {
     if (err) console.warn(`   ⚠️  Não foi possível enviar notificação: ${err.message}`);
   });
+}
+
+// ---------------------------------------------------------------------------
+// Commit + push automático do dashboard/data.json e insights.json
+// — assim o site publicado na Vercel reflete a execução mais recente sem
+//   precisar de nenhum passo manual no GitHub Desktop. Best-effort: se o
+//   git falhar (sem rede, conflito, etc.) só avisa e não quebra o pipeline.
+// ---------------------------------------------------------------------------
+function commitAndPushDashboardData(runId) {
+  const repoDir = join(__dirname, "..");
+  const opts = { cwd: repoDir, stdio: ["ignore", "pipe", "pipe"] };
+  try {
+    const status = execSync(
+      "git status --porcelain dashboard/data.json dashboard/insights.json",
+      opts
+    ).toString().trim();
+
+    if (!status) {
+      console.log("   ℹ️  Nenhuma mudança em data.json/insights.json para commitar.");
+      return;
+    }
+
+    execSync("git add dashboard/data.json dashboard/insights.json", opts);
+    const message = `Atualiza dados do dashboard (run ${runId})\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>`;
+    execSync(`git commit -m ${JSON.stringify(message)}`, opts);
+    execSync("git push", opts);
+    console.log("   ✅ dashboard/data.json e insights.json commitados e enviados ao GitHub (Vercel vai redeployar).");
+  } catch (e) {
+    const detail = e.stderr?.toString().trim() || e.message;
+    console.warn(`   ⚠️  Falha ao commitar/enviar dados do dashboard automaticamente: ${detail}`);
+    console.warn("       Você pode commitar manualmente pelo GitHub Desktop se preferir.");
+  }
 }
 
 function printSeparator(step, title) {
@@ -237,6 +269,9 @@ async function run() {
       console.warn(`   ⚠️  Falha ao gerar insights de performance: ${e.message}`);
     }
 
+    // ── Commita e envia os dados atualizados pro GitHub (Vercel redeploya) ─
+    commitAndPushDashboardData(runId);
+
   } catch (err) {
     console.error(`\n❌ Pipeline falhou no módulo: ${err.message}`);
     state.error = err.message;
@@ -248,6 +283,8 @@ async function run() {
     } catch (e) {
       console.warn(`   ⚠️  Falha ao atualizar dashboard: ${e.message}`);
     }
+
+    commitAndPushDashboardData(runId);
 
     process.exit(1);
   }
