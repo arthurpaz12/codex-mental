@@ -42,10 +42,12 @@ async function generateAudio(text, outputPath) {
         "xi-api-key": apiKey,
         "Content-Type": "application/json",
         Accept: "audio/mpeg",
+        "xi-output-format": "mp3_44100_192",
       },
       body: JSON.stringify({
         text,
         model_id: "eleven_multilingual_v2",
+        output_format: "mp3_44100_192",
         voice_settings: {
           stability,
           similarity_boost: similarityBoost,
