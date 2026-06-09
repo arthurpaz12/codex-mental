@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-08T23:22:08.666Z",
+  "lastUpdated": "2026-06-09T16:06:36.103Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -72,7 +72,7 @@
         "currency": "BRL"
       }
     ],
-    "updatedAt": "2026-06-08T23:22:08.650Z"
+    "updatedAt": "2026-06-09T16:06:36.081Z"
   },
   "runs": [
     {
@@ -187,6 +187,37 @@
         "category": "suspense_misterio",
         "sound": "Dramatic reveal sting / whoosh transition"
       }
+    },
+    {
+      "runId": "2026-06-09T16-00-03",
+      "startedAt": "2026-06-09T16:00:04.001Z",
+      "completedAt": "2026-06-09T16:06:33.743Z",
+      "status": "ok",
+      "error": null,
+      "topic": "3 Sinais de que Alguém Está Te Manipulando Sem Você Perceber",
+      "category": "ciência",
+      "viralScore": 82,
+      "publish": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=3A-FrsP9oOE",
+          "publishId": null
+        },
+        {
+          "platform": "youtube_shorts",
+          "url": "https://www.youtube.com/shorts/vt8C4QBbpV0",
+          "publishId": null
+        },
+        {
+          "platform": "tiktok",
+          "url": "https://www.tiktok.com/@codexmentalbr",
+          "publishId": "v_inbox_file~v2.7649427552922142737"
+        }
+      ],
+      "sound": {
+        "category": "storytelling_motivacional",
+        "sound": "Lo-fi motivational beat"
+      }
     }
   ],
   "revenueProjection": {
@@ -194,7 +225,7 @@
       "youtube": 2,
       "tiktok": 0,
       "total": 2,
-      "videosPublicados": 3,
+      "videosPublicados": 4,
       "hotmart": {
         "source": "api",
         "revenueLast30Days": 0,
@@ -263,12 +294,12 @@
             "currency": "BRL"
           }
         ],
-        "updatedAt": "2026-06-08T23:22:08.650Z"
+        "updatedAt": "2026-06-09T16:06:36.081Z"
       }
     },
-    "custoTotal": 10.5,
+    "custoTotal": 14,
     "baseMonthlyViews": 2,
-    "generatedAt": "2026-06-08T23:22:08.666Z",
+    "generatedAt": "2026-06-09T16:06:36.103Z",
     "scenarios": {
       "conservador": {
         "rpm": 4,
