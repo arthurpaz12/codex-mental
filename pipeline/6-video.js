@@ -403,6 +403,7 @@ async function buildFinalVideo(videoListPath, audioPath, captionImages, outputPa
         "-filter_complex", filterComplex,
         "-map", "[vout]", "-map", audioMap,
         "-c:v", "libx264", "-preset", "fast", "-crf", "23", "-pix_fmt", "yuv420p",
+        "-r", "30",
         "-c:a", "aac", "-b:a", "128k",
         "-shortest", "-y", outputPath,
       ], label + "+legendas");
@@ -419,7 +420,7 @@ async function buildFinalVideo(videoListPath, audioPath, captionImages, outputPa
       ...fallbackArgs,
       "-filter_complex", `[1:a]volume=1.0[narr];[${musicIdx}:a]volume=0.15[music];[narr][music]amix=inputs=2:duration=first[aout]`,
       "-map", "0:v", "-map", "[aout]",
-      "-c:v", "libx264", "-preset", "fast", "-crf", "23",
+      "-c:v", "libx264", "-preset", "fast", "-crf", "23", "-r", "30",
       "-c:a", "aac", "-b:a", "128k",
       "-shortest", "-y", outputPath,
     ], label);
@@ -427,7 +428,7 @@ async function buildFinalVideo(videoListPath, audioPath, captionImages, outputPa
     await runFFmpeg([
       ...fallbackArgs,
       "-map", "0:v", "-map", "1:a",
-      "-c:v", "libx264", "-preset", "fast", "-crf", "23",
+      "-c:v", "libx264", "-preset", "fast", "-crf", "23", "-r", "30",
       "-c:a", "aac", "-b:a", "128k",
       "-shortest", "-y", outputPath,
     ], label);
