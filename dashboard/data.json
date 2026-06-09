@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-09T16:06:36.103Z",
+  "lastUpdated": "2026-06-09T23:08:23.373Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -72,7 +72,7 @@
         "currency": "BRL"
       }
     ],
-    "updatedAt": "2026-06-09T16:06:36.081Z"
+    "updatedAt": "2026-06-09T23:08:23.354Z"
   },
   "runs": [
     {
@@ -218,6 +218,37 @@
         "category": "storytelling_motivacional",
         "sound": "Lo-fi motivational beat"
       }
+    },
+    {
+      "runId": "2026-06-09T23-00-03",
+      "startedAt": "2026-06-09T23:00:03.141Z",
+      "completedAt": "2026-06-09T23:08:21.446Z",
+      "status": "ok",
+      "error": null,
+      "topic": "Os 3 Microgestos que Revelam Atração Instantânea (Quase Ninguém Percebe)",
+      "category": "ciência",
+      "viralScore": 82,
+      "publish": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=H9NA5NOF2KE",
+          "publishId": null
+        },
+        {
+          "platform": "youtube_shorts",
+          "url": "https://www.youtube.com/shorts/2UplQYT4jtc",
+          "publishId": null
+        },
+        {
+          "platform": "tiktok",
+          "url": "https://www.tiktok.com/@codexmentalbr",
+          "publishId": "v_inbox_file~v2.7649535987588909057"
+        }
+      ],
+      "sound": {
+        "category": "storytelling_motivacional",
+        "sound": "Lo-fi motivational beat"
+      }
     }
   ],
   "revenueProjection": {
@@ -225,7 +256,7 @@
       "youtube": 2,
       "tiktok": 0,
       "total": 2,
-      "videosPublicados": 4,
+      "videosPublicados": 5,
       "hotmart": {
         "source": "api",
         "revenueLast30Days": 0,
@@ -294,12 +325,12 @@
             "currency": "BRL"
           }
         ],
-        "updatedAt": "2026-06-09T16:06:36.081Z"
+        "updatedAt": "2026-06-09T23:08:23.354Z"
       }
     },
-    "custoTotal": 14,
+    "custoTotal": 17.5,
     "baseMonthlyViews": 2,
-    "generatedAt": "2026-06-09T16:06:36.103Z",
+    "generatedAt": "2026-06-09T23:08:23.373Z",
     "scenarios": {
       "conservador": {
         "rpm": 4,
