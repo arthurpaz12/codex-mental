@@ -1,0 +1,74 @@
+{
+  "channel": "brazil-noir",
+
+  "niche": {
+    "name": "Brazil Noir",
+    "language": "English",
+    "targetAudience": "English-speaking true crime fans aged 18–45 who love dark, cinematic storytelling about real cases",
+    "categories": ["true crime", "murder", "mystery", "investigation", "serial killer", "cold case", "unsolved"],
+    "style": "dark, cinematic, dramatic narration — like a Netflix true crime documentary compressed into 60 seconds",
+    "links": {
+      "linktree": ""
+    }
+  },
+
+  "script": {
+    "model": "claude-opus-4-8",
+    "wordCount": { "min": 130, "max": 160 },
+    "tone": "dark, gripping, suspenseful — like a true crime podcast narrator. Short sentences. Dramatic pauses. Build tension.",
+    "cta": "Follow for more dark stories from Brazil that the world never heard about."
+  },
+
+  "youtube": {
+    "enabled": false,
+    "privacyStatus": "public",
+    "defaultTags": ["brazil true crime", "true crime", "brazil crime", "brazil noir", "real crime", "murder mystery", "unsolved cases", "brazilian crime", "dark stories", "crime documentary"]
+  },
+
+  "tiktok": {
+    "enabled": false,
+    "privacyLevel": "SELF_ONLY",
+    "disableDuet": false,
+    "disableStitch": false,
+    "disableComment": false,
+    "defaultHashtags": ["#truecrime", "#braziltruecrime", "#brazilnoir", "#crimestories", "#murder", "#mystery", "#unsolved", "#darkstories", "#truecrimecommunity", "#crimejunkie"]
+  },
+
+  "media": {
+    "provider": "pexels",
+    "perPage": 15,
+    "orientation": "landscape",
+    "minWidth": 1920,
+    "videoMaxDuration": 30,
+    "preferVideo": true
+  },
+
+  "thumbnail": {
+    "style": "dark cinematic atmosphere, deep red and black tones, crime scene aesthetic, dramatic shadows, bold white text overlay, noir film aesthetic, high contrast"
+  },
+
+  "video": {
+    "subtitles": {
+      "enabled": true,
+      "style": "animated",
+      "fontSize": 48,
+      "fontColor": "#FFFFFF",
+      "strokeColor": "#000000",
+      "strokeWidth": 3,
+      "highlight": true,
+      "highlightColor": "#FF0000"
+    },
+    "music": {
+      "enabled": false,
+      "volume": 0.12
+    }
+  },
+
+  "voice": {
+    "provider": "elevenlabs",
+    "stability": 0.45,
+    "similarityBoost": 0.80,
+    "style": 0.4,
+    "speakerBoost": true
+  }
+}
