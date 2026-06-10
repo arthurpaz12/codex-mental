@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-10T12:30:03.453Z",
+  "lastUpdated": "2026-06-10T23:07:37.290Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -13,7 +13,7 @@
       {
         "id": "6073525",
         "name": "O Código da Leitura Mental",
-        "cta": "Aprenda a ler qualquer pessoa: link na bio",
+        "cta": "Isso é só 1% do que dá pra ler numa pessoa. O método completo tá no link da bio 🧠",
         "pillars": [
           "leitura de pessoas",
           "linguagem corporal",
@@ -29,7 +29,7 @@
       {
         "id": "6918368",
         "name": "A Arte da Sedução",
-        "cta": "Técnica completa no link da bio",
+        "cta": "Quem entende isso nunca mais é ignorado. A técnica completa tá no link da bio 👀",
         "pillars": [
           "atração e carisma",
           "persuasão e influência psicológica"
@@ -44,7 +44,7 @@
       {
         "id": "R106196697S",
         "name": "Homem Inesquecível: Como desenvolver presença, confiança e valor",
-        "cta": "Descubra como desenvolver presença e confiança: link na bio",
+        "cta": "Presença não é dom, é treino. O passo a passo que poucos conhecem tá no link da bio 🔗",
         "pillars": [
           "atração e carisma",
           "persuasão e influência psicológica"
@@ -59,7 +59,7 @@
       {
         "id": "R106196711X",
         "name": "DESAFIO 21 DIAS: Reprogramação de Apego",
-        "cta": "Existe um desafio de 21 dias pra reprogramar isso: link na bio",
+        "cta": "Dá pra reprogramar isso em 21 dias — mas quase ninguém sabe como começar. Link na bio 🧠",
         "pillars": [
           "manipulação e como se defender",
           "psicologia cognitiva"
@@ -72,7 +72,7 @@
         "currency": "BRL"
       }
     ],
-    "updatedAt": "2026-06-09T23:08:23.354Z"
+    "updatedAt": "2026-06-10T23:07:37.140Z"
   },
   "runs": [
     {
@@ -129,7 +129,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-10T12:30:03.110Z"
+      "statsUpdatedAt": "2026-06-10T23:07:35.879Z"
     },
     {
       "runId": "2026-06-08T16-15-58",
@@ -163,12 +163,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 36,
+          "views": 38,
           "likes": 0,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-10T12:30:03.231Z"
+      "statsUpdatedAt": "2026-06-10T23:07:35.879Z"
     },
     {
       "runId": "2026-06-08T23-02-20",
@@ -212,7 +212,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-10T12:30:03.231Z"
+      "statsUpdatedAt": "2026-06-10T23:07:35.879Z"
     },
     {
       "runId": "2026-06-09T16-00-03",
@@ -251,12 +251,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 183,
-          "likes": 6,
+          "views": 218,
+          "likes": 7,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-10T12:30:03.231Z"
+      "statsUpdatedAt": "2026-06-10T23:07:35.879Z"
     },
     {
       "runId": "2026-06-09T23-00-03",
@@ -295,12 +295,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 399,
-          "likes": 8,
+          "views": 403,
+          "likes": 9,
           "comments": 1
         }
       },
-      "statsUpdatedAt": "2026-06-10T12:30:03.231Z"
+      "statsUpdatedAt": "2026-06-10T23:07:35.879Z"
     },
     {
       "runId": "2026-06-09T23-50-47",
@@ -340,12 +340,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 4,
+          "views": 3,
           "likes": 0,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-10T12:30:03.231Z"
+      "statsUpdatedAt": "2026-06-10T23:07:35.879Z"
     },
     {
       "runId": "2026-06-10T05-40-23",
@@ -385,20 +385,65 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 3,
+          "views": 4,
           "likes": 0,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-10T12:30:03.231Z"
+      "statsUpdatedAt": "2026-06-10T23:07:35.879Z"
+    },
+    {
+      "runId": "2026-06-10T23-00-06",
+      "channel": "codex-mental",
+      "startedAt": "2026-06-10T23:00:06.601Z",
+      "completedAt": "2026-06-10T23:07:35.228Z",
+      "status": "ok",
+      "error": null,
+      "topic": "O Sinal nos Olhos que Revela Atração Instantânea",
+      "category": "ciência",
+      "viralScore": 84,
+      "publish": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=kPMy9mUMqPk",
+          "publishId": null
+        },
+        {
+          "platform": "youtube_shorts",
+          "url": "https://www.youtube.com/shorts/pSHP_dDXJyQ",
+          "publishId": null
+        },
+        {
+          "platform": "tiktok",
+          "url": "https://www.tiktok.com/@codexmentalbr",
+          "publishId": "v_inbox_file~v2.7649906987446159377"
+        }
+      ],
+      "sound": {
+        "category": "trending_viral",
+        "sound": "Voiceover/remix trend do nicho de psicologia"
+      },
+      "stats": {
+        "youtube": {
+          "views": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        "youtube_shorts": {
+          "views": 0,
+          "likes": 0,
+          "comments": 0
+        }
+      },
+      "statsUpdatedAt": "2026-06-10T23:07:35.879Z"
     }
   ],
   "revenueProjection": {
     "realStats": {
-      "youtube": 1154,
+      "youtube": 1195,
       "tiktok": 0,
-      "total": 1154,
-      "videosPublicados": 7,
+      "total": 1195,
+      "videosPublicados": 8,
       "hotmart": {
         "source": "api",
         "revenueLast30Days": 0,
@@ -408,7 +453,7 @@
           {
             "id": "6073525",
             "name": "O Código da Leitura Mental",
-            "cta": "Aprenda a ler qualquer pessoa: link na bio",
+            "cta": "Isso é só 1% do que dá pra ler numa pessoa. O método completo tá no link da bio 🧠",
             "pillars": [
               "leitura de pessoas",
               "linguagem corporal",
@@ -424,7 +469,7 @@
           {
             "id": "6918368",
             "name": "A Arte da Sedução",
-            "cta": "Técnica completa no link da bio",
+            "cta": "Quem entende isso nunca mais é ignorado. A técnica completa tá no link da bio 👀",
             "pillars": [
               "atração e carisma",
               "persuasão e influência psicológica"
@@ -439,7 +484,7 @@
           {
             "id": "R106196697S",
             "name": "Homem Inesquecível: Como desenvolver presença, confiança e valor",
-            "cta": "Descubra como desenvolver presença e confiança: link na bio",
+            "cta": "Presença não é dom, é treino. O passo a passo que poucos conhecem tá no link da bio 🔗",
             "pillars": [
               "atração e carisma",
               "persuasão e influência psicológica"
@@ -454,7 +499,7 @@
           {
             "id": "R106196711X",
             "name": "DESAFIO 21 DIAS: Reprogramação de Apego",
-            "cta": "Existe um desafio de 21 dias pra reprogramar isso: link na bio",
+            "cta": "Dá pra reprogramar isso em 21 dias — mas quase ninguém sabe como começar. Link na bio 🧠",
             "pillars": [
               "manipulação e como se defender",
               "psicologia cognitiva"
@@ -467,65 +512,65 @@
             "currency": "BRL"
           }
         ],
-        "updatedAt": "2026-06-09T23:08:23.354Z"
+        "updatedAt": "2026-06-10T23:07:37.140Z"
       }
     },
-    "custoTotal": 24.5,
-    "baseMonthlyViews": 1154,
-    "generatedAt": "2026-06-10T12:30:03.453Z",
+    "custoTotal": 28,
+    "baseMonthlyViews": 1195,
+    "generatedAt": "2026-06-10T23:07:37.290Z",
     "scenarios": {
       "conservador": {
         "rpm": 4,
         "conv": 0.0005,
-        "adRevenue": 4.616,
-        "sales": 0.577,
-        "affiliateRevenue": 38.659,
-        "total": 43.275
+        "adRevenue": 4.78,
+        "sales": 0.5975,
+        "affiliateRevenue": 40.0325,
+        "total": 44.8125
       },
       "moderado": {
         "rpm": 8,
         "conv": 0.001,
-        "adRevenue": 9.232,
-        "sales": 1.154,
-        "affiliateRevenue": 77.318,
-        "total": 86.55
+        "adRevenue": 9.56,
+        "sales": 1.195,
+        "affiliateRevenue": 80.065,
+        "total": 89.625
       },
       "otimista": {
         "rpm": 14,
         "conv": 0.002,
-        "adRevenue": 16.156,
-        "sales": 2.308,
-        "affiliateRevenue": 154.636,
-        "total": 170.792
+        "adRevenue": 16.73,
+        "sales": 2.39,
+        "affiliateRevenue": 160.13,
+        "total": 176.85999999999999
       }
     },
     "perPlatform": {
       "youtube": {
-        "monthlyViews": 1154,
+        "monthlyViews": 1195,
         "scenarios": {
           "conservador": {
             "rpm": 4,
             "conv": 0.0005,
-            "adRevenue": 4.616,
-            "sales": 0.577,
-            "affiliateRevenue": 38.659,
-            "total": 43.275
+            "adRevenue": 4.78,
+            "sales": 0.5975,
+            "affiliateRevenue": 40.0325,
+            "total": 44.8125
           },
           "moderado": {
             "rpm": 8,
             "conv": 0.001,
-            "adRevenue": 9.232,
-            "sales": 1.154,
-            "affiliateRevenue": 77.318,
-            "total": 86.55
+            "adRevenue": 9.56,
+            "sales": 1.195,
+            "affiliateRevenue": 80.065,
+            "total": 89.625
           },
           "otimista": {
             "rpm": 14,
             "conv": 0.002,
-            "adRevenue": 16.156,
-            "sales": 2.308,
-            "affiliateRevenue": 154.636,
-            "total": 170.792
+            "adRevenue": 16.73,
+            "sales": 2.39,
+            "affiliateRevenue": 160.13,
+            "total": 176.85999999999999
           }
         }
       },
@@ -563,16 +608,16 @@
       "youtube": {
         "codex-mental": {
           "name": "Codex Mental",
-          "subs": 4,
+          "subs": 7,
           "subsGoal": 1000,
-          "totalViews": 563,
+          "totalViews": 1144,
           "shortsViewsGoal90d": 10000000
         },
         "brazil-noir": {
           "name": "Brazil Noir",
           "subs": 1,
           "subsGoal": 1000,
-          "totalViews": 0,
+          "totalViews": 26,
           "shortsViewsGoal90d": 10000000
         }
       },

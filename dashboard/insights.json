@@ -1,12 +1,55 @@
 {
-  "generatedAt": "2026-06-09T23:08:23.377Z",
-  "sampleSize": 1,
+  "generatedAt": "2026-06-10T23:07:37.301Z",
+  "sampleSize": 7,
   "topByViews": [
     {
       "topic": "O Gesto Secreto que Revela Quando Alguém Está Mentindo",
       "category": "ciência",
-      "views": 406,
-      "engagement": 1.72,
+      "views": 526,
+      "engagement": 1.52,
+      "platforms": [
+        "youtube",
+        "youtube_shorts",
+        "tiktok"
+      ]
+    },
+    {
+      "topic": "Os 3 Microgestos que Revelam Atração Instantânea (Quase Ninguém Percebe)",
+      "category": "ciência",
+      "views": 403,
+      "engagement": 2.48,
+      "platforms": [
+        "youtube",
+        "youtube_shorts",
+        "tiktok"
+      ]
+    },
+    {
+      "topic": "3 Sinais de que Alguém Está Te Manipulando Sem Você Perceber",
+      "category": "ciência",
+      "views": 219,
+      "engagement": 3.2,
+      "platforms": [
+        "youtube",
+        "youtube_shorts",
+        "tiktok"
+      ]
+    },
+    {
+      "topic": "A Microexpressão que Denuncia Quando Alguém Te Despreza em Silêncio",
+      "category": "ciência",
+      "views": 39,
+      "engagement": 0,
+      "platforms": [
+        "youtube",
+        "youtube_shorts"
+      ]
+    },
+    {
+      "topic": "The Goalkeeper Case: Brazil's World Cup star ordered his lover murdered — then played football again",
+      "category": "murder",
+      "views": 4,
+      "engagement": 0,
       "platforms": [
         "youtube",
         "youtube_shorts",
@@ -16,10 +59,53 @@
   ],
   "topByEngagement": [
     {
+      "topic": "3 Sinais de que Alguém Está Te Manipulando Sem Você Perceber",
+      "category": "ciência",
+      "views": 219,
+      "engagement": 3.2,
+      "platforms": [
+        "youtube",
+        "youtube_shorts",
+        "tiktok"
+      ]
+    },
+    {
+      "topic": "Os 3 Microgestos que Revelam Atração Instantânea (Quase Ninguém Percebe)",
+      "category": "ciência",
+      "views": 403,
+      "engagement": 2.48,
+      "platforms": [
+        "youtube",
+        "youtube_shorts",
+        "tiktok"
+      ]
+    },
+    {
       "topic": "O Gesto Secreto que Revela Quando Alguém Está Mentindo",
       "category": "ciência",
-      "views": 406,
-      "engagement": 1.72,
+      "views": 526,
+      "engagement": 1.52,
+      "platforms": [
+        "youtube",
+        "youtube_shorts",
+        "tiktok"
+      ]
+    },
+    {
+      "topic": "A Microexpressão que Denuncia Quando Alguém Te Despreza em Silêncio",
+      "category": "ciência",
+      "views": 39,
+      "engagement": 0,
+      "platforms": [
+        "youtube",
+        "youtube_shorts"
+      ]
+    },
+    {
+      "topic": "O Olhar de 3 Segundos que Revela Atração Imediata",
+      "category": "ciência",
+      "views": 1,
+      "engagement": 0,
       "platforms": [
         "youtube",
         "youtube_shorts",
@@ -30,49 +116,107 @@
   "byCategory": [
     {
       "key": "ciência",
+      "videos": 5,
+      "totalViews": 1188,
+      "avgViews": 237.6,
+      "avgEngagement": 1.44
+    },
+    {
+      "key": "murder",
       "videos": 1,
-      "totalViews": 406,
-      "avgViews": 406,
-      "avgEngagement": 1.72
+      "totalViews": 4,
+      "avgViews": 4,
+      "avgEngagement": 0
+    },
+    {
+      "key": "serial killer",
+      "videos": 1,
+      "totalViews": 3,
+      "avgViews": 3,
+      "avgEngagement": 0
     }
   ],
   "byPlatform": [
     {
       "key": "youtube_shorts",
-      "videos": 1,
-      "totalViews": 404,
-      "avgViews": 404,
-      "avgEngagement": 1.73
+      "videos": 7,
+      "totalViews": 1191,
+      "avgViews": 170.1,
+      "avgEngagement": 1.03
     },
     {
       "key": "youtube",
-      "videos": 1,
-      "totalViews": 2,
-      "avgViews": 2,
+      "videos": 3,
+      "totalViews": 4,
+      "avgViews": 1.3,
       "avgEngagement": 0
     }
   ],
   "byHourUTC": [
     {
       "key": "16h",
+      "videos": 3,
+      "totalViews": 784,
+      "avgViews": 261.3,
+      "avgEngagement": 1.57
+    },
+    {
+      "key": "23h",
+      "videos": 2,
+      "totalViews": 404,
+      "avgViews": 202,
+      "avgEngagement": 1.24
+    },
+    {
+      "key": "00h",
       "videos": 1,
-      "totalViews": 406,
-      "avgViews": 406,
-      "avgEngagement": 1.72
+      "totalViews": 3,
+      "avgViews": 3,
+      "avgEngagement": 0
+    },
+    {
+      "key": "05h",
+      "videos": 1,
+      "totalViews": 4,
+      "avgViews": 4,
+      "avgEngagement": 0
     }
   ],
   "byWeekday": [
     {
+      "key": "Terça",
+      "videos": 2,
+      "totalViews": 622,
+      "avgViews": 311,
+      "avgEngagement": 2.84
+    },
+    {
       "key": "Domingo",
       "videos": 1,
-      "totalViews": 406,
-      "avgViews": 406,
-      "avgEngagement": 1.72
+      "totalViews": 526,
+      "avgViews": 526,
+      "avgEngagement": 1.52
+    },
+    {
+      "key": "Segunda",
+      "videos": 2,
+      "totalViews": 40,
+      "avgViews": 20,
+      "avgEngagement": 0
+    },
+    {
+      "key": "Quarta",
+      "videos": 2,
+      "totalViews": 7,
+      "avgViews": 3.5,
+      "avgEngagement": 0
     }
   ],
-  "viralScoreCorrelation": null,
+  "viralScoreCorrelation": -0.17,
   "recommendations": [
+    "A categoria \"ciência\" tem a melhor média de views (238) — vale priorizar temas parecidos.",
     "\"youtube_shorts\" é a plataforma com melhor desempenho médio — considere adaptar mais conteúdo pro formato dela.",
-    "Amostra ainda pequena — esses padrões vão ficar mais confiáveis conforme mais vídeos forem publicados e medidos."
+    "Publicações por volta das 16h (UTC) tiveram o maior engajamento médio — pode ser um bom horário pra concentrar lançamentos.",
+    "Ainda não há correlação clara entre o \"viralScore\" da IA e os resultados reais (-0.17) — continue coletando dados pra confirmar o padrão."
   ]
 }
