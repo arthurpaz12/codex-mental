@@ -26,6 +26,7 @@ import { generateThumbnail } from "../5-thumbnail.js";
 import { assembleVideo } from "../6-video.js";
 import { publishVideos } from "../7-publish.js";
 import { suggestSound } from "../8-sound.js";
+import { updateDashboard } from "../9-dashboard.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_DIR = join(__dirname, "../..");
@@ -126,7 +127,8 @@ async function run() {
       state.voice,
       state.media,
       state.thumbnail || {},
-      outputDir
+      outputDir,
+      { channel: "brazil-noir" }
     );
     save(outputDir, "6-video.json", state.video);
 
@@ -176,6 +178,9 @@ async function run() {
     state.completedAt = new Date().toISOString();
     state.elapsedSeconds = parseFloat(elapsed);
     save(outputDir, "pipeline-state.json", state);
+
+    // Registra a execução no dashboard (histórico compartilhado com Codex Mental)
+    await updateDashboard(state);
 
     console.log("\n" + "═".repeat(52));
     console.log("  ✅ BRAZIL NOIR PIPELINE COMPLETE!");

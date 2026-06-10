@@ -39,6 +39,7 @@ function loadData() {
 function summarizeRun(state) {
   return {
     runId: state.runId,
+    channel: state.channel || "codex-mental",
     startedAt: state.startedAt,
     completedAt: state.completedAt || null,
     status: state.error ? "error" : "ok",

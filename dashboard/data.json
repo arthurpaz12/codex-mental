@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-10T02:44:22.480Z",
+  "lastUpdated": "2026-06-10T02:45:03.376Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -124,12 +124,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 404,
-          "likes": 7,
+          "views": 524,
+          "likes": 8,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-08T00:25:01.114Z"
+      "statsUpdatedAt": "2026-06-10T02:45:03.344Z"
     },
     {
       "runId": "2026-06-08T16-15-58",
@@ -155,7 +155,20 @@
       "sound": {
         "category": "suspense_misterio",
         "sound": "Dramatic reveal sting / whoosh transition"
-      }
+      },
+      "stats": {
+        "youtube": {
+          "views": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        "youtube_shorts": {
+          "views": 36,
+          "likes": 0,
+          "comments": 0
+        }
+      },
+      "statsUpdatedAt": "2026-06-10T02:45:03.346Z"
     },
     {
       "runId": "2026-06-08T23-02-20",
@@ -186,7 +199,20 @@
       "sound": {
         "category": "suspense_misterio",
         "sound": "Dramatic reveal sting / whoosh transition"
-      }
+      },
+      "stats": {
+        "youtube": {
+          "views": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        "youtube_shorts": {
+          "views": 1,
+          "likes": 0,
+          "comments": 0
+        }
+      },
+      "statsUpdatedAt": "2026-06-10T02:45:03.346Z"
     },
     {
       "runId": "2026-06-09T16-00-03",
@@ -217,7 +243,20 @@
       "sound": {
         "category": "storytelling_motivacional",
         "sound": "Lo-fi motivational beat"
-      }
+      },
+      "stats": {
+        "youtube": {
+          "views": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        "youtube_shorts": {
+          "views": 171,
+          "likes": 6,
+          "comments": 0
+        }
+      },
+      "statsUpdatedAt": "2026-06-10T02:45:03.346Z"
     },
     {
       "runId": "2026-06-09T23-00-03",
@@ -248,7 +287,20 @@
       "sound": {
         "category": "storytelling_motivacional",
         "sound": "Lo-fi motivational beat"
-      }
+      },
+      "stats": {
+        "youtube": {
+          "views": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        "youtube_shorts": {
+          "views": 314,
+          "likes": 8,
+          "comments": 1
+        }
+      },
+      "statsUpdatedAt": "2026-06-10T02:45:03.346Z"
     },
     {
       "runId": "2026-06-09T23-50-47",
@@ -280,7 +332,20 @@
       "sound": {
         "category": "storytelling_motivacional",
         "sound": "Lo-fi motivational beat"
-      }
+      },
+      "stats": {
+        "youtube": {
+          "views": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        "youtube_shorts": {
+          "views": 0,
+          "likes": 0,
+          "comments": 0
+        }
+      },
+      "statsUpdatedAt": "2026-06-10T02:45:03.346Z"
     }
   ],
   "revenueProjection": {
@@ -362,7 +427,7 @@
     },
     "custoTotal": 21,
     "baseMonthlyViews": 2,
-    "generatedAt": "2026-06-10T02:44:22.479Z",
+    "generatedAt": "2026-06-10T02:45:03.376Z",
     "scenarios": {
       "conservador": {
         "rpm": 4,

@@ -34,7 +34,10 @@ async function fetchYouTubeStats(videoIds) {
     const batch = videoIds.slice(i, i + 50);
     const url = `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${batch.join(",")}&key=${apiKey}`;
     try {
-      const res = await fetch(url);
+      // A chave da API tem restrição de HTTP referrer (configurada pro
+      // dashboard na Vercel) — em chamadas server-side o referer vai vazio
+      // e o Google bloqueia (403), então enviamos o referer permitido.
+      const res = await fetch(url, { headers: { Referer: "https://codex-mental.vercel.app/" } });
       if (!res.ok) {
         console.warn(`   ⚠️  YouTube stats erro ${res.status}`);
         continue;
