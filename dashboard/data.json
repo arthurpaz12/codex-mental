@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-10T03:05:31.425Z",
+  "lastUpdated": "2026-06-10T05:46:35.103Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -346,6 +346,38 @@
         }
       },
       "statsUpdatedAt": "2026-06-10T02:45:03.346Z"
+    },
+    {
+      "runId": "2026-06-10T05-40-23",
+      "channel": "brazil-noir",
+      "startedAt": "2026-06-10T05:40:23.143Z",
+      "completedAt": "2026-06-10T05:46:35.099Z",
+      "status": "ok",
+      "error": null,
+      "topic": "The Goalkeeper Case: Brazil's World Cup star ordered his lover murdered — then played football again",
+      "category": "murder",
+      "viralScore": 92,
+      "publish": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=qJx9S5lTxfg",
+          "publishId": null
+        },
+        {
+          "platform": "youtube_shorts",
+          "url": "https://www.youtube.com/shorts/G8Iop3n7Rrw",
+          "publishId": null
+        },
+        {
+          "platform": "tiktok",
+          "url": "https://www.tiktok.com/@codexmentalbr",
+          "publishId": "v_inbox_file~v2.7649638779527120897"
+        }
+      ],
+      "sound": {
+        "category": "trending_viral",
+        "sound": "Voiceover/remix trend do nicho de psicologia"
+      }
     }
   ],
   "revenueProjection": {
