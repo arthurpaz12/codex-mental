@@ -187,13 +187,13 @@ export async function refreshAnalytics() {
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   refreshAnalytics()
-    .then((r) => {
+    .then(async (r) => {
       console.log("\n📦 Resultado:", JSON.stringify(r, null, 2));
       // Recalcula a projeção de receita com os números recém-atualizados —
       // assim o cron de analytics (que roda mais vezes que o pipeline
       // completo) também mantém a seção "🔮 Projeção de receita" fresca.
       try {
-        estimateRevenue();
+        await estimateRevenue();
       } catch (e) {
         console.warn(`   ⚠️  Falha ao recalcular projeção de receita: ${e.message}`);
       }

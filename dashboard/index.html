@@ -182,6 +182,18 @@
   .cat-bar { height: 100%; background: linear-gradient(90deg, var(--teal), var(--accent)); border-radius: 4px; }
   .cat-count { font-size: 12px; color: var(--muted); width: 90px; text-align: right; flex-shrink: 0; }
 
+  .tabs { display: flex; gap: 8px; margin-bottom: 28px; flex-wrap: wrap; }
+  .tab {
+    padding: 9px 18px; border-radius: 10px; font-size: 14px; font-weight: 600;
+    cursor: pointer; border: 1px solid var(--border-soft); background: var(--card-2);
+    color: var(--muted); transition: all .15s ease; user-select: none;
+    display: flex; align-items: center; gap: 7px;
+  }
+  .tab:hover { color: var(--text); border-color: var(--accent); }
+  .tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .tab.active[data-channel="brazil-noir"] { background: var(--red, #dc2626); border-color: var(--red, #dc2626); }
+  .tab .tab-count { font-size: 11px; opacity: .7; font-weight: 500; }
+
   footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 50px; letter-spacing: 0; }
   footer::before { content: none; }
 </style>
@@ -195,6 +207,12 @@
       </div>
       <div class="badge" id="updated">carregando...</div>
     </header>
+
+    <div class="tabs" id="tabs">
+      <div class="tab active" data-channel="all">📊 Todos</div>
+      <div class="tab" data-channel="codex-mental">🧠 Codex Mental <span class="tab-count" id="count-codex-mental"></span></div>
+      <div class="tab" data-channel="brazil-noir">🕵️ Brazil Noir <span class="tab-count" id="count-brazil-noir"></span></div>
+    </div>
 
     <div class="grid" id="stats"></div>
 
@@ -229,7 +247,7 @@
         <h2>📈 Views por plataforma</h2>
         <div style="position:relative; height:220px"><canvas id="chart-views"></canvas></div>
       </div>
-      <div class="panel-card">
+      <div class="panel-card" id="card-sales">
         <h2>💰 Vendas Hotmart (últimos 30 dias)</h2>
         <div style="position:relative; height:220px; display:flex; align-items:center; justify-content:center">
           <canvas id="chart-sales"></canvas>
@@ -238,7 +256,7 @@
       </div>
     </div>
 
-    <div class="panel-card" style="margin-bottom:28px">
+    <div class="panel-card" style="margin-bottom:28px" id="card-sales-product">
       <h2>🛒 Vendas por produto (últimos 30 dias)</h2>
       <div id="sales-by-product"></div>
     </div>
@@ -248,12 +266,12 @@
       <div id="categories"><div class="empty">Sem execuções suficientes ainda.</div></div>
     </div>
 
-    <div class="panel-card" style="margin-bottom:28px">
+    <div class="panel-card" style="margin-bottom:28px" id="card-projection">
       <h2>🔮 Projeção de receita (estimativa)</h2>
       <div id="projection"><div class="empty">Rode <code>npm run revenue</code> pra gerar a projeção.</div></div>
     </div>
 
-    <h2>Execuções recentes</h2>
+    <h2 id="runs-title">Execuções recentes</h2>
     <div class="runs" id="runs"><div class="empty">Carregando dados…</div></div>
 
     <footer>Codex Mental · dados atualizados automaticamente a cada execução do pipeline</footer>
@@ -438,8 +456,13 @@
       { label: "Concluídas com sucesso", value: ok.length, cls: "green" },
       { label: "Vídeos publicados", value: totalVideos, cls: "purple" },
       { label: "Views totais", value: fmtNumber(totalViews), cls: "blue", sub: `${fmtNumber(totalLikes)} curtidas no total` },
-      { label: "Receita (Hotmart)", value: revenueValue, cls: "yellow", sub: revenueSub },
     ];
+
+    // Receita Hotmart só faz sentido onde há monetização por afiliado
+    // (Codex Mental e visão geral). Brazil Noir ainda não tem Hotmart.
+    if (typeof activeChannel === "undefined" || activeChannel !== "brazil-noir") {
+      stats.push({ label: "Receita (Hotmart)", value: revenueValue, cls: "yellow", sub: revenueSub });
+    }
 
     document.getElementById("stats").innerHTML = stats.map(s => `
       <div class="stat-card">
@@ -863,41 +886,101 @@
 
     const currency = "BRL";
     const labels = { conservador: "Conservador", moderado: "Moderado", otimista: "Otimista" };
-    const rows = ["conservador", "moderado", "otimista"].map((key) => {
-      const s = proj.scenarios[key];
-      if (!s) return "";
+
+    const scenarioTable = (scenarios) => {
+      const rows = ["conservador", "moderado", "otimista"].map((key) => {
+        const s = scenarios[key];
+        if (!s) return "";
+        return `
+          <tr>
+            <td style="font-weight:600">${labels[key]}</td>
+            <td>${fmtCurrency(s.rpm, currency)}</td>
+            <td>${(s.conv * 100).toFixed(2)}%</td>
+            <td>${fmtCurrency(s.adRevenue, currency)}</td>
+            <td>${fmtCurrency(s.affiliateRevenue, currency)}</td>
+            <td style="font-weight:700; color:var(--accent, #a855f7)">${fmtCurrency(s.total, currency)}</td>
+          </tr>`;
+      }).join("");
       return `
-        <tr>
-          <td style="font-weight:600">${labels[key]}</td>
-          <td>${fmtCurrency(s.rpm, currency)}</td>
-          <td>${(s.conv * 100).toFixed(2)}%</td>
-          <td>${fmtCurrency(s.adRevenue, currency)}</td>
-          <td>${fmtCurrency(s.affiliateRevenue, currency)}</td>
-          <td style="font-weight:700; color:var(--accent, #a855f7)">${fmtCurrency(s.total, currency)}</td>
-        </tr>`;
-    }).join("");
+        <div style="overflow-x:auto">
+          <table style="width:100%; border-collapse:collapse; font-size:13px">
+            <thead>
+              <tr style="text-align:left;color:var(--muted)">
+                <th style="padding:6px 10px">Cenário</th>
+                <th style="padding:6px 10px">RPM</th>
+                <th style="padding:6px 10px">Conv. afiliado</th>
+                <th style="padding:6px 10px">Receita anúncios</th>
+                <th style="padding:6px 10px">Receita afiliado</th>
+                <th style="padding:6px 10px">Total/mês</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>`;
+    };
+
+    // Tabelas por plataforma (novo formato) com fallback pro total (formato antigo)
+    let platformsHtml = "";
+    if (proj.perPlatform) {
+      const icons = { youtube: "📺 YouTube", tiktok: "🎵 TikTok" };
+      platformsHtml = Object.entries(proj.perPlatform).map(([key, p]) => `
+        <div style="margin-bottom:18px">
+          <div style="font-weight:700;margin-bottom:6px">${icons[key] || key}
+            <span style="color:var(--muted);font-weight:400;font-size:12px"> · ~${fmtNumber(p.monthlyViews)} views/mês</span>
+          </div>
+          ${scenarioTable(p.scenarios)}
+        </div>`).join("");
+    } else {
+      platformsHtml = scenarioTable(proj.scenarios);
+    }
+
+    // Metas de monetização com barras de progresso
+    let goalsHtml = "";
+    const goals = proj.monetizationGoals;
+    if (goals) {
+      const bar = (value, goal, label) => {
+        const pct = Math.min((value / goal) * 100, 100);
+        return `
+          <div style="margin-bottom:10px">
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
+              <span>${label}</span>
+              <span style="color:var(--muted)">${fmtNumber(value)} / ${fmtNumber(goal)} (${pct.toFixed(1)}%)</span>
+            </div>
+            <div style="background:rgba(255,255,255,0.08);border-radius:6px;height:8px;overflow:hidden">
+              <div style="width:${pct}%;height:100%;background:linear-gradient(90deg,#34d399,#fbbf24);border-radius:6px"></div>
+            </div>
+          </div>`;
+      };
+
+      let ytGoals = "";
+      for (const ch of Object.values(goals.youtube || {})) {
+        ytGoals += bar(ch.subs, ch.subsGoal, `${ch.name} — inscritos (YouTube Partner)`);
+        ytGoals += bar(ch.totalViews, ch.shortsViewsGoal90d, `${ch.name} — views Shorts (90 dias)`);
+      }
+      let tkGoals = "";
+      if (goals.tiktok) {
+        tkGoals = bar(goals.tiktok.views, goals.tiktok.viewsGoal30d, "TikTok — views (30 dias, Creator Rewards)");
+      }
+
+      goalsHtml = `
+        <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08)">
+          <div style="font-weight:700;margin-bottom:12px">🎯 Metas de monetização</div>
+          ${ytGoals}
+          ${tkGoals}
+          <div style="font-size:11px;color:var(--muted);margin-top:6px">
+            YouTube Partner: 1.000 inscritos + 10M views de Shorts em 90 dias (ou 4.000h de exibição).
+            TikTok Creator Rewards: 10.000 seguidores + 100.000 views em 30 dias.
+          </div>
+        </div>`;
+    }
 
     el.innerHTML = `
       <div style="font-size:13px;color:var(--muted);margin-bottom:12px">
-        Baseado em ~${fmtNumber(proj.baseMonthlyViews)} views/mês ·
-        custo estimado de geração: ${fmtCurrency(proj.custoTotal, currency)} ·
+        Custo estimado de geração: ${fmtCurrency(proj.custoTotal, currency)} ·
         gerado em ${fmtDate(proj.generatedAt)}
       </div>
-      <div style="overflow-x:auto">
-        <table style="width:100%; border-collapse:collapse; font-size:13px">
-          <thead>
-            <tr style="text-align:left;color:var(--muted)">
-              <th style="padding:6px 10px">Cenário</th>
-              <th style="padding:6px 10px">RPM</th>
-              <th style="padding:6px 10px">Conv. afiliado</th>
-              <th style="padding:6px 10px">Receita anúncios</th>
-              <th style="padding:6px 10px">Receita afiliado</th>
-              <th style="padding:6px 10px">Total/mês</th>
-            </tr>
-          </thead>
-          <tbody>${rows}</tbody>
-        </table>
-      </div>
+      ${platformsHtml}
+      ${goalsHtml}
       <div style="font-size:11px;color:var(--muted);margin-top:10px">
         ⚠️ Estimativa especulativa baseada em médias de mercado — não é garantia de resultado.
         Atualize com <code>npm run revenue</code>.
@@ -905,9 +988,57 @@
     `;
   }
 
-  function renderAll(data) {
+  // Canal ativo na aba (all = mostra tudo). Brazil Noir ainda não tem
+  // Hotmart/afiliados, então seções de receita só aparecem em "Todos" e
+  // "Codex Mental".
+  let activeChannel = "all";
+
+  function channelOf(run) {
+    return run.channel || "codex-mental";
+  }
+
+  // Retorna uma cópia do data com os runs filtrados pelo canal ativo
+  function applyChannelFilter(data) {
+    if (activeChannel === "all") return data;
+    const clone = JSON.parse(JSON.stringify(data));
+    clone.runs = (clone.runs || []).filter((r) => channelOf(r) === activeChannel);
+    return clone;
+  }
+
+  // Mostra/esconde seções que só fazem sentido com dados de receita (Hotmart)
+  function applyChannelVisibility() {
+    const showRevenue = activeChannel !== "brazil-noir";
+    const setShown = (id, shown) => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = shown ? "" : "none";
+    };
+    setShown("card-sales", showRevenue);
+    setShown("card-sales-product", showRevenue);
+    // A projeção é uma visão consolidada do negócio (views agregadas dos dois
+    // canais) + metas por canal — só faz sentido na aba "Todos".
+    setShown("card-projection", activeChannel === "all");
+
+    // Título da lista de execuções reflete o canal
+    const titles = { all: "Execuções recentes", "codex-mental": "Execuções — Codex Mental", "brazil-noir": "Execuções — Brazil Noir" };
+    const t = document.getElementById("runs-title");
+    if (t) t.textContent = titles[activeChannel] || "Execuções recentes";
+  }
+
+  function renderAll(rawData) {
     document.getElementById("updated").textContent =
-      data.lastUpdated ? `atualizado em ${fmtDate(data.lastUpdated)} (ao vivo)` : "sem dados ainda";
+      rawData.lastUpdated ? `atualizado em ${fmtDate(rawData.lastUpdated)} (ao vivo)` : "sem dados ainda";
+
+    // Atualiza contadores das abas (sempre com os dados completos)
+    const counts = { "codex-mental": 0, "brazil-noir": 0 };
+    for (const r of rawData.runs || []) counts[channelOf(r)] = (counts[channelOf(r)] || 0) + 1;
+    const cCodex = document.getElementById("count-codex-mental");
+    const cBN = document.getElementById("count-brazil-noir");
+    if (cCodex) cCodex.textContent = counts["codex-mental"] || 0;
+    if (cBN) cBN.textContent = counts["brazil-noir"] || 0;
+
+    const data = applyChannelFilter(rawData);
+    applyChannelVisibility();
+
     renderStats(data);
     renderPlatformBreakdown(data);
     renderTopVideo(data);
@@ -922,10 +1053,20 @@
 
   let baseData = null;
 
-  function refreshLiveStats() {
+  function rerender() {
     if (!baseData) return;
     fetchLiveYouTubeStats(JSON.parse(JSON.stringify(baseData))).then(renderAll);
   }
+
+  // Liga os cliques nas abas
+  document.querySelectorAll("#tabs .tab").forEach((tab) => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll("#tabs .tab").forEach((t) => t.classList.remove("active"));
+      tab.classList.add("active");
+      activeChannel = tab.dataset.channel;
+      rerender();
+    });
+  });
 
   fetch(DATA_URL, { cache: "no-store" })
     .then(r => r.json())
@@ -936,7 +1077,7 @@
     .then(data => {
       renderAll(data);
       // Re-busca as métricas ao vivo periodicamente, sem precisar recarregar a página
-      setInterval(refreshLiveStats, LIVE_REFRESH_MS);
+      setInterval(rerender, LIVE_REFRESH_MS);
     })
     .catch(err => {
       document.getElementById("runs").innerHTML =

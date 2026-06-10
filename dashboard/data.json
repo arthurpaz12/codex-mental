@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-10T02:45:03.376Z",
+  "lastUpdated": "2026-06-10T03:05:31.425Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -350,9 +350,9 @@
   ],
   "revenueProjection": {
     "realStats": {
-      "youtube": 2,
+      "youtube": 1048,
       "tiktok": 0,
-      "total": 2,
+      "total": 1048,
       "videosPublicados": 6,
       "hotmart": {
         "source": "api",
@@ -426,32 +426,115 @@
       }
     },
     "custoTotal": 21,
-    "baseMonthlyViews": 2,
-    "generatedAt": "2026-06-10T02:45:03.376Z",
+    "baseMonthlyViews": 1048,
+    "generatedAt": "2026-06-10T03:05:31.422Z",
     "scenarios": {
       "conservador": {
         "rpm": 4,
         "conv": 0.0005,
-        "adRevenue": 0.008,
-        "sales": 0.001,
-        "affiliateRevenue": 0.067,
-        "total": 0.07500000000000001
+        "adRevenue": 4.192,
+        "sales": 0.524,
+        "affiliateRevenue": 35.108000000000004,
+        "total": 39.300000000000004
       },
       "moderado": {
         "rpm": 8,
         "conv": 0.001,
-        "adRevenue": 0.016,
-        "sales": 0.002,
-        "affiliateRevenue": 0.134,
-        "total": 0.15000000000000002
+        "adRevenue": 8.384,
+        "sales": 1.048,
+        "affiliateRevenue": 70.21600000000001,
+        "total": 78.60000000000001
       },
       "otimista": {
         "rpm": 14,
         "conv": 0.002,
-        "adRevenue": 0.028,
-        "sales": 0.004,
-        "affiliateRevenue": 0.268,
-        "total": 0.29600000000000004
+        "adRevenue": 14.672,
+        "sales": 2.096,
+        "affiliateRevenue": 140.43200000000002,
+        "total": 155.104
+      }
+    },
+    "perPlatform": {
+      "youtube": {
+        "monthlyViews": 1048,
+        "scenarios": {
+          "conservador": {
+            "rpm": 4,
+            "conv": 0.0005,
+            "adRevenue": 4.192,
+            "sales": 0.524,
+            "affiliateRevenue": 35.108000000000004,
+            "total": 39.300000000000004
+          },
+          "moderado": {
+            "rpm": 8,
+            "conv": 0.001,
+            "adRevenue": 8.384,
+            "sales": 1.048,
+            "affiliateRevenue": 70.21600000000001,
+            "total": 78.60000000000001
+          },
+          "otimista": {
+            "rpm": 14,
+            "conv": 0.002,
+            "adRevenue": 14.672,
+            "sales": 2.096,
+            "affiliateRevenue": 140.43200000000002,
+            "total": 155.104
+          }
+        }
+      },
+      "tiktok": {
+        "monthlyViews": 0,
+        "scenarios": {
+          "conservador": {
+            "rpm": 4,
+            "conv": 0.0005,
+            "adRevenue": 0,
+            "sales": 0,
+            "affiliateRevenue": 0,
+            "total": 0
+          },
+          "moderado": {
+            "rpm": 8,
+            "conv": 0.001,
+            "adRevenue": 0,
+            "sales": 0,
+            "affiliateRevenue": 0,
+            "total": 0
+          },
+          "otimista": {
+            "rpm": 14,
+            "conv": 0.002,
+            "adRevenue": 0,
+            "sales": 0,
+            "affiliateRevenue": 0,
+            "total": 0
+          }
+        }
+      }
+    },
+    "monetizationGoals": {
+      "youtube": {
+        "codex-mental": {
+          "name": "Codex Mental",
+          "subs": 4,
+          "subsGoal": 1000,
+          "totalViews": 563,
+          "shortsViewsGoal90d": 10000000
+        },
+        "brazil-noir": {
+          "name": "Brazil Noir",
+          "subs": 0,
+          "subsGoal": 1000,
+          "totalViews": 0,
+          "shortsViewsGoal90d": 10000000
+        }
+      },
+      "tiktok": {
+        "followersGoal": 10000,
+        "viewsGoal30d": 100000,
+        "views": 0
       }
     }
   }

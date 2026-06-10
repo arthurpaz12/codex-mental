@@ -257,7 +257,7 @@ async function run() {
     // ── Recalcula a projeção de ganhos com os números mais recentes ─
     // (grátis, local — atualiza a seção "🔮 Projeção de receita" do dashboard)
     try {
-      estimateRevenue();
+      await estimateRevenue();
     } catch (e) {
       console.warn(`   ⚠️  Falha ao recalcular projeção de receita: ${e.message}`);
     }

@@ -50,8 +50,45 @@ const TICKET_MEDIO = 67; // R$ — ajuste pro valor real do produto promovido
 // Custo aproximado de geração de cada vídeo (Claude + ElevenLabs + etc)
 const CUSTO_POR_VIDEO = 3.5; // R$
 
+// Canais do projeto no YouTube (pra acompanhar inscritos vs meta de monetização)
+const YOUTUBE_CHANNELS = {
+  "codex-mental": { name: "Codex Mental", id: "UC5V9cXbAkVglRcSko5GtLiQ" },
+  "brazil-noir":  { name: "Brazil Noir",  id: "UCdVudlJFf_iAz47AtqrJ90w" },
+};
+
+// Metas dos programas de monetização
+const GOALS = {
+  youtube: { subs: 1000, shortsViews90d: 10_000_000 },
+  tiktok:  { followers: 10_000, views30d: 100_000 },
+};
+
 const fmtBRL = (n) => n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 const fmtNum = (n) => n.toLocaleString("pt-BR");
+
+async function fetchChannelStats() {
+  const apiKey = process.env.YOUTUBE_API_KEY;
+  if (!apiKey) return {};
+  const ids = Object.values(YOUTUBE_CHANNELS).map((c) => c.id).join(",");
+  try {
+    const res = await fetch(
+      `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${ids}&key=${apiKey}`,
+      { headers: { Referer: "https://codex-mental.vercel.app/" } }
+    );
+    if (!res.ok) return {};
+    const data = await res.json();
+    const out = {};
+    for (const item of data.items || []) {
+      const key = Object.keys(YOUTUBE_CHANNELS).find((k) => YOUTUBE_CHANNELS[k].id === item.id);
+      if (key) out[key] = {
+        subs: parseInt(item.statistics.subscriberCount || "0", 10),
+        totalViews: parseInt(item.statistics.viewCount || "0", 10),
+      };
+    }
+    return out;
+  } catch {
+    return {};
+  }
+}
 
 function loadData() {
   if (!existsSync(DATA_PATH)) {
@@ -66,6 +103,7 @@ function sumViews(runs) {
   for (const run of runs) {
     const stats = run.stats || {};
     if (stats.youtube?.views) youtube += stats.youtube.views;
+    if (stats.youtube_shorts?.views) youtube += stats.youtube_shorts.views;
     if (stats.tiktok?.views) tiktok += stats.tiktok.views;
     if ((run.publish || []).length > 0) videosPublicados++;
   }
@@ -83,11 +121,12 @@ function projectScenario(monthlyViews, scenarioKey) {
   return { rpm, conv, adRevenue, sales, affiliateRevenue, total: adRevenue + affiliateRevenue };
 }
 
-export function estimateRevenue() {
+export async function estimateRevenue() {
   const data = loadData();
   const runs = data.runs || [];
   const { youtube, tiktok, total, videosPublicados } = sumViews(runs);
   const hotmart = data.hotmart || {};
+  const channelStats = await fetchChannelStats();
 
   console.log("\n💰 ESTIMATIVA DE GANHOS — Codex Mental\n");
   console.log("📊 Números reais coletados até agora:");
@@ -105,33 +144,66 @@ export function estimateRevenue() {
     console.log("       pra coletar números reais e refinar esta estimativa.\n");
   }
 
-  // Projeções por cenário, assumindo o volume de views ATUAL como "por mês"
-  // — ajuste a constante abaixo se quiser simular outro volume mensal.
-  const baseMonthlyViews = total > 0 ? total : 100000; // fallback ilustrativo
+  // Projeções por plataforma, assumindo o volume de views ATUAL como "por mês"
+  const ytMonthly = youtube > 0 ? youtube : 0;
+  const tkMonthly = tiktok > 0 ? tiktok : 0;
 
-  console.log(`\n📈 Projeção mensal de receita (assumindo ~${fmtNum(baseMonthlyViews)} views/mês):\n`);
-  console.log("   Cenário      | RPM (R$/mil) | Conv. afiliado | Receita anúncios | Vendas/mês | Receita afiliado | TOTAL/mês");
-  console.log("   " + "-".repeat(110));
-
-  for (const key of ["conservador", "moderado", "otimista"]) {
-    const p = projectScenario(baseMonthlyViews, key);
-    console.log(
-      `   ${key.padEnd(12)} | ${fmtBRL(p.rpm).padStart(12)} | ${(p.conv * 100).toFixed(2).padStart(13)}% | ` +
-      `${fmtBRL(p.adRevenue).padStart(16)} | ${fmtNum(Math.round(p.sales)).padStart(10)} | ${fmtBRL(p.affiliateRevenue).padStart(16)} | ${fmtBRL(p.total).padStart(12)}`
-    );
+  for (const [label, views] of [["YouTube", ytMonthly], ["TikTok", tkMonthly]]) {
+    console.log(`\n📈 Projeção mensal — ${label} (~${fmtNum(views)} views/mês):\n`);
+    console.log("   Cenário      | RPM (R$/mil) | Conv. afiliado | Receita anúncios | Receita afiliado | TOTAL/mês");
+    console.log("   " + "-".repeat(100));
+    for (const key of ["conservador", "moderado", "otimista"]) {
+      const p = projectScenario(views, key);
+      console.log(
+        `   ${key.padEnd(12)} | ${fmtBRL(p.rpm).padStart(12)} | ${(p.conv * 100).toFixed(2).padStart(13)}% | ` +
+        `${fmtBRL(p.adRevenue).padStart(16)} | ${fmtBRL(p.affiliateRevenue).padStart(16)} | ${fmtBRL(p.total).padStart(12)}`
+      );
+    }
   }
+
+  // Metas de monetização
+  console.log("\n🎯 Metas de monetização:\n");
+  for (const [key, ch] of Object.entries(YOUTUBE_CHANNELS)) {
+    const st = channelStats[key] || { subs: 0, totalViews: 0 };
+    const pct = ((st.subs / GOALS.youtube.subs) * 100).toFixed(1);
+    console.log(`   ${ch.name} (YouTube): ${fmtNum(st.subs)}/${fmtNum(GOALS.youtube.subs)} inscritos (${pct}%) | ${fmtNum(st.totalViews)} views totais`);
+  }
+  console.log(`   TikTok (Creator Rewards): ${fmtNum(GOALS.tiktok.followers)} seguidores + ${fmtNum(GOALS.tiktok.views30d)} views/30d necessários`);
 
   console.log(`\n   💡 Lucro líquido estimado = receita projetada − custo de geração (${fmtBRL(CUSTO_POR_VIDEO)}/vídeo).`);
   console.log("   ⚠️  Estimativa especulativa baseada em médias de mercado — não é garantia de resultado.\n");
 
+  const mkScenarios = (views) => Object.fromEntries(
+    ["conservador", "moderado", "otimista"].map((k) => [k, projectScenario(views, k)])
+  );
+
   const result = {
     realStats: { youtube, tiktok, total, videosPublicados, hotmart },
     custoTotal,
-    baseMonthlyViews,
+    baseMonthlyViews: total,
     generatedAt: new Date().toISOString(),
-    scenarios: Object.fromEntries(
-      ["conservador", "moderado", "otimista"].map((k) => [k, projectScenario(baseMonthlyViews, k)])
-    ),
+    // Mantém `scenarios` (total) por compat. com o painel antigo + novo formato por plataforma
+    scenarios: mkScenarios(total),
+    perPlatform: {
+      youtube: { monthlyViews: ytMonthly, scenarios: mkScenarios(ytMonthly) },
+      tiktok:  { monthlyViews: tkMonthly, scenarios: mkScenarios(tkMonthly) },
+    },
+    monetizationGoals: {
+      youtube: Object.fromEntries(
+        Object.entries(YOUTUBE_CHANNELS).map(([key, ch]) => [key, {
+          name: ch.name,
+          subs: channelStats[key]?.subs ?? 0,
+          subsGoal: GOALS.youtube.subs,
+          totalViews: channelStats[key]?.totalViews ?? 0,
+          shortsViewsGoal90d: GOALS.youtube.shortsViews90d,
+        }])
+      ),
+      tiktok: {
+        followersGoal: GOALS.tiktok.followers,
+        viewsGoal30d: GOALS.tiktok.views30d,
+        views: tiktok,
+      },
+    },
   };
 
   // Grava no dashboard/data.json pra aparecer direto no painel (seção
