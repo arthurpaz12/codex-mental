@@ -17,6 +17,49 @@ const settings = JSON.parse(
 );
 
 // ---------------------------------------------------------------------------
+// Afiliados (monetização) — atualmente usado pelo Brazil Noir
+// ---------------------------------------------------------------------------
+//
+// O canal injeta seu bloco `affiliate` (do settings do canal) via
+// publishVideos(..., { affiliate }). Geramos as linhas da descrição só se
+// houver um tag de afiliado configurado — sem tag, nada é adicionado
+// (evita publicar links sem comissão).
+//
+// ┌─ TODO MERCH (adicionar ao bater ~5k inscritos E já remunerando) ────────┐
+// │ Quando o canal tiver ~5.000 inscritos e estiver gerando receita (AdSense│
+// │ ativo ou afiliados vendendo), adicionar uma loja de merch print-on-     │
+// │ demand (Teespring/Printful, que integram com o YouTube). Estética noir/ │
+// │ dark — camisetas, posters, canecas. Implementação: espelhar o helper    │
+// │ buildAffiliateLines abaixo num buildMerchLines(merch) e incluí-lo na    │
+// │ descrição do YouTube (e na bio/caption do TikTok). A config fica em     │
+// │ settings-brazil-noir.json — ver "_monetization_roadmap".                │
+// └─────────────────────────────────────────────────────────────────────────┘
+
+function buildAffiliateLines(affiliate) {
+  const amazon = affiliate?.amazon;
+  const tag = amazon?.tag?.trim();
+  if (!tag || !Array.isArray(amazon.links) || amazon.links.length === 0) return [];
+
+  // Anexa o tag de Associates a cada URL da Amazon (?tag= ou &tag=)
+  const withTag = (url) => {
+    try {
+      const u = new URL(url);
+      u.searchParams.set("tag", tag);
+      return u.toString();
+    } catch {
+      return url;
+    }
+  };
+
+  return [
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+    "🔗 Recommended (affiliate links — we may earn a commission):",
+    ...amazon.links.map((l) => `${l.label}: ${withTag(l.url)}`),
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+  ];
+}
+
+// ---------------------------------------------------------------------------
 // YouTube Upload
 // ---------------------------------------------------------------------------
 
@@ -37,7 +80,7 @@ async function refreshYouTubeToken() {
   return data.access_token;
 }
 
-async function uploadToYouTube(videoPath, scriptData, topicData, isShorts = false) {
+async function uploadToYouTube(videoPath, scriptData, topicData, isShorts = false, affiliate = null) {
   if (!process.env.YOUTUBE_CLIENT_ID || !process.env.YOUTUBE_REFRESH_TOKEN) {
     console.log("   ⚠️  YouTube não configurado — pulando");
     return null;
@@ -49,14 +92,27 @@ async function uploadToYouTube(videoPath, scriptData, topicData, isShorts = fals
 
   const linktree = settings.niche.links?.linktree;
 
-  // Monta a descrição com link do Linktree + CTA do Hotmart
+  // Linhas de afiliado (só aparecem se o canal passou um bloco affiliate com
+  // tag configurado — ver buildAffiliateLines). Usado pelo Brazil Noir.
+  const affiliateLines = buildAffiliateLines(affiliate);
+
+  // CTA do Hotmart só existe no Codex Mental; o Brazil Noir não tem
+  // hotmartProducts, então protegemos com optional chaining.
+  const hotmartCta =
+    scriptData.promotedProduct?.cta ||
+    topicData.hotmartCta ||
+    settings.niche.hotmartProducts?.[0]?.cta;
+
+  // Monta a descrição: texto + linktree + (afiliados | CTA Hotmart) + hashtags
   const description = [
     scriptData.description?.youtube || scriptData.script.slice(0, 200) + "...",
     "",
     ...(linktree ? [`🔗 Acesse: ${linktree}`, ""] : []),
-    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-    scriptData.promotedProduct?.cta || topicData.hotmartCta || settings.niche.hotmartProducts[0].cta,
-    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+    ...(affiliateLines.length > 0
+      ? affiliateLines
+      : hotmartCta
+        ? ["━━━━━━━━━━━━━━━━━━━━━━━━━━━━", hotmartCta, "━━━━━━━━━━━━━━━━━━━━━━━━━━━━"]
+        : []),
     "",
     "#" + (settings.youtube.defaultTags || []).join(" #"),
     ...(isShorts ? ["#Shorts"] : []),
@@ -283,8 +339,11 @@ async function uploadToTikTok(videoPath, scriptData, topicData) {
 // Export principal
 // ---------------------------------------------------------------------------
 
-export async function publishVideos(videoData, scriptData, topicData) {
+export async function publishVideos(videoData, scriptData, topicData, options = {}) {
   console.log("🚀 [Publish] Iniciando publicação...");
+
+  // Bloco de afiliados do canal (ex: Brazil Noir injeta o seu via options)
+  const affiliate = options.affiliate || null;
 
   const results = [];
 
@@ -295,7 +354,8 @@ export async function publishVideos(videoData, scriptData, topicData) {
         videoData.youtube,
         scriptData,
         topicData,
-        false
+        false,
+        affiliate
       );
       if (ytResult) results.push(ytResult);
     } catch (e) {
@@ -315,7 +375,8 @@ export async function publishVideos(videoData, scriptData, topicData) {
         videoData.youtubeShorts,
         scriptData,
         topicData,
-        true
+        true,
+        affiliate
       );
       if (ytShortsResult) results.push(ytShortsResult);
     } catch (e) {

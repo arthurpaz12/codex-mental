@@ -12,8 +12,26 @@
     }
   },
 
+  "affiliate": {
+    "amazon": {
+      "comment": "Cole seu tag do Amazon Associates em 'tag' (ex: brazilnoir-20) depois que a conta for aprovada em https://affiliate-program.amazon.com. Enquanto 'tag' estiver vazio, NENHUM link de afiliado é adicionado às descrições (evita publicar links quebrados/sem comissão).",
+      "tag": "",
+      "links": [
+        { "label": "📚 True crime books we recommend", "url": "https://www.amazon.com/s?k=true+crime+books" },
+        { "label": "🎧 Best headphones for late-night listening", "url": "https://www.amazon.com/s?k=wireless+headphones" }
+      ]
+    }
+  },
+
+  "_monetization_roadmap": {
+    "comment": "Plano de monetização do Brazil Noir — referência pra decisões futuras (não é lido pelo código).",
+    "now": "Foco em crescer pra ativar AdSense (YouTube Partner: 1.000 inscritos + 10M views Shorts/90d). Links de afiliado Amazon na descrição assim que a conta Associates for aprovada.",
+    "TODO_merch_at_5k": "Quando bater ~5.000 inscritos E já estiver remunerando (AdSense ativo ou afiliados gerando vendas), adicionar merch via print-on-demand (Teespring/Printful integra com o YouTube). Estética noir/dark — camisetas, posters, canecas. Implementar como mais uma seção em 'affiliate' + linha na descrição. Ver bloco MERCH no pipeline/7-publish.js.",
+    "later": "Patreon/membros (episódios exclusivos, votação de casos) quando houver base fiel (~10k+ inscritos engajados)."
+  },
+
   "script": {
-    "model": "claude-opus-4-8",
+    "model": "claude-fable-5",
     "wordCount": { "min": 130, "max": 160 },
     "tone": "dark, gripping, suspenseful — like a true crime podcast narrator. Short sentences. Dramatic pauses. Build tension.",
     "cta": "Follow for more dark stories from Brazil that the world never heard about."
@@ -66,9 +84,9 @@
 
   "voice": {
     "provider": "elevenlabs",
-    "stability": 0.45,
-    "similarityBoost": 0.80,
-    "style": 0.4,
+    "stability": 0.30,
+    "similarityBoost": 0.85,
+    "style": 0.65,
     "speakerBoost": true
   }
 }

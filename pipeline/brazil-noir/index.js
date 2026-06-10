@@ -10,7 +10,7 @@
  */
 
 import "dotenv/config";
-import { writeFileSync, mkdirSync } from "fs";
+import { writeFileSync, mkdirSync, readFileSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { execFile, execSync } from "child_process";
@@ -29,6 +29,11 @@ import { suggestSound } from "../8-sound.js";
 import { updateDashboard } from "../9-dashboard.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
+// Settings do canal Brazil Noir (afiliados, etc.)
+const bnSettings = JSON.parse(
+  readFileSync(join(__dirname, "../../config/settings-brazil-noir.json"), "utf-8")
+);
 const REPO_DIR = join(__dirname, "../..");
 
 function save(dir, filename, data) {
@@ -149,7 +154,9 @@ async function run() {
       // Usa o client key/secret do Codex Mental (app que autenticou @brazilnoir)
     }
 
-    state.publish = await publishVideos(state.video, state.script, state.topic);
+    state.publish = await publishVideos(state.video, state.script, state.topic, {
+      affiliate: bnSettings.affiliate,
+    });
     save(outputDir, "7-publish.json", state.publish);
 
     // Restaura credenciais originais
