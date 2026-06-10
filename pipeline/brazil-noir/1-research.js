@@ -44,7 +44,7 @@ export async function runResearch() {
 
   const response = await client.messages.create({
     model: settings.script.model,
-    max_tokens: 1024,
+    max_tokens: 4096,
     thinking: { type: "adaptive" },
     system: `You are a true crime content strategist for "Brazil Noir", a YouTube channel that covers
 real Brazilian criminal cases for English-speaking audiences. You select the most compelling,

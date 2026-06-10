@@ -144,8 +144,7 @@ async function run() {
     if (process.env.BN_TIKTOK_ACCESS_TOKEN) {
       process.env.TIKTOK_ACCESS_TOKEN  = process.env.BN_TIKTOK_ACCESS_TOKEN;
       process.env.TIKTOK_REFRESH_TOKEN = process.env.BN_TIKTOK_REFRESH_TOKEN;
-      process.env.TIKTOK_CLIENT_KEY    = process.env.BN_TIKTOK_CLIENT_KEY;
-      process.env.TIKTOK_CLIENT_SECRET = process.env.BN_TIKTOK_CLIENT_SECRET;
+      // Usa o client key/secret do Codex Mental (app que autenticou @brazilnoir)
     }
 
     state.publish = await publishVideos(state.video, state.script, state.topic);
