@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-09T23:08:23.373Z",
+  "lastUpdated": "2026-06-10T02:44:22.480Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -249,6 +249,38 @@
         "category": "storytelling_motivacional",
         "sound": "Lo-fi motivational beat"
       }
+    },
+    {
+      "runId": "2026-06-09T23-50-47",
+      "channel": "brazil-noir",
+      "startedAt": "2026-06-09T23:50:47.785Z",
+      "completedAt": "2026-06-10T00:01:57.282Z",
+      "status": "ok",
+      "error": null,
+      "topic": "The Chico Picadinho Case: The 'Mincemeat Killer' Brazil Was Too Afraid to Free",
+      "category": "serial killer",
+      "viralScore": 88,
+      "publish": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=DK1D47KeVk0",
+          "publishId": null
+        },
+        {
+          "platform": "youtube_shorts",
+          "url": "https://www.youtube.com/shorts/WMhdssyOse4",
+          "publishId": null
+        },
+        {
+          "platform": "tiktok",
+          "url": "https://www.tiktok.com/@codexmentalbr",
+          "publishId": "v_inbox_file~v2.7649550038661793808"
+        }
+      ],
+      "sound": {
+        "category": "storytelling_motivacional",
+        "sound": "Lo-fi motivational beat"
+      }
     }
   ],
   "revenueProjection": {
@@ -256,7 +288,7 @@
       "youtube": 2,
       "tiktok": 0,
       "total": 2,
-      "videosPublicados": 5,
+      "videosPublicados": 6,
       "hotmart": {
         "source": "api",
         "revenueLast30Days": 0,
@@ -328,9 +360,9 @@
         "updatedAt": "2026-06-09T23:08:23.354Z"
       }
     },
-    "custoTotal": 17.5,
+    "custoTotal": 21,
     "baseMonthlyViews": 2,
-    "generatedAt": "2026-06-09T23:08:23.373Z",
+    "generatedAt": "2026-06-10T02:44:22.479Z",
     "scenarios": {
       "conservador": {
         "rpm": 4,
