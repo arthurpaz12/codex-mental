@@ -1,7 +1,29 @@
 {
-  "generatedAt": "2026-06-10T23:07:37.301Z",
-  "sampleSize": 7,
+  "generatedAt": "2026-06-12T23:08:03.852Z",
+  "sampleSize": 9,
   "topByViews": [
+    {
+      "topic": "3 Sinais de que Alguém Está Te Manipulando Sem Você Perceber",
+      "category": "ciência",
+      "views": 673,
+      "engagement": 2.53,
+      "platforms": [
+        "youtube",
+        "youtube_shorts",
+        "tiktok"
+      ]
+    },
+    {
+      "topic": "Os 3 Microgestos que Revelam Atração Instantânea (Quase Ninguém Percebe)",
+      "category": "ciência",
+      "views": 646,
+      "engagement": 1.86,
+      "platforms": [
+        "youtube",
+        "youtube_shorts",
+        "tiktok"
+      ]
+    },
     {
       "topic": "O Gesto Secreto que Revela Quando Alguém Está Mentindo",
       "category": "ciência",
@@ -14,10 +36,10 @@
       ]
     },
     {
-      "topic": "Os 3 Microgestos que Revelam Atração Instantânea (Quase Ninguém Percebe)",
+      "topic": "O Sinal nos Olhos que Revela Atração Instantânea",
       "category": "ciência",
-      "views": 403,
-      "engagement": 2.48,
+      "views": 373,
+      "engagement": 0,
       "platforms": [
         "youtube",
         "youtube_shorts",
@@ -25,31 +47,10 @@
       ]
     },
     {
-      "topic": "3 Sinais de que Alguém Está Te Manipulando Sem Você Perceber",
+      "topic": "O Olhar de 3 Segundos que Revela Atração Imediata",
       "category": "ciência",
-      "views": 219,
-      "engagement": 3.2,
-      "platforms": [
-        "youtube",
-        "youtube_shorts",
-        "tiktok"
-      ]
-    },
-    {
-      "topic": "A Microexpressão que Denuncia Quando Alguém Te Despreza em Silêncio",
-      "category": "ciência",
-      "views": 39,
-      "engagement": 0,
-      "platforms": [
-        "youtube",
-        "youtube_shorts"
-      ]
-    },
-    {
-      "topic": "The Goalkeeper Case: Brazil's World Cup star ordered his lover murdered — then played football again",
-      "category": "murder",
-      "views": 4,
-      "engagement": 0,
+      "views": 73,
+      "engagement": 1.37,
       "platforms": [
         "youtube",
         "youtube_shorts",
@@ -61,8 +62,8 @@
     {
       "topic": "3 Sinais de que Alguém Está Te Manipulando Sem Você Perceber",
       "category": "ciência",
-      "views": 219,
-      "engagement": 3.2,
+      "views": 673,
+      "engagement": 2.53,
       "platforms": [
         "youtube",
         "youtube_shorts",
@@ -72,8 +73,8 @@
     {
       "topic": "Os 3 Microgestos que Revelam Atração Instantânea (Quase Ninguém Percebe)",
       "category": "ciência",
-      "views": 403,
-      "engagement": 2.48,
+      "views": 646,
+      "engagement": 1.86,
       "platforms": [
         "youtube",
         "youtube_shorts",
@@ -92,63 +93,63 @@
       ]
     },
     {
-      "topic": "A Microexpressão que Denuncia Quando Alguém Te Despreza em Silêncio",
-      "category": "ciência",
-      "views": 39,
-      "engagement": 0,
-      "platforms": [
-        "youtube",
-        "youtube_shorts"
-      ]
-    },
-    {
       "topic": "O Olhar de 3 Segundos que Revela Atração Imediata",
       "category": "ciência",
-      "views": 1,
-      "engagement": 0,
+      "views": 73,
+      "engagement": 1.37,
       "platforms": [
         "youtube",
         "youtube_shorts",
         "tiktok"
+      ]
+    },
+    {
+      "topic": "A Microexpressão que Denuncia Quando Alguém Te Despreza em Silêncio",
+      "category": "ciência",
+      "views": 72,
+      "engagement": 0,
+      "platforms": [
+        "youtube",
+        "youtube_shorts"
       ]
     }
   ],
   "byCategory": [
     {
       "key": "ciência",
-      "videos": 5,
-      "totalViews": 1188,
-      "avgViews": 237.6,
-      "avgEngagement": 1.44
+      "videos": 6,
+      "totalViews": 2363,
+      "avgViews": 393.8,
+      "avgEngagement": 1.21
     },
     {
       "key": "murder",
-      "videos": 1,
-      "totalViews": 4,
-      "avgViews": 4,
+      "videos": 2,
+      "totalViews": 58,
+      "avgViews": 29,
       "avgEngagement": 0
     },
     {
       "key": "serial killer",
       "videos": 1,
-      "totalViews": 3,
-      "avgViews": 3,
+      "totalViews": 7,
+      "avgViews": 7,
       "avgEngagement": 0
     }
   ],
   "byPlatform": [
     {
       "key": "youtube_shorts",
-      "videos": 7,
-      "totalViews": 1191,
-      "avgViews": 170.1,
-      "avgEngagement": 1.03
+      "videos": 9,
+      "totalViews": 2397,
+      "avgViews": 266.3,
+      "avgEngagement": 0.81
     },
     {
       "key": "youtube",
-      "videos": 3,
-      "totalViews": 4,
-      "avgViews": 1.3,
+      "videos": 7,
+      "totalViews": 31,
+      "avgViews": 4.4,
       "avgEngagement": 0
     }
   ],
@@ -156,26 +157,33 @@
     {
       "key": "16h",
       "videos": 3,
-      "totalViews": 784,
-      "avgViews": 261.3,
-      "avgEngagement": 1.57
+      "totalViews": 1271,
+      "avgViews": 423.7,
+      "avgEngagement": 1.35
     },
     {
       "key": "23h",
-      "videos": 2,
-      "totalViews": 404,
-      "avgViews": 202,
-      "avgEngagement": 1.24
+      "videos": 3,
+      "totalViews": 1092,
+      "avgViews": 364,
+      "avgEngagement": 1.08
     },
     {
       "key": "00h",
       "videos": 1,
-      "totalViews": 3,
-      "avgViews": 3,
+      "totalViews": 7,
+      "avgViews": 7,
       "avgEngagement": 0
     },
     {
       "key": "05h",
+      "videos": 1,
+      "totalViews": 54,
+      "avgViews": 54,
+      "avgEngagement": 0
+    },
+    {
+      "key": "03h",
       "videos": 1,
       "totalViews": 4,
       "avgViews": 4,
@@ -186,9 +194,9 @@
     {
       "key": "Terça",
       "videos": 2,
-      "totalViews": 622,
-      "avgViews": 311,
-      "avgEngagement": 2.84
+      "totalViews": 1319,
+      "avgViews": 659.5,
+      "avgEngagement": 2.19
     },
     {
       "key": "Domingo",
@@ -200,23 +208,30 @@
     {
       "key": "Segunda",
       "videos": 2,
-      "totalViews": 40,
-      "avgViews": 20,
-      "avgEngagement": 0
+      "totalViews": 145,
+      "avgViews": 72.5,
+      "avgEngagement": 0.68
     },
     {
       "key": "Quarta",
-      "videos": 2,
-      "totalViews": 7,
-      "avgViews": 3.5,
+      "videos": 3,
+      "totalViews": 434,
+      "avgViews": 144.7,
+      "avgEngagement": 0
+    },
+    {
+      "key": "Sexta",
+      "videos": 1,
+      "totalViews": 4,
+      "avgViews": 4,
       "avgEngagement": 0
     }
   ],
-  "viralScoreCorrelation": -0.17,
+  "viralScoreCorrelation": -0.54,
   "recommendations": [
-    "A categoria \"ciência\" tem a melhor média de views (238) — vale priorizar temas parecidos.",
+    "A categoria \"ciência\" tem a melhor média de views (394) — vale priorizar temas parecidos.",
     "\"youtube_shorts\" é a plataforma com melhor desempenho médio — considere adaptar mais conteúdo pro formato dela.",
     "Publicações por volta das 16h (UTC) tiveram o maior engajamento médio — pode ser um bom horário pra concentrar lançamentos.",
-    "Ainda não há correlação clara entre o \"viralScore\" da IA e os resultados reais (-0.17) — continue coletando dados pra confirmar o padrão."
+    "O \"viralScore\" estimado pela IA está com correlação negativa (-0.54) com os resultados reais — vale revisar os critérios usados pra calculá-lo."
   ]
 }
