@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-12T00:45:55.811Z",
+  "lastUpdated": "2026-06-12T03:14:28.241Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -449,6 +449,38 @@
       "viralScore": 82,
       "publish": [],
       "sound": null
+    },
+    {
+      "runId": "2026-06-12T03-00-02",
+      "channel": "brazil-noir",
+      "startedAt": "2026-06-12T03:00:02.937Z",
+      "completedAt": "2026-06-12T03:14:28.235Z",
+      "status": "ok",
+      "error": null,
+      "topic": "The Flordelis Case: The Congresswoman Mother of 55 Who Ordered Her Husband's Murder",
+      "category": "murder",
+      "viralScore": 94,
+      "publish": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=yTmcpzPusTE",
+          "publishId": null
+        },
+        {
+          "platform": "youtube_shorts",
+          "url": "https://www.youtube.com/shorts/qjHYsmhO-zg",
+          "publishId": null
+        },
+        {
+          "platform": "tiktok",
+          "url": "https://www.tiktok.com/@codexmentalbr",
+          "publishId": "v_inbox_file~v2.7650341461146208273"
+        }
+      ],
+      "sound": {
+        "category": "storytelling_motivacional",
+        "sound": "Soft piano storytelling loop"
+      }
     }
   ],
   "revenueProjection": {
