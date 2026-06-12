@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-12T00:30:41.649Z",
+  "lastUpdated": "2026-06-12T00:45:55.811Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -436,6 +436,19 @@
         }
       },
       "statsUpdatedAt": "2026-06-12T00:30:41.324Z"
+    },
+    {
+      "runId": "2026-06-11T23-46-12",
+      "channel": "codex-mental",
+      "startedAt": "2026-06-11T23:46:12.580Z",
+      "completedAt": "2026-06-12T00:45:55.761Z",
+      "status": "error",
+      "error": "read ECONNRESET",
+      "topic": "Como Saber se Alguém Está Mentindo Pelos Olhos (O Sinal que o Cérebro Não Consegue Esconder)",
+      "category": "ciência",
+      "viralScore": 82,
+      "publish": [],
+      "sound": null
     }
   ],
   "revenueProjection": {
