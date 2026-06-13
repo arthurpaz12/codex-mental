@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-06-12T23:08:03.852Z",
-  "sampleSize": 9,
+  "generatedAt": "2026-06-13T23:06:58.149Z",
+  "sampleSize": 10,
   "topByViews": [
     {
       "topic": "3 Sinais de que Alguém Está Te Manipulando Sem Você Perceber",
       "category": "ciência",
-      "views": 673,
-      "engagement": 2.53,
+      "views": 678,
+      "engagement": 2.51,
       "platforms": [
         "youtube",
         "youtube_shorts",
@@ -16,8 +16,8 @@
     {
       "topic": "Os 3 Microgestos que Revelam Atração Instantânea (Quase Ninguém Percebe)",
       "category": "ciência",
-      "views": 646,
-      "engagement": 1.86,
+      "views": 661,
+      "engagement": 1.82,
       "platforms": [
         "youtube",
         "youtube_shorts",
@@ -27,8 +27,8 @@
     {
       "topic": "O Gesto Secreto que Revela Quando Alguém Está Mentindo",
       "category": "ciência",
-      "views": 526,
-      "engagement": 1.52,
+      "views": 531,
+      "engagement": 1.51,
       "platforms": [
         "youtube",
         "youtube_shorts",
@@ -47,23 +47,32 @@
       ]
     },
     {
-      "topic": "O Olhar de 3 Segundos que Revela Atração Imediata",
+      "topic": "A Técnica de Interrogatório que Faz Qualquer Pessoa Confessar a Verdade",
       "category": "ciência",
-      "views": 73,
-      "engagement": 1.37,
+      "views": 316,
+      "engagement": 6.65,
       "platforms": [
         "youtube",
-        "youtube_shorts",
-        "tiktok"
+        "youtube_shorts"
       ]
     }
   ],
   "topByEngagement": [
     {
+      "topic": "A Técnica de Interrogatório que Faz Qualquer Pessoa Confessar a Verdade",
+      "category": "ciência",
+      "views": 316,
+      "engagement": 6.65,
+      "platforms": [
+        "youtube",
+        "youtube_shorts"
+      ]
+    },
+    {
       "topic": "3 Sinais de que Alguém Está Te Manipulando Sem Você Perceber",
       "category": "ciência",
-      "views": 673,
-      "engagement": 2.53,
+      "views": 678,
+      "engagement": 2.51,
       "platforms": [
         "youtube",
         "youtube_shorts",
@@ -73,8 +82,8 @@
     {
       "topic": "Os 3 Microgestos que Revelam Atração Instantânea (Quase Ninguém Percebe)",
       "category": "ciência",
-      "views": 646,
-      "engagement": 1.86,
+      "views": 661,
+      "engagement": 1.82,
       "platforms": [
         "youtube",
         "youtube_shorts",
@@ -84,8 +93,8 @@
     {
       "topic": "O Gesto Secreto que Revela Quando Alguém Está Mentindo",
       "category": "ciência",
-      "views": 526,
-      "engagement": 1.52,
+      "views": 531,
+      "engagement": 1.51,
       "platforms": [
         "youtube",
         "youtube_shorts",
@@ -95,143 +104,133 @@
     {
       "topic": "O Olhar de 3 Segundos que Revela Atração Imediata",
       "category": "ciência",
-      "views": 73,
-      "engagement": 1.37,
+      "views": 78,
+      "engagement": 1.28,
       "platforms": [
         "youtube",
         "youtube_shorts",
         "tiktok"
-      ]
-    },
-    {
-      "topic": "A Microexpressão que Denuncia Quando Alguém Te Despreza em Silêncio",
-      "category": "ciência",
-      "views": 72,
-      "engagement": 0,
-      "platforms": [
-        "youtube",
-        "youtube_shorts"
       ]
     }
   ],
   "byCategory": [
     {
       "key": "ciência",
-      "videos": 6,
-      "totalViews": 2363,
-      "avgViews": 393.8,
-      "avgEngagement": 1.21
+      "videos": 7,
+      "totalViews": 2728,
+      "avgViews": 389.7,
+      "avgEngagement": 1.97
     },
     {
       "key": "murder",
       "videos": 2,
-      "totalViews": 58,
-      "avgViews": 29,
+      "totalViews": 77,
+      "avgViews": 38.5,
       "avgEngagement": 0
     },
     {
       "key": "serial killer",
       "videos": 1,
-      "totalViews": 7,
-      "avgViews": 7,
+      "totalViews": 8,
+      "avgViews": 8,
       "avgEngagement": 0
     }
   ],
   "byPlatform": [
     {
       "key": "youtube_shorts",
-      "videos": 9,
-      "totalViews": 2397,
-      "avgViews": 266.3,
-      "avgEngagement": 0.81
+      "videos": 10,
+      "totalViews": 2735,
+      "avgViews": 273.5,
+      "avgEngagement": 1.4
     },
     {
       "key": "youtube",
-      "videos": 7,
-      "totalViews": 31,
-      "avgViews": 4.4,
+      "videos": 9,
+      "totalViews": 78,
+      "avgViews": 8.7,
       "avgEngagement": 0
     }
   ],
   "byHourUTC": [
     {
-      "key": "16h",
-      "videos": 3,
-      "totalViews": 1271,
-      "avgViews": 423.7,
-      "avgEngagement": 1.35
+      "key": "23h",
+      "videos": 4,
+      "totalViews": 1428,
+      "avgViews": 357,
+      "avgEngagement": 2.44
     },
     {
-      "key": "23h",
+      "key": "16h",
       "videos": 3,
-      "totalViews": 1092,
-      "avgViews": 364,
-      "avgEngagement": 1.08
+      "totalViews": 1300,
+      "avgViews": 433.3,
+      "avgEngagement": 1.34
     },
     {
       "key": "00h",
       "videos": 1,
-      "totalViews": 7,
-      "avgViews": 7,
+      "totalViews": 8,
+      "avgViews": 8,
       "avgEngagement": 0
     },
     {
       "key": "05h",
       "videos": 1,
-      "totalViews": 54,
-      "avgViews": 54,
+      "totalViews": 71,
+      "avgViews": 71,
       "avgEngagement": 0
     },
     {
       "key": "03h",
       "videos": 1,
-      "totalViews": 4,
-      "avgViews": 4,
+      "totalViews": 6,
+      "avgViews": 6,
       "avgEngagement": 0
     }
   ],
   "byWeekday": [
     {
+      "key": "Sexta",
+      "videos": 2,
+      "totalViews": 322,
+      "avgViews": 161,
+      "avgEngagement": 3.32
+    },
+    {
       "key": "Terça",
       "videos": 2,
-      "totalViews": 1319,
-      "avgViews": 659.5,
-      "avgEngagement": 2.19
+      "totalViews": 1339,
+      "avgViews": 669.5,
+      "avgEngagement": 2.16
     },
     {
       "key": "Domingo",
       "videos": 1,
-      "totalViews": 526,
-      "avgViews": 526,
-      "avgEngagement": 1.52
+      "totalViews": 531,
+      "avgViews": 531,
+      "avgEngagement": 1.51
     },
     {
       "key": "Segunda",
       "videos": 2,
-      "totalViews": 145,
-      "avgViews": 72.5,
-      "avgEngagement": 0.68
+      "totalViews": 169,
+      "avgViews": 84.5,
+      "avgEngagement": 0.64
     },
     {
       "key": "Quarta",
       "videos": 3,
-      "totalViews": 434,
-      "avgViews": 144.7,
-      "avgEngagement": 0
-    },
-    {
-      "key": "Sexta",
-      "videos": 1,
-      "totalViews": 4,
-      "avgViews": 4,
+      "totalViews": 452,
+      "avgViews": 150.7,
       "avgEngagement": 0
     }
   ],
   "viralScoreCorrelation": -0.54,
   "recommendations": [
-    "A categoria \"ciência\" tem a melhor média de views (394) — vale priorizar temas parecidos.",
+    "A categoria \"ciência\" tem a melhor média de views (390) — vale priorizar temas parecidos.",
     "\"youtube_shorts\" é a plataforma com melhor desempenho médio — considere adaptar mais conteúdo pro formato dela.",
-    "Publicações por volta das 16h (UTC) tiveram o maior engajamento médio — pode ser um bom horário pra concentrar lançamentos.",
+    "Publicações por volta das 23h (UTC) tiveram o maior engajamento médio — pode ser um bom horário pra concentrar lançamentos.",
     "O \"viralScore\" estimado pela IA está com correlação negativa (-0.54) com os resultados reais — vale revisar os critérios usados pra calculá-lo."
   ]
 }
