@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-14T12:33:51.521Z",
+  "lastUpdated": "2026-06-14T23:06:08.624Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -72,7 +72,7 @@
         "currency": "BRL"
       }
     ],
-    "updatedAt": "2026-06-14T04:46:53.248Z"
+    "updatedAt": "2026-06-14T23:06:08.463Z"
   },
   "runs": [
     {
@@ -124,12 +124,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 524,
+          "views": 525,
           "likes": 8,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-14T12:33:51.015Z"
+      "statsUpdatedAt": "2026-06-14T23:06:07.025Z"
     },
     {
       "runId": "2026-06-08T16-15-58",
@@ -163,12 +163,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 59,
+          "views": 60,
           "likes": 0,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-14T12:33:51.025Z"
+      "statsUpdatedAt": "2026-06-14T23:06:07.025Z"
     },
     {
       "runId": "2026-06-08T23-02-20",
@@ -212,7 +212,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-14T12:33:51.025Z"
+      "statsUpdatedAt": "2026-06-14T23:06:07.025Z"
     },
     {
       "runId": "2026-06-09T16-00-03",
@@ -246,17 +246,17 @@
       },
       "stats": {
         "youtube": {
-          "views": 8,
+          "views": 12,
           "likes": 0,
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 671,
+          "views": 674,
           "likes": 17,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-14T12:33:51.025Z"
+      "statsUpdatedAt": "2026-06-14T23:06:07.025Z"
     },
     {
       "runId": "2026-06-09T23-00-03",
@@ -290,17 +290,17 @@
       },
       "stats": {
         "youtube": {
-          "views": 22,
+          "views": 31,
           "likes": 0,
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 639,
+          "views": 641,
           "likes": 11,
           "comments": 1
         }
       },
-      "statsUpdatedAt": "2026-06-14T12:33:51.025Z"
+      "statsUpdatedAt": "2026-06-14T23:06:07.025Z"
     },
     {
       "runId": "2026-06-09T23-50-47",
@@ -345,7 +345,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-14T12:33:51.025Z"
+      "statsUpdatedAt": "2026-06-14T23:06:07.025Z"
     },
     {
       "runId": "2026-06-10T05-40-23",
@@ -390,7 +390,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-14T12:33:51.025Z"
+      "statsUpdatedAt": "2026-06-14T23:06:07.025Z"
     },
     {
       "runId": "2026-06-10T23-00-06",
@@ -430,12 +430,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 372,
+          "views": 374,
           "likes": 0,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-14T12:33:51.025Z"
+      "statsUpdatedAt": "2026-06-14T23:06:07.025Z"
     },
     {
       "runId": "2026-06-11T23-46-12",
@@ -493,7 +493,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-14T12:33:51.025Z"
+      "statsUpdatedAt": "2026-06-14T23:06:07.025Z"
     },
     {
       "runId": "2026-06-12T23-00-02",
@@ -528,12 +528,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 482,
-          "likes": 31,
+          "views": 556,
+          "likes": 33,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-14T12:33:51.025Z"
+      "statsUpdatedAt": "2026-06-14T23:06:07.025Z"
     },
     {
       "runId": "2026-06-13T23-00-02",
@@ -568,12 +568,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 146,
-          "likes": 7,
+          "views": 206,
+          "likes": 11,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-14T12:33:51.025Z"
+      "statsUpdatedAt": "2026-06-14T23:06:07.025Z"
     },
     {
       "runId": "2026-06-14T04-31-07",
@@ -613,12 +613,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 22,
+          "views": 60,
           "likes": 1,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-14T12:33:51.025Z"
+      "statsUpdatedAt": "2026-06-14T23:06:07.025Z"
     },
     {
       "runId": "2026-06-14T04-40-24",
@@ -658,20 +658,42 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 80,
+          "views": 105,
           "likes": 2,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-14T12:33:51.025Z"
+      "statsUpdatedAt": "2026-06-14T23:06:07.025Z"
+    },
+    {
+      "runId": "2026-06-14T23-00-02",
+      "channel": "codex-mental",
+      "startedAt": "2026-06-14T23:00:02.944Z",
+      "completedAt": "2026-06-14T23:06:06.424Z",
+      "status": "ok",
+      "error": null,
+      "topic": "O Sinal nos Olhos que Revela Quando Alguém Está Te Avaliando Secretamente",
+      "category": "ciência",
+      "viralScore": 82,
+      "publish": [
+        {
+          "platform": "tiktok",
+          "url": "https://www.tiktok.com/@codexmentalbr",
+          "publishId": "v_inbox_file~v2.7651390793009154049"
+        }
+      ],
+      "sound": {
+        "category": "suspense_misterio",
+        "sound": "Dramatic reveal sting / whoosh transition"
+      }
     }
   ],
   "revenueProjection": {
     "realStats": {
-      "youtube": 3243,
+      "youtube": 3462,
       "tiktok": 0,
-      "total": 3243,
-      "videosPublicados": 13,
+      "total": 3462,
+      "videosPublicados": 14,
       "hotmart": {
         "source": "api",
         "revenueLast30Days": 0,
@@ -740,65 +762,65 @@
             "currency": "BRL"
           }
         ],
-        "updatedAt": "2026-06-14T04:46:53.248Z"
+        "updatedAt": "2026-06-14T23:06:08.463Z"
       }
     },
-    "custoTotal": 45.5,
-    "baseMonthlyViews": 3243,
-    "generatedAt": "2026-06-14T12:33:51.520Z",
+    "custoTotal": 49,
+    "baseMonthlyViews": 3462,
+    "generatedAt": "2026-06-14T23:06:08.623Z",
     "scenarios": {
       "conservador": {
         "rpm": 4,
         "conv": 0.0005,
-        "adRevenue": 12.972,
-        "sales": 1.6215,
-        "affiliateRevenue": 108.6405,
-        "total": 121.6125
+        "adRevenue": 13.848,
+        "sales": 1.731,
+        "affiliateRevenue": 115.977,
+        "total": 129.82500000000002
       },
       "moderado": {
         "rpm": 8,
         "conv": 0.001,
-        "adRevenue": 25.944,
-        "sales": 3.243,
-        "affiliateRevenue": 217.281,
-        "total": 243.225
+        "adRevenue": 27.696,
+        "sales": 3.462,
+        "affiliateRevenue": 231.954,
+        "total": 259.65000000000003
       },
       "otimista": {
         "rpm": 14,
         "conv": 0.002,
-        "adRevenue": 45.402,
-        "sales": 6.486,
-        "affiliateRevenue": 434.562,
-        "total": 479.964
+        "adRevenue": 48.468,
+        "sales": 6.924,
+        "affiliateRevenue": 463.908,
+        "total": 512.376
       }
     },
     "perPlatform": {
       "youtube": {
-        "monthlyViews": 3243,
+        "monthlyViews": 3462,
         "scenarios": {
           "conservador": {
             "rpm": 4,
             "conv": 0.0005,
-            "adRevenue": 12.972,
-            "sales": 1.6215,
-            "affiliateRevenue": 108.6405,
-            "total": 121.6125
+            "adRevenue": 13.848,
+            "sales": 1.731,
+            "affiliateRevenue": 115.977,
+            "total": 129.82500000000002
           },
           "moderado": {
             "rpm": 8,
             "conv": 0.001,
-            "adRevenue": 25.944,
-            "sales": 3.243,
-            "affiliateRevenue": 217.281,
-            "total": 243.225
+            "adRevenue": 27.696,
+            "sales": 3.462,
+            "affiliateRevenue": 231.954,
+            "total": 259.65000000000003
           },
           "otimista": {
             "rpm": 14,
             "conv": 0.002,
-            "adRevenue": 45.402,
-            "sales": 6.486,
-            "affiliateRevenue": 434.562,
-            "total": 479.964
+            "adRevenue": 48.468,
+            "sales": 6.924,
+            "affiliateRevenue": 463.908,
+            "total": 512.376
           }
         }
       },
@@ -836,16 +858,16 @@
       "youtube": {
         "codex-mental": {
           "name": "Codex Mental",
-          "subs": 12,
+          "subs": 14,
           "subsGoal": 1000,
-          "totalViews": 2708,
+          "totalViews": 3034,
           "shortsViewsGoal90d": 10000000
         },
         "brazil-noir": {
           "name": "Brazil Noir",
           "subs": 1,
           "subsGoal": 1000,
-          "totalViews": 159,
+          "totalViews": 86,
           "shortsViewsGoal90d": 10000000
         }
       },
