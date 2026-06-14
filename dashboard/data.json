@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-14T00:30:06.166Z",
+  "lastUpdated": "2026-06-14T04:38:43.836Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -574,6 +574,38 @@
         }
       },
       "statsUpdatedAt": "2026-06-14T00:30:05.968Z"
+    },
+    {
+      "runId": "2026-06-14T04-31-07",
+      "channel": "brazil-noir",
+      "startedAt": "2026-06-14T04:31:07.510Z",
+      "completedAt": "2026-06-14T04:38:43.834Z",
+      "status": "ok",
+      "error": null,
+      "topic": "The Richthofen Case: A privileged daughter plotted her own parents' brutal murder for love and money",
+      "category": "murder",
+      "viralScore": 92,
+      "publish": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=f3sMWwwopvU",
+          "publishId": null
+        },
+        {
+          "platform": "youtube_shorts",
+          "url": "https://www.youtube.com/shorts/4t1uU9s05Ks",
+          "publishId": null
+        },
+        {
+          "platform": "tiktok",
+          "url": "https://www.tiktok.com/@codexmentalbr",
+          "publishId": "v_inbox_file~v2.7651104965288658945"
+        }
+      ],
+      "sound": {
+        "category": "suspense_misterio",
+        "sound": "Dramatic reveal sting / whoosh transition"
+      }
     }
   ],
   "revenueProjection": {
