@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-15T03:09:47.366Z",
+  "lastUpdated": "2026-06-15T12:30:06.220Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -129,7 +129,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-15T00:30:03.617Z"
+      "statsUpdatedAt": "2026-06-15T12:30:05.986Z"
     },
     {
       "runId": "2026-06-08T16-15-58",
@@ -168,7 +168,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-15T00:30:03.624Z"
+      "statsUpdatedAt": "2026-06-15T12:30:05.993Z"
     },
     {
       "runId": "2026-06-08T23-02-20",
@@ -212,7 +212,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-15T00:30:03.625Z"
+      "statsUpdatedAt": "2026-06-15T12:30:05.993Z"
     },
     {
       "runId": "2026-06-09T16-00-03",
@@ -256,7 +256,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-15T00:30:03.625Z"
+      "statsUpdatedAt": "2026-06-15T12:30:05.993Z"
     },
     {
       "runId": "2026-06-09T23-00-03",
@@ -290,7 +290,7 @@
       },
       "stats": {
         "youtube": {
-          "views": 33,
+          "views": 34,
           "likes": 0,
           "comments": 0
         },
@@ -300,7 +300,7 @@
           "comments": 1
         }
       },
-      "statsUpdatedAt": "2026-06-15T00:30:03.625Z"
+      "statsUpdatedAt": "2026-06-15T12:30:05.993Z"
     },
     {
       "runId": "2026-06-09T23-50-47",
@@ -345,7 +345,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-15T00:30:03.625Z"
+      "statsUpdatedAt": "2026-06-15T12:30:05.993Z"
     },
     {
       "runId": "2026-06-10T05-40-23",
@@ -390,7 +390,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-15T00:30:03.625Z"
+      "statsUpdatedAt": "2026-06-15T12:30:05.993Z"
     },
     {
       "runId": "2026-06-10T23-00-06",
@@ -435,7 +435,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-15T00:30:03.625Z"
+      "statsUpdatedAt": "2026-06-15T12:30:05.993Z"
     },
     {
       "runId": "2026-06-11T23-46-12",
@@ -493,7 +493,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-15T00:30:03.625Z"
+      "statsUpdatedAt": "2026-06-15T12:30:05.993Z"
     },
     {
       "runId": "2026-06-12T23-00-02",
@@ -528,12 +528,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 556,
+          "views": 566,
           "likes": 33,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-15T00:30:03.625Z"
+      "statsUpdatedAt": "2026-06-15T12:30:05.993Z"
     },
     {
       "runId": "2026-06-13T23-00-02",
@@ -568,12 +568,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 207,
-          "likes": 11,
+          "views": 237,
+          "likes": 12,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-15T00:30:03.625Z"
+      "statsUpdatedAt": "2026-06-15T12:30:05.993Z"
     },
     {
       "runId": "2026-06-14T04-31-07",
@@ -613,12 +613,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 60,
+          "views": 64,
           "likes": 1,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-15T00:30:03.625Z"
+      "statsUpdatedAt": "2026-06-15T12:30:05.993Z"
     },
     {
       "runId": "2026-06-14T04-40-24",
@@ -658,12 +658,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 105,
-          "likes": 2,
+          "views": 127,
+          "likes": 3,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-15T00:30:03.625Z"
+      "statsUpdatedAt": "2026-06-15T12:30:05.993Z"
     },
     {
       "runId": "2026-06-14T23-00-02",
@@ -717,15 +717,28 @@
       "sound": {
         "category": "storytelling_motivacional",
         "sound": "Lo-fi motivational beat"
-      }
+      },
+      "stats": {
+        "youtube": {
+          "views": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        "youtube_shorts": {
+          "views": 7,
+          "likes": 0,
+          "comments": 0
+        }
+      },
+      "statsUpdatedAt": "2026-06-15T12:30:05.993Z"
     }
   ],
   "revenueProjection": {
     "realStats": {
-      "youtube": 3465,
+      "youtube": 3539,
       "tiktok": 0,
-      "total": 3465,
-      "videosPublicados": 14,
+      "total": 3539,
+      "videosPublicados": 15,
       "hotmart": {
         "source": "api",
         "revenueLast30Days": 0,
@@ -797,62 +810,62 @@
         "updatedAt": "2026-06-14T23:06:08.463Z"
       }
     },
-    "custoTotal": 49,
-    "baseMonthlyViews": 3465,
-    "generatedAt": "2026-06-15T00:30:03.801Z",
+    "custoTotal": 52.5,
+    "baseMonthlyViews": 3539,
+    "generatedAt": "2026-06-15T12:30:06.220Z",
     "scenarios": {
       "conservador": {
         "rpm": 4,
         "conv": 0.0005,
-        "adRevenue": 13.86,
-        "sales": 1.7325,
-        "affiliateRevenue": 116.0775,
-        "total": 129.9375
+        "adRevenue": 14.156,
+        "sales": 1.7695,
+        "affiliateRevenue": 118.5565,
+        "total": 132.7125
       },
       "moderado": {
         "rpm": 8,
         "conv": 0.001,
-        "adRevenue": 27.72,
-        "sales": 3.465,
-        "affiliateRevenue": 232.155,
-        "total": 259.875
+        "adRevenue": 28.312,
+        "sales": 3.539,
+        "affiliateRevenue": 237.113,
+        "total": 265.425
       },
       "otimista": {
         "rpm": 14,
         "conv": 0.002,
-        "adRevenue": 48.51,
-        "sales": 6.93,
-        "affiliateRevenue": 464.31,
-        "total": 512.82
+        "adRevenue": 49.546,
+        "sales": 7.078,
+        "affiliateRevenue": 474.226,
+        "total": 523.772
       }
     },
     "perPlatform": {
       "youtube": {
-        "monthlyViews": 3465,
+        "monthlyViews": 3539,
         "scenarios": {
           "conservador": {
             "rpm": 4,
             "conv": 0.0005,
-            "adRevenue": 13.86,
-            "sales": 1.7325,
-            "affiliateRevenue": 116.0775,
-            "total": 129.9375
+            "adRevenue": 14.156,
+            "sales": 1.7695,
+            "affiliateRevenue": 118.5565,
+            "total": 132.7125
           },
           "moderado": {
             "rpm": 8,
             "conv": 0.001,
-            "adRevenue": 27.72,
-            "sales": 3.465,
-            "affiliateRevenue": 232.155,
-            "total": 259.875
+            "adRevenue": 28.312,
+            "sales": 3.539,
+            "affiliateRevenue": 237.113,
+            "total": 265.425
           },
           "otimista": {
             "rpm": 14,
             "conv": 0.002,
-            "adRevenue": 48.51,
-            "sales": 6.93,
-            "affiliateRevenue": 464.31,
-            "total": 512.82
+            "adRevenue": 49.546,
+            "sales": 7.078,
+            "affiliateRevenue": 474.226,
+            "total": 523.772
           }
         }
       },
@@ -892,14 +905,14 @@
           "name": "Codex Mental",
           "subs": 14,
           "subsGoal": 1000,
-          "totalViews": 3034,
+          "totalViews": 3285,
           "shortsViewsGoal90d": 10000000
         },
         "brazil-noir": {
           "name": "Brazil Noir",
           "subs": 1,
           "subsGoal": 1000,
-          "totalViews": 86,
+          "totalViews": 147,
           "shortsViewsGoal90d": 10000000
         }
       },
