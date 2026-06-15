@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-15T00:30:03.801Z",
+  "lastUpdated": "2026-06-15T03:09:47.366Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -685,6 +685,38 @@
       "sound": {
         "category": "suspense_misterio",
         "sound": "Dramatic reveal sting / whoosh transition"
+      }
+    },
+    {
+      "runId": "2026-06-15T03-00-03",
+      "channel": "brazil-noir",
+      "startedAt": "2026-06-15T03:00:03.204Z",
+      "completedAt": "2026-06-15T03:09:47.364Z",
+      "status": "ok",
+      "error": null,
+      "topic": "The Park Maniac Case: A motorcycle courier lured aspiring models to their deaths with a fake modeling career",
+      "category": "serial killer",
+      "viralScore": 88,
+      "publish": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=s6P-WZcH5UY",
+          "publishId": null
+        },
+        {
+          "platform": "youtube_shorts",
+          "url": "https://www.youtube.com/shorts/3gV9djmOW1c",
+          "publishId": null
+        },
+        {
+          "platform": "tiktok",
+          "url": "https://www.tiktok.com/@brazilnoir",
+          "publishId": "v_inbox_file~v2.7651453158337742849"
+        }
+      ],
+      "sound": {
+        "category": "storytelling_motivacional",
+        "sound": "Lo-fi motivational beat"
       }
     }
   ],
