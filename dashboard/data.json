@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-16T00:30:04.650Z",
+  "lastUpdated": "2026-06-16T03:05:04.500Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -752,6 +752,38 @@
       "sound": {
         "category": "storytelling_motivacional",
         "sound": "Lo-fi motivational beat"
+      }
+    },
+    {
+      "runId": "2026-06-16T03-00-03",
+      "channel": "brazil-noir",
+      "startedAt": "2026-06-16T03:00:03.645Z",
+      "completedAt": "2026-06-16T03:05:04.496Z",
+      "status": "ok",
+      "error": null,
+      "topic": "The Isabella Nardoni Case: A 5-year-old thrown from a 6th-floor window by her own family",
+      "category": "murder",
+      "viralScore": 92,
+      "publish": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=Nr8P84a5bsw",
+          "publishId": null
+        },
+        {
+          "platform": "youtube_shorts",
+          "url": "https://www.youtube.com/shorts/59trW9n8GBo",
+          "publishId": null
+        },
+        {
+          "platform": "tiktok",
+          "url": "https://www.tiktok.com/@brazilnoir",
+          "publishId": "v_inbox_file~v2.7651823282198693908"
+        }
+      ],
+      "sound": {
+        "category": "trending_viral",
+        "sound": "Voiceover/remix trend do nicho de psicologia"
       }
     }
   ],
