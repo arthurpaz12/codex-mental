@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-06-16T23:07:38.500Z",
+  "generatedAt": "2026-06-17T23:05:17.409Z",
   "sampleSize": 15,
   "topByViews": [
     {
       "topic": "Os 3 Microgestos que Revelam Atração Instantânea (Quase Ninguém Percebe)",
       "category": "ciência",
-      "views": 704,
+      "views": 705,
       "engagement": 1.7,
       "platforms": [
         "youtube",
@@ -16,7 +16,7 @@
     {
       "topic": "3 Sinais de que Alguém Está Te Manipulando Sem Você Perceber",
       "category": "ciência",
-      "views": 688,
+      "views": 689,
       "engagement": 2.47,
       "platforms": [
         "youtube",
@@ -92,7 +92,7 @@
     {
       "topic": "3 Sinais de que Alguém Está Te Manipulando Sem Você Perceber",
       "category": "ciência",
-      "views": 688,
+      "views": 689,
       "engagement": 2.47,
       "platforms": [
         "youtube",
@@ -103,7 +103,7 @@
     {
       "topic": "Os 3 Microgestos que Revelam Atração Instantânea (Quase Ninguém Percebe)",
       "category": "ciência",
-      "views": 704,
+      "views": 705,
       "engagement": 1.7,
       "platforms": [
         "youtube",
@@ -116,22 +116,22 @@
     {
       "key": "ciência",
       "videos": 9,
-      "totalViews": 3460,
-      "avgViews": 384.4,
+      "totalViews": 3462,
+      "avgViews": 384.7,
       "avgEngagement": 2.37
     },
     {
       "key": "murder",
       "videos": 4,
-      "totalViews": 168,
-      "avgViews": 42,
+      "totalViews": 174,
+      "avgViews": 43.5,
       "avgEngagement": 0.31
     },
     {
       "key": "serial killer",
       "videos": 2,
-      "totalViews": 35,
-      "avgViews": 17.5,
+      "totalViews": 49,
+      "avgViews": 24.5,
       "avgEngagement": 0
     }
   ],
@@ -139,15 +139,15 @@
     {
       "key": "youtube_shorts",
       "videos": 15,
-      "totalViews": 3503,
-      "avgViews": 233.5,
+      "totalViews": 3509,
+      "avgViews": 233.9,
       "avgEngagement": 1.54
     },
     {
       "key": "youtube",
-      "videos": 12,
-      "totalViews": 160,
-      "avgViews": 13.3,
+      "videos": 14,
+      "totalViews": 176,
+      "avgViews": 12.6,
       "avgEngagement": 0
     }
   ],
@@ -155,8 +155,8 @@
     {
       "key": "23h",
       "videos": 5,
-      "totalViews": 1973,
-      "avgViews": 394.6,
+      "totalViews": 1974,
+      "avgViews": 394.8,
       "avgEngagement": 2.93
     },
     {
@@ -169,29 +169,29 @@
     {
       "key": "16h",
       "videos": 3,
-      "totalViews": 1329,
-      "avgViews": 443,
+      "totalViews": 1330,
+      "avgViews": 443.3,
       "avgEngagement": 1.38
     },
     {
       "key": "00h",
       "videos": 1,
-      "totalViews": 19,
-      "avgViews": 19,
+      "totalViews": 30,
+      "avgViews": 30,
       "avgEngagement": 0
     },
     {
       "key": "05h",
       "videos": 1,
-      "totalViews": 71,
-      "avgViews": 71,
+      "totalViews": 72,
+      "avgViews": 72,
       "avgEngagement": 0
     },
     {
       "key": "03h",
       "videos": 3,
-      "totalViews": 32,
-      "avgViews": 10.7,
+      "totalViews": 40,
+      "avgViews": 13.3,
       "avgEngagement": 0
     }
   ],
@@ -220,28 +220,28 @@
     {
       "key": "Terça",
       "videos": 3,
-      "totalViews": 1402,
-      "avgViews": 467.3,
+      "totalViews": 1409,
+      "avgViews": 469.7,
       "avgEngagement": 1.39
     },
     {
       "key": "Segunda",
       "videos": 3,
-      "totalViews": 198,
-      "avgViews": 66,
+      "totalViews": 201,
+      "avgViews": 67,
       "avgEngagement": 0.43
     },
     {
       "key": "Quarta",
       "videos": 3,
-      "totalViews": 466,
-      "avgViews": 155.3,
+      "totalViews": 478,
+      "avgViews": 159.3,
       "avgEngagement": 0
     }
   ],
   "viralScoreCorrelation": -0.46,
   "recommendations": [
-    "A categoria \"ciência\" tem a melhor média de views (384) — vale priorizar temas parecidos.",
+    "A categoria \"ciência\" tem a melhor média de views (385) — vale priorizar temas parecidos.",
     "\"youtube_shorts\" é a plataforma com melhor desempenho médio — considere adaptar mais conteúdo pro formato dela.",
     "Publicações por volta das 23h (UTC) tiveram o maior engajamento médio — pode ser um bom horário pra concentrar lançamentos.",
     "O \"viralScore\" estimado pela IA está com correlação negativa (-0.46) com os resultados reais — vale revisar os critérios usados pra calculá-lo."
