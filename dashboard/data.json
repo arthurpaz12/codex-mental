@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-17T00:30:02.628Z",
+  "lastUpdated": "2026-06-17T03:09:10.386Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -819,6 +819,28 @@
       "sound": {
         "category": "trending_viral",
         "sound": "Voiceover/remix trend do nicho de psicologia"
+      }
+    },
+    {
+      "runId": "2026-06-17T03-00-02",
+      "channel": "brazil-noir",
+      "startedAt": "2026-06-17T03:00:02.562Z",
+      "completedAt": "2026-06-17T03:09:10.383Z",
+      "status": "ok",
+      "error": null,
+      "topic": "The Ângela Diniz Case: A glamorous socialite gunned down by her lover — who walked free claiming 'honor'",
+      "category": "murder",
+      "viralScore": 88,
+      "publish": [
+        {
+          "platform": "tiktok",
+          "url": "https://www.tiktok.com/@brazilnoir",
+          "publishId": "v_inbox_file~v2.7652195666621450241"
+        }
+      ],
+      "sound": {
+        "category": "suspense_misterio",
+        "sound": "Tense/suspenseful background hum"
       }
     }
   ],
