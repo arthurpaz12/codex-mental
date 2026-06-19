@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-19T00:30:08.001Z",
+  "lastUpdated": "2026-06-19T03:07:18.444Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -863,6 +863,28 @@
       "sound": {
         "category": "suspense_misterio",
         "sound": "Tense/suspenseful background hum"
+      }
+    },
+    {
+      "runId": "2026-06-19T03-00-30",
+      "channel": "brazil-noir",
+      "startedAt": "2026-06-19T03:00:30.783Z",
+      "completedAt": "2026-06-19T03:07:18.179Z",
+      "status": "ok",
+      "error": null,
+      "topic": "The Pedrinho Matador Case: Brazil's vigilante serial killer who murdered 70+ people — and ate his father's heart",
+      "category": "serial killer",
+      "viralScore": 94,
+      "publish": [
+        {
+          "platform": "tiktok",
+          "url": "https://www.tiktok.com/@brazilnoir",
+          "publishId": "v_inbox_file~v2.7652937301500184593"
+        }
+      ],
+      "sound": {
+        "category": "trending_viral",
+        "sound": "Som em alta da semana (genérico)"
       }
     }
   ],
