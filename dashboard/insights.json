@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-19T03:39:38.639Z",
+  "generatedAt": "2026-06-19T23:05:45.934Z",
   "sampleSize": 15,
   "topByViews": [
     {
@@ -123,15 +123,15 @@
     {
       "key": "murder",
       "videos": 4,
-      "totalViews": 178,
-      "avgViews": 44.5,
+      "totalViews": 179,
+      "avgViews": 44.8,
       "avgEngagement": 0.31
     },
     {
       "key": "serial killer",
       "videos": 2,
-      "totalViews": 55,
-      "avgViews": 27.5,
+      "totalViews": 58,
+      "avgViews": 29,
       "avgEngagement": 0
     }
   ],
@@ -146,8 +146,8 @@
     {
       "key": "youtube",
       "videos": 14,
-      "totalViews": 183,
-      "avgViews": 13.1,
+      "totalViews": 187,
+      "avgViews": 13.4,
       "avgEngagement": 0
     }
   ],
@@ -176,8 +176,8 @@
     {
       "key": "00h",
       "videos": 1,
-      "totalViews": 35,
-      "avgViews": 35,
+      "totalViews": 38,
+      "avgViews": 38,
       "avgEngagement": 0
     },
     {
@@ -190,8 +190,8 @@
     {
       "key": "03h",
       "videos": 3,
-      "totalViews": 45,
-      "avgViews": 15,
+      "totalViews": 46,
+      "avgViews": 15.3,
       "avgEngagement": 0
     }
   ],
@@ -206,8 +206,8 @@
     {
       "key": "Sexta",
       "videos": 2,
-      "totalViews": 575,
-      "avgViews": 287.5,
+      "totalViews": 576,
+      "avgViews": 288,
       "avgEngagement": 2.99
     },
     {
@@ -234,8 +234,8 @@
     {
       "key": "Quarta",
       "videos": 3,
-      "totalViews": 483,
-      "avgViews": 161,
+      "totalViews": 486,
+      "avgViews": 162,
       "avgEngagement": 0
     }
   ],
