@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-19T03:07:18.444Z",
+  "lastUpdated": "2026-06-19T03:39:38.497Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -72,7 +72,7 @@
         "currency": "BRL"
       }
     ],
-    "updatedAt": "2026-06-17T23:05:17.241Z"
+    "updatedAt": "2026-06-19T03:39:35.946Z"
   },
   "runs": [
     {
@@ -129,7 +129,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-19T00:30:05.721Z"
+      "statsUpdatedAt": "2026-06-19T03:39:34.104Z"
     },
     {
       "runId": "2026-06-08T16-15-58",
@@ -168,7 +168,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-19T00:30:06.215Z"
+      "statsUpdatedAt": "2026-06-19T03:39:34.104Z"
     },
     {
       "runId": "2026-06-08T23-02-20",
@@ -212,7 +212,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-19T00:30:06.215Z"
+      "statsUpdatedAt": "2026-06-19T03:39:34.104Z"
     },
     {
       "runId": "2026-06-09T16-00-03",
@@ -256,7 +256,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-19T00:30:06.215Z"
+      "statsUpdatedAt": "2026-06-19T03:39:34.104Z"
     },
     {
       "runId": "2026-06-09T23-00-03",
@@ -300,7 +300,7 @@
           "comments": 1
         }
       },
-      "statsUpdatedAt": "2026-06-19T00:30:06.215Z"
+      "statsUpdatedAt": "2026-06-19T03:39:34.104Z"
     },
     {
       "runId": "2026-06-09T23-50-47",
@@ -345,7 +345,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-19T00:30:06.215Z"
+      "statsUpdatedAt": "2026-06-19T03:39:34.104Z"
     },
     {
       "runId": "2026-06-10T05-40-23",
@@ -390,7 +390,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-19T00:30:06.215Z"
+      "statsUpdatedAt": "2026-06-19T03:39:34.104Z"
     },
     {
       "runId": "2026-06-10T23-00-06",
@@ -435,7 +435,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-19T00:30:06.215Z"
+      "statsUpdatedAt": "2026-06-19T03:39:34.104Z"
     },
     {
       "runId": "2026-06-11T23-46-12",
@@ -493,7 +493,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-19T00:30:06.215Z"
+      "statsUpdatedAt": "2026-06-19T03:39:34.104Z"
     },
     {
       "runId": "2026-06-12T23-00-02",
@@ -533,7 +533,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-19T00:30:06.215Z"
+      "statsUpdatedAt": "2026-06-19T03:39:34.104Z"
     },
     {
       "runId": "2026-06-13T23-00-02",
@@ -573,7 +573,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-19T00:30:06.215Z"
+      "statsUpdatedAt": "2026-06-19T03:39:34.104Z"
     },
     {
       "runId": "2026-06-14T04-31-07",
@@ -618,7 +618,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-19T00:30:06.215Z"
+      "statsUpdatedAt": "2026-06-19T03:39:34.104Z"
     },
     {
       "runId": "2026-06-14T04-40-24",
@@ -663,7 +663,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-19T00:30:06.215Z"
+      "statsUpdatedAt": "2026-06-19T03:39:34.104Z"
     },
     {
       "runId": "2026-06-14T23-00-02",
@@ -730,7 +730,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-19T00:30:06.215Z"
+      "statsUpdatedAt": "2026-06-19T03:39:34.104Z"
     },
     {
       "runId": "2026-06-15T23-00-03",
@@ -797,7 +797,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-19T00:30:06.215Z"
+      "statsUpdatedAt": "2026-06-19T03:39:34.104Z"
     },
     {
       "runId": "2026-06-16T23-00-02",
@@ -886,6 +886,28 @@
         "category": "trending_viral",
         "sound": "Som em alta da semana (genérico)"
       }
+    },
+    {
+      "runId": "2026-06-18T23-00-35",
+      "channel": "codex-mental",
+      "startedAt": "2026-06-18T23:00:35.732Z",
+      "completedAt": "2026-06-19T03:39:33.543Z",
+      "status": "ok",
+      "error": null,
+      "topic": "A Pergunta Psicológica que Desmascara um Mentiroso em 10 Segundos",
+      "category": "ciência",
+      "viralScore": 82,
+      "publish": [
+        {
+          "platform": "tiktok",
+          "url": "https://www.tiktok.com/@codexmentalbr",
+          "publishId": "v_inbox_file~v2.7652945027844311056"
+        }
+      ],
+      "sound": {
+        "category": "trending_viral",
+        "sound": "Som em alta da semana (genérico)"
+      }
     }
   ],
   "revenueProjection": {
@@ -893,7 +915,7 @@
       "youtube": 3696,
       "tiktok": 0,
       "total": 3696,
-      "videosPublicados": 20,
+      "videosPublicados": 22,
       "hotmart": {
         "source": "api",
         "revenueLast30Days": 0,
@@ -962,12 +984,12 @@
             "currency": "BRL"
           }
         ],
-        "updatedAt": "2026-06-17T23:05:17.241Z"
+        "updatedAt": "2026-06-19T03:39:35.946Z"
       }
     },
-    "custoTotal": 70,
+    "custoTotal": 77,
     "baseMonthlyViews": 3696,
-    "generatedAt": "2026-06-19T00:30:08.000Z",
+    "generatedAt": "2026-06-19T03:39:38.496Z",
     "scenarios": {
       "conservador": {
         "rpm": 4,

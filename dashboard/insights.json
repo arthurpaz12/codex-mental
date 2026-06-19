@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-17T23:05:17.409Z",
+  "generatedAt": "2026-06-19T03:39:38.639Z",
   "sampleSize": 15,
   "topByViews": [
     {
@@ -116,22 +116,22 @@
     {
       "key": "ciência",
       "videos": 9,
-      "totalViews": 3462,
-      "avgViews": 384.7,
+      "totalViews": 3463,
+      "avgViews": 384.8,
       "avgEngagement": 2.37
     },
     {
       "key": "murder",
       "videos": 4,
-      "totalViews": 174,
-      "avgViews": 43.5,
+      "totalViews": 178,
+      "avgViews": 44.5,
       "avgEngagement": 0.31
     },
     {
       "key": "serial killer",
       "videos": 2,
-      "totalViews": 49,
-      "avgViews": 24.5,
+      "totalViews": 55,
+      "avgViews": 27.5,
       "avgEngagement": 0
     }
   ],
@@ -139,15 +139,15 @@
     {
       "key": "youtube_shorts",
       "videos": 15,
-      "totalViews": 3509,
-      "avgViews": 233.9,
+      "totalViews": 3513,
+      "avgViews": 234.2,
       "avgEngagement": 1.54
     },
     {
       "key": "youtube",
       "videos": 14,
-      "totalViews": 176,
-      "avgViews": 12.6,
+      "totalViews": 183,
+      "avgViews": 13.1,
       "avgEngagement": 0
     }
   ],
@@ -155,8 +155,8 @@
     {
       "key": "23h",
       "videos": 5,
-      "totalViews": 1974,
-      "avgViews": 394.8,
+      "totalViews": 1975,
+      "avgViews": 395,
       "avgEngagement": 2.93
     },
     {
@@ -176,8 +176,8 @@
     {
       "key": "00h",
       "videos": 1,
-      "totalViews": 30,
-      "avgViews": 30,
+      "totalViews": 35,
+      "avgViews": 35,
       "avgEngagement": 0
     },
     {
@@ -190,8 +190,8 @@
     {
       "key": "03h",
       "videos": 3,
-      "totalViews": 40,
-      "avgViews": 13.3,
+      "totalViews": 45,
+      "avgViews": 15,
       "avgEngagement": 0
     }
   ],
@@ -220,30 +220,30 @@
     {
       "key": "Terça",
       "videos": 3,
-      "totalViews": 1409,
-      "avgViews": 469.7,
+      "totalViews": 1413,
+      "avgViews": 471,
       "avgEngagement": 1.39
     },
     {
       "key": "Segunda",
       "videos": 3,
-      "totalViews": 201,
-      "avgViews": 67,
-      "avgEngagement": 0.43
+      "totalViews": 203,
+      "avgViews": 67.7,
+      "avgEngagement": 0.42
     },
     {
       "key": "Quarta",
       "videos": 3,
-      "totalViews": 478,
-      "avgViews": 159.3,
+      "totalViews": 483,
+      "avgViews": 161,
       "avgEngagement": 0
     }
   ],
-  "viralScoreCorrelation": -0.46,
+  "viralScoreCorrelation": -0.45,
   "recommendations": [
     "A categoria \"ciência\" tem a melhor média de views (385) — vale priorizar temas parecidos.",
     "\"youtube_shorts\" é a plataforma com melhor desempenho médio — considere adaptar mais conteúdo pro formato dela.",
     "Publicações por volta das 23h (UTC) tiveram o maior engajamento médio — pode ser um bom horário pra concentrar lançamentos.",
-    "O \"viralScore\" estimado pela IA está com correlação negativa (-0.46) com os resultados reais — vale revisar os critérios usados pra calculá-lo."
+    "O \"viralScore\" estimado pela IA está com correlação negativa (-0.45) com os resultados reais — vale revisar os critérios usados pra calculá-lo."
   ]
 }
