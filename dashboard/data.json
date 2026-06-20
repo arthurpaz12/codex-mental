@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-20T00:30:04.025Z",
+  "lastUpdated": "2026-06-20T09:48:02.367Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -953,6 +953,22 @@
         }
       },
       "statsUpdatedAt": "2026-06-20T00:30:03.743Z"
+    },
+    {
+      "runId": "2026-06-20T03-00-04",
+      "channel": "brazil-noir",
+      "startedAt": "2026-06-20T03:00:04.356Z",
+      "completedAt": "2026-06-20T09:48:02.264Z",
+      "status": "ok",
+      "error": null,
+      "topic": "The Elize Matsunaga Case: An escort married a food empire heir — then dismembered him",
+      "category": "murder",
+      "viralScore": 89,
+      "publish": [],
+      "sound": {
+        "category": "suspense_misterio",
+        "sound": "Dramatic reveal sting / whoosh transition"
+      }
     }
   ],
   "revenueProjection": {
