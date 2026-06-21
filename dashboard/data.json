@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-21T12:36:02.456Z",
+  "lastUpdated": "2026-06-21T23:15:21.108Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -980,6 +980,19 @@
       "topic": "O Truque dos 4 Segundos que Expõe um Mentiroso na Hora (Usado por Investigadores)",
       "category": "ciência",
       "viralScore": 88,
+      "publish": [],
+      "sound": null
+    },
+    {
+      "runId": "2026-06-21T23-05-07",
+      "channel": "codex-mental",
+      "startedAt": "2026-06-21T23:05:07.532Z",
+      "completedAt": "2026-06-21T23:15:21.105Z",
+      "status": "error",
+      "error": "read ECONNRESET",
+      "topic": "O Erro de 1 Segundo que Denuncia uma Mentira (Antes da Boca Falar)",
+      "category": "ciência",
+      "viralScore": 82,
       "publish": [],
       "sound": null
     }
