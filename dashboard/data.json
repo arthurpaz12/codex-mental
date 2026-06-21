@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-21T00:44:18.110Z",
+  "lastUpdated": "2026-06-21T01:46:44.323Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -969,6 +969,19 @@
         "category": "suspense_misterio",
         "sound": "Dramatic reveal sting / whoosh transition"
       }
+    },
+    {
+      "runId": "2026-06-20T23-01-12",
+      "channel": "codex-mental",
+      "startedAt": "2026-06-20T23:01:12.519Z",
+      "completedAt": "2026-06-21T01:46:44.313Z",
+      "status": "error",
+      "error": "read ECONNRESET",
+      "topic": "O Truque dos 4 Segundos que Expõe um Mentiroso na Hora (Usado por Investigadores)",
+      "category": "ciência",
+      "viralScore": 88,
+      "publish": [],
+      "sound": null
     }
   ],
   "revenueProjection": {
