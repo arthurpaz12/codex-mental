@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-23T00:35:05.285Z",
+  "lastUpdated": "2026-06-23T02:19:34.053Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -993,6 +993,19 @@
       "topic": "O Erro de 1 Segundo que Denuncia uma Mentira (Antes da Boca Falar)",
       "category": "ciência",
       "viralScore": 82,
+      "publish": [],
+      "sound": null
+    },
+    {
+      "runId": "2026-06-22T23-04-22",
+      "channel": "codex-mental",
+      "startedAt": "2026-06-22T23:04:22.084Z",
+      "completedAt": "2026-06-23T02:19:34.042Z",
+      "status": "error",
+      "error": "Request timed out.",
+      "topic": null,
+      "category": null,
+      "viralScore": null,
       "publish": [],
       "sound": null
     }
