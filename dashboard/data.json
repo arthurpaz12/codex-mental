@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-23T18:58:27.888Z",
+  "lastUpdated": "2026-06-23T22:04:05.577Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -75,18 +75,6 @@
     "updatedAt": "2026-06-23T18:58:27.735Z"
   },
   "runs": [
-    {
-      "runId": "2026-06-07T06-20-29",
-      "startedAt": "2026-06-07T06:20:29.107Z",
-      "completedAt": "2026-06-07T06:38:00.378Z",
-      "status": "error",
-      "error": "read ECONNRESET",
-      "topic": "3 Microexpressões Que Revelam Quando Alguém Está Mentindo Para Você",
-      "category": "ciência",
-      "viralScore": 88,
-      "publish": [],
-      "sound": null
-    },
     {
       "runId": "2026-06-07T16-09-07",
       "startedAt": "2026-06-07T16:09:07.380Z",
@@ -1053,6 +1041,38 @@
         }
       },
       "statsUpdatedAt": "2026-06-23T18:58:26.114Z"
+    },
+    {
+      "runId": "2026-06-23T21-58-30",
+      "channel": "brazil-noir",
+      "startedAt": "2026-06-23T21:58:30.075Z",
+      "completedAt": "2026-06-23T22:04:05.573Z",
+      "status": "ok",
+      "error": null,
+      "topic": "The Eloá Pimentel Case: Brazil's longest hostage siege played out live on national TV",
+      "category": "murder",
+      "viralScore": 88,
+      "publish": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=YVGriopeuRE",
+          "publishId": null
+        },
+        {
+          "platform": "youtube_shorts",
+          "url": "https://www.youtube.com/shorts/JzXhlkJS77s",
+          "publishId": null
+        },
+        {
+          "platform": "tiktok",
+          "url": "https://www.tiktok.com/@brazilnoir",
+          "publishId": "v_inbox_file~v2.7654714801398548496"
+        }
+      ],
+      "sound": {
+        "category": "suspense_misterio",
+        "sound": "Tense/suspenseful background hum"
+      }
     }
   ],
   "revenueProjection": {
