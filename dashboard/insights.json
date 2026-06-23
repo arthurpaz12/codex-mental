@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-23T18:58:27.893Z",
+  "generatedAt": "2026-06-23T23:05:08.583Z",
   "sampleSize": 16,
   "topByViews": [
     {
@@ -35,10 +35,10 @@
       ]
     },
     {
-      "topic": "O Gesto Secreto que Revela Quando Alguém Está Mentindo",
+      "topic": "O Sinal nos Olhos que Revela Atração Instantânea",
       "category": "ciência",
-      "views": 537,
-      "engagement": 1.68,
+      "views": 377,
+      "engagement": 0,
       "platforms": [
         "youtube",
         "youtube_shorts",
@@ -46,14 +46,13 @@
       ]
     },
     {
-      "topic": "O Sinal nos Olhos que Revela Atração Instantânea",
+      "topic": "A Técnica do Silêncio: Como Fazer Qualquer Pessoa Revelar Seus Segredos",
       "category": "ciência",
-      "views": 376,
-      "engagement": 0,
+      "views": 246,
+      "engagement": 5.69,
       "platforms": [
         "youtube",
-        "youtube_shorts",
-        "tiktok"
+        "youtube_shorts"
       ]
     }
   ],
@@ -116,9 +115,9 @@
     {
       "key": "ciência",
       "videos": 10,
-      "totalViews": 3677,
-      "avgViews": 367.7,
-      "avgEngagement": 2.51
+      "totalViews": 3170,
+      "avgViews": 317,
+      "avgEngagement": 2.34
     },
     {
       "key": "murder",
@@ -130,8 +129,8 @@
     {
       "key": "serial killer",
       "videos": 2,
-      "totalViews": 76,
-      "avgViews": 38,
+      "totalViews": 80,
+      "avgViews": 40,
       "avgEngagement": 0
     }
   ],
@@ -139,15 +138,15 @@
     {
       "key": "youtube_shorts",
       "videos": 16,
-      "totalViews": 3725,
-      "avgViews": 232.8,
-      "avgEngagement": 1.68
+      "totalViews": 3224,
+      "avgViews": 201.5,
+      "avgEngagement": 1.57
     },
     {
       "key": "youtube",
-      "videos": 15,
-      "totalViews": 212,
-      "avgViews": 14.1,
+      "videos": 14,
+      "totalViews": 210,
+      "avgViews": 15,
       "avgEngagement": 0
     }
   ],
@@ -155,8 +154,8 @@
     {
       "key": "23h",
       "videos": 6,
-      "totalViews": 2188,
-      "avgViews": 364.7,
+      "totalViews": 2189,
+      "avgViews": 364.8,
       "avgEngagement": 3.07
     },
     {
@@ -168,16 +167,16 @@
     },
     {
       "key": "16h",
-      "videos": 3,
-      "totalViews": 1330,
-      "avgViews": 443.3,
-      "avgEngagement": 1.38
+      "videos": 2,
+      "totalViews": 793,
+      "avgViews": 396.5,
+      "avgEngagement": 1.23
     },
     {
       "key": "00h",
       "videos": 1,
-      "totalViews": 56,
-      "avgViews": 56,
+      "totalViews": 60,
+      "avgViews": 60,
       "avgEngagement": 0
     },
     {
@@ -192,6 +191,13 @@
       "videos": 3,
       "totalViews": 50,
       "avgViews": 16.7,
+      "avgEngagement": 0
+    },
+    {
+      "key": "18h",
+      "videos": 1,
+      "totalViews": 29,
+      "avgViews": 29,
       "avgEngagement": 0
     }
   ],
@@ -212,17 +218,17 @@
     },
     {
       "key": "Domingo",
-      "videos": 3,
-      "totalViews": 778,
-      "avgViews": 259.3,
-      "avgEngagement": 1.8
+      "videos": 2,
+      "totalViews": 241,
+      "avgViews": 120.5,
+      "avgEngagement": 1.87
     },
     {
       "key": "Terça",
-      "videos": 3,
-      "totalViews": 1417,
-      "avgViews": 472.3,
-      "avgEngagement": 1.39
+      "videos": 4,
+      "totalViews": 1446,
+      "avgViews": 361.5,
+      "avgEngagement": 1.04
     },
     {
       "key": "Segunda",
@@ -234,16 +240,16 @@
     {
       "key": "Quarta",
       "videos": 3,
-      "totalViews": 504,
-      "avgViews": 168,
+      "totalViews": 509,
+      "avgViews": 169.7,
       "avgEngagement": 0
     }
   ],
-  "viralScoreCorrelation": -0.44,
+  "viralScoreCorrelation": -0.52,
   "recommendations": [
-    "A categoria \"ciência\" tem a melhor média de views (368) — vale priorizar temas parecidos.",
+    "A categoria \"ciência\" tem a melhor média de views (317) — vale priorizar temas parecidos.",
     "\"youtube_shorts\" é a plataforma com melhor desempenho médio — considere adaptar mais conteúdo pro formato dela.",
     "Publicações por volta das 23h (UTC) tiveram o maior engajamento médio — pode ser um bom horário pra concentrar lançamentos.",
-    "O \"viralScore\" estimado pela IA está com correlação negativa (-0.44) com os resultados reais — vale revisar os critérios usados pra calculá-lo."
+    "O \"viralScore\" estimado pela IA está com correlação negativa (-0.52) com os resultados reais — vale revisar os critérios usados pra calculá-lo."
   ]
 }
