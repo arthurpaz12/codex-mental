@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-24T19:40:23.040Z",
+  "lastUpdated": "2026-06-24T22:45:31.506Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -75,50 +75,6 @@
     "updatedAt": "2026-06-24T19:40:22.895Z"
   },
   "runs": [
-    {
-      "runId": "2026-06-09T23-00-03",
-      "startedAt": "2026-06-09T23:00:03.141Z",
-      "completedAt": "2026-06-09T23:08:21.446Z",
-      "status": "ok",
-      "error": null,
-      "topic": "Os 3 Microgestos que Revelam Atração Instantânea (Quase Ninguém Percebe)",
-      "category": "ciência",
-      "viralScore": 82,
-      "publish": [
-        {
-          "platform": "youtube",
-          "url": "https://www.youtube.com/watch?v=H9NA5NOF2KE",
-          "publishId": null
-        },
-        {
-          "platform": "youtube_shorts",
-          "url": "https://www.youtube.com/shorts/2UplQYT4jtc",
-          "publishId": null
-        },
-        {
-          "platform": "tiktok",
-          "url": "https://www.tiktok.com/@codexmentalbr",
-          "publishId": "v_inbox_file~v2.7649535987588909057"
-        }
-      ],
-      "sound": {
-        "category": "storytelling_motivacional",
-        "sound": "Lo-fi motivational beat"
-      },
-      "stats": {
-        "youtube": {
-          "views": 64,
-          "likes": 0,
-          "comments": 0
-        },
-        "youtube_shorts": {
-          "views": 641,
-          "likes": 11,
-          "comments": 1
-        }
-      },
-      "statsUpdatedAt": "2026-06-24T19:40:21.098Z"
-    },
     {
       "runId": "2026-06-09T23-50-47",
       "channel": "brazil-noir",
@@ -1095,6 +1051,33 @@
         }
       },
       "statsUpdatedAt": "2026-06-24T19:40:21.098Z"
+    },
+    {
+      "runId": "2026-06-24T22-40-25",
+      "channel": "brazil-noir",
+      "startedAt": "2026-06-24T22:40:25.770Z",
+      "completedAt": "2026-06-24T22:45:31.502Z",
+      "status": "ok",
+      "error": null,
+      "topic": "The Mércia Nakashima Case: A jealous ex-cop drowned his lawyer girlfriend in a sunken car",
+      "category": "murder",
+      "viralScore": 84,
+      "publish": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=1ok7U-95drQ",
+          "publishId": null
+        },
+        {
+          "platform": "youtube_shorts",
+          "url": "https://www.youtube.com/shorts/8dD6DG0Vh_8",
+          "publishId": null
+        }
+      ],
+      "sound": {
+        "category": "storytelling_motivacional",
+        "sound": "Soft piano storytelling loop"
+      }
     }
   ],
   "revenueProjection": {
