@@ -1,18 +1,7 @@
 {
-  "generatedAt": "2026-06-24T19:40:23.047Z",
+  "generatedAt": "2026-06-24T23:05:02.720Z",
   "sampleSize": 17,
   "topByViews": [
-    {
-      "topic": "Os 3 Microgestos que Revelam Atração Instantânea (Quase Ninguém Percebe)",
-      "category": "ciência",
-      "views": 705,
-      "engagement": 1.7,
-      "platforms": [
-        "youtube",
-        "youtube_shorts",
-        "tiktok"
-      ]
-    },
     {
       "topic": "A Técnica de Interrogatório que Faz Qualquer Pessoa Confessar a Verdade",
       "category": "ciência",
@@ -42,6 +31,17 @@
       "platforms": [
         "youtube",
         "youtube_shorts"
+      ]
+    },
+    {
+      "topic": "The Champinha Case: A teenage killer Brazil couldn't legally punish",
+      "category": "murder",
+      "views": 224,
+      "engagement": 2.23,
+      "platforms": [
+        "youtube",
+        "youtube_shorts",
+        "tiktok"
       ]
     },
     {
@@ -78,32 +78,32 @@
       ]
     },
     {
+      "topic": "The Park Maniac Case: A motorcycle courier lured aspiring models to their deaths with a fake modeling career",
+      "category": "serial killer",
+      "views": 20,
+      "engagement": 5,
+      "platforms": [
+        "youtube",
+        "youtube_shorts",
+        "tiktok"
+      ]
+    },
+    {
+      "topic": "The Isabella Nardoni Case: A 5-year-old thrown from a 6th-floor window by her own family",
+      "category": "murder",
+      "views": 23,
+      "engagement": 4.35,
+      "platforms": [
+        "youtube",
+        "youtube_shorts",
+        "tiktok"
+      ]
+    },
+    {
       "topic": "O Olhar de 3 Segundos que Revela Quando Alguém Está Mentindo",
       "category": "ciência",
       "views": 211,
       "engagement": 3.79,
-      "platforms": [
-        "youtube",
-        "youtube_shorts",
-        "tiktok"
-      ]
-    },
-    {
-      "topic": "A Regra dos Pés: O Sinal Secreto que Revela o Que Alguém Realmente Pensa de Você",
-      "category": "ciência",
-      "views": 131,
-      "engagement": 3.05,
-      "platforms": [
-        "youtube",
-        "youtube_shorts",
-        "tiktok"
-      ]
-    },
-    {
-      "topic": "O Gesto Silencioso que Revela Quem Realmente Tem o Poder numa Conversa",
-      "category": "ciência",
-      "views": 159,
-      "engagement": 2.52,
       "platforms": [
         "youtube",
         "youtube_shorts",
@@ -115,55 +115,69 @@
     {
       "key": "ciência",
       "videos": 9,
-      "totalViews": 2506,
-      "avgViews": 278.4,
-      "avgEngagement": 2.52
-    },
-    {
-      "key": "serial killer",
-      "videos": 2,
-      "totalViews": 110,
-      "avgViews": 55,
-      "avgEngagement": 0
+      "totalViews": 1818,
+      "avgViews": 202,
+      "avgEngagement": 2.33
     },
     {
       "key": "murder",
-      "videos": 6,
-      "totalViews": 223,
-      "avgViews": 37.2,
-      "avgEngagement": 0.2
+      "videos": 7,
+      "totalViews": 417,
+      "avgViews": 59.6,
+      "avgEngagement": 1.11
+    },
+    {
+      "key": "serial killer",
+      "videos": 1,
+      "totalViews": 20,
+      "avgViews": 20,
+      "avgEngagement": 5
     }
   ],
   "byPlatform": [
     {
       "key": "youtube_shorts",
       "videos": 17,
-      "totalViews": 2662,
-      "avgViews": 156.6,
-      "avgEngagement": 1.43
+      "totalViews": 2226,
+      "avgViews": 130.9,
+      "avgEngagement": 2.14
     },
     {
       "key": "youtube",
-      "videos": 13,
-      "totalViews": 177,
-      "avgViews": 13.6,
+      "videos": 11,
+      "totalViews": 29,
+      "avgViews": 2.6,
       "avgEngagement": 0
     }
   ],
   "byHourUTC": [
     {
-      "key": "01h",
-      "videos": 1,
-      "totalViews": 131,
-      "avgViews": 131,
-      "avgEngagement": 3.05
+      "key": "03h",
+      "videos": 3,
+      "totalViews": 50,
+      "avgViews": 16.7,
+      "avgEngagement": 3.12
     },
     {
       "key": "23h",
-      "videos": 6,
-      "totalViews": 2114,
-      "avgViews": 352.3,
-      "avgEngagement": 2.86
+      "videos": 5,
+      "totalViews": 1409,
+      "avgViews": 281.8,
+      "avgEngagement": 3.09
+    },
+    {
+      "key": "01h",
+      "videos": 1,
+      "totalViews": 132,
+      "avgViews": 132,
+      "avgEngagement": 3.03
+    },
+    {
+      "key": "16h",
+      "videos": 1,
+      "totalViews": 224,
+      "avgViews": 224,
+      "avgEngagement": 2.23
     },
     {
       "key": "04h",
@@ -173,13 +187,6 @@
       "avgEngagement": 1.87
     },
     {
-      "key": "00h",
-      "videos": 1,
-      "totalViews": 90,
-      "avgViews": 90,
-      "avgEngagement": 0
-    },
-    {
       "key": "05h",
       "videos": 1,
       "totalViews": 72,
@@ -187,31 +194,24 @@
       "avgEngagement": 0
     },
     {
-      "key": "03h",
-      "videos": 3,
-      "totalViews": 50,
-      "avgViews": 16.7,
-      "avgEngagement": 0
-    },
-    {
       "key": "18h",
       "videos": 1,
-      "totalViews": 102,
-      "avgViews": 102,
+      "totalViews": 103,
+      "avgViews": 103,
       "avgEngagement": 0
     },
     {
       "key": "22h",
-      "videos": 1,
-      "totalViews": 5,
-      "avgViews": 5,
+      "videos": 2,
+      "totalViews": 9,
+      "avgViews": 4.5,
       "avgEngagement": 0
     },
     {
-      "key": "16h",
+      "key": "19h",
       "videos": 1,
-      "totalViews": 34,
-      "avgViews": 34,
+      "totalViews": 15,
+      "avgViews": 15,
       "avgEngagement": 0
     }
   ],
@@ -222,6 +222,13 @@
       "totalViews": 246,
       "avgViews": 246,
       "avgEngagement": 5.69
+    },
+    {
+      "key": "Segunda",
+      "videos": 1,
+      "totalViews": 20,
+      "avgViews": 20,
+      "avgEngagement": 5
     },
     {
       "key": "Sexta",
@@ -238,32 +245,25 @@
       "avgEngagement": 1.87
     },
     {
-      "key": "Quarta",
-      "videos": 5,
-      "totalViews": 704,
-      "avgViews": 140.8,
-      "avgEngagement": 0.61
-    },
-    {
       "key": "Terça",
-      "videos": 5,
-      "totalViews": 840,
-      "avgViews": 168,
-      "avgEngagement": 0.34
+      "videos": 4,
+      "totalViews": 139,
+      "avgViews": 34.8,
+      "avgEngagement": 1.09
     },
     {
-      "key": "Segunda",
-      "videos": 1,
-      "totalViews": 20,
-      "avgViews": 20,
-      "avgEngagement": 0
+      "key": "Quarta",
+      "videos": 6,
+      "totalViews": 821,
+      "avgViews": 136.8,
+      "avgEngagement": 0.88
     }
   ],
-  "viralScoreCorrelation": -0.57,
+  "viralScoreCorrelation": -0.43,
   "recommendations": [
-    "A categoria \"ciência\" tem a melhor média de views (278) — vale priorizar temas parecidos.",
+    "A categoria \"ciência\" tem a melhor média de views (202) — vale priorizar temas parecidos.",
     "\"youtube_shorts\" é a plataforma com melhor desempenho médio — considere adaptar mais conteúdo pro formato dela.",
-    "Publicações por volta das 01h (UTC) tiveram o maior engajamento médio — pode ser um bom horário pra concentrar lançamentos.",
-    "O \"viralScore\" estimado pela IA está com correlação negativa (-0.57) com os resultados reais — vale revisar os critérios usados pra calculá-lo."
+    "Publicações por volta das 03h (UTC) tiveram o maior engajamento médio — pode ser um bom horário pra concentrar lançamentos.",
+    "O \"viralScore\" estimado pela IA está com correlação negativa (-0.43) com os resultados reais — vale revisar os critérios usados pra calculá-lo."
   ]
 }

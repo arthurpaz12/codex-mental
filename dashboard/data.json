@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-24T22:45:31.506Z",
+  "lastUpdated": "2026-06-24T23:05:02.710Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -72,54 +72,9 @@
         "currency": "BRL"
       }
     ],
-    "updatedAt": "2026-06-24T19:40:22.895Z"
+    "updatedAt": "2026-06-24T23:05:02.519Z"
   },
   "runs": [
-    {
-      "runId": "2026-06-09T23-50-47",
-      "channel": "brazil-noir",
-      "startedAt": "2026-06-09T23:50:47.785Z",
-      "completedAt": "2026-06-10T00:01:57.282Z",
-      "status": "ok",
-      "error": null,
-      "topic": "The Chico Picadinho Case: The 'Mincemeat Killer' Brazil Was Too Afraid to Free",
-      "category": "serial killer",
-      "viralScore": 88,
-      "publish": [
-        {
-          "platform": "youtube",
-          "url": "https://www.youtube.com/watch?v=DK1D47KeVk0",
-          "publishId": null
-        },
-        {
-          "platform": "youtube_shorts",
-          "url": "https://www.youtube.com/shorts/WMhdssyOse4",
-          "publishId": null
-        },
-        {
-          "platform": "tiktok",
-          "url": "https://www.tiktok.com/@codexmentalbr",
-          "publishId": "v_inbox_file~v2.7649550038661793808"
-        }
-      ],
-      "sound": {
-        "category": "storytelling_motivacional",
-        "sound": "Lo-fi motivational beat"
-      },
-      "stats": {
-        "youtube": {
-          "views": 84,
-          "likes": 0,
-          "comments": 0
-        },
-        "youtube_shorts": {
-          "views": 6,
-          "likes": 0,
-          "comments": 0
-        }
-      },
-      "statsUpdatedAt": "2026-06-24T19:40:21.098Z"
-    },
     {
       "runId": "2026-06-10T05-40-23",
       "channel": "brazil-noir",
@@ -163,7 +118,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T19:40:21.098Z"
+      "statsUpdatedAt": "2026-06-24T23:05:00.471Z"
     },
     {
       "runId": "2026-06-10T23-00-06",
@@ -208,7 +163,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T19:40:21.098Z"
+      "statsUpdatedAt": "2026-06-24T23:05:00.471Z"
     },
     {
       "runId": "2026-06-11T23-46-12",
@@ -266,7 +221,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T19:40:21.098Z"
+      "statsUpdatedAt": "2026-06-24T23:05:00.471Z"
     },
     {
       "runId": "2026-06-12T23-00-02",
@@ -306,7 +261,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T19:40:21.098Z"
+      "statsUpdatedAt": "2026-06-24T23:05:00.471Z"
     },
     {
       "runId": "2026-06-13T23-00-02",
@@ -346,7 +301,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T19:40:21.098Z"
+      "statsUpdatedAt": "2026-06-24T23:05:00.471Z"
     },
     {
       "runId": "2026-06-14T04-31-07",
@@ -391,7 +346,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T19:40:21.098Z"
+      "statsUpdatedAt": "2026-06-24T23:05:00.471Z"
     },
     {
       "runId": "2026-06-14T04-40-24",
@@ -436,7 +391,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T19:40:21.098Z"
+      "statsUpdatedAt": "2026-06-24T23:05:00.471Z"
     },
     {
       "runId": "2026-06-14T23-00-02",
@@ -499,11 +454,11 @@
         },
         "youtube_shorts": {
           "views": 18,
-          "likes": 0,
+          "likes": 1,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T19:40:21.098Z"
+      "statsUpdatedAt": "2026-06-24T23:05:00.471Z"
     },
     {
       "runId": "2026-06-15T23-00-03",
@@ -566,11 +521,11 @@
         },
         "youtube_shorts": {
           "views": 16,
-          "likes": 0,
+          "likes": 1,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T19:40:21.098Z"
+      "statsUpdatedAt": "2026-06-24T23:05:00.471Z"
     },
     {
       "runId": "2026-06-16T23-00-02",
@@ -725,7 +680,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T19:40:21.098Z"
+      "statsUpdatedAt": "2026-06-24T23:05:00.471Z"
     },
     {
       "runId": "2026-06-20T03-00-04",
@@ -820,12 +775,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 102,
+          "views": 103,
           "likes": 0,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T19:40:21.098Z"
+      "statsUpdatedAt": "2026-06-24T23:05:00.471Z"
     },
     {
       "runId": "2026-06-23T21-58-30",
@@ -865,12 +820,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 4,
+          "views": 7,
           "likes": 0,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T19:40:21.098Z"
+      "statsUpdatedAt": "2026-06-24T23:05:00.471Z"
     },
     {
       "runId": "2026-06-23T23-00-02",
@@ -915,7 +870,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T19:40:21.098Z"
+      "statsUpdatedAt": "2026-06-24T23:05:00.471Z"
     },
     {
       "runId": "2026-06-24T01-04-08",
@@ -955,12 +910,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 130,
+          "views": 131,
           "likes": 4,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T19:40:21.098Z"
+      "statsUpdatedAt": "2026-06-24T23:05:00.471Z"
     },
     {
       "runId": "2026-06-24T16-30-17",
@@ -1000,12 +955,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 34,
-          "likes": 0,
+          "views": 224,
+          "likes": 5,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T19:40:21.098Z"
+      "statsUpdatedAt": "2026-06-24T23:05:00.471Z"
     },
     {
       "runId": "2026-06-24T19-35-34",
@@ -1045,12 +1000,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 0,
+          "views": 15,
           "likes": 0,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T19:40:21.098Z"
+      "statsUpdatedAt": "2026-06-24T23:05:00.471Z"
     },
     {
       "runId": "2026-06-24T22-40-25",
@@ -1077,14 +1032,72 @@
       "sound": {
         "category": "storytelling_motivacional",
         "sound": "Soft piano storytelling loop"
-      }
+      },
+      "stats": {
+        "youtube": {
+          "views": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        "youtube_shorts": {
+          "views": 1,
+          "likes": 0,
+          "comments": 0
+        }
+      },
+      "statsUpdatedAt": "2026-06-24T23:05:00.471Z"
+    },
+    {
+      "runId": "2026-06-24T23-00-05",
+      "channel": "codex-mental",
+      "startedAt": "2026-06-24T23:00:05.491Z",
+      "completedAt": "2026-06-24T23:04:58.998Z",
+      "status": "ok",
+      "error": null,
+      "topic": "A Regra dos Pés: O Sinal Corporal que Revela o Que Alguém Esconde de Você",
+      "category": "ciência",
+      "viralScore": 82,
+      "publish": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=GLVbKelJs6s",
+          "publishId": null
+        },
+        {
+          "platform": "youtube_shorts",
+          "url": "https://www.youtube.com/shorts/BGQshz2CuSs",
+          "publishId": null
+        },
+        {
+          "platform": "tiktok",
+          "url": "https://www.tiktok.com/@codexmentalbr",
+          "publishId": "v_inbox_file~v2.7655101411201681424"
+        }
+      ],
+      "sound": {
+        "category": "storytelling_motivacional",
+        "sound": "Soft piano storytelling loop"
+      },
+      "stats": {
+        "youtube": {
+          "views": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        "youtube_shorts": {
+          "views": 0,
+          "likes": 0,
+          "comments": 0
+        }
+      },
+      "statsUpdatedAt": "2026-06-24T23:05:00.471Z"
     }
   ],
   "revenueProjection": {
     "realStats": {
-      "youtube": 2839,
+      "youtube": 2255,
       "tiktok": 0,
-      "total": 2839,
+      "total": 2255,
       "videosPublicados": 25,
       "hotmart": {
         "source": "api",
@@ -1154,65 +1167,65 @@
             "currency": "BRL"
           }
         ],
-        "updatedAt": "2026-06-24T19:40:22.895Z"
+        "updatedAt": "2026-06-24T23:05:02.519Z"
       }
     },
     "custoTotal": 87.5,
-    "baseMonthlyViews": 2839,
-    "generatedAt": "2026-06-24T19:40:23.039Z",
+    "baseMonthlyViews": 2255,
+    "generatedAt": "2026-06-24T23:05:02.710Z",
     "scenarios": {
       "conservador": {
         "rpm": 4,
         "conv": 0.0005,
-        "adRevenue": 11.356,
-        "sales": 1.4195,
-        "affiliateRevenue": 95.1065,
-        "total": 106.46249999999999
+        "adRevenue": 9.02,
+        "sales": 1.1275,
+        "affiliateRevenue": 75.54249999999999,
+        "total": 84.56249999999999
       },
       "moderado": {
         "rpm": 8,
         "conv": 0.001,
-        "adRevenue": 22.712,
-        "sales": 2.839,
-        "affiliateRevenue": 190.213,
-        "total": 212.92499999999998
+        "adRevenue": 18.04,
+        "sales": 2.255,
+        "affiliateRevenue": 151.08499999999998,
+        "total": 169.12499999999997
       },
       "otimista": {
         "rpm": 14,
         "conv": 0.002,
-        "adRevenue": 39.746,
-        "sales": 5.678,
-        "affiliateRevenue": 380.426,
-        "total": 420.17199999999997
+        "adRevenue": 31.57,
+        "sales": 4.51,
+        "affiliateRevenue": 302.16999999999996,
+        "total": 333.73999999999995
       }
     },
     "perPlatform": {
       "youtube": {
-        "monthlyViews": 2839,
+        "monthlyViews": 2255,
         "scenarios": {
           "conservador": {
             "rpm": 4,
             "conv": 0.0005,
-            "adRevenue": 11.356,
-            "sales": 1.4195,
-            "affiliateRevenue": 95.1065,
-            "total": 106.46249999999999
+            "adRevenue": 9.02,
+            "sales": 1.1275,
+            "affiliateRevenue": 75.54249999999999,
+            "total": 84.56249999999999
           },
           "moderado": {
             "rpm": 8,
             "conv": 0.001,
-            "adRevenue": 22.712,
-            "sales": 2.839,
-            "affiliateRevenue": 190.213,
-            "total": 212.92499999999998
+            "adRevenue": 18.04,
+            "sales": 2.255,
+            "affiliateRevenue": 151.08499999999998,
+            "total": 169.12499999999997
           },
           "otimista": {
             "rpm": 14,
             "conv": 0.002,
-            "adRevenue": 39.746,
-            "sales": 5.678,
-            "affiliateRevenue": 380.426,
-            "total": 420.17199999999997
+            "adRevenue": 31.57,
+            "sales": 4.51,
+            "affiliateRevenue": 302.16999999999996,
+            "total": 333.73999999999995
           }
         }
       },
