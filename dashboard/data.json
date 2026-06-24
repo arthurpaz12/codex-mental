@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-24T00:30:06.093Z",
+  "lastUpdated": "2026-06-24T01:09:26.923Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -72,48 +72,9 @@
         "currency": "BRL"
       }
     ],
-    "updatedAt": "2026-06-23T23:05:08.332Z"
+    "updatedAt": "2026-06-24T01:09:26.793Z"
   },
   "runs": [
-    {
-      "runId": "2026-06-08T16-15-58",
-      "startedAt": "2026-06-08T16:15:58.484Z",
-      "completedAt": "2026-06-08T16:23:40.650Z",
-      "status": "ok",
-      "error": null,
-      "topic": "A Microexpressão que Denuncia Quando Alguém Te Despreza em Silêncio",
-      "category": "ciência",
-      "viralScore": 82,
-      "publish": [
-        {
-          "platform": "youtube",
-          "url": "https://www.youtube.com/watch?v=7_U6ZZED9Gk",
-          "publishId": null
-        },
-        {
-          "platform": "youtube_shorts",
-          "url": "https://www.youtube.com/shorts/6zM13NtYki8",
-          "publishId": null
-        }
-      ],
-      "sound": {
-        "category": "suspense_misterio",
-        "sound": "Dramatic reveal sting / whoosh transition"
-      },
-      "stats": {
-        "youtube": {
-          "views": 44,
-          "likes": 0,
-          "comments": 0
-        },
-        "youtube_shorts": {
-          "views": 60,
-          "likes": 0,
-          "comments": 0
-        }
-      },
-      "statsUpdatedAt": "2026-06-24T00:30:05.871Z"
-    },
     {
       "runId": "2026-06-08T23-02-20",
       "startedAt": "2026-06-08T23:02:20.707Z",
@@ -156,7 +117,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T00:30:05.883Z"
+      "statsUpdatedAt": "2026-06-24T01:09:25.080Z"
     },
     {
       "runId": "2026-06-09T16-00-03",
@@ -200,7 +161,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T00:30:05.883Z"
+      "statsUpdatedAt": "2026-06-24T01:09:25.080Z"
     },
     {
       "runId": "2026-06-09T23-00-03",
@@ -244,7 +205,7 @@
           "comments": 1
         }
       },
-      "statsUpdatedAt": "2026-06-24T00:30:05.883Z"
+      "statsUpdatedAt": "2026-06-24T01:09:25.080Z"
     },
     {
       "runId": "2026-06-09T23-50-47",
@@ -289,7 +250,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T00:30:05.883Z"
+      "statsUpdatedAt": "2026-06-24T01:09:25.080Z"
     },
     {
       "runId": "2026-06-10T05-40-23",
@@ -334,7 +295,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T00:30:05.883Z"
+      "statsUpdatedAt": "2026-06-24T01:09:25.080Z"
     },
     {
       "runId": "2026-06-10T23-00-06",
@@ -379,7 +340,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T00:30:05.883Z"
+      "statsUpdatedAt": "2026-06-24T01:09:25.080Z"
     },
     {
       "runId": "2026-06-11T23-46-12",
@@ -437,7 +398,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T00:30:05.883Z"
+      "statsUpdatedAt": "2026-06-24T01:09:25.080Z"
     },
     {
       "runId": "2026-06-12T23-00-02",
@@ -477,7 +438,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T00:30:05.883Z"
+      "statsUpdatedAt": "2026-06-24T01:09:25.080Z"
     },
     {
       "runId": "2026-06-13T23-00-02",
@@ -517,7 +478,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T00:30:05.883Z"
+      "statsUpdatedAt": "2026-06-24T01:09:25.080Z"
     },
     {
       "runId": "2026-06-14T04-31-07",
@@ -562,7 +523,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T00:30:05.883Z"
+      "statsUpdatedAt": "2026-06-24T01:09:25.080Z"
     },
     {
       "runId": "2026-06-14T04-40-24",
@@ -607,7 +568,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T00:30:05.883Z"
+      "statsUpdatedAt": "2026-06-24T01:09:25.080Z"
     },
     {
       "runId": "2026-06-14T23-00-02",
@@ -674,7 +635,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T00:30:05.883Z"
+      "statsUpdatedAt": "2026-06-24T01:09:25.080Z"
     },
     {
       "runId": "2026-06-15T23-00-03",
@@ -741,7 +702,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T00:30:05.883Z"
+      "statsUpdatedAt": "2026-06-24T01:09:25.080Z"
     },
     {
       "runId": "2026-06-16T23-00-02",
@@ -896,7 +857,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T00:30:05.883Z"
+      "statsUpdatedAt": "2026-06-24T01:09:25.080Z"
     },
     {
       "runId": "2026-06-20T03-00-04",
@@ -996,7 +957,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T00:30:05.883Z"
+      "statsUpdatedAt": "2026-06-24T01:09:25.080Z"
     },
     {
       "runId": "2026-06-23T21-58-30",
@@ -1041,7 +1002,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T00:30:05.883Z"
+      "statsUpdatedAt": "2026-06-24T01:09:25.080Z"
     },
     {
       "runId": "2026-06-23T23-00-02",
@@ -1086,14 +1047,59 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-24T00:30:05.883Z"
+      "statsUpdatedAt": "2026-06-24T01:09:25.080Z"
+    },
+    {
+      "runId": "2026-06-24T01-04-08",
+      "channel": "codex-mental",
+      "startedAt": "2026-06-24T01:04:08.250Z",
+      "completedAt": "2026-06-24T01:09:24.454Z",
+      "status": "ok",
+      "error": null,
+      "topic": "A Regra dos Pés: O Sinal Secreto que Revela o Que Alguém Realmente Pensa de Você",
+      "category": "ciência",
+      "viralScore": 88,
+      "publish": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=C7qq0KUFxFY",
+          "publishId": null
+        },
+        {
+          "platform": "youtube_shorts",
+          "url": "https://www.youtube.com/shorts/bU5aF4xt6h4",
+          "publishId": null
+        },
+        {
+          "platform": "tiktok",
+          "url": "https://www.tiktok.com/@codexmentalbr",
+          "publishId": "v_inbox_file~v2.7654761891046377489"
+        }
+      ],
+      "sound": {
+        "category": "suspense_misterio",
+        "sound": "Tense/suspenseful background hum"
+      },
+      "stats": {
+        "youtube": {
+          "views": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        "youtube_shorts": {
+          "views": 0,
+          "likes": 0,
+          "comments": 0
+        }
+      },
+      "statsUpdatedAt": "2026-06-24T01:09:25.080Z"
     }
   ],
   "revenueProjection": {
     "realStats": {
-      "youtube": 3444,
+      "youtube": 3340,
       "tiktok": 0,
-      "total": 3444,
+      "total": 3340,
       "videosPublicados": 25,
       "hotmart": {
         "source": "api",
@@ -1163,65 +1169,65 @@
             "currency": "BRL"
           }
         ],
-        "updatedAt": "2026-06-23T23:05:08.332Z"
+        "updatedAt": "2026-06-24T01:09:26.793Z"
       }
     },
     "custoTotal": 87.5,
-    "baseMonthlyViews": 3444,
-    "generatedAt": "2026-06-24T00:30:06.093Z",
+    "baseMonthlyViews": 3340,
+    "generatedAt": "2026-06-24T01:09:26.923Z",
     "scenarios": {
       "conservador": {
         "rpm": 4,
         "conv": 0.0005,
-        "adRevenue": 13.776,
-        "sales": 1.722,
-        "affiliateRevenue": 115.374,
-        "total": 129.15
+        "adRevenue": 13.36,
+        "sales": 1.67,
+        "affiliateRevenue": 111.89,
+        "total": 125.25
       },
       "moderado": {
         "rpm": 8,
         "conv": 0.001,
-        "adRevenue": 27.552,
-        "sales": 3.444,
-        "affiliateRevenue": 230.748,
-        "total": 258.3
+        "adRevenue": 26.72,
+        "sales": 3.34,
+        "affiliateRevenue": 223.78,
+        "total": 250.5
       },
       "otimista": {
         "rpm": 14,
         "conv": 0.002,
-        "adRevenue": 48.216,
-        "sales": 6.888,
-        "affiliateRevenue": 461.496,
-        "total": 509.712
+        "adRevenue": 46.76,
+        "sales": 6.68,
+        "affiliateRevenue": 447.56,
+        "total": 494.32
       }
     },
     "perPlatform": {
       "youtube": {
-        "monthlyViews": 3444,
+        "monthlyViews": 3340,
         "scenarios": {
           "conservador": {
             "rpm": 4,
             "conv": 0.0005,
-            "adRevenue": 13.776,
-            "sales": 1.722,
-            "affiliateRevenue": 115.374,
-            "total": 129.15
+            "adRevenue": 13.36,
+            "sales": 1.67,
+            "affiliateRevenue": 111.89,
+            "total": 125.25
           },
           "moderado": {
             "rpm": 8,
             "conv": 0.001,
-            "adRevenue": 27.552,
-            "sales": 3.444,
-            "affiliateRevenue": 230.748,
-            "total": 258.3
+            "adRevenue": 26.72,
+            "sales": 3.34,
+            "affiliateRevenue": 223.78,
+            "total": 250.5
           },
           "otimista": {
             "rpm": 14,
             "conv": 0.002,
-            "adRevenue": 48.216,
-            "sales": 6.888,
-            "affiliateRevenue": 461.496,
-            "total": 509.712
+            "adRevenue": 46.76,
+            "sales": 6.68,
+            "affiliateRevenue": 447.56,
+            "total": 494.32
           }
         }
       },

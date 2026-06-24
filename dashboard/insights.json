@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-06-23T23:05:08.583Z",
-  "sampleSize": 16,
+  "generatedAt": "2026-06-24T01:09:26.927Z",
+  "sampleSize": 17,
   "topByViews": [
     {
       "topic": "Os 3 Microgestos que Revelam Atração Instantânea (Quase Ninguém Percebe)",
@@ -115,48 +115,55 @@
     {
       "key": "ciência",
       "videos": 10,
-      "totalViews": 3170,
-      "avgViews": 317,
+      "totalViews": 3070,
+      "avgViews": 307,
       "avgEngagement": 2.34
-    },
-    {
-      "key": "murder",
-      "videos": 4,
-      "totalViews": 184,
-      "avgViews": 46,
-      "avgEngagement": 0.3
     },
     {
       "key": "serial killer",
       "videos": 2,
-      "totalViews": 80,
-      "avgViews": 40,
+      "totalViews": 84,
+      "avgViews": 42,
       "avgEngagement": 0
+    },
+    {
+      "key": "murder",
+      "videos": 5,
+      "totalViews": 186,
+      "avgViews": 37.2,
+      "avgEngagement": 0.24
     }
   ],
   "byPlatform": [
     {
       "key": "youtube_shorts",
-      "videos": 16,
-      "totalViews": 3224,
-      "avgViews": 201.5,
-      "avgEngagement": 1.57
+      "videos": 17,
+      "totalViews": 3170,
+      "avgViews": 186.5,
+      "avgEngagement": 1.48
     },
     {
       "key": "youtube",
-      "videos": 14,
-      "totalViews": 210,
-      "avgViews": 15,
+      "videos": 13,
+      "totalViews": 170,
+      "avgViews": 13.1,
       "avgEngagement": 0
     }
   ],
   "byHourUTC": [
     {
       "key": "23h",
-      "videos": 6,
-      "totalViews": 2189,
-      "avgViews": 364.8,
-      "avgEngagement": 3.07
+      "videos": 7,
+      "totalViews": 2193,
+      "avgViews": 313.3,
+      "avgEngagement": 2.63
+    },
+    {
+      "key": "16h",
+      "videos": 1,
+      "totalViews": 689,
+      "avgViews": 689,
+      "avgEngagement": 2.47
     },
     {
       "key": "04h",
@@ -166,17 +173,10 @@
       "avgEngagement": 1.87
     },
     {
-      "key": "16h",
-      "videos": 2,
-      "totalViews": 793,
-      "avgViews": 396.5,
-      "avgEngagement": 1.23
-    },
-    {
       "key": "00h",
       "videos": 1,
-      "totalViews": 60,
-      "avgViews": 60,
+      "totalViews": 64,
+      "avgViews": 64,
       "avgEngagement": 0
     },
     {
@@ -198,6 +198,13 @@
       "videos": 1,
       "totalViews": 29,
       "avgViews": 29,
+      "avgEngagement": 0
+    },
+    {
+      "key": "22h",
+      "videos": 1,
+      "totalViews": 2,
+      "avgViews": 2,
       "avgEngagement": 0
     }
   ],
@@ -225,31 +232,31 @@
     },
     {
       "key": "Terça",
-      "videos": 4,
-      "totalViews": 1446,
-      "avgViews": 361.5,
-      "avgEngagement": 1.04
+      "videos": 6,
+      "totalViews": 1452,
+      "avgViews": 242,
+      "avgEngagement": 0.69
     },
     {
       "key": "Segunda",
-      "videos": 3,
-      "totalViews": 204,
-      "avgViews": 68,
-      "avgEngagement": 0.42
+      "videos": 2,
+      "totalViews": 100,
+      "avgViews": 50,
+      "avgEngagement": 0.63
     },
     {
       "key": "Quarta",
       "videos": 3,
-      "totalViews": 509,
-      "avgViews": 169.7,
+      "totalViews": 513,
+      "avgViews": 171,
       "avgEngagement": 0
     }
   ],
-  "viralScoreCorrelation": -0.52,
+  "viralScoreCorrelation": -0.56,
   "recommendations": [
-    "A categoria \"ciência\" tem a melhor média de views (317) — vale priorizar temas parecidos.",
+    "A categoria \"ciência\" tem a melhor média de views (307) — vale priorizar temas parecidos.",
     "\"youtube_shorts\" é a plataforma com melhor desempenho médio — considere adaptar mais conteúdo pro formato dela.",
     "Publicações por volta das 23h (UTC) tiveram o maior engajamento médio — pode ser um bom horário pra concentrar lançamentos.",
-    "O \"viralScore\" estimado pela IA está com correlação negativa (-0.52) com os resultados reais — vale revisar os critérios usados pra calculá-lo."
+    "O \"viralScore\" estimado pela IA está com correlação negativa (-0.56) com os resultados reais — vale revisar os critérios usados pra calculá-lo."
   ]
 }
