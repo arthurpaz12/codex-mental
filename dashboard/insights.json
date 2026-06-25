@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-24T23:05:02.720Z",
+  "generatedAt": "2026-06-25T23:04:52.405Z",
   "sampleSize": 17,
   "topByViews": [
     {
@@ -24,20 +24,20 @@
       ]
     },
     {
-      "topic": "A Técnica do Silêncio: Como Fazer Qualquer Pessoa Revelar Seus Segredos",
-      "category": "ciência",
-      "views": 246,
-      "engagement": 5.69,
+      "topic": "The Mércia Nakashima Case: A jealous ex-cop drowned his lawyer girlfriend in a sunken car",
+      "category": "murder",
+      "views": 347,
+      "engagement": 0.86,
       "platforms": [
         "youtube",
         "youtube_shorts"
       ]
     },
     {
-      "topic": "The Champinha Case: A teenage killer Brazil couldn't legally punish",
-      "category": "murder",
-      "views": 224,
-      "engagement": 2.23,
+      "topic": "A Regra dos Pés: O Sinal Corporal que Revela o Que Alguém Esconde de Você",
+      "category": "ciência",
+      "views": 343,
+      "engagement": 2.33,
       "platforms": [
         "youtube",
         "youtube_shorts",
@@ -45,10 +45,10 @@
       ]
     },
     {
-      "topic": "O Olhar de 3 Segundos que Revela Quando Alguém Está Mentindo",
-      "category": "ciência",
-      "views": 211,
-      "engagement": 3.79,
+      "topic": "The Champinha Case: A teenage killer Brazil couldn't legally punish",
+      "category": "murder",
+      "views": 333,
+      "engagement": 1.8,
       "platforms": [
         "youtube",
         "youtube_shorts",
@@ -78,10 +78,21 @@
       ]
     },
     {
+      "topic": "The Eloá Pimentel Case: Brazil's longest hostage siege played out live on national TV",
+      "category": "murder",
+      "views": 37,
+      "engagement": 5.41,
+      "platforms": [
+        "youtube",
+        "youtube_shorts",
+        "tiktok"
+      ]
+    },
+    {
       "topic": "The Park Maniac Case: A motorcycle courier lured aspiring models to their deaths with a fake modeling career",
       "category": "serial killer",
-      "views": 20,
-      "engagement": 5,
+      "views": 21,
+      "engagement": 4.76,
       "platforms": [
         "youtube",
         "youtube_shorts",
@@ -91,19 +102,8 @@
     {
       "topic": "The Isabella Nardoni Case: A 5-year-old thrown from a 6th-floor window by her own family",
       "category": "murder",
-      "views": 23,
-      "engagement": 4.35,
-      "platforms": [
-        "youtube",
-        "youtube_shorts",
-        "tiktok"
-      ]
-    },
-    {
-      "topic": "O Olhar de 3 Segundos que Revela Quando Alguém Está Mentindo",
-      "category": "ciência",
-      "views": 211,
-      "engagement": 3.79,
+      "views": 24,
+      "engagement": 4.17,
       "platforms": [
         "youtube",
         "youtube_shorts",
@@ -114,84 +114,84 @@
   "byCategory": [
     {
       "key": "ciência",
-      "videos": 9,
-      "totalViews": 1818,
-      "avgViews": 202,
-      "avgEngagement": 2.33
+      "videos": 10,
+      "totalViews": 2185,
+      "avgViews": 218.5,
+      "avgEngagement": 2.24
     },
     {
       "key": "murder",
-      "videos": 7,
-      "totalViews": 417,
-      "avgViews": 59.6,
-      "avgEngagement": 1.11
+      "videos": 6,
+      "totalViews": 831,
+      "avgViews": 138.5,
+      "avgEngagement": 2.24
     },
     {
       "key": "serial killer",
       "videos": 1,
-      "totalViews": 20,
-      "avgViews": 20,
-      "avgEngagement": 5
+      "totalViews": 21,
+      "avgViews": 21,
+      "avgEngagement": 4.76
     }
   ],
   "byPlatform": [
     {
       "key": "youtube_shorts",
       "videos": 17,
-      "totalViews": 2226,
-      "avgViews": 130.9,
-      "avgEngagement": 2.14
+      "totalViews": 3009,
+      "avgViews": 177,
+      "avgEngagement": 2.54
     },
     {
       "key": "youtube",
-      "videos": 11,
-      "totalViews": 29,
-      "avgViews": 2.6,
+      "videos": 10,
+      "totalViews": 28,
+      "avgViews": 2.8,
       "avgEngagement": 0
     }
   ],
   "byHourUTC": [
     {
+      "key": "22h",
+      "videos": 2,
+      "totalViews": 384,
+      "avgViews": 192,
+      "avgEngagement": 3.13
+    },
+    {
       "key": "03h",
       "videos": 3,
-      "totalViews": 50,
-      "avgViews": 16.7,
-      "avgEngagement": 3.12
+      "totalViews": 52,
+      "avgViews": 17.3,
+      "avgEngagement": 2.98
     },
     {
       "key": "23h",
-      "videos": 5,
-      "totalViews": 1409,
-      "avgViews": 281.8,
-      "avgEngagement": 3.09
+      "videos": 6,
+      "totalViews": 1753,
+      "avgViews": 292.2,
+      "avgEngagement": 2.96
     },
     {
       "key": "01h",
       "videos": 1,
-      "totalViews": 132,
-      "avgViews": 132,
-      "avgEngagement": 3.03
-    },
-    {
-      "key": "16h",
-      "videos": 1,
-      "totalViews": 224,
-      "avgViews": 224,
-      "avgEngagement": 2.23
+      "totalViews": 144,
+      "avgViews": 144,
+      "avgEngagement": 2.08
     },
     {
       "key": "04h",
       "videos": 2,
-      "totalViews": 241,
-      "avgViews": 120.5,
-      "avgEngagement": 1.87
+      "totalViews": 242,
+      "avgViews": 121,
+      "avgEngagement": 1.86
     },
     {
-      "key": "05h",
+      "key": "16h",
       "videos": 1,
-      "totalViews": 72,
-      "avgViews": 72,
-      "avgEngagement": 0
+      "totalViews": 333,
+      "avgViews": 333,
+      "avgEngagement": 1.8
     },
     {
       "key": "18h",
@@ -201,17 +201,10 @@
       "avgEngagement": 0
     },
     {
-      "key": "22h",
-      "videos": 2,
-      "totalViews": 9,
-      "avgViews": 4.5,
-      "avgEngagement": 0
-    },
-    {
       "key": "19h",
       "videos": 1,
-      "totalViews": 15,
-      "avgViews": 15,
+      "totalViews": 26,
+      "avgViews": 26,
       "avgEngagement": 0
     }
   ],
@@ -226,9 +219,9 @@
     {
       "key": "Segunda",
       "videos": 1,
-      "totalViews": 20,
-      "avgViews": 20,
-      "avgEngagement": 5
+      "totalViews": 21,
+      "avgViews": 21,
+      "avgEngagement": 4.76
     },
     {
       "key": "Sexta",
@@ -238,32 +231,32 @@
       "avgEngagement": 3.25
     },
     {
-      "key": "Domingo",
-      "videos": 2,
-      "totalViews": 241,
-      "avgViews": 120.5,
-      "avgEngagement": 1.87
-    },
-    {
       "key": "Terça",
       "videos": 4,
-      "totalViews": 139,
-      "avgViews": 34.8,
-      "avgEngagement": 1.09
+      "totalViews": 170,
+      "avgViews": 42.5,
+      "avgEngagement": 2.39
+    },
+    {
+      "key": "Domingo",
+      "videos": 2,
+      "totalViews": 242,
+      "avgViews": 121,
+      "avgEngagement": 1.86
     },
     {
       "key": "Quarta",
       "videos": 6,
-      "totalViews": 821,
-      "avgViews": 136.8,
-      "avgEngagement": 0.88
+      "totalViews": 1570,
+      "avgViews": 261.7,
+      "avgEngagement": 1.18
     }
   ],
-  "viralScoreCorrelation": -0.43,
+  "viralScoreCorrelation": -0.47,
   "recommendations": [
-    "A categoria \"ciência\" tem a melhor média de views (202) — vale priorizar temas parecidos.",
+    "A categoria \"ciência\" tem a melhor média de views (219) — vale priorizar temas parecidos.",
     "\"youtube_shorts\" é a plataforma com melhor desempenho médio — considere adaptar mais conteúdo pro formato dela.",
-    "Publicações por volta das 03h (UTC) tiveram o maior engajamento médio — pode ser um bom horário pra concentrar lançamentos.",
-    "O \"viralScore\" estimado pela IA está com correlação negativa (-0.43) com os resultados reais — vale revisar os critérios usados pra calculá-lo."
+    "Publicações por volta das 22h (UTC) tiveram o maior engajamento médio — pode ser um bom horário pra concentrar lançamentos.",
+    "O \"viralScore\" estimado pela IA está com correlação negativa (-0.47) com os resultados reais — vale revisar os critérios usados pra calculá-lo."
   ]
 }
