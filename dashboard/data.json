@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-26T00:30:03.236Z",
+  "lastUpdated": "2026-06-26T03:04:50.222Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -75,51 +75,6 @@
     "updatedAt": "2026-06-25T23:04:52.122Z"
   },
   "runs": [
-    {
-      "runId": "2026-06-10T23-00-06",
-      "channel": "codex-mental",
-      "startedAt": "2026-06-10T23:00:06.601Z",
-      "completedAt": "2026-06-10T23:07:35.228Z",
-      "status": "ok",
-      "error": null,
-      "topic": "O Sinal nos Olhos que Revela Atração Instantânea",
-      "category": "ciência",
-      "viralScore": 84,
-      "publish": [
-        {
-          "platform": "youtube",
-          "url": "https://www.youtube.com/watch?v=kPMy9mUMqPk",
-          "publishId": null
-        },
-        {
-          "platform": "youtube_shorts",
-          "url": "https://www.youtube.com/shorts/pSHP_dDXJyQ",
-          "publishId": null
-        },
-        {
-          "platform": "tiktok",
-          "url": "https://www.tiktok.com/@codexmentalbr",
-          "publishId": "v_inbox_file~v2.7649906987446159377"
-        }
-      ],
-      "sound": {
-        "category": "trending_viral",
-        "sound": "Voiceover/remix trend do nicho de psicologia"
-      },
-      "stats": {
-        "youtube": {
-          "views": 3,
-          "likes": 0,
-          "comments": 0
-        },
-        "youtube_shorts": {
-          "views": 374,
-          "likes": 0,
-          "comments": 0
-        }
-      },
-      "statsUpdatedAt": "2026-06-26T00:30:02.959Z"
-    },
     {
       "runId": "2026-06-11T23-46-12",
       "channel": "codex-mental",
@@ -1091,6 +1046,33 @@
         }
       },
       "statsUpdatedAt": "2026-06-26T00:30:02.967Z"
+    },
+    {
+      "runId": "2026-06-26T03-00-01",
+      "channel": "brazil-noir",
+      "startedAt": "2026-06-26T03:00:01.212Z",
+      "completedAt": "2026-06-26T03:04:50.218Z",
+      "status": "ok",
+      "error": null,
+      "topic": "The Galdino Case: They set a sleeping man on fire and called it a 'prank'",
+      "category": "murder",
+      "viralScore": 88,
+      "publish": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=9ysXMb8PNas",
+          "publishId": null
+        },
+        {
+          "platform": "youtube_shorts",
+          "url": "https://www.youtube.com/shorts/uPwmkb49yvE",
+          "publishId": null
+        }
+      ],
+      "sound": {
+        "category": "suspense_misterio",
+        "sound": "Dramatic reveal sting / whoosh transition"
+      }
     }
   ],
   "revenueProjection": {
