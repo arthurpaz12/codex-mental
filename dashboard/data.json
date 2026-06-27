@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-27T00:35:36.584Z",
+  "lastUpdated": "2026-06-27T02:18:06.935Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -75,19 +75,6 @@
     "updatedAt": "2026-06-25T23:04:52.122Z"
   },
   "runs": [
-    {
-      "runId": "2026-06-11T23-46-12",
-      "channel": "codex-mental",
-      "startedAt": "2026-06-11T23:46:12.580Z",
-      "completedAt": "2026-06-12T00:45:55.761Z",
-      "status": "error",
-      "error": "read ECONNRESET",
-      "topic": "Como Saber se Alguém Está Mentindo Pelos Olhos (O Sinal que o Cérebro Não Consegue Esconder)",
-      "category": "ciência",
-      "viralScore": 82,
-      "publish": [],
-      "sound": null
-    },
     {
       "runId": "2026-06-12T03-00-02",
       "channel": "brazil-noir",
@@ -1086,6 +1073,19 @@
         }
       },
       "statsUpdatedAt": "2026-06-27T00:35:36.231Z"
+    },
+    {
+      "runId": "2026-06-26T23-00-06",
+      "channel": "codex-mental",
+      "startedAt": "2026-06-26T23:00:06.905Z",
+      "completedAt": "2026-06-27T02:18:06.912Z",
+      "status": "error",
+      "error": "Request timed out.",
+      "topic": null,
+      "category": null,
+      "viralScore": null,
+      "publish": [],
+      "sound": null
     }
   ],
   "revenueProjection": {
