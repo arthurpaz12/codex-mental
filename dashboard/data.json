@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-27T06:50:39.218Z",
+  "lastUpdated": "2026-06-27T12:44:34.003Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -113,7 +113,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T00:35:36.231Z"
+      "statsUpdatedAt": "2026-06-27T12:44:33.763Z"
     },
     {
       "runId": "2026-06-13T23-00-02",
@@ -153,7 +153,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T00:35:36.231Z"
+      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
     },
     {
       "runId": "2026-06-14T04-31-07",
@@ -198,7 +198,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T00:35:36.231Z"
+      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
     },
     {
       "runId": "2026-06-14T04-40-24",
@@ -243,7 +243,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T00:35:36.231Z"
+      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
     },
     {
       "runId": "2026-06-14T23-00-02",
@@ -310,7 +310,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T00:35:36.231Z"
+      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
     },
     {
       "runId": "2026-06-15T23-00-03",
@@ -377,7 +377,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T00:35:36.231Z"
+      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
     },
     {
       "runId": "2026-06-16T23-00-02",
@@ -532,7 +532,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T00:35:36.231Z"
+      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
     },
     {
       "runId": "2026-06-20T03-00-04",
@@ -632,7 +632,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T00:35:36.231Z"
+      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
     },
     {
       "runId": "2026-06-23T21-58-30",
@@ -667,7 +667,7 @@
       },
       "stats": {
         "youtube": {
-          "views": 2,
+          "views": 3,
           "likes": 0,
           "comments": 0
         },
@@ -677,7 +677,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T00:35:36.231Z"
+      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
     },
     {
       "runId": "2026-06-23T23-00-02",
@@ -717,12 +717,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 6,
+          "views": 7,
           "likes": 0,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T00:35:36.231Z"
+      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
     },
     {
       "runId": "2026-06-24T01-04-08",
@@ -767,7 +767,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T00:35:36.231Z"
+      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
     },
     {
       "runId": "2026-06-24T16-30-17",
@@ -812,7 +812,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T00:35:36.231Z"
+      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
     },
     {
       "runId": "2026-06-24T19-35-34",
@@ -857,7 +857,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T00:35:36.231Z"
+      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
     },
     {
       "runId": "2026-06-24T22-40-25",
@@ -892,12 +892,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 453,
+          "views": 454,
           "likes": 3,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T00:35:36.231Z"
+      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
     },
     {
       "runId": "2026-06-24T23-00-05",
@@ -937,12 +937,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 576,
+          "views": 691,
           "likes": 11,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T00:35:36.231Z"
+      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
     },
     {
       "runId": "2026-06-25T23-00-02",
@@ -982,12 +982,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 379,
+          "views": 380,
           "likes": 3,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T00:35:36.231Z"
+      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
     },
     {
       "runId": "2026-06-26T03-00-01",
@@ -1027,7 +1027,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T00:35:36.231Z"
+      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
     },
     {
       "runId": "2026-06-26T23-00-06",
@@ -1067,14 +1067,27 @@
       "sound": {
         "category": "storytelling_motivacional",
         "sound": "Lo-fi motivational beat"
-      }
+      },
+      "stats": {
+        "youtube": {
+          "views": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        "youtube_shorts": {
+          "views": 24,
+          "likes": 0,
+          "comments": 0
+        }
+      },
+      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
     }
   ],
   "revenueProjection": {
     "realStats": {
-      "youtube": 3435,
+      "youtube": 3571,
       "tiktok": 0,
-      "total": 3435,
+      "total": 3571,
       "videosPublicados": 25,
       "hotmart": {
         "source": "api",
@@ -1148,61 +1161,61 @@
       }
     },
     "custoTotal": 87.5,
-    "baseMonthlyViews": 3435,
-    "generatedAt": "2026-06-27T00:35:36.583Z",
+    "baseMonthlyViews": 3571,
+    "generatedAt": "2026-06-27T12:44:34.002Z",
     "scenarios": {
       "conservador": {
         "rpm": 4,
         "conv": 0.0005,
-        "adRevenue": 13.74,
-        "sales": 1.7175,
-        "affiliateRevenue": 115.0725,
-        "total": 128.8125
+        "adRevenue": 14.284,
+        "sales": 1.7855,
+        "affiliateRevenue": 119.6285,
+        "total": 133.9125
       },
       "moderado": {
         "rpm": 8,
         "conv": 0.001,
-        "adRevenue": 27.48,
-        "sales": 3.435,
-        "affiliateRevenue": 230.145,
-        "total": 257.625
+        "adRevenue": 28.568,
+        "sales": 3.571,
+        "affiliateRevenue": 239.257,
+        "total": 267.825
       },
       "otimista": {
         "rpm": 14,
         "conv": 0.002,
-        "adRevenue": 48.09,
-        "sales": 6.87,
-        "affiliateRevenue": 460.29,
-        "total": 508.38
+        "adRevenue": 49.994,
+        "sales": 7.142,
+        "affiliateRevenue": 478.514,
+        "total": 528.508
       }
     },
     "perPlatform": {
       "youtube": {
-        "monthlyViews": 3435,
+        "monthlyViews": 3571,
         "scenarios": {
           "conservador": {
             "rpm": 4,
             "conv": 0.0005,
-            "adRevenue": 13.74,
-            "sales": 1.7175,
-            "affiliateRevenue": 115.0725,
-            "total": 128.8125
+            "adRevenue": 14.284,
+            "sales": 1.7855,
+            "affiliateRevenue": 119.6285,
+            "total": 133.9125
           },
           "moderado": {
             "rpm": 8,
             "conv": 0.001,
-            "adRevenue": 27.48,
-            "sales": 3.435,
-            "affiliateRevenue": 230.145,
-            "total": 257.625
+            "adRevenue": 28.568,
+            "sales": 3.571,
+            "affiliateRevenue": 239.257,
+            "total": 267.825
           },
           "otimista": {
             "rpm": 14,
             "conv": 0.002,
-            "adRevenue": 48.09,
-            "sales": 6.87,
-            "affiliateRevenue": 460.29,
-            "total": 508.38
+            "adRevenue": 49.994,
+            "sales": 7.142,
+            "affiliateRevenue": 478.514,
+            "total": 528.508
           }
         }
       },
@@ -1242,14 +1255,14 @@
           "name": "Codex Mental",
           "subs": 22,
           "subsGoal": 1000,
-          "totalViews": 5020,
+          "totalViews": 5657,
           "shortsViewsGoal90d": 10000000
         },
         "brazil-noir": {
           "name": "Brazil Noir",
           "subs": 2,
           "subsGoal": 1000,
-          "totalViews": 1406,
+          "totalViews": 1579,
           "shortsViewsGoal90d": 10000000
         }
       },
