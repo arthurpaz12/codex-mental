@@ -1,22 +1,12 @@
 {
-  "generatedAt": "2026-06-25T23:04:52.405Z",
+  "generatedAt": "2026-06-27T23:07:23.140Z",
   "sampleSize": 17,
   "topByViews": [
     {
-      "topic": "A Técnica de Interrogatório que Faz Qualquer Pessoa Confessar a Verdade",
+      "topic": "A Regra dos Pés: O Sinal Corporal que Revela o Que Alguém Esconde de Você",
       "category": "ciência",
-      "views": 570,
-      "engagement": 5.96,
-      "platforms": [
-        "youtube",
-        "youtube_shorts"
-      ]
-    },
-    {
-      "topic": "O Sinal nos Olhos que Revela Atração Instantânea",
-      "category": "ciência",
-      "views": 377,
-      "engagement": 0,
+      "views": 693,
+      "engagement": 1.59,
       "platforms": [
         "youtube",
         "youtube_shorts",
@@ -26,18 +16,18 @@
     {
       "topic": "The Mércia Nakashima Case: A jealous ex-cop drowned his lawyer girlfriend in a sunken car",
       "category": "murder",
-      "views": 347,
-      "engagement": 0.86,
+      "views": 455,
+      "engagement": 0.66,
       "platforms": [
         "youtube",
         "youtube_shorts"
       ]
     },
     {
-      "topic": "A Regra dos Pés: O Sinal Corporal que Revela o Que Alguém Esconde de Você",
+      "topic": "O Gesto das Mãos que Denuncia Quando Alguém Está Mentindo Para Você",
       "category": "ciência",
-      "views": 343,
-      "engagement": 2.33,
+      "views": 381,
+      "engagement": 0.79,
       "platforms": [
         "youtube",
         "youtube_shorts",
@@ -47,24 +37,12 @@
     {
       "topic": "The Champinha Case: A teenage killer Brazil couldn't legally punish",
       "category": "murder",
-      "views": 333,
-      "engagement": 1.8,
+      "views": 361,
+      "engagement": 1.94,
       "platforms": [
         "youtube",
         "youtube_shorts",
         "tiktok"
-      ]
-    }
-  ],
-  "topByEngagement": [
-    {
-      "topic": "A Técnica de Interrogatório que Faz Qualquer Pessoa Confessar a Verdade",
-      "category": "ciência",
-      "views": 570,
-      "engagement": 5.96,
-      "platforms": [
-        "youtube",
-        "youtube_shorts"
       ]
     },
     {
@@ -76,16 +54,17 @@
         "youtube",
         "youtube_shorts"
       ]
-    },
+    }
+  ],
+  "topByEngagement": [
     {
-      "topic": "The Eloá Pimentel Case: Brazil's longest hostage siege played out live on national TV",
-      "category": "murder",
-      "views": 37,
-      "engagement": 5.41,
+      "topic": "A Técnica do Silêncio: Como Fazer Qualquer Pessoa Revelar Seus Segredos",
+      "category": "ciência",
+      "views": 246,
+      "engagement": 5.69,
       "platforms": [
         "youtube",
-        "youtube_shorts",
-        "tiktok"
+        "youtube_shorts"
       ]
     },
     {
@@ -109,75 +88,104 @@
         "youtube_shorts",
         "tiktok"
       ]
+    },
+    {
+      "topic": "The Eloá Pimentel Case: Brazil's longest hostage siege played out live on national TV",
+      "category": "murder",
+      "views": 48,
+      "engagement": 4.17,
+      "platforms": [
+        "youtube",
+        "youtube_shorts",
+        "tiktok"
+      ]
+    },
+    {
+      "topic": "O Olhar de 3 Segundos que Revela Quando Alguém Está Mentindo",
+      "category": "ciência",
+      "views": 212,
+      "engagement": 3.77,
+      "platforms": [
+        "youtube",
+        "youtube_shorts",
+        "tiktok"
+      ]
     }
   ],
   "byCategory": [
     {
       "key": "ciência",
-      "videos": 10,
-      "totalViews": 2185,
-      "avgViews": 218.5,
-      "avgEngagement": 2.24
+      "videos": 9,
+      "totalViews": 1993,
+      "avgViews": 221.4,
+      "avgEngagement": 1.82
     },
     {
       "key": "murder",
       "videos": 6,
-      "totalViews": 831,
-      "avgViews": 138.5,
-      "avgEngagement": 2.24
+      "totalViews": 973,
+      "avgViews": 162.2,
+      "avgEngagement": 2.02
     },
     {
       "key": "serial killer",
-      "videos": 1,
-      "totalViews": 21,
-      "avgViews": 21,
-      "avgEngagement": 4.76
+      "videos": 2,
+      "totalViews": 102,
+      "avgViews": 51,
+      "avgEngagement": 2.38
     }
   ],
   "byPlatform": [
     {
       "key": "youtube_shorts",
       "videos": 17,
-      "totalViews": 3009,
-      "avgViews": 177,
-      "avgEngagement": 2.54
+      "totalViews": 3043,
+      "avgViews": 179,
+      "avgEngagement": 2.12
     },
     {
       "key": "youtube",
-      "videos": 10,
-      "totalViews": 28,
-      "avgViews": 2.8,
+      "videos": 8,
+      "totalViews": 25,
+      "avgViews": 3.1,
       "avgEngagement": 0
     }
   ],
   "byHourUTC": [
     {
-      "key": "22h",
-      "videos": 2,
-      "totalViews": 384,
-      "avgViews": 192,
-      "avgEngagement": 3.13
-    },
-    {
       "key": "03h",
       "videos": 3,
-      "totalViews": 52,
-      "avgViews": 17.3,
+      "totalViews": 47,
+      "avgViews": 15.7,
       "avgEngagement": 2.98
     },
     {
+      "key": "22h",
+      "videos": 2,
+      "totalViews": 503,
+      "avgViews": 251.5,
+      "avgEngagement": 2.41
+    },
+    {
       "key": "23h",
-      "videos": 6,
-      "totalViews": 1753,
-      "avgViews": 292.2,
-      "avgEngagement": 2.96
+      "videos": 5,
+      "totalViews": 1539,
+      "avgViews": 307.8,
+      "avgEngagement": 2.37
     },
     {
       "key": "01h",
       "videos": 1,
-      "totalViews": 144,
-      "avgViews": 144,
-      "avgEngagement": 2.08
+      "totalViews": 146,
+      "avgViews": 146,
+      "avgEngagement": 2.05
+    },
+    {
+      "key": "16h",
+      "videos": 1,
+      "totalViews": 361,
+      "avgViews": 361,
+      "avgEngagement": 1.94
     },
     {
       "key": "04h",
@@ -187,35 +195,28 @@
       "avgEngagement": 1.86
     },
     {
-      "key": "16h",
-      "videos": 1,
-      "totalViews": 333,
-      "avgViews": 333,
-      "avgEngagement": 1.8
-    },
-    {
       "key": "18h",
       "videos": 1,
-      "totalViews": 103,
-      "avgViews": 103,
+      "totalViews": 105,
+      "avgViews": 105,
       "avgEngagement": 0
     },
     {
       "key": "19h",
       "videos": 1,
-      "totalViews": 26,
-      "avgViews": 26,
+      "totalViews": 44,
+      "avgViews": 44,
+      "avgEngagement": 0
+    },
+    {
+      "key": "06h",
+      "videos": 1,
+      "totalViews": 81,
+      "avgViews": 81,
       "avgEngagement": 0
     }
   ],
   "byWeekday": [
-    {
-      "key": "Sábado",
-      "videos": 1,
-      "totalViews": 246,
-      "avgViews": 246,
-      "avgEngagement": 5.69
-    },
     {
       "key": "Segunda",
       "videos": 1,
@@ -224,18 +225,25 @@
       "avgEngagement": 4.76
     },
     {
-      "key": "Sexta",
-      "videos": 3,
-      "totalViews": 788,
-      "avgViews": 262.7,
-      "avgEngagement": 3.25
+      "key": "Sábado",
+      "videos": 2,
+      "totalViews": 327,
+      "avgViews": 163.5,
+      "avgEngagement": 2.85
     },
     {
       "key": "Terça",
       "videos": 4,
-      "totalViews": 170,
-      "avgViews": 42.5,
-      "avgEngagement": 2.39
+      "totalViews": 184,
+      "avgViews": 46,
+      "avgEngagement": 2.08
+    },
+    {
+      "key": "Sexta",
+      "videos": 2,
+      "totalViews": 214,
+      "avgViews": 107,
+      "avgEngagement": 1.89
     },
     {
       "key": "Domingo",
@@ -246,17 +254,24 @@
     },
     {
       "key": "Quarta",
-      "videos": 6,
-      "totalViews": 1570,
-      "avgViews": 261.7,
-      "avgEngagement": 1.18
+      "videos": 5,
+      "totalViews": 1699,
+      "avgViews": 339.8,
+      "avgEngagement": 1.25
+    },
+    {
+      "key": "Quinta",
+      "videos": 1,
+      "totalViews": 381,
+      "avgViews": 381,
+      "avgEngagement": 0.79
     }
   ],
-  "viralScoreCorrelation": -0.47,
+  "viralScoreCorrelation": -0.42,
   "recommendations": [
-    "A categoria \"ciência\" tem a melhor média de views (219) — vale priorizar temas parecidos.",
+    "A categoria \"ciência\" tem a melhor média de views (221) — vale priorizar temas parecidos.",
     "\"youtube_shorts\" é a plataforma com melhor desempenho médio — considere adaptar mais conteúdo pro formato dela.",
-    "Publicações por volta das 22h (UTC) tiveram o maior engajamento médio — pode ser um bom horário pra concentrar lançamentos.",
-    "O \"viralScore\" estimado pela IA está com correlação negativa (-0.47) com os resultados reais — vale revisar os critérios usados pra calculá-lo."
+    "Publicações por volta das 03h (UTC) tiveram o maior engajamento médio — pode ser um bom horário pra concentrar lançamentos.",
+    "O \"viralScore\" estimado pela IA está com correlação negativa (-0.42) com os resultados reais — vale revisar os critérios usados pra calculá-lo."
   ]
 }

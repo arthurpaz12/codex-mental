@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-27T12:44:34.003Z",
+  "lastUpdated": "2026-06-27T23:07:23.132Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -72,49 +72,9 @@
         "currency": "BRL"
       }
     ],
-    "updatedAt": "2026-06-25T23:04:52.122Z"
+    "updatedAt": "2026-06-27T23:07:22.990Z"
   },
   "runs": [
-    {
-      "runId": "2026-06-12T23-00-02",
-      "channel": "codex-mental",
-      "startedAt": "2026-06-12T23:00:02.945Z",
-      "completedAt": "2026-06-12T23:08:02.290Z",
-      "status": "ok",
-      "error": null,
-      "topic": "A Técnica de Interrogatório que Faz Qualquer Pessoa Confessar a Verdade",
-      "category": "ciência",
-      "viralScore": 82,
-      "publish": [
-        {
-          "platform": "youtube",
-          "url": "https://www.youtube.com/watch?v=i0RFe-PREK8",
-          "publishId": null
-        },
-        {
-          "platform": "youtube_shorts",
-          "url": "https://www.youtube.com/shorts/L821nU2icu4",
-          "publishId": null
-        }
-      ],
-      "sound": {
-        "category": "storytelling_motivacional",
-        "sound": "Soft piano storytelling loop"
-      },
-      "stats": {
-        "youtube": {
-          "views": 1,
-          "likes": 0,
-          "comments": 0
-        },
-        "youtube_shorts": {
-          "views": 570,
-          "likes": 34,
-          "comments": 0
-        }
-      },
-      "statsUpdatedAt": "2026-06-27T12:44:33.763Z"
-    },
     {
       "runId": "2026-06-13T23-00-02",
       "channel": "codex-mental",
@@ -153,7 +113,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
+      "statsUpdatedAt": "2026-06-27T23:07:21.633Z"
     },
     {
       "runId": "2026-06-14T04-31-07",
@@ -198,7 +158,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
+      "statsUpdatedAt": "2026-06-27T23:07:21.633Z"
     },
     {
       "runId": "2026-06-14T04-40-24",
@@ -243,7 +203,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
+      "statsUpdatedAt": "2026-06-27T23:07:21.633Z"
     },
     {
       "runId": "2026-06-14T23-00-02",
@@ -310,7 +270,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
+      "statsUpdatedAt": "2026-06-27T23:07:21.633Z"
     },
     {
       "runId": "2026-06-15T23-00-03",
@@ -377,7 +337,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
+      "statsUpdatedAt": "2026-06-27T23:07:21.633Z"
     },
     {
       "runId": "2026-06-16T23-00-02",
@@ -522,7 +482,7 @@
       },
       "stats": {
         "youtube": {
-          "views": 1,
+          "views": 2,
           "likes": 0,
           "comments": 0
         },
@@ -532,7 +492,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
+      "statsUpdatedAt": "2026-06-27T23:07:21.633Z"
     },
     {
       "runId": "2026-06-20T03-00-04",
@@ -627,12 +587,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 103,
+          "views": 105,
           "likes": 0,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
+      "statsUpdatedAt": "2026-06-27T23:07:21.633Z"
     },
     {
       "runId": "2026-06-23T21-58-30",
@@ -672,12 +632,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 44,
+          "views": 45,
           "likes": 2,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
+      "statsUpdatedAt": "2026-06-27T23:07:21.633Z"
     },
     {
       "runId": "2026-06-23T23-00-02",
@@ -722,7 +682,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
+      "statsUpdatedAt": "2026-06-27T23:07:21.633Z"
     },
     {
       "runId": "2026-06-24T01-04-08",
@@ -762,12 +722,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 144,
+          "views": 145,
           "likes": 3,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
+      "statsUpdatedAt": "2026-06-27T23:07:21.633Z"
     },
     {
       "runId": "2026-06-24T16-30-17",
@@ -812,7 +772,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
+      "statsUpdatedAt": "2026-06-27T23:07:21.633Z"
     },
     {
       "runId": "2026-06-24T19-35-34",
@@ -852,12 +812,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 42,
+          "views": 44,
           "likes": 0,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
+      "statsUpdatedAt": "2026-06-27T23:07:21.633Z"
     },
     {
       "runId": "2026-06-24T22-40-25",
@@ -892,12 +852,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 454,
+          "views": 455,
           "likes": 3,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
+      "statsUpdatedAt": "2026-06-27T23:07:21.633Z"
     },
     {
       "runId": "2026-06-24T23-00-05",
@@ -937,12 +897,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 691,
+          "views": 693,
           "likes": 11,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
+      "statsUpdatedAt": "2026-06-27T23:07:21.633Z"
     },
     {
       "runId": "2026-06-25T23-00-02",
@@ -982,12 +942,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 380,
+          "views": 381,
           "likes": 3,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
+      "statsUpdatedAt": "2026-06-27T23:07:21.633Z"
     },
     {
       "runId": "2026-06-26T03-00-01",
@@ -1027,7 +987,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
+      "statsUpdatedAt": "2026-06-27T23:07:21.633Z"
     },
     {
       "runId": "2026-06-26T23-00-06",
@@ -1075,19 +1035,64 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 24,
+          "views": 81,
           "likes": 0,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-27T12:44:33.771Z"
+      "statsUpdatedAt": "2026-06-27T23:07:21.633Z"
+    },
+    {
+      "runId": "2026-06-27T23-00-06",
+      "channel": "codex-mental",
+      "startedAt": "2026-06-27T23:00:06.543Z",
+      "completedAt": "2026-06-27T23:07:21.024Z",
+      "status": "ok",
+      "error": null,
+      "topic": "A Pergunta Capciosa que Faz Mentirosos se Trairem em Segundos",
+      "category": "ciência",
+      "viralScore": 82,
+      "publish": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=L9TVx5fdj4w",
+          "publishId": null
+        },
+        {
+          "platform": "youtube_shorts",
+          "url": "https://www.youtube.com/shorts/ztfrxQnkKqo",
+          "publishId": null
+        },
+        {
+          "platform": "tiktok",
+          "url": "https://www.tiktok.com/@codexmentalbr",
+          "publishId": "v_inbox_file~v2.7656215072339134465"
+        }
+      ],
+      "sound": {
+        "category": "storytelling_motivacional",
+        "sound": "Lo-fi motivational beat"
+      },
+      "stats": {
+        "youtube": {
+          "views": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        "youtube_shorts": {
+          "views": 0,
+          "likes": 0,
+          "comments": 0
+        }
+      },
+      "statsUpdatedAt": "2026-06-27T23:07:21.633Z"
     }
   ],
   "revenueProjection": {
     "realStats": {
-      "youtube": 3571,
+      "youtube": 3068,
       "tiktok": 0,
-      "total": 3571,
+      "total": 3068,
       "videosPublicados": 25,
       "hotmart": {
         "source": "api",
@@ -1157,65 +1162,65 @@
             "currency": "BRL"
           }
         ],
-        "updatedAt": "2026-06-25T23:04:52.122Z"
+        "updatedAt": "2026-06-27T23:07:22.990Z"
       }
     },
     "custoTotal": 87.5,
-    "baseMonthlyViews": 3571,
-    "generatedAt": "2026-06-27T12:44:34.002Z",
+    "baseMonthlyViews": 3068,
+    "generatedAt": "2026-06-27T23:07:23.132Z",
     "scenarios": {
       "conservador": {
         "rpm": 4,
         "conv": 0.0005,
-        "adRevenue": 14.284,
-        "sales": 1.7855,
-        "affiliateRevenue": 119.6285,
-        "total": 133.9125
+        "adRevenue": 12.272,
+        "sales": 1.534,
+        "affiliateRevenue": 102.778,
+        "total": 115.05000000000001
       },
       "moderado": {
         "rpm": 8,
         "conv": 0.001,
-        "adRevenue": 28.568,
-        "sales": 3.571,
-        "affiliateRevenue": 239.257,
-        "total": 267.825
+        "adRevenue": 24.544,
+        "sales": 3.068,
+        "affiliateRevenue": 205.556,
+        "total": 230.10000000000002
       },
       "otimista": {
         "rpm": 14,
         "conv": 0.002,
-        "adRevenue": 49.994,
-        "sales": 7.142,
-        "affiliateRevenue": 478.514,
-        "total": 528.508
+        "adRevenue": 42.952,
+        "sales": 6.136,
+        "affiliateRevenue": 411.112,
+        "total": 454.064
       }
     },
     "perPlatform": {
       "youtube": {
-        "monthlyViews": 3571,
+        "monthlyViews": 3068,
         "scenarios": {
           "conservador": {
             "rpm": 4,
             "conv": 0.0005,
-            "adRevenue": 14.284,
-            "sales": 1.7855,
-            "affiliateRevenue": 119.6285,
-            "total": 133.9125
+            "adRevenue": 12.272,
+            "sales": 1.534,
+            "affiliateRevenue": 102.778,
+            "total": 115.05000000000001
           },
           "moderado": {
             "rpm": 8,
             "conv": 0.001,
-            "adRevenue": 28.568,
-            "sales": 3.571,
-            "affiliateRevenue": 239.257,
-            "total": 267.825
+            "adRevenue": 24.544,
+            "sales": 3.068,
+            "affiliateRevenue": 205.556,
+            "total": 230.10000000000002
           },
           "otimista": {
             "rpm": 14,
             "conv": 0.002,
-            "adRevenue": 49.994,
-            "sales": 7.142,
-            "affiliateRevenue": 478.514,
-            "total": 528.508
+            "adRevenue": 42.952,
+            "sales": 6.136,
+            "affiliateRevenue": 411.112,
+            "total": 454.064
           }
         }
       },
