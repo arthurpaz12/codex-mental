@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-27T02:18:06.935Z",
+  "lastUpdated": "2026-06-27T06:50:39.218Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -75,51 +75,6 @@
     "updatedAt": "2026-06-25T23:04:52.122Z"
   },
   "runs": [
-    {
-      "runId": "2026-06-12T03-00-02",
-      "channel": "brazil-noir",
-      "startedAt": "2026-06-12T03:00:02.937Z",
-      "completedAt": "2026-06-12T03:14:28.235Z",
-      "status": "ok",
-      "error": null,
-      "topic": "The Flordelis Case: The Congresswoman Mother of 55 Who Ordered Her Husband's Murder",
-      "category": "murder",
-      "viralScore": 94,
-      "publish": [
-        {
-          "platform": "youtube",
-          "url": "https://www.youtube.com/watch?v=yTmcpzPusTE",
-          "publishId": null
-        },
-        {
-          "platform": "youtube_shorts",
-          "url": "https://www.youtube.com/shorts/qjHYsmhO-zg",
-          "publishId": null
-        },
-        {
-          "platform": "tiktok",
-          "url": "https://www.tiktok.com/@codexmentalbr",
-          "publishId": "v_inbox_file~v2.7650341461146208273"
-        }
-      ],
-      "sound": {
-        "category": "storytelling_motivacional",
-        "sound": "Soft piano storytelling loop"
-      },
-      "stats": {
-        "youtube": {
-          "views": 3,
-          "likes": 0,
-          "comments": 0
-        },
-        "youtube_shorts": {
-          "views": 4,
-          "likes": 0,
-          "comments": 0
-        }
-      },
-      "statsUpdatedAt": "2026-06-27T00:35:35.938Z"
-    },
     {
       "runId": "2026-06-12T23-00-02",
       "channel": "codex-mental",
@@ -1086,6 +1041,33 @@
       "viralScore": null,
       "publish": [],
       "sound": null
+    },
+    {
+      "runId": "2026-06-27T03-05-04",
+      "channel": "brazil-noir",
+      "startedAt": "2026-06-27T03:05:04.579Z",
+      "completedAt": "2026-06-27T06:50:39.214Z",
+      "status": "ok",
+      "error": null,
+      "topic": "The Angel of Death Case: A hospital orderly killed patients to earn funeral home commissions",
+      "category": "serial killer",
+      "viralScore": 88,
+      "publish": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=2veCv2vFYhg",
+          "publishId": null
+        },
+        {
+          "platform": "youtube_shorts",
+          "url": "https://www.youtube.com/shorts/9fcw7ns8fbI",
+          "publishId": null
+        }
+      ],
+      "sound": {
+        "category": "storytelling_motivacional",
+        "sound": "Lo-fi motivational beat"
+      }
     }
   ],
   "revenueProjection": {
