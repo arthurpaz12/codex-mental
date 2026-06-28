@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-28T00:30:06.269Z",
+  "lastUpdated": "2026-06-28T03:05:29.264Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -75,46 +75,6 @@
     "updatedAt": "2026-06-27T23:07:22.990Z"
   },
   "runs": [
-    {
-      "runId": "2026-06-13T23-00-02",
-      "channel": "codex-mental",
-      "startedAt": "2026-06-13T23:00:02.667Z",
-      "completedAt": "2026-06-13T23:06:56.199Z",
-      "status": "ok",
-      "error": null,
-      "topic": "A Técnica do Silêncio: Como Fazer Qualquer Pessoa Revelar Seus Segredos",
-      "category": "ciência",
-      "viralScore": 84,
-      "publish": [
-        {
-          "platform": "youtube",
-          "url": "https://www.youtube.com/watch?v=aSxN7wB-4kY",
-          "publishId": null
-        },
-        {
-          "platform": "youtube_shorts",
-          "url": "https://www.youtube.com/shorts/4ML9MrnWZws",
-          "publishId": null
-        }
-      ],
-      "sound": {
-        "category": "trending_viral",
-        "sound": "Som em alta da semana (genérico)"
-      },
-      "stats": {
-        "youtube": {
-          "views": 1,
-          "likes": 0,
-          "comments": 0
-        },
-        "youtube_shorts": {
-          "views": 245,
-          "likes": 14,
-          "comments": 0
-        }
-      },
-      "statsUpdatedAt": "2026-06-28T00:30:06.059Z"
-    },
     {
       "runId": "2026-06-14T04-31-07",
       "channel": "brazil-noir",
@@ -1086,6 +1046,33 @@
         }
       },
       "statsUpdatedAt": "2026-06-28T00:30:06.068Z"
+    },
+    {
+      "runId": "2026-06-28T03-00-01",
+      "channel": "brazil-noir",
+      "startedAt": "2026-06-28T03:00:01.638Z",
+      "completedAt": "2026-06-28T03:05:29.261Z",
+      "status": "ok",
+      "error": null,
+      "topic": "The Fortaleza Bank Heist: Brazil's Biggest Robbery Vanished Through a 256-Foot Tunnel",
+      "category": "heist",
+      "viralScore": 88,
+      "publish": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=iwlF_gJBXdQ",
+          "publishId": null
+        },
+        {
+          "platform": "youtube_shorts",
+          "url": "https://www.youtube.com/shorts/WvH6nMB9Fuc",
+          "publishId": null
+        }
+      ],
+      "sound": {
+        "category": "trending_viral",
+        "sound": "Voiceover/remix trend do nicho de psicologia"
+      }
     }
   ],
   "revenueProjection": {
