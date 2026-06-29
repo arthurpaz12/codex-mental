@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-06-28T23:05:31.797Z",
+  "generatedAt": "2026-06-29T23:05:53.631Z",
   "sampleSize": 17,
   "topByViews": [
     {
       "topic": "A Pergunta Capciosa que Faz Mentirosos se Trairem em Segundos",
       "category": "ciência",
-      "views": 819,
-      "engagement": 2.93,
+      "views": 826,
+      "engagement": 2.91,
       "platforms": [
         "youtube",
         "youtube_shorts",
@@ -48,8 +48,8 @@
     {
       "topic": "The Champinha Case: A teenage killer Brazil couldn't legally punish",
       "category": "murder",
-      "views": 361,
-      "engagement": 1.94,
+      "views": 362,
+      "engagement": 1.93,
       "platforms": [
         "youtube",
         "youtube_shorts",
@@ -105,8 +105,8 @@
     {
       "topic": "A Pergunta Capciosa que Faz Mentirosos se Trairem em Segundos",
       "category": "ciência",
-      "views": 819,
-      "engagement": 2.93,
+      "views": 826,
+      "engagement": 2.91,
       "platforms": [
         "youtube",
         "youtube_shorts",
@@ -118,29 +118,29 @@
     {
       "key": "ciência",
       "videos": 9,
-      "totalViews": 2565,
-      "avgViews": 285,
-      "avgEngagement": 1.52
+      "totalViews": 2577,
+      "avgViews": 286.3,
+      "avgEngagement": 1.3
     },
     {
       "key": "murder",
       "videos": 5,
-      "totalViews": 889,
-      "avgViews": 177.8,
+      "totalViews": 890,
+      "avgViews": 178,
       "avgEngagement": 2.19
     },
     {
       "key": "serial killer",
       "videos": 2,
-      "totalViews": 151,
-      "avgViews": 75.5,
-      "avgEngagement": 2.77
+      "totalViews": 161,
+      "avgViews": 80.5,
+      "avgEngagement": 2.74
     },
     {
       "key": "heist",
       "videos": 1,
-      "totalViews": 18,
-      "avgViews": 18,
+      "totalViews": 23,
+      "avgViews": 23,
       "avgEngagement": 0
     }
   ],
@@ -148,26 +148,19 @@
     {
       "key": "youtube_shorts",
       "videos": 17,
-      "totalViews": 3607,
-      "avgViews": 212.2,
-      "avgEngagement": 1.92
+      "totalViews": 3632,
+      "avgViews": 213.6,
+      "avgEngagement": 1.8
     },
     {
       "key": "youtube",
-      "videos": 6,
-      "totalViews": 16,
-      "avgViews": 2.7,
+      "videos": 9,
+      "totalViews": 19,
+      "avgViews": 2.1,
       "avgEngagement": 0
     }
   ],
   "byHourUTC": [
-    {
-      "key": "04h",
-      "videos": 1,
-      "totalViews": 159,
-      "avgViews": 159,
-      "avgEngagement": 2.52
-    },
     {
       "key": "22h",
       "videos": 2,
@@ -178,8 +171,8 @@
     {
       "key": "03h",
       "videos": 4,
-      "totalViews": 66,
-      "avgViews": 16.5,
+      "totalViews": 71,
+      "avgViews": 17.8,
       "avgEngagement": 2.23
     },
     {
@@ -192,23 +185,23 @@
     {
       "key": "16h",
       "videos": 1,
-      "totalViews": 361,
-      "avgViews": 361,
-      "avgEngagement": 1.94
+      "totalViews": 362,
+      "avgViews": 362,
+      "avgEngagement": 1.93
     },
     {
       "key": "23h",
-      "videos": 5,
-      "totalViews": 2111,
-      "avgViews": 422.2,
-      "avgEngagement": 1.82
+      "videos": 6,
+      "totalViews": 2282,
+      "avgViews": 380.3,
+      "avgEngagement": 1.61
     },
     {
       "key": "06h",
       "videos": 1,
-      "totalViews": 130,
-      "avgViews": 130,
-      "avgEngagement": 0.77
+      "totalViews": 140,
+      "avgViews": 140,
+      "avgEngagement": 0.71
     },
     {
       "key": "18h",
@@ -236,8 +229,8 @@
     {
       "key": "Terça",
       "videos": 4,
-      "totalViews": 184,
-      "avgViews": 46,
+      "totalViews": 185,
+      "avgViews": 46.3,
       "avgEngagement": 2.08
     },
     {
@@ -250,22 +243,15 @@
     {
       "key": "Sábado",
       "videos": 2,
-      "totalViews": 949,
-      "avgViews": 474.5,
-      "avgEngagement": 1.85
-    },
-    {
-      "key": "Domingo",
-      "videos": 2,
-      "totalViews": 177,
-      "avgViews": 88.5,
-      "avgEngagement": 1.26
+      "totalViews": 966,
+      "avgViews": 483,
+      "avgEngagement": 1.81
     },
     {
       "key": "Quarta",
       "videos": 5,
-      "totalViews": 1695,
-      "avgViews": 339,
+      "totalViews": 1696,
+      "avgViews": 339.2,
       "avgEngagement": 1.25
     },
     {
@@ -274,13 +260,20 @@
       "totalViews": 382,
       "avgViews": 382,
       "avgEngagement": 0.79
+    },
+    {
+      "key": "Domingo",
+      "videos": 2,
+      "totalViews": 186,
+      "avgViews": 93,
+      "avgEngagement": 0.31
     }
   ],
-  "viralScoreCorrelation": -0.44,
+  "viralScoreCorrelation": -0.61,
   "recommendations": [
-    "A categoria \"ciência\" tem a melhor média de views (285) — vale priorizar temas parecidos.",
+    "A categoria \"ciência\" tem a melhor média de views (286) — vale priorizar temas parecidos.",
     "\"youtube_shorts\" é a plataforma com melhor desempenho médio — considere adaptar mais conteúdo pro formato dela.",
-    "Publicações por volta das 04h (UTC) tiveram o maior engajamento médio — pode ser um bom horário pra concentrar lançamentos.",
-    "O \"viralScore\" estimado pela IA está com correlação negativa (-0.44) com os resultados reais — vale revisar os critérios usados pra calculá-lo."
+    "Publicações por volta das 22h (UTC) tiveram o maior engajamento médio — pode ser um bom horário pra concentrar lançamentos.",
+    "O \"viralScore\" estimado pela IA está com correlação negativa (-0.61) com os resultados reais — vale revisar os critérios usados pra calculá-lo."
   ]
 }

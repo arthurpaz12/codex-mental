@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-29T12:30:08.112Z",
+  "lastUpdated": "2026-06-29T23:05:53.626Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -72,54 +72,9 @@
         "currency": "BRL"
       }
     ],
-    "updatedAt": "2026-06-28T23:05:31.601Z"
+    "updatedAt": "2026-06-29T23:05:53.484Z"
   },
   "runs": [
-    {
-      "runId": "2026-06-14T04-40-24",
-      "channel": "codex-mental",
-      "startedAt": "2026-06-14T04:40:24.763Z",
-      "completedAt": "2026-06-14T04:46:51.207Z",
-      "status": "ok",
-      "error": null,
-      "topic": "O Gesto Silencioso que Revela Quem Realmente Tem o Poder numa Conversa",
-      "category": "ciência",
-      "viralScore": 74,
-      "publish": [
-        {
-          "platform": "youtube",
-          "url": "https://www.youtube.com/watch?v=3RFUjAhPy0w",
-          "publishId": null
-        },
-        {
-          "platform": "youtube_shorts",
-          "url": "https://www.youtube.com/shorts/HEXhN4kHLMg",
-          "publishId": null
-        },
-        {
-          "platform": "tiktok",
-          "url": "https://www.tiktok.com/@codexmentalbr",
-          "publishId": "v_inbox_file~v2.7651105775372519441"
-        }
-      ],
-      "sound": {
-        "category": "suspense_misterio",
-        "sound": "Dramatic reveal sting / whoosh transition"
-      },
-      "stats": {
-        "youtube": {
-          "views": 0,
-          "likes": 0,
-          "comments": 0
-        },
-        "youtube_shorts": {
-          "views": 159,
-          "likes": 4,
-          "comments": 0
-        }
-      },
-      "statsUpdatedAt": "2026-06-29T12:30:07.874Z"
-    },
     {
       "runId": "2026-06-14T23-00-02",
       "channel": "codex-mental",
@@ -185,7 +140,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T12:30:07.883Z"
+      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
     },
     {
       "runId": "2026-06-15T23-00-03",
@@ -252,7 +207,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T12:30:07.883Z"
+      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
     },
     {
       "runId": "2026-06-16T23-00-02",
@@ -407,7 +362,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T12:30:07.883Z"
+      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
     },
     {
       "runId": "2026-06-20T03-00-04",
@@ -507,7 +462,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T12:30:07.883Z"
+      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
     },
     {
       "runId": "2026-06-23T21-58-30",
@@ -552,7 +507,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T12:30:07.883Z"
+      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
     },
     {
       "runId": "2026-06-23T23-00-02",
@@ -597,7 +552,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T12:30:07.883Z"
+      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
     },
     {
       "runId": "2026-06-24T01-04-08",
@@ -642,7 +597,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T12:30:07.883Z"
+      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
     },
     {
       "runId": "2026-06-24T16-30-17",
@@ -677,7 +632,7 @@
       },
       "stats": {
         "youtube": {
-          "views": 0,
+          "views": 1,
           "likes": 0,
           "comments": 0
         },
@@ -687,7 +642,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T12:30:07.883Z"
+      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
     },
     {
       "runId": "2026-06-24T19-35-34",
@@ -732,7 +687,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T12:30:07.883Z"
+      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
     },
     {
       "runId": "2026-06-24T22-40-25",
@@ -772,7 +727,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T12:30:07.883Z"
+      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
     },
     {
       "runId": "2026-06-24T23-00-05",
@@ -817,7 +772,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T12:30:07.883Z"
+      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
     },
     {
       "runId": "2026-06-25T23-00-02",
@@ -862,7 +817,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T12:30:07.883Z"
+      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
     },
     {
       "runId": "2026-06-26T03-00-01",
@@ -902,7 +857,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T12:30:07.883Z"
+      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
     },
     {
       "runId": "2026-06-26T23-00-06",
@@ -955,7 +910,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T12:30:07.883Z"
+      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
     },
     {
       "runId": "2026-06-27T23-00-06",
@@ -1000,7 +955,7 @@
           "comments": 1
         }
       },
-      "statsUpdatedAt": "2026-06-29T12:30:07.883Z"
+      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
     },
     {
       "runId": "2026-06-28T03-00-01",
@@ -1035,12 +990,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 22,
+          "views": 23,
           "likes": 0,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T12:30:07.883Z"
+      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
     },
     {
       "runId": "2026-06-28T23-00-05",
@@ -1075,24 +1030,69 @@
       },
       "stats": {
         "youtube": {
+          "views": 1,
+          "likes": 0,
+          "comments": 0
+        },
+        "youtube_shorts": {
+          "views": 162,
+          "likes": 1,
+          "comments": 0
+        }
+      },
+      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
+    },
+    {
+      "runId": "2026-06-29T23-00-02",
+      "channel": "codex-mental",
+      "startedAt": "2026-06-29T23:00:02.402Z",
+      "completedAt": "2026-06-29T23:05:51.521Z",
+      "status": "ok",
+      "error": null,
+      "topic": "A Técnica do Silêncio Estratégico: Como Calar a Boca Faz Pessoas Revelarem Tudo",
+      "category": "ciência",
+      "viralScore": 82,
+      "publish": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=wB8Um7ez-Ws",
+          "publishId": null
+        },
+        {
+          "platform": "youtube_shorts",
+          "url": "https://www.youtube.com/shorts/wOT2dFh6JFo",
+          "publishId": null
+        },
+        {
+          "platform": "tiktok",
+          "url": "https://www.tiktok.com/@codexmentalbr",
+          "publishId": "v_inbox_file~v2.7656957227744200721"
+        }
+      ],
+      "sound": {
+        "category": "suspense_misterio",
+        "sound": "Tense/suspenseful background hum"
+      },
+      "stats": {
+        "youtube": {
           "views": 0,
           "likes": 0,
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 164,
-          "likes": 1,
+          "views": 0,
+          "likes": 0,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T12:30:07.883Z"
+      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
     }
   ],
   "revenueProjection": {
     "realStats": {
-      "youtube": 3809,
+      "youtube": 3651,
       "tiktok": 0,
-      "total": 3809,
+      "total": 3651,
       "videosPublicados": 25,
       "hotmart": {
         "source": "api",
@@ -1162,65 +1162,65 @@
             "currency": "BRL"
           }
         ],
-        "updatedAt": "2026-06-28T23:05:31.601Z"
+        "updatedAt": "2026-06-29T23:05:53.484Z"
       }
     },
     "custoTotal": 87.5,
-    "baseMonthlyViews": 3809,
-    "generatedAt": "2026-06-29T12:30:08.112Z",
+    "baseMonthlyViews": 3651,
+    "generatedAt": "2026-06-29T23:05:53.626Z",
     "scenarios": {
       "conservador": {
         "rpm": 4,
         "conv": 0.0005,
-        "adRevenue": 15.236,
-        "sales": 1.9045,
-        "affiliateRevenue": 127.6015,
-        "total": 142.8375
+        "adRevenue": 14.604,
+        "sales": 1.8255000000000001,
+        "affiliateRevenue": 122.30850000000001,
+        "total": 136.91250000000002
       },
       "moderado": {
         "rpm": 8,
         "conv": 0.001,
-        "adRevenue": 30.472,
-        "sales": 3.809,
-        "affiliateRevenue": 255.203,
-        "total": 285.675
+        "adRevenue": 29.208,
+        "sales": 3.6510000000000002,
+        "affiliateRevenue": 244.61700000000002,
+        "total": 273.82500000000005
       },
       "otimista": {
         "rpm": 14,
         "conv": 0.002,
-        "adRevenue": 53.326,
-        "sales": 7.618,
-        "affiliateRevenue": 510.406,
-        "total": 563.732
+        "adRevenue": 51.114,
+        "sales": 7.3020000000000005,
+        "affiliateRevenue": 489.23400000000004,
+        "total": 540.3480000000001
       }
     },
     "perPlatform": {
       "youtube": {
-        "monthlyViews": 3809,
+        "monthlyViews": 3651,
         "scenarios": {
           "conservador": {
             "rpm": 4,
             "conv": 0.0005,
-            "adRevenue": 15.236,
-            "sales": 1.9045,
-            "affiliateRevenue": 127.6015,
-            "total": 142.8375
+            "adRevenue": 14.604,
+            "sales": 1.8255000000000001,
+            "affiliateRevenue": 122.30850000000001,
+            "total": 136.91250000000002
           },
           "moderado": {
             "rpm": 8,
             "conv": 0.001,
-            "adRevenue": 30.472,
-            "sales": 3.809,
-            "affiliateRevenue": 255.203,
-            "total": 285.675
+            "adRevenue": 29.208,
+            "sales": 3.6510000000000002,
+            "affiliateRevenue": 244.61700000000002,
+            "total": 273.82500000000005
           },
           "otimista": {
             "rpm": 14,
             "conv": 0.002,
-            "adRevenue": 53.326,
-            "sales": 7.618,
-            "affiliateRevenue": 510.406,
-            "total": 563.732
+            "adRevenue": 51.114,
+            "sales": 7.3020000000000005,
+            "affiliateRevenue": 489.23400000000004,
+            "total": 540.3480000000001
           }
         }
       },
