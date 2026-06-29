@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+<script>
+  // Bounce do OAuth de demo (auditoria TikTok Content Posting API):
+  // o TikTok não aceita redirect localhost, então o OAuth volta pra cá
+  // (raiz HTTPS cadastrada) e reencaminhamos o code pro app de demo local.
+  // Só ativa quando o state começa com "demo_"; senão, carrega o dashboard.
+  (function () {
+    try {
+      var p = new URLSearchParams(location.search);
+      var st = p.get("state") || "";
+      if (st.indexOf("demo_") === 0 && (p.get("code") || p.get("error"))) {
+        location.replace("http://localhost:8088/callback" + location.search);
+      }
+    } catch (e) {}
+  })();
+</script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Codex Mental — Painel do Pipeline</title>
