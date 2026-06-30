@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-29T23:05:53.626Z",
+  "lastUpdated": "2026-06-30T00:30:02.419Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -140,7 +140,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
+      "statsUpdatedAt": "2026-06-30T00:30:02.225Z"
     },
     {
       "runId": "2026-06-15T23-00-03",
@@ -207,7 +207,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
+      "statsUpdatedAt": "2026-06-30T00:30:02.232Z"
     },
     {
       "runId": "2026-06-16T23-00-02",
@@ -362,7 +362,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
+      "statsUpdatedAt": "2026-06-30T00:30:02.232Z"
     },
     {
       "runId": "2026-06-20T03-00-04",
@@ -462,7 +462,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
+      "statsUpdatedAt": "2026-06-30T00:30:02.232Z"
     },
     {
       "runId": "2026-06-23T21-58-30",
@@ -507,7 +507,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
+      "statsUpdatedAt": "2026-06-30T00:30:02.232Z"
     },
     {
       "runId": "2026-06-23T23-00-02",
@@ -552,7 +552,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
+      "statsUpdatedAt": "2026-06-30T00:30:02.232Z"
     },
     {
       "runId": "2026-06-24T01-04-08",
@@ -597,7 +597,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
+      "statsUpdatedAt": "2026-06-30T00:30:02.232Z"
     },
     {
       "runId": "2026-06-24T16-30-17",
@@ -642,7 +642,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
+      "statsUpdatedAt": "2026-06-30T00:30:02.232Z"
     },
     {
       "runId": "2026-06-24T19-35-34",
@@ -687,7 +687,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
+      "statsUpdatedAt": "2026-06-30T00:30:02.232Z"
     },
     {
       "runId": "2026-06-24T22-40-25",
@@ -727,7 +727,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
+      "statsUpdatedAt": "2026-06-30T00:30:02.232Z"
     },
     {
       "runId": "2026-06-24T23-00-05",
@@ -772,7 +772,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
+      "statsUpdatedAt": "2026-06-30T00:30:02.232Z"
     },
     {
       "runId": "2026-06-25T23-00-02",
@@ -817,7 +817,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
+      "statsUpdatedAt": "2026-06-30T00:30:02.232Z"
     },
     {
       "runId": "2026-06-26T03-00-01",
@@ -857,7 +857,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
+      "statsUpdatedAt": "2026-06-30T00:30:02.232Z"
     },
     {
       "runId": "2026-06-26T23-00-06",
@@ -910,7 +910,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
+      "statsUpdatedAt": "2026-06-30T00:30:02.232Z"
     },
     {
       "runId": "2026-06-27T23-00-06",
@@ -955,7 +955,7 @@
           "comments": 1
         }
       },
-      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
+      "statsUpdatedAt": "2026-06-30T00:30:02.232Z"
     },
     {
       "runId": "2026-06-28T03-00-01",
@@ -991,11 +991,11 @@
         },
         "youtube_shorts": {
           "views": 23,
-          "likes": 0,
+          "likes": 1,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
+      "statsUpdatedAt": "2026-06-30T00:30:02.232Z"
     },
     {
       "runId": "2026-06-28T23-00-05",
@@ -1040,7 +1040,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
+      "statsUpdatedAt": "2026-06-30T00:30:02.232Z"
     },
     {
       "runId": "2026-06-29T23-00-02",
@@ -1080,19 +1080,19 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 0,
+          "views": 27,
           "likes": 0,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-29T23:05:51.961Z"
+      "statsUpdatedAt": "2026-06-30T00:30:02.232Z"
     }
   ],
   "revenueProjection": {
     "realStats": {
-      "youtube": 3651,
+      "youtube": 3678,
       "tiktok": 0,
-      "total": 3651,
+      "total": 3678,
       "videosPublicados": 25,
       "hotmart": {
         "source": "api",
@@ -1166,61 +1166,61 @@
       }
     },
     "custoTotal": 87.5,
-    "baseMonthlyViews": 3651,
-    "generatedAt": "2026-06-29T23:05:53.626Z",
+    "baseMonthlyViews": 3678,
+    "generatedAt": "2026-06-30T00:30:02.418Z",
     "scenarios": {
       "conservador": {
         "rpm": 4,
         "conv": 0.0005,
-        "adRevenue": 14.604,
-        "sales": 1.8255000000000001,
-        "affiliateRevenue": 122.30850000000001,
-        "total": 136.91250000000002
+        "adRevenue": 14.712,
+        "sales": 1.839,
+        "affiliateRevenue": 123.213,
+        "total": 137.92499999999998
       },
       "moderado": {
         "rpm": 8,
         "conv": 0.001,
-        "adRevenue": 29.208,
-        "sales": 3.6510000000000002,
-        "affiliateRevenue": 244.61700000000002,
-        "total": 273.82500000000005
+        "adRevenue": 29.424,
+        "sales": 3.678,
+        "affiliateRevenue": 246.426,
+        "total": 275.84999999999997
       },
       "otimista": {
         "rpm": 14,
         "conv": 0.002,
-        "adRevenue": 51.114,
-        "sales": 7.3020000000000005,
-        "affiliateRevenue": 489.23400000000004,
-        "total": 540.3480000000001
+        "adRevenue": 51.492,
+        "sales": 7.356,
+        "affiliateRevenue": 492.852,
+        "total": 544.3439999999999
       }
     },
     "perPlatform": {
       "youtube": {
-        "monthlyViews": 3651,
+        "monthlyViews": 3678,
         "scenarios": {
           "conservador": {
             "rpm": 4,
             "conv": 0.0005,
-            "adRevenue": 14.604,
-            "sales": 1.8255000000000001,
-            "affiliateRevenue": 122.30850000000001,
-            "total": 136.91250000000002
+            "adRevenue": 14.712,
+            "sales": 1.839,
+            "affiliateRevenue": 123.213,
+            "total": 137.92499999999998
           },
           "moderado": {
             "rpm": 8,
             "conv": 0.001,
-            "adRevenue": 29.208,
-            "sales": 3.6510000000000002,
-            "affiliateRevenue": 244.61700000000002,
-            "total": 273.82500000000005
+            "adRevenue": 29.424,
+            "sales": 3.678,
+            "affiliateRevenue": 246.426,
+            "total": 275.84999999999997
           },
           "otimista": {
             "rpm": 14,
             "conv": 0.002,
-            "adRevenue": 51.114,
-            "sales": 7.3020000000000005,
-            "affiliateRevenue": 489.23400000000004,
-            "total": 540.3480000000001
+            "adRevenue": 51.492,
+            "sales": 7.356,
+            "affiliateRevenue": 492.852,
+            "total": 544.3439999999999
           }
         }
       },
