@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-06-29T23:05:53.631Z",
-  "sampleSize": 17,
+  "generatedAt": "2026-06-30T23:05:08.459Z",
+  "sampleSize": 18,
   "topByViews": [
     {
       "topic": "A Pergunta Capciosa que Faz Mentirosos se Trairem em Segundos",
       "category": "ciência",
-      "views": 826,
-      "engagement": 2.91,
+      "views": 827,
+      "engagement": 2.9,
       "platforms": [
         "youtube",
         "youtube_shorts",
@@ -70,10 +70,10 @@
       ]
     },
     {
-      "topic": "The Isabella Nardoni Case: A 5-year-old thrown from a 6th-floor window by her own family",
+      "topic": "The Eloá Pimentel Case: Brazil's longest hostage siege played out live on national TV",
       "category": "murder",
-      "views": 24,
-      "engagement": 4.17,
+      "views": 49,
+      "engagement": 4.08,
       "platforms": [
         "youtube",
         "youtube_shorts",
@@ -81,14 +81,24 @@
       ]
     },
     {
-      "topic": "The Eloá Pimentel Case: Brazil's longest hostage siege played out live on national TV",
+      "topic": "The Isabella Nardoni Case: A 5-year-old thrown from a 6th-floor window by her own family",
       "category": "murder",
-      "views": 48,
-      "engagement": 4.17,
+      "views": 25,
+      "engagement": 4,
       "platforms": [
         "youtube",
         "youtube_shorts",
         "tiktok"
+      ]
+    },
+    {
+      "topic": "The Fortaleza Bank Heist: Brazil's Biggest Robbery Vanished Through a 256-Foot Tunnel",
+      "category": "heist",
+      "views": 26,
+      "engagement": 3.85,
+      "platforms": [
+        "youtube",
+        "youtube_shorts"
       ]
     },
     {
@@ -101,33 +111,22 @@
         "youtube_shorts",
         "tiktok"
       ]
-    },
-    {
-      "topic": "A Pergunta Capciosa que Faz Mentirosos se Trairem em Segundos",
-      "category": "ciência",
-      "views": 826,
-      "engagement": 2.91,
-      "platforms": [
-        "youtube",
-        "youtube_shorts",
-        "tiktok"
-      ]
     }
   ],
   "byCategory": [
     {
       "key": "ciência",
-      "videos": 9,
-      "totalViews": 2577,
-      "avgViews": 286.3,
-      "avgEngagement": 1.3
+      "videos": 10,
+      "totalViews": 2620,
+      "avgViews": 262,
+      "avgEngagement": 1.17
     },
     {
       "key": "murder",
       "videos": 5,
-      "totalViews": 890,
-      "avgViews": 178,
-      "avgEngagement": 2.19
+      "totalViews": 892,
+      "avgViews": 178.4,
+      "avgEngagement": 2.14
     },
     {
       "key": "serial killer",
@@ -139,41 +138,41 @@
     {
       "key": "heist",
       "videos": 1,
-      "totalViews": 23,
-      "avgViews": 23,
-      "avgEngagement": 0
+      "totalViews": 26,
+      "avgViews": 26,
+      "avgEngagement": 3.85
     }
   ],
   "byPlatform": [
     {
       "key": "youtube_shorts",
-      "videos": 17,
-      "totalViews": 3632,
-      "avgViews": 213.6,
-      "avgEngagement": 1.8
+      "videos": 18,
+      "totalViews": 3676,
+      "avgViews": 204.2,
+      "avgEngagement": 1.94
     },
     {
       "key": "youtube",
-      "videos": 9,
-      "totalViews": 19,
-      "avgViews": 2.1,
+      "videos": 10,
+      "totalViews": 23,
+      "avgViews": 2.3,
       "avgEngagement": 0
     }
   ],
   "byHourUTC": [
     {
-      "key": "22h",
-      "videos": 2,
-      "totalViews": 501,
-      "avgViews": 250.5,
-      "avgEngagement": 2.41
-    },
-    {
       "key": "03h",
       "videos": 4,
-      "totalViews": 71,
-      "avgViews": 17.8,
-      "avgEngagement": 2.23
+      "totalViews": 75,
+      "avgViews": 18.8,
+      "avgEngagement": 3.15
+    },
+    {
+      "key": "22h",
+      "videos": 2,
+      "totalViews": 502,
+      "avgViews": 251,
+      "avgEngagement": 2.37
     },
     {
       "key": "01h",
@@ -191,10 +190,10 @@
     },
     {
       "key": "23h",
-      "videos": 6,
-      "totalViews": 2282,
-      "avgViews": 380.3,
-      "avgEngagement": 1.61
+      "videos": 7,
+      "totalViews": 2325,
+      "avgViews": 332.1,
+      "avgEngagement": 1.38
     },
     {
       "key": "06h",
@@ -221,17 +220,24 @@
   "byWeekday": [
     {
       "key": "Segunda",
-      "videos": 1,
-      "totalViews": 21,
-      "avgViews": 21,
-      "avgEngagement": 4.76
+      "videos": 2,
+      "totalViews": 63,
+      "avgViews": 31.5,
+      "avgEngagement": 2.38
+    },
+    {
+      "key": "Domingo",
+      "videos": 2,
+      "totalViews": 189,
+      "avgViews": 94.5,
+      "avgEngagement": 2.23
     },
     {
       "key": "Terça",
       "videos": 4,
-      "totalViews": 185,
-      "avgViews": 46.3,
-      "avgEngagement": 2.08
+      "totalViews": 187,
+      "avgViews": 46.8,
+      "avgEngagement": 2.02
     },
     {
       "key": "Sexta",
@@ -243,8 +249,8 @@
     {
       "key": "Sábado",
       "videos": 2,
-      "totalViews": 966,
-      "avgViews": 483,
+      "totalViews": 967,
+      "avgViews": 483.5,
       "avgEngagement": 1.81
     },
     {
@@ -260,20 +266,13 @@
       "totalViews": 382,
       "avgViews": 382,
       "avgEngagement": 0.79
-    },
-    {
-      "key": "Domingo",
-      "videos": 2,
-      "totalViews": 186,
-      "avgViews": 93,
-      "avgEngagement": 0.31
     }
   ],
-  "viralScoreCorrelation": -0.61,
+  "viralScoreCorrelation": -0.53,
   "recommendations": [
-    "A categoria \"ciência\" tem a melhor média de views (286) — vale priorizar temas parecidos.",
+    "A categoria \"ciência\" tem a melhor média de views (262) — vale priorizar temas parecidos.",
     "\"youtube_shorts\" é a plataforma com melhor desempenho médio — considere adaptar mais conteúdo pro formato dela.",
-    "Publicações por volta das 22h (UTC) tiveram o maior engajamento médio — pode ser um bom horário pra concentrar lançamentos.",
-    "O \"viralScore\" estimado pela IA está com correlação negativa (-0.61) com os resultados reais — vale revisar os critérios usados pra calculá-lo."
+    "Publicações por volta das 03h (UTC) tiveram o maior engajamento médio — pode ser um bom horário pra concentrar lançamentos.",
+    "O \"viralScore\" estimado pela IA está com correlação negativa (-0.53) com os resultados reais — vale revisar os critérios usados pra calculá-lo."
   ]
 }

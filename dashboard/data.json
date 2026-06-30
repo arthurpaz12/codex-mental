@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-30T12:35:10.276Z",
+  "lastUpdated": "2026-06-30T23:05:08.408Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -72,31 +72,9 @@
         "currency": "BRL"
       }
     ],
-    "updatedAt": "2026-06-29T23:05:53.484Z"
+    "updatedAt": "2026-06-30T23:05:07.605Z"
   },
   "runs": [
-    {
-      "runId": "2026-06-14T23-00-02",
-      "channel": "codex-mental",
-      "startedAt": "2026-06-14T23:00:02.944Z",
-      "completedAt": "2026-06-14T23:06:06.424Z",
-      "status": "ok",
-      "error": null,
-      "topic": "O Sinal nos Olhos que Revela Quando Alguém Está Te Avaliando Secretamente",
-      "category": "ciência",
-      "viralScore": 82,
-      "publish": [
-        {
-          "platform": "tiktok",
-          "url": "https://www.tiktok.com/@codexmentalbr",
-          "publishId": "v_inbox_file~v2.7651390793009154049"
-        }
-      ],
-      "sound": {
-        "category": "suspense_misterio",
-        "sound": "Dramatic reveal sting / whoosh transition"
-      }
-    },
     {
       "runId": "2026-06-15T03-00-03",
       "channel": "brazil-noir",
@@ -140,7 +118,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-30T12:35:10.062Z"
+      "statsUpdatedAt": "2026-06-30T23:05:04.536Z"
     },
     {
       "runId": "2026-06-15T23-00-03",
@@ -197,7 +175,7 @@
       },
       "stats": {
         "youtube": {
-          "views": 7,
+          "views": 8,
           "likes": 0,
           "comments": 0
         },
@@ -207,7 +185,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-30T12:35:10.070Z"
+      "statsUpdatedAt": "2026-06-30T23:05:04.536Z"
     },
     {
       "runId": "2026-06-16T23-00-02",
@@ -362,7 +340,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-30T12:35:10.070Z"
+      "statsUpdatedAt": "2026-06-30T23:05:04.536Z"
     },
     {
       "runId": "2026-06-20T03-00-04",
@@ -462,7 +440,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-30T12:35:10.070Z"
+      "statsUpdatedAt": "2026-06-30T23:05:04.536Z"
     },
     {
       "runId": "2026-06-23T21-58-30",
@@ -497,7 +475,7 @@
       },
       "stats": {
         "youtube": {
-          "views": 3,
+          "views": 4,
           "likes": 0,
           "comments": 0
         },
@@ -507,7 +485,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-30T12:35:10.070Z"
+      "statsUpdatedAt": "2026-06-30T23:05:04.536Z"
     },
     {
       "runId": "2026-06-23T23-00-02",
@@ -552,7 +530,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-30T12:35:10.070Z"
+      "statsUpdatedAt": "2026-06-30T23:05:04.536Z"
     },
     {
       "runId": "2026-06-24T01-04-08",
@@ -597,7 +575,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-30T12:35:10.070Z"
+      "statsUpdatedAt": "2026-06-30T23:05:04.536Z"
     },
     {
       "runId": "2026-06-24T16-30-17",
@@ -642,7 +620,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-30T12:35:10.070Z"
+      "statsUpdatedAt": "2026-06-30T23:05:04.536Z"
     },
     {
       "runId": "2026-06-24T19-35-34",
@@ -687,7 +665,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-30T12:35:10.070Z"
+      "statsUpdatedAt": "2026-06-30T23:05:04.536Z"
     },
     {
       "runId": "2026-06-24T22-40-25",
@@ -727,7 +705,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-30T12:35:10.070Z"
+      "statsUpdatedAt": "2026-06-30T23:05:04.536Z"
     },
     {
       "runId": "2026-06-24T23-00-05",
@@ -772,7 +750,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-30T12:35:10.070Z"
+      "statsUpdatedAt": "2026-06-30T23:05:04.536Z"
     },
     {
       "runId": "2026-06-25T23-00-02",
@@ -817,7 +795,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-30T12:35:10.070Z"
+      "statsUpdatedAt": "2026-06-30T23:05:04.536Z"
     },
     {
       "runId": "2026-06-26T03-00-01",
@@ -857,7 +835,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-30T12:35:10.070Z"
+      "statsUpdatedAt": "2026-06-30T23:05:04.536Z"
     },
     {
       "runId": "2026-06-26T23-00-06",
@@ -910,7 +888,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-30T12:35:10.070Z"
+      "statsUpdatedAt": "2026-06-30T23:05:04.536Z"
     },
     {
       "runId": "2026-06-27T23-00-06",
@@ -950,12 +928,12 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 826,
+          "views": 827,
           "likes": 23,
           "comments": 1
         }
       },
-      "statsUpdatedAt": "2026-06-30T12:35:10.070Z"
+      "statsUpdatedAt": "2026-06-30T23:05:04.536Z"
     },
     {
       "runId": "2026-06-28T03-00-01",
@@ -985,7 +963,7 @@
       },
       "stats": {
         "youtube": {
-          "views": 1,
+          "views": 2,
           "likes": 0,
           "comments": 0
         },
@@ -995,7 +973,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-30T12:35:10.070Z"
+      "statsUpdatedAt": "2026-06-30T23:05:04.536Z"
     },
     {
       "runId": "2026-06-28T23-00-05",
@@ -1040,7 +1018,7 @@
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-30T12:35:10.070Z"
+      "statsUpdatedAt": "2026-06-30T23:05:04.536Z"
     },
     {
       "runId": "2026-06-29T23-00-02",
@@ -1080,19 +1058,64 @@
           "comments": 0
         },
         "youtube_shorts": {
-          "views": 40,
+          "views": 42,
           "likes": 0,
           "comments": 0
         }
       },
-      "statsUpdatedAt": "2026-06-30T12:35:10.070Z"
+      "statsUpdatedAt": "2026-06-30T23:05:04.536Z"
+    },
+    {
+      "runId": "2026-06-30T23-00-02",
+      "channel": "codex-mental",
+      "startedAt": "2026-06-30T23:00:02.745Z",
+      "completedAt": "2026-06-30T23:05:03.259Z",
+      "status": "ok",
+      "error": null,
+      "topic": "O Efeito do Silêncio: A Pausa de 4 Segundos que Faz Qualquer Pessoa Revelar a Verdade",
+      "category": "ciência",
+      "viralScore": 78,
+      "publish": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=DxoMu1Oigvo",
+          "publishId": null
+        },
+        {
+          "platform": "youtube_shorts",
+          "url": "https://www.youtube.com/shorts/Q9tRgw-tWEk",
+          "publishId": null
+        },
+        {
+          "platform": "tiktok",
+          "url": "https://www.tiktok.com/@codexmentalbr",
+          "publishId": "v_inbox_file~v2.7657327920759769089"
+        }
+      ],
+      "sound": {
+        "category": "storytelling_motivacional",
+        "sound": "Soft piano storytelling loop"
+      },
+      "stats": {
+        "youtube": {
+          "views": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        "youtube_shorts": {
+          "views": 0,
+          "likes": 0,
+          "comments": 0
+        }
+      },
+      "statsUpdatedAt": "2026-06-30T23:05:04.536Z"
     }
   ],
   "revenueProjection": {
     "realStats": {
-      "youtube": 3693,
+      "youtube": 3699,
       "tiktok": 0,
-      "total": 3693,
+      "total": 3699,
       "videosPublicados": 25,
       "hotmart": {
         "source": "api",
@@ -1162,65 +1185,65 @@
             "currency": "BRL"
           }
         ],
-        "updatedAt": "2026-06-29T23:05:53.484Z"
+        "updatedAt": "2026-06-30T23:05:07.605Z"
       }
     },
     "custoTotal": 87.5,
-    "baseMonthlyViews": 3693,
-    "generatedAt": "2026-06-30T12:35:10.276Z",
+    "baseMonthlyViews": 3699,
+    "generatedAt": "2026-06-30T23:05:08.407Z",
     "scenarios": {
       "conservador": {
         "rpm": 4,
         "conv": 0.0005,
-        "adRevenue": 14.772,
-        "sales": 1.8465,
-        "affiliateRevenue": 123.7155,
-        "total": 138.4875
+        "adRevenue": 14.796,
+        "sales": 1.8495000000000001,
+        "affiliateRevenue": 123.91650000000001,
+        "total": 138.7125
       },
       "moderado": {
         "rpm": 8,
         "conv": 0.001,
-        "adRevenue": 29.544,
-        "sales": 3.693,
-        "affiliateRevenue": 247.431,
-        "total": 276.975
+        "adRevenue": 29.592,
+        "sales": 3.6990000000000003,
+        "affiliateRevenue": 247.83300000000003,
+        "total": 277.425
       },
       "otimista": {
         "rpm": 14,
         "conv": 0.002,
-        "adRevenue": 51.702,
-        "sales": 7.386,
-        "affiliateRevenue": 494.862,
-        "total": 546.5640000000001
+        "adRevenue": 51.786,
+        "sales": 7.398000000000001,
+        "affiliateRevenue": 495.66600000000005,
+        "total": 547.452
       }
     },
     "perPlatform": {
       "youtube": {
-        "monthlyViews": 3693,
+        "monthlyViews": 3699,
         "scenarios": {
           "conservador": {
             "rpm": 4,
             "conv": 0.0005,
-            "adRevenue": 14.772,
-            "sales": 1.8465,
-            "affiliateRevenue": 123.7155,
-            "total": 138.4875
+            "adRevenue": 14.796,
+            "sales": 1.8495000000000001,
+            "affiliateRevenue": 123.91650000000001,
+            "total": 138.7125
           },
           "moderado": {
             "rpm": 8,
             "conv": 0.001,
-            "adRevenue": 29.544,
-            "sales": 3.693,
-            "affiliateRevenue": 247.431,
-            "total": 276.975
+            "adRevenue": 29.592,
+            "sales": 3.6990000000000003,
+            "affiliateRevenue": 247.83300000000003,
+            "total": 277.425
           },
           "otimista": {
             "rpm": 14,
             "conv": 0.002,
-            "adRevenue": 51.702,
-            "sales": 7.386,
-            "affiliateRevenue": 494.862,
-            "total": 546.5640000000001
+            "adRevenue": 51.786,
+            "sales": 7.398000000000001,
+            "affiliateRevenue": 495.66600000000005,
+            "total": 547.452
           }
         }
       },
