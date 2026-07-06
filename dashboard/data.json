@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-01T12:47:26.204Z",
+  "lastUpdated": "2026-07-06T00:45:30.426Z",
   "settings": {
     "estimatedRevenuePerVideo": 5,
     "currency": "BRL"
@@ -75,51 +75,6 @@
     "updatedAt": "2026-06-30T23:05:07.605Z"
   },
   "runs": [
-    {
-      "runId": "2026-06-15T03-00-03",
-      "channel": "brazil-noir",
-      "startedAt": "2026-06-15T03:00:03.204Z",
-      "completedAt": "2026-06-15T03:09:47.364Z",
-      "status": "ok",
-      "error": null,
-      "topic": "The Park Maniac Case: A motorcycle courier lured aspiring models to their deaths with a fake modeling career",
-      "category": "serial killer",
-      "viralScore": 88,
-      "publish": [
-        {
-          "platform": "youtube",
-          "url": "https://www.youtube.com/watch?v=s6P-WZcH5UY",
-          "publishId": null
-        },
-        {
-          "platform": "youtube_shorts",
-          "url": "https://www.youtube.com/shorts/3gV9djmOW1c",
-          "publishId": null
-        },
-        {
-          "platform": "tiktok",
-          "url": "https://www.tiktok.com/@brazilnoir",
-          "publishId": "v_inbox_file~v2.7651453158337742849"
-        }
-      ],
-      "sound": {
-        "category": "storytelling_motivacional",
-        "sound": "Lo-fi motivational beat"
-      },
-      "stats": {
-        "youtube": {
-          "views": 2,
-          "likes": 0,
-          "comments": 0
-        },
-        "youtube_shorts": {
-          "views": 19,
-          "likes": 1,
-          "comments": 0
-        }
-      },
-      "statsUpdatedAt": "2026-07-01T12:47:25.588Z"
-    },
     {
       "runId": "2026-06-15T23-00-03",
       "channel": "codex-mental",
@@ -1109,6 +1064,33 @@
         }
       },
       "statsUpdatedAt": "2026-07-01T12:47:25.614Z"
+    },
+    {
+      "runId": "2026-07-06T00-39-29",
+      "channel": "brazil-noir",
+      "startedAt": "2026-07-06T00:39:29.663Z",
+      "completedAt": "2026-07-06T00:45:30.422Z",
+      "status": "ok",
+      "error": null,
+      "topic": "The Goiânia Serial Killer Case: A quiet security guard who hunted strangers from his motorcycle",
+      "category": "serial killer",
+      "viralScore": 88,
+      "publish": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=3ICicwF99a8",
+          "publishId": null
+        },
+        {
+          "platform": "youtube_shorts",
+          "url": "https://www.youtube.com/shorts/MNgzF0C4DDk",
+          "publishId": null
+        }
+      ],
+      "sound": {
+        "category": "suspense_misterio",
+        "sound": "Tense/suspenseful background hum"
+      }
     }
   ],
   "revenueProjection": {
