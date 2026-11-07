@@ -411,6 +411,7 @@
         <button data-mode="sample">Exemplo</button>
       </div>
       <div class="side-src" id="side-src"></div>
+      <a class="link" id="logout" href="/brazil-noir/logout" hidden style="padding:0 10px">Sair</a>
     </div>
   </aside>
 
@@ -1441,6 +1442,9 @@
   });
   let lastW = 0, rT;
   new ResizeObserver(() => { const w = $("#main").clientWidth; if (Math.abs(w - lastW) < 4) return; lastW = w; clearTimeout(rT); rT = setTimeout(() => state.model && $("#ch-followers") && renderGrowth(state.model), 120); }).observe($("#main"));
+
+  // Na Vercel a dashboard tem login; no servidor local (127.0.0.1) não
+  if (!/^(127\.0\.0\.1|localhost)$/.test(location.hostname)) $("#logout").hidden = false;
 
   setMode(state.mode);
 })();
