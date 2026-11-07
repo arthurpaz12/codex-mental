@@ -18,7 +18,9 @@
     "hotmart": "node pipeline/11-hotmart.js",
     "revenue": "node pipeline/12-revenue-estimate.js",
     "insights": "node pipeline/13-performance-insights.js",
-    "dashboard": "npx serve dashboard"
+    "dashboard": "npx serve dashboard",
+    "bn:dashboard": "node pipeline/brazil-noir/analytics.js",
+    "bn:dashboard:sample": "node pipeline/brazil-noir/dashboard-sample.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.40.0",

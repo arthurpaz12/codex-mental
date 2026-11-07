@@ -1,0 +1,40 @@
+{
+  "_leia": "Lançamentos manuais da dashboard do Brazil Noir. A página lê este arquivo direto: edite, salve e recarregue (no ar, precisa commit + deploy). Use para o que a API ainda não entrega. 'snapshots' = números da conta num dia (copie do app: seguidores, views totais). 'videos' = vídeos que a API não lista (ex.: TikTok enquanto o escopo video.list não está aprovado). 'overrides' = corrige ou completa um vídeo que já veio da API, pelo id (ex.: gancho, caso, retenção do TikTok Studio, seguidores ganhos). Campos de vídeo: platform (yt_long | yt_shorts | tiktok | reels), id, title, hook, case, publishedAt (AAAA-MM-DD), durationSec, url, views, likes, comments, shares, avgWatchSec, avgViewPct, followersGained. Apague os itens de '_exemplos' quando não precisar mais deles: são ignorados.",
+
+  "snapshots": [
+    { "date": "2026-11-06", "platform": "tiktok", "followers": 1, "note": "aproximado — confira no app e corrija" }
+  ],
+
+  "videos": [],
+
+  "overrides": {},
+
+  "_exemplos": {
+    "snapshots": [
+      { "date": "2026-11-07", "platform": "tiktok", "followers": 3, "totalViews": 640, "likes": 25 },
+      { "date": "2026-11-07", "platform": "instagram", "followers": 2 }
+    ],
+    "videos": [
+      {
+        "platform": "tiktok",
+        "id": "tt-ep01-c1",
+        "title": "Banco Central — corte 1",
+        "hook": "Eighty meters. That's how far a gang tunneled under downtown Fortaleza.",
+        "case": "Banco Central heist",
+        "publishedAt": "2026-11-05",
+        "durationSec": 78,
+        "url": "https://www.tiktok.com/@brazilnoir/video/0000000000000000000",
+        "views": 216,
+        "likes": 9,
+        "comments": 1,
+        "shares": 2,
+        "avgWatchSec": 21,
+        "avgViewPct": 27,
+        "followersGained": 0
+      }
+    ],
+    "overrides": {
+      "MNgzF0C4DDk": { "hook": "39 victims. He picked them from his motorcycle.", "case": "Goiânia Serial Killer" }
+    }
+  }
+}
