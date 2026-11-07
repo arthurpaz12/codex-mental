@@ -10,14 +10,14 @@ Página estática em `dashboard/brazil-noir/` (no ar em `/brazil-noir` do mesmo 
 | `data.json` | `node pipeline/brazil-noir/analytics.js` | números coletados pelas APIs + histórico diário |
 | `data.sample.json` | `node pipeline/brazil-noir/dashboard-sample.js` | dados inventados, botão **Exemplo** no topo |
 | `manual.json` | você | snapshots de seguidores, vídeos e correções que a API não dá |
-| `spend.json` | você, pela página ou à mão | gastos (impulsionamentos e ferramentas) |
-| `schedule.json` | você, pela página ou à mão | vídeos programados (YouTube, TikTok, Reels); viram "publicado" sozinhos quando o vídeo sai com o mesmo título |
+| `spend.json` | você, pela página ou à mão | gastos (impulsionamentos e ferramentas). **Fora do git**: fica só no computador |
+| `schedule.json` | você, pela página ou à mão | vídeos programados (YouTube, TikTok, Reels); viram "publicado" sozinhos quando o vídeo sai com o mesmo título. **Fora do git**: fica só no computador |
 
 ## Acesso
 
 Na Vercel, `/brazil-noir` só abre com login (`dashboard/middleware.js`). Configure `BN_DASH_USER` e `BN_DASH_PASSWORD` em **Settings → Environment Variables** do projeto e faça um redeploy. Sem essas variáveis a dashboard fica bloqueada para todos. O servidor local (atalho) não pede login, porque só escuta no próprio computador.
 
-A página lê `manual.json` e `spend.json` direto: editou, salvou, recarregou. No ar, precisa de commit + deploy.
+A página lê `manual.json`, `spend.json` e `schedule.json` direto: editou, salvou, recarregou. `spend.json` e `schedule.json` estão no `.gitignore` (o repositório é público): só aparecem na dashboard aberta pelo atalho; a versão online avisa que eles ficam no computador. Se o arquivo não existir, o servidor local cria na primeira gravação.
 
 ## Ver e usar localmente
 

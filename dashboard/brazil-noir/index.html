@@ -628,6 +628,8 @@
     m.refDate = m.mode === "sample" && m.generatedAt ? new Date(m.generatedAt) : new Date();
     m.refKey = keyOf(m.refDate);
     m.scheduleFile = scheduleFile;
+    // Online (sem servidor local) gastos e programados não existem: ficam só no computador
+    m.localOnly = m.mode === "real" && !state.api && !spendFile && !scheduleFile;
     m.ytScheduled = raw.scheduled || [];
     m.schedule = buildSchedule(m, scheduleFile, m.ytScheduled);
     return m;
@@ -1107,7 +1109,7 @@
     };
     $("#sched").innerHTML = `
       <div class="card"><div class="card-h"><span class="card-title">Próximos</span><span class="card-sub">${upcoming.length} programado${upcoming.length === 1 ? "" : "s"}</span></div>
-        ${upcoming.length ? [...byDay].map(([k, list]) => `<div class="agenda-day"><h4>${dayTitle(k)}</h4>${list.map((it) => row(it)).join("")}</div>`).join("") : empty(`<b>Nada programado.</b><br>Use <b>Programar vídeo</b> para registrar o que você agendou no YouTube Studio, no TikTok ou no Instagram.${m.ytScheduled.length || m.mode === "sample" ? "" : "<br>Com o OAuth do YouTube ligado, os agendados do Studio aparecem sozinhos."}`)}
+        ${upcoming.length ? [...byDay].map(([k, list]) => `<div class="agenda-day"><h4>${dayTitle(k)}</h4>${list.map((it) => row(it)).join("")}</div>`).join("") : empty(m.localOnly ? `<b>Os programados ficam só no seu computador.</b><br>Abra pelo atalho <b>Brazil Noir - Dashboard</b> para ver e programar.` : `<b>Nada programado.</b><br>Use <b>Programar vídeo</b> para registrar o que você agendou no YouTube Studio, no TikTok ou no Instagram.${m.ytScheduled.length || m.mode === "sample" ? "" : "<br>Com o OAuth do YouTube ligado, os agendados do Studio aparecem sozinhos."}`)}
       </div>
       <div class="card"><div class="card-h"><span class="card-title">Últimos 7 dias</span><span class="card-sub">o que estava programado e já passou</span></div>
         ${past.length ? past.map((it) => row(it, schedStatus(it, ref))).join("") : empty("Nada programado nos últimos 7 dias.")}
@@ -1534,7 +1536,7 @@
     const el = $("#spendbox");
     spendHeader(m);
     if (!m.spend.length) {
-      el.innerHTML = `<div class="card">${empty(`<b>Nenhum gasto lançado ainda.</b><br>Clique em <b>Novo gasto</b> para lançar impulsionamentos (com as views e seguidores que o anúncio trouxe) e ferramentas, como a voz.${state.api ? "" : "<br>Para gravar pela página, abra pelo atalho da área de trabalho."}`).replace('class="empty"', 'class="empty" style="margin-top:0"')}</div>`;
+      el.innerHTML = `<div class="card">${empty(`${m.localOnly ? "<b>Os gastos ficam só no seu computador.</b><br>Eles não vão para a internet. Abra pelo atalho <b>Brazil Noir - Dashboard</b> para ver e lançar." : "<b>Nenhum gasto lançado ainda.</b><br>"}${m.localOnly ? "" : `Clique em <b>Novo gasto</b> para lançar impulsionamentos (com as views e seguidores que o anúncio trouxe) e ferramentas, como a voz.${state.api ? "" : "<br>Para gravar pela página, abra pelo atalho da área de trabalho."}`}`).replace('class="empty"', 'class="empty" style="margin-top:0"')}</div>`;
       return;
     }
     const list = m.spend.filter((e) => inPeriod(m, e.date)).sort((a, b) => b.date.localeCompare(a.date));

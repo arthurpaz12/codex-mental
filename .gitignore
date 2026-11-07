@@ -14,3 +14,8 @@ dashboard/.next/
 .env*.local
 config/settings.json
 logs/
+
+# Brazil Noir: gastos e programados ficam só no computador (dashboard local)
+dashboard/brazil-noir/spend.json
+dashboard/brazil-noir/schedule.json
+dashboard/brazil-noir/*.json.tmp
