@@ -3,34 +3,35 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Brazil Noir — Painel</title>
+<title>Brazil Noir · Painel do canal</title>
 <meta name="description" content="Alcance, gastos e progresso rumo à monetização do canal Brazil Noir no YouTube, TikTok e Reels.">
-<meta name="theme-color" content="#0b0a09">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b0a09'/%3E%3Ccircle cx='16' cy='16' r='6.5' fill='%23c8323a'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0f0f10">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2318181b'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23e5484d'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,650;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>
-  // Aplica o tema antes de pintar (evita piscar)
   try { var t = localStorage.getItem("bn-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
 </script>
 <style>
-  /* ---------- Tokens (escuro é o padrão: estética noir) ---------- */
+  /* ---------- Tokens ---------- */
   :root {
     color-scheme: dark;
-    --page: #0b0a09;
-    --surface: #171615;
-    --surface-2: #1f1d1b;
-    --surface-3: #262421;
-    --line: rgba(255, 255, 255, 0.08);
-    --line-strong: rgba(255, 255, 255, 0.14);
-    --grid: #2a2826;
-    --axis: #3a3835;
-    --ink: #f0ede8;
-    --ink-2: #c4c0b8;
-    --muted: #8d8880;
-    --brand: #c8323a;
-    --brand-soft: rgba(200, 50, 58, 0.14);
+    --bg: #0f0f10;
+    --side: #131315;
+    --surface: #18181b;
+    --surface-2: #1f1f23;
+    --surface-3: #27272b;
+    --border: #27272a;
+    --border-2: #34343a;
+    --grid: #26262a;
+    --axis: #3a3a40;
+    --ink: #f4f4f5;
+    --ink-2: #c4c4cc;
+    --muted: #8b8b94;
+    --accent: #e5484d;
+    --accent-ink: #ff6369;
+    --accent-soft: rgba(229, 72, 77, 0.12);
     --c-red: #e66767;
     --c-amber: #c98500;
     --c-blue: #3987e5;
@@ -39,208 +40,232 @@
     --c-violet: #9085e9;
     --c-gray: #6f6b66;
     --good: #0ca30c;
-    --good-ink: #3ccf3c;
-    --warn: #fab219;
-    --crit: #d03b3b;
-    --shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 18px 40px -24px rgba(0, 0, 0, 0.8);
-    --grain-opacity: 0.07;
+    --good-ink: #3dd68c;
+    --bad-ink: #ff6369;
+    --warn-ink: #f5b544;
+    --overlay: rgba(0, 0, 0, 0.72);
   }
   @media (prefers-color-scheme: light) {
     :root:not([data-theme="dark"]) {
       color-scheme: light;
-      --page: #f3f1ec; --surface: #fdfcfa; --surface-2: #f6f4ef; --surface-3: #eeebe4;
-      --line: rgba(11, 11, 11, 0.09); --line-strong: rgba(11, 11, 11, 0.16);
-      --grid: #e6e3db; --axis: #c3c2b7;
-      --ink: #14120f; --ink-2: #52504b; --muted: #807c75;
-      --brand: #a3202a; --brand-soft: rgba(163, 32, 42, 0.08);
+      --bg: #f5f5f4; --side: #fafaf9; --surface: #ffffff; --surface-2: #f6f6f5; --surface-3: #ececeb;
+      --border: #e7e7e4; --border-2: #d9d9d5; --grid: #ececea; --axis: #c9c9c4;
+      --ink: #18181b; --ink-2: #52525b; --muted: #74747c;
+      --accent: #d6343a; --accent-ink: #c21d24; --accent-soft: rgba(214, 52, 58, 0.08);
       --c-red: #e34948; --c-amber: #eda100; --c-blue: #2a78d6; --c-aqua: #1baf7a;
       --c-magenta: #e87ba4; --c-violet: #6250d6; --c-gray: #a9a59d;
-      --good-ink: #006300;
-      --shadow: 0 1px 2px rgba(20, 18, 15, 0.04), 0 12px 32px -20px rgba(20, 18, 15, 0.25);
-      --grain-opacity: 0.035;
+      --good-ink: #067a3d; --bad-ink: #c21d24; --warn-ink: #8a5a00;
     }
   }
   :root[data-theme="light"] {
     color-scheme: light;
-    --page: #f3f1ec; --surface: #fdfcfa; --surface-2: #f6f4ef; --surface-3: #eeebe4;
-    --line: rgba(11, 11, 11, 0.09); --line-strong: rgba(11, 11, 11, 0.16);
-    --grid: #e6e3db; --axis: #c3c2b7;
-    --ink: #14120f; --ink-2: #52504b; --muted: #807c75;
-    --brand: #a3202a; --brand-soft: rgba(163, 32, 42, 0.08);
+    --bg: #f5f5f4; --side: #fafaf9; --surface: #ffffff; --surface-2: #f6f6f5; --surface-3: #ececeb;
+    --border: #e7e7e4; --border-2: #d9d9d5; --grid: #ececea; --axis: #c9c9c4;
+    --ink: #18181b; --ink-2: #52525b; --muted: #74747c;
+    --accent: #d6343a; --accent-ink: #c21d24; --accent-soft: rgba(214, 52, 58, 0.08);
     --c-red: #e34948; --c-amber: #eda100; --c-blue: #2a78d6; --c-aqua: #1baf7a;
     --c-magenta: #e87ba4; --c-violet: #6250d6; --c-gray: #a9a59d;
-    --good-ink: #006300;
-    --shadow: 0 1px 2px rgba(20, 18, 15, 0.04), 0 12px 32px -20px rgba(20, 18, 15, 0.25);
-    --grain-opacity: 0.035;
+    --good-ink: #067a3d; --bad-ink: #c21d24; --warn-ink: #8a5a00;
   }
 
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body {
-    margin: 0;
-    background:
-      radial-gradient(ellipse 1100px 520px at 50% -180px, var(--brand-soft), transparent 70%),
-      var(--page);
-    color: var(--ink);
-    font: 14px/1.5 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    min-height: 100vh;
-  }
-  .grain {
-    position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: var(--grain-opacity);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-  .wrap { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 28px 24px 72px; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 76px; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.5 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
   a { color: inherit; }
   button { font: inherit; color: inherit; }
   .num { font-variant-numeric: tabular-nums; }
   .muted { color: var(--muted); }
-  .serif { font-family: "Fraunces", Georgia, serif; }
-  .mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+  code { font: 12px ui-monospace, "Cascadia Code", Consolas, monospace; background: var(--surface-3); padding: 1px 5px; border-radius: 4px; color: var(--ink-2); }
 
-  /* ---------- Masthead ---------- */
-  .mast { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
-  .brand { display: flex; align-items: center; gap: 16px; min-width: 0; }
-  .brand-mark { width: 52px; height: 52px; border-radius: 50%; flex: none; background: var(--surface-2); border: 1px solid var(--line-strong); overflow: hidden; display: grid; place-items: center; }
-  .brand-mark img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.2) contrast(1.05); }
-  .brand-mark span { width: 18px; height: 18px; border-radius: 50%; background: var(--brand); box-shadow: 0 0 24px var(--brand); }
-  .kicker { font: 500 11px/1 "JetBrains Mono", monospace; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brand); }
-  :root[data-theme="dark"] .kicker, :root:not([data-theme]) .kicker { color: #e2575e; }
-  h1 { font: 650 clamp(30px, 5vw, 44px)/1 "Fraunces", Georgia, serif; letter-spacing: -0.02em; margin: 6px 0 6px; }
-  .handles { color: var(--muted); font-size: 13px; display: flex; gap: 6px 14px; flex-wrap: wrap; }
-  .handles a { text-decoration: none; border-bottom: 1px solid var(--line-strong); }
-  .handles a:hover { color: var(--ink); }
-  .controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-  .seg { display: inline-flex; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 3px; }
-  .seg button { border: 0; background: transparent; padding: 6px 11px; border-radius: 7px; cursor: pointer; color: var(--muted); font-size: 13px; font-weight: 500; white-space: nowrap; }
+  /* ---------- Shell ---------- */
+  .app { display: grid; grid-template-columns: 232px minmax(0, 1fr); min-height: 100vh; }
+  .side { position: sticky; top: 0; height: 100vh; background: var(--side); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 18px 12px; gap: 18px; }
+  .chan { display: flex; align-items: center; gap: 10px; padding: 4px 8px 14px; border-bottom: 1px solid var(--border); }
+  .avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--surface-3); display: grid; place-items: center; overflow: hidden; flex: none; font-weight: 700; font-size: 12px; color: var(--ink); }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .avatar .mark { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); }
+  .chan-name { font-weight: 600; font-size: 14px; line-height: 1.2; }
+  .chan-sub { font-size: 12px; color: var(--muted); }
+  .nav { display: flex; flex-direction: column; gap: 2px; }
+  .nav-label { font-size: 11px; font-weight: 600; color: var(--muted); padding: 6px 10px 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .nav a { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; text-decoration: none; color: var(--ink-2); font-size: 13.5px; font-weight: 500; }
+  .nav a svg { width: 17px; height: 17px; flex: none; opacity: 0.85; }
+  .nav a:hover { background: var(--surface-2); color: var(--ink); }
+  .nav a.active { background: var(--accent-soft); color: var(--accent-ink); }
+  .nav a.active svg { opacity: 1; }
+  .side-foot { margin-top: auto; display: flex; flex-direction: column; gap: 10px; }
+  .side-foot .seg { width: 100%; }
+  .side-foot .seg button { flex: 1; }
+  .side-src { font-size: 12px; color: var(--muted); display: flex; flex-direction: column; gap: 6px; padding: 10px; border: 1px solid var(--border); border-radius: 10px; }
+  .side-src div { display: flex; align-items: center; gap: 8px; }
+
+  .main { min-width: 0; }
+  .topbar { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 12px; padding: 12px 28px; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+  .topbar h1 { font-size: 17px; font-weight: 600; margin: 0; letter-spacing: -0.01em; }
+  .topbar .when { font-size: 12px; color: var(--muted); }
+  .topbar .spacer { flex: 1; }
+  .content { padding: 24px 28px 64px; max-width: 1360px; }
+
+  .seg { display: inline-flex; background: var(--surface); border: 1px solid var(--border); border-radius: 9px; padding: 3px; }
+  .seg button { border: 0; background: transparent; padding: 5px 11px; border-radius: 6px; cursor: pointer; color: var(--muted); font-size: 13px; font-weight: 500; white-space: nowrap; }
   .seg button:hover { color: var(--ink); }
-  .seg button[aria-pressed="true"] { background: var(--surface-3); color: var(--ink); box-shadow: 0 1px 0 var(--line-strong) inset; }
-  .icon-btn { width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); cursor: pointer; display: grid; place-items: center; color: var(--ink-2); }
-  .icon-btn:hover { color: var(--ink); border-color: var(--line-strong); }
-  .statusline { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 14px 0 0; font-size: 12px; color: var(--muted); }
-  .src { display: inline-flex; align-items: center; gap: 6px; padding: 4px 9px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); white-space: nowrap; }
+  .seg button[aria-pressed="true"] { background: var(--surface-3); color: var(--ink); }
+  .icon-btn { width: 34px; height: 34px; border-radius: 9px; border: 1px solid var(--border); background: var(--surface); cursor: pointer; display: grid; place-items: center; color: var(--ink-2); flex: none; }
+  .icon-btn:hover { color: var(--ink); border-color: var(--border-2); }
   .dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
-  .dot.on { background: var(--good); box-shadow: 0 0 0 3px rgba(12, 163, 12, 0.18); }
-  .dot.part { background: var(--warn); }
-  .dot.off { background: transparent; border: 1.5px solid var(--muted); }
+  .dot.on { background: var(--good); }
+  .dot.part { background: #f5b544; }
+  .dot.off { border: 1.5px solid var(--muted); }
 
-  /* ---------- Banner de exemplo ---------- */
-  .banner { margin-top: 18px; display: flex; gap: 14px; align-items: center; padding: 12px 16px; border: 1px dashed var(--line-strong); border-radius: 12px; background: var(--surface); color: var(--ink-2); font-size: 13px; }
-  .stamp { font: 500 12px/1 "JetBrains Mono", monospace; letter-spacing: 0.2em; color: var(--brand); border: 1.5px solid var(--brand); padding: 6px 8px 5px; border-radius: 4px; transform: rotate(-4deg); flex: none; }
-  :root:not([data-theme="light"]) .stamp { color: #e2575e; border-color: #e2575e; }
-  @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .stamp { color: var(--brand); border-color: var(--brand); } }
+  .notice { display: flex; gap: 10px; align-items: center; padding: 10px 14px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); color: var(--ink-2); font-size: 13px; margin-bottom: 20px; }
+  .notice .tag { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-ink); flex: none; }
+  .notice button { background: none; border: 0; padding: 0; color: var(--ink); font-weight: 600; text-decoration: underline; cursor: pointer; }
 
-  /* ---------- Seções ---------- */
-  .sec { margin-top: 44px; }
-  .sec-h { display: flex; align-items: baseline; gap: 12px; margin: 0 0 16px; }
-  .sec-h .fileno { font: 500 11px/1 "JetBrains Mono", monospace; color: var(--muted); letter-spacing: 0.12em; }
-  .sec-h h2 { font: 650 22px/1.15 "Fraunces", Georgia, serif; letter-spacing: -0.01em; margin: 0; }
-  .sec-h .aside { margin-left: auto; font-size: 12px; color: var(--muted); }
-  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; box-shadow: var(--shadow); min-width: 0; }
-  .card-h { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 4px; flex-wrap: wrap; }
+  /* ---------- Blocos ---------- */
+  .block { margin-top: 36px; }
+  .block-h { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+  .block-h h2 { font-size: 16px; font-weight: 600; margin: 0; letter-spacing: -0.01em; }
+  .block-h .sub { font-size: 13px; color: var(--muted); }
+  .block-h .right { margin-left: auto; font-size: 12px; color: var(--muted); }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; min-width: 0; }
+  .card-h { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 4px; flex-wrap: wrap; }
   .card-title { font-weight: 600; font-size: 14px; }
   .card-sub { font-size: 12px; color: var(--muted); }
-  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 16px; }
+  .link { font-size: 12px; font-weight: 500; color: var(--ink-2); text-decoration: none; }
+  .link:hover { color: var(--ink); }
+  .grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
   .grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
   .grid4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
-  @media (max-width: 1080px) {
-    .grid3, .grid4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .grid3 > :last-child:nth-child(odd) { grid-column: 1 / -1; }
-  }
-  @media (max-width: 640px) { .grid3, .grid4 { grid-template-columns: 1fr; } }
-  .empty { display: grid; place-items: center; text-align: center; min-height: 160px; color: var(--muted); font-size: 13px; padding: 18px; border: 1px dashed var(--line); border-radius: 10px; margin-top: 12px; }
+  .empty { display: grid; place-items: center; text-align: center; min-height: 150px; color: var(--muted); font-size: 13px; padding: 18px; border: 1px dashed var(--border-2); border-radius: 10px; margin-top: 10px; line-height: 1.6; }
   .empty b { color: var(--ink-2); font-weight: 600; }
-  code { font: 12px "JetBrains Mono", ui-monospace, monospace; background: var(--surface-3); padding: 1px 5px; border-radius: 4px; color: var(--ink-2); }
+
+  /* ---------- Destaque + recentes ---------- */
+  .hero { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(300px, 1fr); gap: 16px; align-items: start; }
+  .feat { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+  .feat-media { position: relative; aspect-ratio: 16 / 9; background: #000; }
+  .feat-media .thumb { position: absolute; inset: 0; border-radius: 0; aspect-ratio: auto; }
+  .feat-media iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .play { position: absolute; inset: 0; display: grid; place-items: center; background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.55)); border: 0; cursor: pointer; padding: 0; }
+  .play span { width: 64px; height: 64px; border-radius: 50%; background: rgba(15, 15, 16, 0.78); display: grid; place-items: center; transition: transform 0.15s, background 0.15s; }
+  .play:hover span { transform: scale(1.06); background: var(--accent); }
+  .feat-badge { position: absolute; left: 14px; top: 14px; z-index: 2; display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 999px; background: var(--overlay); color: #fff; font-size: 12px; font-weight: 600; pointer-events: none; }
+  .feat-body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 14px; }
+  .feat-top { display: flex; align-items: flex-start; gap: 12px; justify-content: space-between; }
+  .feat-title { font-size: 18px; font-weight: 600; line-height: 1.3; margin: 0; letter-spacing: -0.01em; }
+  .feat-title a { text-decoration: none; }
+  .feat-title a:hover { text-decoration: underline; }
+  .feat-meta { font-size: 13px; color: var(--muted); margin-top: 4px; display: flex; flex-wrap: wrap; gap: 4px 12px; }
+  .feat-hook { font-size: 13px; color: var(--ink-2); border-left: 2px solid var(--border-2); padding-left: 10px; }
+  .feat-stats { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .feat-stats > div { padding: 10px 12px; border-right: 1px solid var(--border); min-width: 0; }
+  .feat-stats > div:last-child { border-right: 0; }
+  .feat-stats span { display: block; font-size: 11.5px; color: var(--muted); white-space: nowrap; }
+  .feat-stats b { display: block; font-size: 17px; font-weight: 600; margin-top: 2px; }
+  .feat-cmp { font-size: 13px; color: var(--ink-2); }
+  .feat-cmp b { color: var(--good-ink); }
+  .feat-tabs { margin-left: auto; }
+
+  .recent { display: flex; flex-direction: column; }
+  .rlist { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; }
+  .rlist li { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .rlist li:last-child { border-bottom: 0; padding-bottom: 0; }
+  .rlist .thumb { width: 120px; }
+  .r-title { font-size: 13px; font-weight: 500; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .r-title a { text-decoration: none; }
+  .r-title a:hover { text-decoration: underline; }
+  .r-meta { font-size: 12px; color: var(--muted); margin-top: 3px; display: flex; flex-wrap: wrap; gap: 2px 10px; align-items: center; }
+  .r-plats { display: flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 4px; font-size: 12px; color: var(--ink-2); }
+  .perf { font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 999px; white-space: nowrap; }
+  .perf.up { color: var(--good-ink); background: color-mix(in srgb, var(--good-ink) 12%, transparent); }
+  .perf.down { color: var(--bad-ink); background: color-mix(in srgb, var(--bad-ink) 10%, transparent); }
+  .perf.mid { color: var(--muted); background: var(--surface-3); }
+
+  .thumb { position: relative; aspect-ratio: 16 / 9; border-radius: 8px; overflow: hidden; background: var(--surface-3); flex: none; }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .thumb.ph { background: radial-gradient(120% 90% at 20% 15%, color-mix(in srgb, var(--pc) 45%, #000) 0%, #101012 70%); display: flex; align-items: flex-end; padding: 8px 9px; }
+  .thumb.ph .ph-t { color: #fff; font-weight: 700; font-size: 11px; line-height: 1.15; text-transform: uppercase; letter-spacing: 0.02em; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6); max-width: 80%; }
+  .feat-media .thumb.ph .ph-t { font-size: clamp(20px, 3vw, 34px); max-width: 70%; padding: 10px; }
+  .dur { position: absolute; right: 6px; bottom: 6px; background: var(--overlay); color: #fff; font-size: 11px; font-weight: 600; padding: 1px 5px; border-radius: 4px; }
+  .feat-media .dur { right: 12px; bottom: 12px; font-size: 12px; padding: 2px 7px; }
 
   /* ---------- KPIs ---------- */
-  .kpis { display: grid; grid-template-columns: repeat(5, 1fr); margin-top: 24px; background: var(--line); gap: 1px; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow); }
-  .kpi { background: var(--surface); padding: 18px 20px 16px; min-width: 0; }
-  .kpi-label { font-size: 12px; color: var(--muted); }
-  .kpi-value { font-size: 30px; font-weight: 600; letter-spacing: -0.02em; margin-top: 6px; line-height: 1.1; }
-  .kpi-sub { font-size: 12px; color: var(--muted); margin-top: 6px; min-height: 18px; }
+  .kpis { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
+  .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; min-width: 0; }
+  .kpi-label { font-size: 12px; color: var(--muted); font-weight: 500; }
+  .kpi-value { font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin-top: 4px; line-height: 1.15; }
+  .kpi-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
   .delta { font-weight: 600; }
   .delta.up { color: var(--good-ink); }
-  .delta.down { color: var(--c-red); }
-  @media (max-width: 1000px) { .kpis { grid-template-columns: repeat(2, 1fr); } .kpi:first-child { grid-column: 1 / -1; } }
+  .delta.down { color: var(--bad-ink); }
 
-  /* ---------- Monetização ---------- */
-  .goal-card { display: flex; flex-direction: column; gap: 14px; }
-  .goal-top { display: flex; align-items: center; gap: 10px; justify-content: space-between; }
-  .goal-name { font: 650 17px/1.2 "Fraunces", Georgia, serif; }
+  /* ---------- Metas ---------- */
+  .goal { display: flex; flex-direction: column; gap: 14px; }
+  .goal-top { display: flex; align-items: flex-start; gap: 10px; justify-content: space-between; }
+  .goal-name { font-size: 15px; font-weight: 600; }
   .goal-req { font-size: 12px; color: var(--muted); margin-top: 2px; }
-  .pill { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px; border: 1px solid var(--line-strong); color: var(--ink-2); white-space: nowrap; display: inline-flex; gap: 5px; align-items: center; }
-  .pill.ok { color: var(--good-ink); border-color: currentColor; }
+  .pill { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px; background: var(--surface-3); color: var(--ink-2); white-space: nowrap; }
+  .pill.ok { color: var(--good-ink); background: color-mix(in srgb, var(--good-ink) 12%, transparent); }
   .meter-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 13px; }
   .meter-label { color: var(--ink-2); }
   .meter-val { color: var(--muted); white-space: nowrap; }
-  .meter-val b { color: var(--ink); font-weight: 600; font-size: 15px; }
-  .track { height: 8px; border-radius: 999px; background: var(--surface-3); margin-top: 7px; overflow: hidden; }
+  .meter-val b { color: var(--ink); font-weight: 600; }
+  .track { height: 6px; border-radius: 999px; background: var(--surface-3); margin-top: 7px; overflow: hidden; }
   .fill { height: 100%; border-radius: 999px; min-width: 3px; transition: width 0.6s cubic-bezier(.2, .8, .2, 1); }
   .fill.zero { min-width: 0; }
   .meter-sub { font-size: 12px; color: var(--muted); margin-top: 6px; }
-  .meter-sub .tag { color: var(--ink-2); }
-  .or { display: flex; align-items: center; gap: 10px; font: 500 10px/1 "JetBrains Mono", monospace; letter-spacing: 0.16em; color: var(--muted); text-transform: uppercase; }
-  .or::before, .or::after { content: ""; flex: 1; height: 1px; background: var(--line); }
-  .goal-foot { font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; margin-top: auto; }
-  .est { font-size: 11px; color: var(--warn); font-weight: 600; }
-  :root[data-theme="light"] .est { color: #8a5a00; }
-  @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .est { color: #8a5a00; } }
+  .meter-sub .tag { color: var(--ink-2); font-weight: 500; }
+  .or { display: flex; align-items: center; gap: 10px; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .or::before, .or::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+  .goal-foot { font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); padding-top: 12px; margin-top: auto; }
+  .est { font-size: 11px; color: var(--warn-ink); font-weight: 600; }
 
-  /* ---------- Legendas e gráficos ---------- */
+  /* ---------- Gráficos ---------- */
   .legend { display: flex; gap: 6px 16px; flex-wrap: wrap; font-size: 12px; color: var(--ink-2); margin: 10px 0 6px; }
   .legend span { display: inline-flex; align-items: center; gap: 6px; }
-  .sw { width: 10px; height: 10px; border-radius: 3px; flex: none; }
+  .sw { width: 10px; height: 10px; border-radius: 3px; flex: none; display: inline-block; }
   .chart { position: relative; width: 100%; height: 240px; }
   .chart svg { display: block; overflow: visible; }
   .chart text { font: 11px "Inter", system-ui, sans-serif; fill: var(--muted); font-variant-numeric: tabular-nums; }
   .chart .lbl { fill: var(--ink-2); font-weight: 600; }
   details.data { margin-top: 10px; font-size: 12px; color: var(--muted); }
   details.data summary { cursor: pointer; }
-  details.data table { margin-top: 8px; }
-
-  .tip { position: fixed; z-index: 50; pointer-events: none; background: var(--surface-2); border: 1px solid var(--line-strong); border-radius: 10px; padding: 9px 11px; font-size: 12px; box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.6); opacity: 0; transition: opacity 0.1s; min-width: 150px; max-width: 280px; }
+  .tip { position: fixed; z-index: 50; pointer-events: none; background: var(--surface-2); border: 1px solid var(--border-2); border-radius: 10px; padding: 9px 11px; font-size: 12px; box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.5); opacity: 0; transition: opacity 0.1s; min-width: 150px; max-width: 280px; }
   .tip.show { opacity: 1; }
-  .tip-h { font-weight: 600; margin-bottom: 6px; color: var(--ink); }
+  .tip-h { font-weight: 600; margin-bottom: 6px; }
   .tip-row { display: flex; align-items: center; gap: 7px; color: var(--ink-2); line-height: 1.7; }
   .tip-row b { margin-left: auto; padding-left: 12px; color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
-  .tip-total { border-top: 1px solid var(--line); margin-top: 4px; padding-top: 4px; }
+  .tip-total { border-top: 1px solid var(--border); margin-top: 4px; padding-top: 4px; }
 
   /* ---------- Plataformas ---------- */
-  .plat { display: flex; flex-direction: column; gap: 12px; position: relative; overflow: hidden; }
-  .plat::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--pc); }
+  .plat { display: flex; flex-direction: column; gap: 12px; }
   .plat-h { display: flex; align-items: center; gap: 8px; }
-  .plat-h .sw { width: 9px; height: 9px; border-radius: 50%; }
-  .plat-big { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; line-height: 1; }
-  .plat-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px; }
+  .plat-h .sw { width: 8px; height: 8px; border-radius: 50%; }
+  .plat-big { font-size: 26px; font-weight: 600; letter-spacing: -0.02em; line-height: 1; }
+  .plat-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px; border-top: 1px solid var(--border); padding-top: 12px; }
   .plat-stats div { font-size: 12px; color: var(--muted); }
-  .plat-stats b { display: block; font-size: 15px; color: var(--ink); font-weight: 600; margin-top: 1px; }
-  .spark { height: 44px; }
-  .plat.off { opacity: 0.75; }
-  .plat.off::before { background: var(--line-strong); }
+  .plat-stats b { display: block; font-size: 14px; color: var(--ink); font-weight: 600; margin-top: 1px; }
+  .spark { height: 40px; }
 
   /* ---------- Destaques ---------- */
-  .rank { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
-  .rank li { display: grid; grid-template-columns: 26px 1fr; gap: 4px 10px; }
-  .rank .n { font: 500 12px/22px "JetBrains Mono", monospace; color: var(--muted); }
-  .hook { font: italic 400 15px/1.35 "Fraunces", Georgia, serif; color: var(--ink); }
-  .hook-meta { grid-column: 2; font-size: 12px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 10px; }
-  .bar-row { grid-column: 2; display: flex; align-items: center; gap: 8px; }
-  .sbar { display: flex; gap: 2px; height: 10px; flex: none; min-width: 3px; }
+  .rank { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; }
+  .rank li { display: grid; grid-template-columns: 22px 1fr; gap: 3px 10px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .rank li:last-child { border-bottom: 0; }
+  .rank .n { font-size: 12px; color: var(--muted); font-weight: 600; line-height: 20px; font-variant-numeric: tabular-nums; }
+  .rank .t { font-size: 13.5px; font-weight: 500; line-height: 1.4; }
+  .rank .m { grid-column: 2; font-size: 12px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 2px 10px; }
+  .bar-row { grid-column: 2; display: flex; align-items: center; gap: 8px; margin-top: 2px; }
+  .sbar { display: flex; gap: 2px; height: 8px; flex: none; min-width: 3px; }
   .sbar i { display: block; height: 100%; min-width: 2px; }
-  .sbar i:first-child { border-radius: 0; }
   .sbar i:last-child { border-radius: 0 4px 4px 0; }
   .bar-val { font-size: 12px; font-weight: 600; color: var(--ink-2); white-space: nowrap; }
-  .insights { margin: 10px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
-  .insights li { display: flex; gap: 10px; font-size: 13px; color: var(--ink-2); line-height: 1.5; }
-  .insights li::before { content: "§"; font: 600 14px/1.4 "Fraunces", serif; color: var(--brand); flex: none; }
-  :root:not([data-theme="light"]) .insights li::before { color: #e2575e; }
+  .insights { margin: 8px 0 0; padding: 0 0 0 18px; display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: var(--ink-2); }
   .insights b { color: var(--ink); font-weight: 600; }
 
   /* ---------- Tabelas ---------- */
-  .tbl-wrap { overflow-x: auto; margin-top: 12px; border: 1px solid var(--line); border-radius: 10px; }
+  .tbl-wrap { overflow: auto; margin-top: 12px; border: 1px solid var(--border); border-radius: 10px; }
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
-  th { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; background: var(--surface-2); position: sticky; top: 0; }
+  th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  th { font-size: 12px; font-weight: 500; color: var(--muted); background: var(--surface-2); position: sticky; top: 0; z-index: 1; }
   th.sortable { cursor: pointer; user-select: none; }
   th.sortable:hover { color: var(--ink); }
   th[aria-sort="descending"]::after { content: " ↓"; }
@@ -248,98 +273,140 @@
   td.r, th.r { text-align: right; font-variant-numeric: tabular-nums; }
   tbody tr:last-child td { border-bottom: 0; }
   tbody tr:hover td { background: var(--surface-2); }
-  .vcell { display: flex; align-items: center; gap: 10px; white-space: normal; min-width: 260px; max-width: 420px; }
-  .thumb { width: 56px; height: 32px; border-radius: 5px; flex: none; background: var(--surface-3) center/cover no-repeat; border: 1px solid var(--line); }
+  .vcell { display: flex; align-items: center; gap: 12px; white-space: normal; min-width: 280px; max-width: 440px; }
+  .vcell .thumb { width: 88px; border-radius: 6px; }
+  .vcell .thumb .dur { font-size: 10px; right: 4px; bottom: 4px; }
   .vtitle { font-weight: 500; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .vtitle a { text-decoration: none; }
   .vtitle a:hover { text-decoration: underline; }
-  .vcase { font-size: 11px; color: var(--muted); }
+  .vcase { font-size: 12px; color: var(--muted); margin-top: 2px; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
   .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-2); }
   .chip .sw { width: 8px; height: 8px; border-radius: 50%; }
   .ret { display: inline-flex; align-items: center; gap: 8px; justify-content: flex-end; }
-  .ret-bar { width: 44px; height: 4px; background: var(--surface-3); border-radius: 2px; overflow: hidden; }
+  .ret-bar { width: 40px; height: 4px; background: var(--surface-3); border-radius: 2px; overflow: hidden; }
   .ret-bar i { display: block; height: 100%; background: var(--ink-2); border-radius: 2px; }
   .filters { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
   .filters .seg { max-width: 100%; overflow-x: auto; scrollbar-width: none; }
   .filters .seg button { display: inline-flex; gap: 6px; align-items: center; flex: none; }
-  .search { flex: 1; min-width: 180px; max-width: 320px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; color: var(--ink); font: inherit; font-size: 13px; }
-  .search:focus { outline: 2px solid var(--line-strong); outline-offset: 0; }
+  .search { flex: 1; min-width: 180px; max-width: 320px; background: var(--surface); border: 1px solid var(--border); border-radius: 9px; padding: 7px 12px; color: var(--ink); font: inherit; font-size: 13px; }
+  .search:focus { outline: 2px solid var(--border-2); outline-offset: 0; }
 
   /* ---------- Gastos ---------- */
-  .boosts { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; }
-  .boosts li { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+  .spend-tiles { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
+  .spend-tiles > div { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
+  .spend-tiles .v { font-size: 19px; font-weight: 600; margin-top: 3px; }
+  .months { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+  .month { display: grid; grid-template-columns: 56px 1fr; align-items: center; gap: 12px; font-size: 12px; color: var(--muted); }
+  .month .bar-row { grid-column: auto; margin: 0; }
+  .boosts { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; }
+  .boosts li { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
   .boosts li:last-child { border-bottom: 0; }
   .boosts .amt { font-weight: 600; text-align: right; }
   .boosts .res { grid-column: 1 / -1; font-size: 12px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 12px; }
   .boosts .res b { color: var(--ink-2); font-weight: 600; }
-  .spend-tiles { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
-  .spend-tiles > div { background: var(--surface); padding: 14px 16px; }
-  .spend-tiles .v { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; margin-top: 4px; }
-  @media (max-width: 1080px) { .spend-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-  @media (max-width: 560px) { .spend-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  .months { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
-  .month { display: grid; grid-template-columns: 64px 1fr; align-items: center; gap: 12px; font-size: 12px; color: var(--muted); }
-  .month .bar-row { grid-column: auto; }
 
   /* ---------- Fontes ---------- */
-  .sources { display: flex; flex-direction: column; }
-  .source { display: grid; grid-template-columns: 22px minmax(140px, 220px) 1fr; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--line); align-items: start; font-size: 13px; }
+  .source { display: grid; grid-template-columns: 18px minmax(140px, 220px) 1fr; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); align-items: start; font-size: 13px; }
   .source:last-child { border-bottom: 0; }
   .source .dot { margin-top: 6px; }
   .source-name { font-weight: 600; }
   .source-name small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; }
   .source-how { color: var(--ink-2); }
-  @media (max-width: 640px) { .source { grid-template-columns: 22px 1fr; } .source-how { grid-column: 2; } }
-
-  footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
   .loading { padding: 80px 0; text-align: center; color: var(--muted); }
-  @media (max-width: 640px) {
-    .wrap { padding: 20px 16px 56px; }
-    .kpi-value { font-size: 24px; }
-    .card { padding: 16px; }
-    .controls { width: 100%; }
+  footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+  /* ---------- Responsivo ---------- */
+  @media (max-width: 1280px) { .kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); } .feat-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); } .feat-stats > div:nth-child(3) { border-right: 0; } .feat-stats > div:nth-child(-n+3) { border-bottom: 1px solid var(--border); } }
+  @media (max-width: 1180px) {
+    .hero { grid-template-columns: 1fr; }
+    .grid3, .grid4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid3 > :last-child:nth-child(odd) { grid-column: 1 / -1; }
+    .spend-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
-  @media (prefers-reduced-motion: reduce) { .fill { transition: none; } }
+  @media (max-width: 900px) {
+    .app { grid-template-columns: 1fr; }
+    .side { position: sticky; top: 0; z-index: 30; height: auto; flex-direction: row; align-items: center; padding: 8px 12px; gap: 10px; border-right: 0; border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+    .chan { border: 0; padding: 0; }
+    .chan-sub, .nav-label, .side-src { display: none; }
+    .nav { flex-direction: row; }
+    .nav a { padding: 7px 10px; white-space: nowrap; }
+    .nav a svg { display: none; }
+    .side-foot { margin: 0 0 0 auto; }
+    .side-foot .seg { width: auto; }
+    .topbar { position: static; padding: 12px 16px; flex-wrap: wrap; }
+    .content { padding: 18px 16px 48px; }
+    .grid2 { grid-template-columns: 1fr; }
+    html { scroll-padding-top: 64px; }
+  }
+  @media (max-width: 640px) {
+    .grid3, .grid4 { grid-template-columns: 1fr; }
+    .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .kpis .kpi:first-child { grid-column: 1 / -1; }
+    .spend-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .rlist li { grid-template-columns: 104px minmax(0, 1fr); }
+    .rlist .thumb { width: 104px; }
+    .feat-title { font-size: 16px; }
+    .feat-top { flex-direction: column; }
+    .feat-tabs { margin-left: 0; }
+    .source { grid-template-columns: 18px 1fr; }
+    .source-how { grid-column: 2; }
+    .side .chan-name { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .fill { transition: none; } }
 </style>
 </head>
 <body>
-<div class="grain" aria-hidden="true"></div>
-<div class="wrap">
-  <header class="mast">
-    <div class="brand">
-      <div class="brand-mark" id="avatar"><span></span></div>
-      <div>
-        <div class="kicker">Case file · painel do canal</div>
-        <h1>Brazil Noir</h1>
-        <div class="handles" id="handles"></div>
-      </div>
+<div class="app">
+  <aside class="side">
+    <div class="chan">
+      <div class="avatar" id="avatar"><span class="mark"></span></div>
+      <div><div class="chan-name">Brazil Noir</div><div class="chan-sub">Painel do canal</div></div>
     </div>
-    <div class="controls">
+    <nav class="nav" id="nav" aria-label="Seções">
+      <div class="nav-label">Canal</div>
+      <a href="#overview" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Visão geral</a>
+      <a href="#growth"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>Crescimento</a>
+      <a href="#money"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.5-1-1.6-1.5-3-1.5-1.7 0-3 .9-3 2.2 0 3 6 1.6 6 4.6 0 1.3-1.3 2.2-3 2.2-1.4 0-2.6-.6-3.1-1.6M12 6.5v11"/></svg>Monetização</a>
+      <a href="#platforms"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg>Plataformas</a>
+      <a href="#highlights"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.1-5.4 3.1 1.3-6L3.3 9.2l6.1-.6z"/></svg>Destaques</a>
+      <a href="#videos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>Vídeos</a>
+      <div class="nav-label">Negócio</div>
+      <a href="#spend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/></svg>Gastos</a>
+      <a href="#sources"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>Fontes de dados</a>
+    </nav>
+    <div class="side-foot">
       <div class="seg" role="group" aria-label="Fonte dos dados" id="mode-seg">
         <button data-mode="real">Dados reais</button>
         <button data-mode="sample">Exemplo</button>
       </div>
+      <div class="side-src" id="side-src"></div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div>
+        <h1>Visão geral</h1>
+        <div class="when" id="when"></div>
+      </div>
+      <div class="spacer"></div>
       <div class="seg" role="group" aria-label="Período" id="period-seg">
-        <button data-period="7">7d</button>
-        <button data-period="30">30d</button>
-        <button data-period="90">90d</button>
+        <button data-period="7">7 dias</button>
+        <button data-period="30">30 dias</button>
+        <button data-period="90">90 dias</button>
         <button data-period="0">Tudo</button>
       </div>
       <button class="icon-btn" id="theme-btn" title="Alternar tema claro/escuro" aria-label="Alternar tema">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
       </button>
+    </header>
+    <div class="content">
+      <div id="notice"></div>
+      <main id="main"><div class="loading">Carregando…</div></main>
+      <footer><span>Brazil Noir · dados em <code>dashboard/brazil-noir/</code></span><span id="foot"></span></footer>
     </div>
-  </header>
-  <div class="statusline" id="statusline"></div>
-  <div id="banner"></div>
-
-  <main id="main"><div class="loading">Abrindo o arquivo do caso…</div></main>
-
-  <footer>
-    <span>Brazil Noir · dashboard v2 · dados em <code>dashboard/brazil-noir/</code></span>
-    <span id="foot-updated"></span>
-  </footer>
+  </div>
 </div>
 <div class="tip" id="tip" role="tooltip"></div>
 
@@ -348,12 +415,12 @@
   "use strict";
 
   // Chave pública da YouTube Data API (a mesma da v1, restrita por HTTP referrer
-  // ao domínio da Vercel). Atualiza inscritos e views ao vivo quando a página
-  // está no ar; em localhost a chamada falha e ficam os números do data.json.
+  // ao domínio da Vercel). No ar, atualiza inscritos e views ao vivo; em
+  // localhost a chamada é recusada e ficam os números do data.json.
   const YOUTUBE_API_KEY = "AIzaSyCxGtmSugA2UUMEzFO4kh8AHy2xX8zb30I";
   const LONGFORM_ERA = "2026-08-01";
 
-  // ---------- Metadados de plataforma (cor segue a entidade, nunca o ranking) ----------
+  // ---------- Plataformas (cor segue a entidade) ----------
   const PLAT = {
     yt_long:   { label: "YouTube · vídeos", short: "YouTube", net: "youtube",   color: "var(--c-red)" },
     yt_shorts: { label: "YouTube Shorts",   short: "Shorts",  net: "youtube",   color: "var(--c-amber)" },
@@ -389,7 +456,7 @@
   };
   const brl = (n, d = 2) => (isNum(n) ? n.toLocaleString("pt-BR", { style: "currency", currency: "BRL", minimumFractionDigits: d, maximumFractionDigits: d }) : "—");
   const pct = (n, d = 1) => (isNum(n) ? n.toLocaleString("pt-BR", { maximumFractionDigits: d }) + "%" : "—");
-  const dur = (s) => (!isNum(s) ? "—" : s >= 60 ? `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, "0")}` : `${Math.round(s)}s`);
+  const dur = (s) => (!isNum(s) ? "—" : s >= 60 ? `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, "0")}` : `0:${String(Math.round(s)).padStart(2, "0")}`);
   const sum = (arr, f) => arr.reduce((s, x) => s + (f(x) || 0), 0);
   const median = (arr) => { const a = arr.filter(isNum).sort((x, y) => x - y); if (!a.length) return null; const m = a.length >> 1; return a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2; };
   const pad = (n) => String(n).padStart(2, "0");
@@ -398,47 +465,36 @@
   const pubKey = (iso) => (iso && iso.length > 10 ? keyOf(new Date(iso)) : iso);
   const addDays = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
   const daysBetween = (a, b) => Math.round((dateOf(b) - dateOf(a)) / 864e5);
-  const dShort = (k) => dateOf(k).toLocaleDateString("pt-BR", { day: "2-digit", month: "short" }).replace(".", "");
+  const dShort = (k) => dateOf(k).toLocaleDateString("pt-BR", { day: "2-digit", month: "short" }).replace(/\./g, "").replace(/ de /g, " ");
   const dLong = (k) => dateOf(k).toLocaleDateString("pt-BR", { day: "2-digit", month: "short", year: "numeric" }).replace(/\./g, "").replace(/ de /g, " ");
-  const monthYear = (d) => d.toLocaleDateString("pt-BR", { month: "short", year: "numeric" }).replace(".", "").replace(" de ", " ");
+  const monthYear = (d) => d.toLocaleDateString("pt-BR", { month: "short", year: "numeric" }).replace(/\./g, "").replace(/ de /g, " ");
+  const ago = (k, refKey) => { const d = daysBetween(k, refKey); return d <= 0 ? "hoje" : d === 1 ? "ontem" : d < 7 ? `há ${d} dias` : d < 60 ? `há ${Math.round(d / 7)} sem` : `há ${Math.round(d / 30)} meses`; };
   const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
 
-  // Base da pasta, funcione a página em /brazil-noir, /brazil-noir/ ou /brazil-noir/index.html
-  const BASE = (() => {
-    const p = location.pathname;
-    if (p.endsWith("/")) return p;
-    if (/\.html?$/.test(p)) return p.slice(0, p.lastIndexOf("/") + 1);
-    return p + "/";
-  })();
-  const getJson = async (file) => {
-    try {
-      const r = await fetch(BASE + file, { cache: "no-store" });
-      return r.ok ? await r.json() : null;
-    } catch { return null; }
-  };
+  // Pasta base: funciona em /brazil-noir, /brazil-noir/ e /brazil-noir/index.html
+  const BASE = (() => { const p = location.pathname; if (p.endsWith("/")) return p; if (/\.html?$/.test(p)) return p.slice(0, p.lastIndexOf("/") + 1); return p + "/"; })();
+  const getJson = async (file) => { try { const r = await fetch(BASE + file, { cache: "no-store" }); return r.ok ? await r.json() : null; } catch { return null; } };
 
   // ---------- Estado ----------
   const qs = new URLSearchParams(location.search);
   const state = {
     mode: qs.has("exemplo") ? "sample" : store.get("bn-mode") || "real",
     period: Number(store.get("bn-period") ?? 0),
+    featMetric: "views",
     plat: "all",
     q: "",
-    sort: { key: "publishedAt", dir: -1 },
+    sort: { key: "pub", dir: -1 },
     model: null,
   };
 
-  // ---------- Carregamento e normalização ----------
+  // ---------- Dados ----------
   async function loadModel(mode) {
     if (mode === "sample") {
       const raw = await getJson("data.sample.json");
       return raw ? buildModel(raw, null, { entries: raw.spend || [] }) : null;
     }
     const [raw, manual, spend] = await Promise.all([getJson("data.json"), getJson("manual.json"), getJson("spend.json")]);
-    const model = buildModel(raw || { mode: "real", videos: [], daily: [], accounts: {}, sources: {} }, manual, spend);
-    model.hasManualFile = !!manual;
-    model.hasSpendFile = !!spend;
-    return model;
+    return buildModel(raw || { mode: "real", videos: [], daily: [], accounts: {}, sources: {} }, manual, spend);
   }
 
   function buildModel(raw, manual, spendFile) {
@@ -472,14 +528,10 @@
       for (const [id, o] of Object.entries(manual.overrides || {})) if (byId.has(id)) Object.assign(byId.get(id), o);
     }
     m.daily.sort((a, b) => (a.date + a.platform).localeCompare(b.date + b.platform));
-    // Conta sem API: usa o último número lançado à mão
     for (const net of NET_ORDER) {
       if (isNum(m.accounts[net]?.followers)) continue;
       const rows = m.daily.filter((r) => r.platform === net && isNum(r.followers));
-      if (rows.length) {
-        const last = rows.at(-1);
-        m.accounts[net] = { ...(m.accounts[net] || {}), followers: last.followers, views: last.totalViews ?? null, asOf: last.date, manual: true };
-      }
+      if (rows.length) { const last = rows.at(-1); m.accounts[net] = { ...(m.accounts[net] || {}), followers: last.followers, views: last.totalViews ?? null, asOf: last.date, manual: true }; }
     }
     finalizeVideos(m);
     m.refDate = m.mode === "sample" && m.generatedAt ? new Date(m.generatedAt) : new Date();
@@ -494,10 +546,9 @@
       v.engagement = isNum(v.views) && v.views > 0 ? (((v.likes || 0) + (v.comments || 0) + (v.shares || 0)) / v.views) * 100 : null;
       v.key = (v.hook || v.title || v.id).trim();
     }
-    m.videos.sort((a, b) => (b.pub || "").localeCompare(a.pub || ""));
+    m.videos.sort((a, b) => (b.pub || "").localeCompare(a.pub || "") || (b.views || 0) - (a.views || 0));
   }
 
-  // Atualização ao vivo do YouTube (só funciona no domínio liberado da chave)
   async function liveYouTube(m) {
     if (!YOUTUBE_API_KEY || m.mode !== "real") return false;
     const api = (path, p) => fetch(`https://www.googleapis.com/youtube/v3/${path}?${new URLSearchParams({ ...p, key: YOUTUBE_API_KEY })}`).then((r) => (r.ok ? r.json() : Promise.reject(r.status)));
@@ -510,9 +561,8 @@
       const byId = new Map(m.videos.map((v) => [v.id, v]));
       for (const it of vids) {
         const st = it.statistics;
-        const known = byId.get(it.id);
         const stats = { views: +st.viewCount || 0, likes: st.likeCount != null ? +st.likeCount : null, comments: st.commentCount != null ? +st.commentCount : null };
-        if (known) { Object.assign(known, stats); continue; }
+        if (byId.has(it.id)) { Object.assign(byId.get(it.id), stats); continue; }
         const d = /PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/.exec(it.contentDetails.duration) || [];
         const secs = (+d[1] || 0) * 3600 + (+d[2] || 0) * 60 + (+d[3] || 0);
         const short = secs <= 180 && (/#shorts/i.test(it.snippet.title) || it.snippet.publishedAt >= LONGFORM_ERA);
@@ -536,10 +586,8 @@
   const startKey = (m) => (state.period ? keyOf(addDays(m.refDate, -state.period + 1)) : "0000-00-00");
   const prevStartKey = (m) => (state.period ? keyOf(addDays(m.refDate, -2 * state.period + 1)) : null);
   const inPeriod = (m, k) => k && k >= startKey(m) && k <= m.refKey;
+  const followerRows = (m, net) => m.daily.filter((r) => r.platform === net && isNum(r.followers));
 
-  function followerRows(m, net) { return m.daily.filter((r) => r.platform === net && isNum(r.followers)); }
-
-  // Views por dia de uma rede: usa o campo 'views' quando existe; senão a diferença entre totais
   function viewsByDay(m, net) {
     const out = new Map();
     let prev = null;
@@ -550,7 +598,6 @@
     }
     return out;
   }
-
   function gainedBetween(m, net, fromKey, toKey) {
     const rows = followerRows(m, net);
     const end = [...rows].reverse().find((r) => r.date <= toKey);
@@ -559,30 +606,41 @@
     if (!base || base.date >= end.date) return null;
     return end.followers - base.followers;
   }
-
   function viewsBetween(m, fromKey, toKey) {
     let total = 0, any = false;
     for (const net of NET_ORDER) for (const [k, v] of viewsByDay(m, net)) if (k >= fromKey && k <= toKey) { total += v; any = true; }
     return any ? total : null;
   }
-
-  // Ritmo de crescimento (últimos 30 dias de histórico) → previsão de quando bate a meta
   function eta(m, net, goal) {
     const rows = followerRows(m, net);
-    if (rows.length < 2) return "o ritmo aparece depois de alguns dias de histórico";
+    if (rows.length < 2) return "o ritmo aparece com alguns dias de histórico";
     const last = rows.at(-1);
     if (last.followers >= goal) return "meta batida";
     const from = keyOf(addDays(dateOf(last.date), -30));
     const base = rows.find((r) => r.date >= from && r.date < last.date) || rows[0];
     const span = daysBetween(base.date, last.date);
-    if (span < 5) return "o ritmo aparece depois de alguns dias de histórico";
+    if (span < 5) return "o ritmo aparece com alguns dias de histórico";
     const rate = (last.followers - base.followers) / span;
     if (rate <= 0) return "sem crescimento no último mês";
     const days = (goal - last.followers) / rate;
-    const when = addDays(dateOf(last.date), Math.ceil(days));
     const rateTxt = rate >= 1 ? `+${fmt1(rate)}/dia` : `+${fmt1(rate * 7)}/semana`;
     if (days > 365 * 3) return `no ritmo atual (${rateTxt}) leva mais de 3 anos`;
-    return `no ritmo atual (${rateTxt}): <span class="tag">${monthYear(when)}</span>`;
+    return `no ritmo atual (${rateTxt}): <span class="tag">${monthYear(addDays(dateOf(last.date), Math.ceil(days)))}</span>`;
+  }
+
+  // ---------- Thumbnails ----------
+  const ytId = (v) => (v.platform?.startsWith("yt_") && /^[\w-]{11}$/.test(v.id) ? v.id : null);
+  window.bnThumbErr = (img) => {
+    if (img.src.includes("/sddefault.jpg")) img.src = img.src.replace("/sddefault.jpg", "/mqdefault.jpg");
+    else img.remove();
+  };
+  function thumb(v, { big = false } = {}) {
+    const id = ytId(v);
+    const url = id ? `https://i.ytimg.com/vi/${id}/${big ? "sddefault" : "mqdefault"}.jpg` : v.thumb;
+    const color = PLAT[v.platform]?.color || "var(--muted)";
+    const badge = isNum(v.durationSec) ? `<span class="dur">${dur(v.durationSec)}</span>` : "";
+    if (url) return `<div class="thumb"><img src="${esc(url)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="bnThumbErr(this)">${badge}</div>`;
+    return `<div class="thumb ph" style="--pc:${color}"><span class="ph-t">${esc(v.case || v.title)}</span>${badge}</div>`;
   }
 
   // ---------- Tooltip ----------
@@ -600,21 +658,18 @@
   const hideTip = () => tip.classList.remove("show");
   const tipRow = (color, label, value) => `<div class="tip-row"><span class="sw" style="background:${color}"></span>${esc(label)}<b>${value}</b></div>`;
 
-  // ---------- Gráficos (SVG desenhado à mão) ----------
+  // ---------- Gráficos ----------
   function niceMax(v) {
     if (!(v > 0)) return 1;
     const p = Math.pow(10, Math.floor(Math.log10(v)));
     for (const s of [1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10]) if (s * p >= v) return s * p;
     return 10 * p;
   }
-  const NS = "http://www.w3.org/2000/svg";
-
   function frame(el, h) {
-    const w = Math.max(280, el.clientWidth);
+    const w = Math.max(260, el.clientWidth);
     el.innerHTML = `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img"></svg>`;
     return { svg: el.firstChild, w, h };
   }
-
   function axes(svg, { w, h, m, yMax, yFmt, xKeys, xPos }) {
     let g = "";
     for (let i = 0; i <= 4; i++) {
@@ -628,14 +683,13 @@
       const idx = ticks === 1 ? 0 : Math.round((i * (n - 1)) / (ticks - 1));
       if (seen.has(idx)) continue;
       seen.add(idx);
-      const anchor = i === 0 ? "start" : i === ticks - 1 ? "end" : "middle";
+      const anchor = ticks === 1 ? "middle" : i === 0 ? "start" : i === ticks - 1 ? "end" : "middle";
       g += `<text x="${xPos(idx)}" y="${h - 6}" text-anchor="${anchor}">${dShort(xKeys[idx])}</text>`;
     }
     svg.insertAdjacentHTML("beforeend", g);
   }
 
-  // Linhas (seguidores por rede). Rótulo direto no fim de cada linha + crosshair no hover.
-  function lineChart(el, series, { yFmt = fmtC, unit = "" } = {}) {
+  function lineChart(el, series, { yFmt = fmtC } = {}) {
     const keys = [...new Set(series.flatMap((s) => s.points.map((p) => p.k)))].sort();
     if (!keys.length) return false;
     const { svg, w, h } = frame(el, 240);
@@ -646,7 +700,6 @@
     const y = (v) => h - m.b - ((h - m.t - m.b) * v) / yMax;
     const idx = new Map(keys.map((k, i) => [k, i]));
     axes(svg, { w, h, m, yMax, yFmt, xKeys: keys, xPos: x });
-
     let g = "";
     const ends = [];
     for (const s of series) {
@@ -656,19 +709,15 @@
       g += `<circle cx="${last[0]}" cy="${last[1]}" r="4" style="fill:${s.color};stroke:var(--surface)" stroke-width="2"/>`;
       ends.push({ y: last[1], x: last[0], text: `${s.label} ${fmt(s.points.at(-1).v)}` });
     }
-    // Afasta rótulos que colidem
     ends.sort((a, b) => a.y - b.y);
     for (let i = 1; i < ends.length; i++) if (ends[i].y - ends[i - 1].y < 14) ends[i].y = ends[i - 1].y + 14;
     for (const e of ends) g += `<text class="lbl" x="${e.x + 9}" y="${e.y + 4}">${esc(e.text)}</text>`;
-    g += `<line class="xh" y1="${m.t}" y2="${h - m.b}" style="stroke:var(--line-strong);display:none" stroke-width="1"/><g class="hd"></g>`;
+    g += `<line class="xh" y1="${m.t}" y2="${h - m.b}" style="stroke:var(--border-2);display:none" stroke-width="1"/><g class="hd"></g>`;
     g += `<rect x="${m.l}" y="0" width="${Math.max(1, w - m.l - m.r)}" height="${h}" fill="transparent" class="hit"/>`;
     svg.insertAdjacentHTML("beforeend", g);
-
-    const xh = svg.querySelector(".xh"), hd = svg.querySelector(".hd");
-    const hit = svg.querySelector(".hit");
+    const xh = svg.querySelector(".xh"), hd = svg.querySelector(".hd"), hit = svg.querySelector(".hit");
     hit.addEventListener("pointermove", (ev) => {
-      const rect = svg.getBoundingClientRect();
-      const px = ev.clientX - rect.left;
+      const px = ev.clientX - svg.getBoundingClientRect().left;
       let best = 0, bd = Infinity;
       keys.forEach((k, i) => { const d = Math.abs(x(i) - px); if (d < bd) { bd = d; best = i; } });
       const k = keys[best];
@@ -677,7 +726,7 @@
       for (const s of series) {
         const p = s.points.find((q) => q.k === k);
         if (!p) continue;
-        rows += tipRow(s.color, s.label, fmt(p.v) + (unit ? ` ${unit}` : ""));
+        rows += tipRow(s.color, s.label, fmt(p.v));
         dots += `<circle cx="${x(best)}" cy="${y(p.v)}" r="4.5" style="fill:${s.color};stroke:var(--surface)" stroke-width="2"/>`;
       }
       hd.innerHTML = dots;
@@ -687,7 +736,6 @@
     return true;
   }
 
-  // Colunas empilhadas (views por dia por rede). 2px de respiro entre segmentos, topo arredondado.
   function stackedColumns(el, keys, series, { yFmt = fmtC } = {}) {
     if (!keys.length) return false;
     const { svg, w, h } = frame(el, 240);
@@ -705,156 +753,252 @@
       let acc = 0;
       const segs = series.map((s) => ({ s, v: s.values[i] || 0 })).filter((q) => q.v > 0);
       segs.forEach((q, j) => {
-        const y0 = y(acc), y1 = y(acc + q.v);
+        const y0 = y(acc);
         acc += q.v;
         const top = j === segs.length - 1;
-        let hgt = y0 - y1 - (top ? 0 : gap);
+        const hgt = y0 - y(acc) - (top ? 0 : gap);
         if (hgt < 0.5) return;
-        const x0 = x(i) - bw / 2;
-        const yt = y0 - hgt;
-        const r = top ? Math.min(4, bw / 2, hgt) : 0;
+        const x0 = x(i) - bw / 2, yt = y0 - hgt, r = top ? Math.min(4, bw / 2, hgt) : 0;
         g += `<path d="M${x0},${y0}V${yt + r}${r ? `Q${x0},${yt} ${x0 + r},${yt}` : ""}H${x0 + bw - r}${r ? `Q${x0 + bw},${yt} ${x0 + bw},${yt + r}` : ""}V${y0}Z" style="fill:${q.s.color}"/>`;
-        if (!top) g += "";
       });
       g += `<rect x="${m.l + band * i}" y="${m.t}" width="${band}" height="${h - m.t - m.b}" fill="transparent" data-i="${i}" class="hit"/>`;
     });
-    svg.insertAdjacentHTML("afterbegin", `<rect class="ghost" x="0" y="${m.t}" width="${band}" height="${h - m.t - m.b}" style="fill:var(--surface-3);display:none" rx="4"/>`);
+    svg.insertAdjacentHTML("afterbegin", `<rect class="ghost" x="0" y="${m.t}" width="${band}" height="${h - m.t - m.b}" style="fill:var(--surface-2);display:none" rx="4"/>`);
     svg.insertAdjacentHTML("beforeend", g);
     const ghost = svg.querySelector(".ghost");
     svg.querySelectorAll(".hit").forEach((r) => {
       r.addEventListener("pointermove", (ev) => {
         const i = +r.dataset.i;
         ghost.setAttribute("x", m.l + band * i); ghost.style.display = "";
-        const rows = series.map((s) => tipRow(s.color, s.label, fmt(s.values[i] || 0))).join("");
-        showTip(`<div class="tip-h">${dLong(keys[i])}</div>${rows}<div class="tip-row tip-total">Total<b>${fmt(totals[i])}</b></div>`, ev.clientX, ev.clientY);
+        showTip(`<div class="tip-h">${dLong(keys[i])}</div>${series.map((s) => tipRow(s.color, s.label, fmt(s.values[i] || 0))).join("")}<div class="tip-row tip-total">Total<b>${fmt(totals[i])}</b></div>`, ev.clientX, ev.clientY);
       });
       r.addEventListener("pointerleave", () => { ghost.style.display = "none"; hideTip(); });
     });
     return true;
   }
 
-  // Mini colunas: views de cada vídeo da plataforma, em ordem de publicação
   function spark(vids, color) {
     const list = vids.filter((v) => isNum(v.views)).slice(0, 40).reverse();
     if (!list.length) return "";
-    const W = 260, H = 44, n = list.length, band = W / n, bw = Math.max(2, Math.min(10, band - 2));
+    const W = 260, H = 40, n = list.length, band = W / n, bw = Math.max(2, Math.min(10, band - 2));
     const max = Math.max(...list.map((v) => v.views), 1);
-    const bars = list.map((v, i) => {
-      const hh = Math.max(1.5, (v.views / max) * (H - 2));
-      return `<rect x="${i * band + (band - bw) / 2}" y="${H - hh}" width="${bw}" height="${hh}" rx="${Math.min(2, bw / 2)}" style="fill:${color}"><title>${esc(v.key)} — ${fmt(v.views)} views</title></rect>`;
-    }).join("");
-    return `<svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" width="100%" height="44" aria-label="Views por vídeo">${bars}</svg>`;
+    const bars = list.map((v, i) => { const hh = Math.max(1.5, (v.views / max) * (H - 2)); return `<rect x="${i * band + (band - bw) / 2}" y="${H - hh}" width="${bw}" height="${hh}" rx="${Math.min(2, bw / 2)}" style="fill:${color}"><title>${esc(v.key)} — ${fmt(v.views)} views</title></rect>`; }).join("");
+    return `<svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" width="100%" height="40" aria-label="Views por vídeo">${bars}</svg>`;
   }
-
-  // Barra segmentada por plataforma (HTML): comprimento ∝ total, 2px entre segmentos
   function segBar(parts, max, maxPx = 100) {
     const total = sum(parts, (p) => p.v);
     const width = max > 0 ? Math.max(1, (total / max) * maxPx) : 0;
-    const segs = parts.filter((p) => p.v > 0).map((p) => `<i style="flex:${p.v} 1 0;background:${p.color}" title="${esc(p.label)}: ${fmt(p.v)}"></i>`).join("");
-    return `<span class="sbar" style="width:${width}%">${segs}</span>`;
+    return `<span class="sbar" style="width:${width}%">${parts.filter((p) => p.v > 0).map((p) => `<i style="flex:${p.v} 1 0;background:${p.color}" title="${esc(p.label)}: ${fmt(p.v)}"></i>`).join("")}</span>`;
   }
+  const empty = (html) => `<div class="empty"><div>${html}</div></div>`;
 
   // ---------- Render ----------
   function render() {
     const m = state.model;
-    const main = $("#main");
-    if (!m) {
-      main.innerHTML = `<div class="empty" style="min-height:240px"><div><b>Não encontrei os dados.</b><br>Rode <code>node pipeline/brazil-noir/analytics.js</code> ou <code>node pipeline/brazil-noir/dashboard-sample.js</code> e abra a página por um servidor (não direto do arquivo).</div></div>`;
-      return;
-    }
     document.querySelectorAll("#mode-seg button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.mode === state.mode)));
     document.querySelectorAll("#period-seg button").forEach((b) => b.setAttribute("aria-pressed", String(+b.dataset.period === state.period)));
-    renderHeader(m);
-    main.innerHTML = `
-      <section class="kpis" id="kpis" aria-label="Resumo"></section>
-      <section class="sec"><div class="sec-h"><span class="fileno">01</span><h2>Rumo à monetização</h2><span class="aside">metas oficiais de cada programa</span></div><div class="grid3" id="money"></div></section>
-      <section class="sec"><div class="sec-h"><span class="fileno">02</span><h2>Alcance e crescimento</h2><span class="aside" id="growth-aside"></span></div>
+    if (!m) {
+      $("#main").innerHTML = empty(`<b>Não encontrei os dados.</b><br>Rode <code>npm run bn:dashboard</code> ou <code>npm run bn:dashboard:sample</code> e abra a página por um servidor local.`);
+      return;
+    }
+    renderChrome(m);
+    $("#main").innerHTML = `
+      <section id="overview">
+        <div class="hero"><div class="card feat" id="feat"></div><div class="card recent" id="recent"></div></div>
+        <div class="kpis" id="kpis"></div>
+      </section>
+      <section class="block" id="growth"><div class="block-h"><h2>Crescimento</h2><span class="sub">seguidores e views ao longo do tempo</span><span class="right" id="growth-aside"></span></div>
         <div class="grid2">
-          <div class="card"><div class="card-h"><span class="card-title">Seguidores por rede</span><span class="card-sub">inscritos no YouTube, seguidores no TikTok e Instagram</span></div><div class="legend" id="lg-followers"></div><div class="chart" id="ch-followers"></div></div>
-          <div class="card"><div class="card-h"><span class="card-title">Views por dia</span><span class="card-sub">todas as redes, empilhadas</span></div><div class="legend" id="lg-views"></div><div class="chart" id="ch-views"></div><div id="tbl-views"></div></div>
+          <div class="card"><div class="card-h"><span class="card-title">Seguidores por rede</span></div><div class="legend" id="lg-followers"></div><div class="chart" id="ch-followers"></div></div>
+          <div class="card"><div class="card-h"><span class="card-title">Views por dia</span></div><div class="legend" id="lg-views"></div><div class="chart" id="ch-views"></div><div id="tbl-views"></div></div>
         </div></section>
-      <section class="sec"><div class="sec-h"><span class="fileno">03</span><h2>Por plataforma</h2><span class="aside" id="plat-aside"></span></div><div class="grid4" id="platforms"></div></section>
-      <section class="sec"><div class="sec-h"><span class="fileno">04</span><h2>Destaques</h2><span class="aside">ganchos e casos que mais (e menos) renderam</span></div><div class="grid2" id="highlights"></div></section>
-      <section class="sec"><div class="sec-h"><span class="fileno">05</span><h2>Gastos</h2><span class="aside">lançados em <code>spend.json</code></span></div><div id="spend"></div></section>
-      <section class="sec"><div class="sec-h"><span class="fileno">06</span><h2>Todos os vídeos</h2><span class="aside" id="videos-aside"></span></div><div class="card" id="videos"></div></section>
-      <section class="sec"><div class="sec-h"><span class="fileno">07</span><h2>Fontes de dados</h2><span class="aside">o que está ligado e o que falta</span></div><div class="card sources" id="sources"></div></section>`;
+      <section class="block" id="money"><div class="block-h"><h2>Monetização</h2><span class="sub">progresso nas metas oficiais de cada programa</span></div><div class="grid3" id="goals"></div></section>
+      <section class="block" id="platforms"><div class="block-h"><h2>Plataformas</h2><span class="sub" id="plat-aside"></span></div><div class="grid4" id="plats"></div></section>
+      <section class="block" id="highlights"><div class="block-h"><h2>Destaques</h2><span class="sub">o que rendeu mais e menos no período</span></div><div class="grid2" id="hl"></div></section>
+      <section class="block" id="videos"><div class="block-h"><h2>Vídeos</h2><span class="right" id="videos-aside"></span></div><div class="card" id="vtable"></div></section>
+      <section class="block" id="spend"><div class="block-h"><h2>Gastos</h2><span class="sub">lançados em <code>spend.json</code></span></div><div id="spendbox"></div></section>
+      <section class="block" id="sources"><div class="block-h"><h2>Fontes de dados</h2><span class="sub">o que está ligado e o que falta</span></div><div class="card" id="srcs"></div></section>`;
+    renderFeatured(m);
+    renderRecent(m);
     renderKpis(m);
-    renderMoney(m);
     renderGrowth(m);
+    renderGoals(m);
     renderPlatforms(m);
     renderHighlights(m);
-    renderSpend(m);
     renderVideos(m);
+    renderSpend(m);
     renderSources(m);
+    spy();
   }
 
-  function renderHeader(m) {
-    const yt = m.channel.youtube || {}, tk = m.channel.tiktok || {}, ig = m.channel.instagram || {};
-    const links = [];
-    if (yt.url) links.push(`<a href="${esc(yt.url)}" target="_blank" rel="noopener">YouTube @${esc(yt.handle)}</a>`);
-    if (tk.url) links.push(`<a href="${esc(tk.url)}" target="_blank" rel="noopener">TikTok @${esc(tk.handle)}</a>`);
-    if (ig.url) links.push(`<a href="${esc(ig.url)}" target="_blank" rel="noopener">Instagram @${esc(ig.handle)}</a>`);
-    links.push(`<span>true crime brasileiro, narrado em inglês</span>`);
-    $("#handles").innerHTML = links.join("");
-    const av = yt.avatar;
-    $("#avatar").innerHTML = av && m.mode === "real" ? `<img src="${esc(av)}" alt="" referrerpolicy="no-referrer" onerror="this.replaceWith(document.createElement('span'))">` : "<span></span>";
+  function sourceFlags(m) {
+    const sample = m.mode === "sample";
+    return {
+      yt: sample || !!(m.sources.youtube || m.live),
+      ana: sample || String(m.sources.youtube || "").includes("analytics"),
+      tk: sample || m.sources.tiktok ? "on" : m.manualUsed.tiktok ? "part" : "off",
+      ig: sample || m.sources.instagram ? "on" : m.manualUsed.instagram ? "part" : "off",
+    };
+  }
 
-    const st = (label, s) => `<span class="src"><span class="dot ${s}"></span>${label}</span>`;
-    const ytOn = m.sources.youtube || (m.live && "api");
-    const parts = [
-      st(`YouTube ${m.live ? "· ao vivo" : ytOn ? "· API" : "· sem dados"}`, ytOn ? "on" : "off"),
-      st(`Retenção YT ${String(m.sources.youtube || "").includes("analytics") || m.mode === "sample" ? "· ligada" : "· falta OAuth"}`, String(m.sources.youtube || "").includes("analytics") || m.mode === "sample" ? "on" : "off"),
-      st(`TikTok ${m.sources.tiktok ? "· API" : m.manualUsed.tiktok ? "· manual" : "· sem dados"}`, m.sources.tiktok ? "on" : m.manualUsed.tiktok ? "part" : "off"),
-      st(`Reels ${m.sources.instagram ? "· API" : m.manualUsed.instagram ? "· manual" : "· não ligado"}`, m.sources.instagram ? "on" : m.manualUsed.instagram ? "part" : "off"),
-      st(`Gastos · ${m.spend.length} lançamento${m.spend.length === 1 ? "" : "s"}`, m.spend.length ? "on" : "off"),
-    ];
-    const upd = m.mode === "sample" ? "" : m.generatedAt ? `<span>coletado em ${new Date(m.generatedAt).toLocaleString("pt-BR", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" })}</span>` : "";
-    $("#statusline").innerHTML = parts.join("") + upd;
-    $("#banner").innerHTML = m.mode === "sample"
-      ? `<div class="banner"><span class="stamp">EXEMPLO</span><span>Números inventados para mostrar a dashboard completa (8 semanas do formato novo: episódio longo + 3 cortes). Clique em <b>Dados reais</b> para ver o canal de verdade.</span></div>`
-      : "";
-    $("#foot-updated").textContent = m.mode === "sample" ? "modo exemplo" : `referência: ${dLong(m.refKey)}`;
+  function renderChrome(m) {
+    const yt = m.channel.youtube || {};
+    $("#avatar").innerHTML = yt.avatar && m.mode === "real" ? `<img src="${esc(yt.avatar)}" alt="" referrerpolicy="no-referrer" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'mark'}))">` : `<span class="mark"></span>`;
+    const f = sourceFlags(m);
+    const row = (s, t) => `<div><span class="dot ${s}"></span>${t}</div>`;
+    $("#side-src").innerHTML = [
+      row(f.yt ? "on" : "off", `YouTube${m.live ? " · ao vivo" : ""}`),
+      row(f.ana ? "on" : "off", f.ana ? "Retenção YouTube" : "Retenção YT · falta OAuth"),
+      row(f.tk, `TikTok${f.tk === "part" ? " · manual" : f.tk === "off" ? " · sem dados" : ""}`),
+      row(f.ig, `Reels${f.ig === "off" ? " · não ligado" : f.ig === "part" ? " · manual" : ""}`),
+      row(m.spend.length ? "on" : "off", `Gastos · ${m.spend.length}`),
+    ].join("");
+    const when = m.mode === "sample" ? "Dados de exemplo" : m.generatedAt ? `Atualizado em ${new Date(m.generatedAt).toLocaleString("pt-BR", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" }).replace(/\./g, "")}${m.live ? " · YouTube ao vivo" : ""}` : "";
+    $("#when").textContent = when;
+    $("#notice").innerHTML = m.mode === "sample" ? `<div class="notice"><span class="tag">Exemplo</span><span>Números inventados para mostrar o painel completo. <button type="button" id="to-real">Ver dados reais</button></span></div>` : "";
+    $("#to-real")?.addEventListener("click", () => setMode("real"));
+    $("#foot").textContent = m.mode === "sample" ? "modo exemplo" : `referência: ${dLong(m.refKey)}`;
+  }
+
+  // Melhor vídeo do período (por métrica escolhida), com player do YouTube
+  const FEAT_METRICS = {
+    views: { label: "Views", get: (v) => v.views },
+    ret: { label: "Retenção", get: (v) => (v.views >= 30 ? v.avgViewPct : null) },
+    fol: { label: "Seguidores", get: (v) => v.followersGained },
+  };
+  function renderFeatured(m) {
+    const el = $("#feat");
+    let pool = m.videos.filter((v) => inPeriod(m, v.pub) && isNum(v.views));
+    const scope = pool.length ? (state.period ? `nos últimos ${state.period} dias` : "de todos os tempos") : "de todos os tempos";
+    if (!pool.length) pool = m.videos.filter((v) => isNum(v.views));
+    if (!pool.length) { el.innerHTML = `<div style="padding:18px">${empty("<b>Nenhum vídeo com métricas ainda.</b>")}</div>`; return; }
+    const avail = Object.entries(FEAT_METRICS).filter(([, d]) => pool.filter((v) => isNum(d.get(v))).length >= 2).map(([k]) => k);
+    if (!avail.includes(state.featMetric)) state.featMetric = "views";
+    const get = FEAT_METRICS[state.featMetric].get;
+    const v = pool.filter((x) => isNum(get(x))).sort((a, b) => get(b) - get(a))[0];
+    const meta = PLAT[v.platform];
+    const peers = pool.filter((x) => x.platform === v.platform && x !== v);
+    const med = median(peers.map((x) => x.views));
+    const cmp = isNum(med) && med > 0 && v.views > med ? `<div class="feat-cmp"><b>${fmt1(v.views / med)}×</b> a mediana de views do ${meta.short} no período (${fmt(med)}).</div>` : "";
+    const id = ytId(v);
+    const others = m.videos.filter((x) => x !== v && x.key === v.key && x.pub === v.pub);
+    const alsoOn = others.length ? `<span>também no ${others.map((x) => `${PLAT[x.platform].short}: ${fmtC(x.views)} view${x.views === 1 ? "" : "s"}`).join(", ")}</span>` : "";
+    const stat = (label, value) => `<div><span>${label}</span><b class="num">${value}</b></div>`;
+    el.innerHTML = `
+      <div class="feat-media" id="feat-media">
+        ${thumb(v, { big: true })}
+        <span class="feat-badge"><span class="sw" style="background:${meta.color};border-radius:50%;width:8px;height:8px"></span>Melhor vídeo ${scope} · ${FEAT_METRICS[state.featMetric].label.toLowerCase()}</span>
+        ${id ? `<button class="play" type="button" aria-label="Assistir aqui"><span><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13l11-6.5z"/></svg></span></button>` : ""}
+      </div>
+      <div class="feat-body">
+        <div class="feat-top">
+          <div style="min-width:0">
+            <h3 class="feat-title">${v.url ? `<a href="${esc(v.url)}" target="_blank" rel="noopener">${esc(v.title)}</a>` : esc(v.title)}</h3>
+            <div class="feat-meta"><span class="chip"><i class="sw" style="background:${meta.color}"></i>${meta.label}</span><span>${dLong(v.pub)} · ${ago(v.pub, m.refKey)}</span>${v.case ? `<span>${esc(v.case)}</span>` : ""}${alsoOn}</div>
+          </div>
+          ${avail.length > 1 ? `<div class="seg feat-tabs" role="group" aria-label="Critério">${avail.map((k) => `<button data-fm="${k}" aria-pressed="${k === state.featMetric}">${FEAT_METRICS[k].label}</button>`).join("")}</div>` : ""}
+        </div>
+        ${v.hook && v.hook !== v.title ? `<div class="feat-hook">“${esc(v.hook)}”</div>` : ""}
+        <div class="feat-stats">
+          ${stat("Views", fmt(v.views))}
+          ${stat("Retenção", isNum(v.avgViewPct) ? `${pct(v.avgViewPct, 0)} <span class="muted" style="display:inline;font-size:12px;font-weight:500">${dur(v.avgWatchSec)}</span>` : "—")}
+          ${stat("Likes", fmt(v.likes))}
+          ${stat("Comentários", fmt(v.comments))}
+          ${stat("Compart.", fmt(v.shares))}
+          ${stat("Seguidores", isNum(v.followersGained) ? "+" + fmt(v.followersGained) : "—")}
+        </div>
+        ${cmp}
+      </div>`;
+    el.querySelector(".play")?.addEventListener("click", () => {
+      $("#feat-media").innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="${esc(v.title)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+    });
+    el.querySelectorAll("[data-fm]").forEach((b) => b.addEventListener("click", () => { state.featMetric = b.dataset.fm; renderFeatured(m); }));
+  }
+
+  // Recentes: o mesmo corte postado em várias redes no mesmo dia vira uma linha
+  function renderRecent(m) {
+    const el = $("#recent");
+    const groups = [];
+    const byKey = new Map();
+    for (const v of m.videos) {
+      if (!v.pub) continue;
+      const k = v.key + "|" + v.pub;
+      let g = byKey.get(k);
+      if (!g) { g = { key: v.key, title: v.title, case: v.case, pub: v.pub, items: [] }; byKey.set(k, g); groups.push(g); }
+      g.items.push(v);
+    }
+    const all = groups.map((g) => ({ ...g, views: sum(g.items, (x) => x.views) }));
+    const med = median(all.slice(0, 30).map((g) => g.views));
+    const recent = all.slice(0, 6);
+    const perf = (g) => {
+      if (!isNum(med) || med <= 0 || daysBetween(g.pub, m.refKey) < 2) return `<span class="perf mid">${daysBetween(g.pub, m.refKey) < 2 ? "rodando" : "—"}</span>`;
+      const r = g.views / med;
+      return r >= 1.5 ? `<span class="perf up">▲ ${fmt1(r)}× a mediana</span>` : r <= 0.6 ? `<span class="perf down">▼ abaixo do normal</span>` : `<span class="perf mid">na média</span>`;
+    };
+    const lead = (g) => g.items.find((x) => ytId(x)) || g.items[0];
+    el.innerHTML = `
+      <div class="card-h"><span class="card-title">Publicados recentemente</span><a class="link" href="#videos">Ver todos</a></div>
+      ${recent.length ? `<ul class="rlist">${recent.map((g) => {
+        const v = lead(g);
+        return `<li>${thumb(v)}<div style="min-width:0">
+          <div class="r-title">${v.url ? `<a href="${esc(v.url)}" target="_blank" rel="noopener">${esc(g.title)}</a>` : esc(g.title)}</div>
+          <div class="r-meta"><span>${ago(g.pub, m.refKey)}</span><b class="num" style="color:var(--ink);font-weight:600">${fmtC(g.views)} views</b>${perf(g)}</div>
+          <div class="r-plats">${PLAT_ORDER.map((p) => g.items.filter((x) => x.platform === p)).filter((l) => l.length).map((l) => `<span class="chip"><i class="sw" style="background:${PLAT[l[0].platform].color}"></i>${PLAT[l[0].platform].short} ${fmtC(sum(l, (x) => x.views))}</span>`).join("")}</div>
+        </div></li>`;
+      }).join("")}</ul>` : empty("Nenhum vídeo publicado ainda.")}`;
   }
 
   function renderKpis(m) {
     const s = startKey(m), ps = prevStartKey(m), prevEnd = state.period ? keyOf(addDays(m.refDate, -state.period)) : null;
-    const per = state.period ? `nos últimos ${state.period} dias` : "desde o início";
-
+    const per = state.period ? `em ${state.period} dias` : "desde o início";
     const nets = NET_ORDER.filter((n) => isNum(m.accounts[n]?.followers));
     const audience = sum(nets, (n) => m.accounts[n].followers);
     const gained = nets.map((n) => gainedBetween(m, n, s, m.refKey)).filter(isNum);
     const gainedTotal = gained.length ? sum(gained, (x) => x) : null;
-    const audienceSub = nets.map((n) => `${NETS[n].label} ${fmtC(m.accounts[n].followers)}`).join(" · ") || "nenhuma conta com dados";
-
     let views = viewsBetween(m, s, m.refKey), viewsLabel = "Views no período", viewsSub = per;
     const prevViews = ps ? viewsBetween(m, ps, prevEnd) : null;
-    if (!isNum(views)) {
-      views = sum(NET_ORDER, (n) => m.accounts[n]?.views);
-      viewsLabel = "Views totais";
-      viewsSub = "o diário começa com o histórico de coletas";
-    } else if (isNum(prevViews) && prevViews > 0) {
-      const d = ((views - prevViews) / prevViews) * 100;
-      viewsSub = `<span class="delta ${d >= 0 ? "up" : "down"}">${d >= 0 ? "▲" : "▼"} ${fmt1(Math.abs(d))}%</span> vs. ${state.period} dias anteriores`;
-    }
-
+    if (!isNum(views)) { views = sum(NET_ORDER, (n) => m.accounts[n]?.views); viewsLabel = "Views totais"; viewsSub = "histórico diário ainda curto"; }
+    else if (isNum(prevViews) && prevViews > 0) { const d = ((views - prevViews) / prevViews) * 100; viewsSub = `<span class="delta ${d >= 0 ? "up" : "down"}">${d >= 0 ? "+" : "−"}${fmt1(Math.abs(d))}%</span> vs. ${state.period} dias anteriores`; }
     const pubs = m.videos.filter((v) => inPeriod(m, v.pub));
-    const pubSub = PLAT_ORDER.map((p) => [p, pubs.filter((v) => v.platform === p).length]).filter(([, n]) => n).map(([p, n]) => `${PLAT[p].short} ${n}`).join(" · ") || per;
-
     const spent = m.spend.filter((e) => inPeriod(m, e.date));
     const spentTotal = sum(spent, (e) => e.amount);
-    const boosts = sum(spent.filter((e) => e.category === "impulsionamento"), (e) => e.amount);
     const cpf = gainedTotal > 0 && spentTotal > 0 ? spentTotal / gainedTotal : null;
-    const cpm = isNum(views) && views > 0 && spentTotal > 0 && viewsLabel !== "Views totais" ? (spentTotal / views) * 1000 : null;
-
+    const kpi = (label, value, sub) => `<div class="kpi"><div class="kpi-label">${label}</div><div class="kpi-value num">${value}</div><div class="kpi-sub">${sub}</div></div>`;
     $("#kpis").innerHTML = [
-      kpi("Público total", fmt(audience), (isNum(gainedTotal) ? `<span class="delta ${gainedTotal >= 0 ? "up" : "down"}">${gainedTotal >= 0 ? "+" : ""}${fmt(gainedTotal)}</span> ${per} · ` : "") + audienceSub),
+      kpi("Seguidores (todas as redes)", fmt(audience), isNum(gainedTotal) ? `<span class="delta ${gainedTotal >= 0 ? "up" : "down"}">${gainedTotal >= 0 ? "+" : ""}${fmt(gainedTotal)}</span> ${per}` : nets.map((n) => `${NETS[n].label} ${fmtC(m.accounts[n].followers)}`).join(" · ") || "sem dados"),
       kpi(viewsLabel, fmtC(views), viewsSub),
-      kpi("Vídeos publicados", fmt(pubs.length), pubSub),
-      kpi("Gasto no período", brl(spentTotal), spentTotal ? `impulsionamento ${brl(boosts, 0)} · resto ${brl(spentTotal - boosts, 0)}` : "nada lançado " + per),
-      kpi("Custo por seguidor", cpf ? brl(cpf) : "—", cpm ? `${brl(cpm)} por mil views` : cpf ? "gasto ÷ seguidores ganhos" : "precisa de gasto e histórico de seguidores"),
+      kpi("Vídeos publicados", fmt(pubs.length), PLAT_ORDER.map((p) => [p, pubs.filter((v) => v.platform === p).length]).filter(([, n]) => n).map(([p, n]) => `${PLAT[p].short} ${n}`).join(" · ") || per),
+      kpi("Gasto", brl(spentTotal), spentTotal ? per : `nada lançado ${per}`),
+      kpi("Custo por seguidor", cpf ? brl(cpf) : "—", cpf ? "gasto ÷ seguidores ganhos" : "precisa de gasto e histórico"),
     ].join("");
   }
-  const kpi = (label, value, sub) => `<div class="kpi"><div class="kpi-label">${label}</div><div class="kpi-value num">${value}</div><div class="kpi-sub">${sub}</div></div>`;
+
+  function renderGrowth(m) {
+    const s = startKey(m);
+    const fSeries = NET_ORDER.map((n) => ({ label: NETS[n].label, color: NETS[n].color, points: followerRows(m, n).filter((r) => r.date >= s).map((r) => ({ k: r.date, v: r.followers })) })).filter((x) => x.points.length);
+    const npts = Math.max(0, ...fSeries.map((x) => x.points.length));
+    $("#lg-followers").innerHTML = (fSeries.length > 1 ? fSeries.map((x) => `<span><i class="sw" style="background:${x.color}"></i>${x.label}</span>`).join("") : "") + (fSeries.length && npts < 3 ? `<span class="muted">histórico começou agora (${npts} leitura${npts > 1 ? "s" : ""}); a curva se forma com as próximas coletas</span>` : "");
+    const fEl = $("#ch-followers");
+    if (!fSeries.length) fEl.innerHTML = empty("<b>Sem leituras de seguidores no período.</b><br>Cada coleta (ou snapshot em <code>manual.json</code>) adiciona um ponto.");
+    else lineChart(fEl, fSeries);
+
+    const maps = NET_ORDER.map((n) => [n, viewsByDay(m, n)]);
+    const allKeys = [...new Set(maps.flatMap(([, mp]) => [...mp.keys()]))].filter((k) => k >= s).sort();
+    let keys = allKeys;
+    if (allKeys.length > 1) { keys = []; for (let d = dateOf(allKeys[0]); keyOf(d) <= allKeys.at(-1); d = addDays(d, 1)) keys.push(keyOf(d)); }
+    const vSeries = maps.filter(([, mp]) => [...mp.values()].some((v) => v > 0)).map(([n, mp]) => ({ label: NETS[n].label, color: NETS[n].color, values: keys.map((k) => mp.get(k) || 0) }));
+    $("#lg-views").innerHTML = vSeries.map((x) => `<span><i class="sw" style="background:${x.color}"></i>${x.label}</span>`).join("");
+    if (!vSeries.length || !keys.length) {
+      $("#ch-views").innerHTML = empty("<b>Ainda não há views diárias.</b><br>Aparecem a partir da segunda coleta, ou na hora com o YouTube Analytics ligado.");
+      $("#tbl-views").innerHTML = "";
+    } else {
+      stackedColumns($("#ch-views"), keys, vSeries);
+      const rows = keys.slice().reverse().slice(0, 60).map((k, i) => `<tr><td>${dLong(k)}</td>${vSeries.map((x) => `<td class="r">${fmt(x.values[keys.length - 1 - i])}</td>`).join("")}</tr>`).join("");
+      $("#tbl-views").innerHTML = `<details class="data"><summary>Ver em tabela</summary><div class="tbl-wrap" style="max-height:260px"><table><thead><tr><th>Dia</th>${vSeries.map((x) => `<th class="r">${x.label}</th>`).join("")}</tr></thead><tbody>${rows}</tbody></table></div></details>`;
+    }
+    const g = NET_ORDER.map((n) => gainedBetween(m, n, s, m.refKey)).filter(isNum);
+    $("#growth-aside").textContent = g.length ? `${sum(g, (x) => x) >= 0 ? "+" : ""}${fmt(sum(g, (x) => x))} seguidores ${state.period ? `em ${state.period} dias` : "no histórico"}` : "";
+  }
 
   function meter({ label, value, goal, color, fmtV = fmt, sub = "", est = false }) {
     const p = isNum(value) ? Math.min(100, (value / goal) * 100) : 0;
@@ -867,151 +1011,100 @@
     </div>`;
   }
 
-  function renderMoney(m) {
+  function renderGoals(m) {
     const yt = m.accounts.youtube || {}, tk = m.accounts.tiktok || {};
     const ref = m.refDate;
     const k365 = keyOf(addDays(ref, -365)), k90 = keyOf(addDays(ref, -90)), k30 = keyOf(addDays(ref, -30));
     const ytVids = m.videos.filter((v) => v.net === "youtube");
-
-    // Horas de exibição pública (só vídeos longos) nos últimos 12 meses
     let hours = yt.longWatchHours12m, hoursEst = false;
     if (!isNum(hours)) {
       hoursEst = true;
-      hours = sum(ytVids.filter((v) => v.platform === "yt_long" && v.pub >= k365), (v) =>
-        isNum(v.watchHours) ? v.watchHours : isNum(v.avgWatchSec) ? (v.views * v.avgWatchSec) / 3600 : ((v.views || 0) * (v.durationSec || 0) * 0.4) / 3600);
+      hours = sum(ytVids.filter((v) => v.platform === "yt_long" && v.pub >= k365), (v) => (isNum(v.watchHours) ? v.watchHours : isNum(v.avgWatchSec) ? (v.views * v.avgWatchSec) / 3600 : ((v.views || 0) * (v.durationSec || 0) * 0.4) / 3600));
     }
     let shorts90 = yt.shortsViews90d, shortsEst = false;
-    if (!isNum(shorts90)) {
-      shortsEst = true;
-      shorts90 = sum(ytVids.filter((v) => v.platform === "yt_shorts" && v.pub >= k90), (v) => v.views);
-    }
+    if (!isNum(shorts90)) { shortsEst = true; shorts90 = sum(ytVids.filter((v) => v.platform === "yt_shorts" && v.pub >= k90), (v) => v.views); }
     const uploads90 = ytVids.filter((v) => v.pub >= k90).length;
     const subs = yt.followers;
-    const ytColor = NETS.youtube.color, shColor = PLAT.yt_shorts.color, tkColor = NETS.tiktok.color;
+    const ytC = NETS.youtube.color, shC = PLAT.yt_shorts.color, tkC = NETS.tiktok.color;
     const hoursFmt = (v) => fmt(v) + " h";
     const fullDone = subs >= 1000 && (hours >= 4000 || shorts90 >= 1e7);
     const lowDone = subs >= 500 && uploads90 >= 3 && (hours >= 3000 || shorts90 >= 3e6);
-    const estNote = hoursEst ? `<div class="goal-foot">Horas e views de Shorts aqui são <b>estimadas</b> pelas views públicas (40% de retenção nos vídeos longos). O número oficial vem do YouTube Analytics — veja <a href="#sources">Fontes</a>.</div>` : "";
-
-    // TikTok Creator Rewards
-    const tkFollowers = tk.followers;
     const tkDaily = viewsByDay(m, "tiktok");
     let tk30 = null, tk30Est = false;
-    const dailyKeys = [...tkDaily.keys()].filter((k) => k >= k30);
-    if (dailyKeys.length >= 20) tk30 = sum(dailyKeys, (k) => tkDaily.get(k));
-    else {
-      const recent = m.videos.filter((v) => v.platform === "tiktok" && v.pub >= k30);
-      if (recent.length) { tk30 = sum(recent, (v) => v.views); tk30Est = true; }
-    }
+    const dk = [...tkDaily.keys()].filter((k) => k >= k30);
+    if (dk.length >= 20) tk30 = sum(dk, (k) => tkDaily.get(k));
+    else { const recent = m.videos.filter((v) => v.platform === "tiktok" && v.pub >= k30); if (recent.length) { tk30 = sum(recent, (v) => v.views); tk30Est = true; } }
     const tkRecent = m.videos.filter((v) => v.platform === "tiktok" && v.pub >= k30);
     const tkLong = tkRecent.filter((v) => (v.durationSec || 0) > 60).length;
-    const tkDone = tkFollowers >= 10000 && tk30 >= 100000;
-
-    $("#money").innerHTML = `
-      <div class="card goal-card">
-        <div class="goal-top"><div><div class="goal-name">YouTube Partner Program</div><div class="goal-req">Receita de anúncios · 1.000 inscritos + um dos dois caminhos</div></div><span class="pill ${fullDone ? "ok" : ""}">${fullDone ? "✓ elegível" : "em andamento"}</span></div>
-        ${meter({ label: "Inscritos", value: subs, goal: 1000, color: ytColor, sub: eta(m, "youtube", 1000) })}
-        ${meter({ label: "Caminho A · horas de exibição (12 meses)", value: hours, goal: 4000, color: ytColor, fmtV: hoursFmt, est: hoursEst, sub: "só vídeos longos públicos contam" })}
+    const tkDone = tk.followers >= 10000 && tk30 >= 100000;
+    const pill = (ok) => `<span class="pill ${ok ? "ok" : ""}">${ok ? "Elegível" : "Em andamento"}</span>`;
+    $("#goals").innerHTML = `
+      <div class="card goal">
+        <div class="goal-top"><div><div class="goal-name">YouTube Partner Program</div><div class="goal-req">Receita de anúncios · 1.000 inscritos + um dos caminhos</div></div>${pill(fullDone)}</div>
+        ${meter({ label: "Inscritos", value: subs, goal: 1000, color: ytC, sub: eta(m, "youtube", 1000) })}
+        ${meter({ label: "Horas de exibição (12 meses)", value: hours, goal: 4000, color: ytC, fmtV: hoursFmt, est: hoursEst, sub: "só vídeos longos públicos" })}
         <div class="or">ou</div>
-        ${meter({ label: "Caminho B · views de Shorts (90 dias)", value: shorts90, goal: 1e7, color: shColor, fmtV: fmtC, est: shortsEst })}
-        ${estNote}
+        ${meter({ label: "Views de Shorts (90 dias)", value: shorts90, goal: 1e7, color: shC, fmtV: fmtC, est: shortsEst })}
+        ${hoursEst ? `<div class="goal-foot">Horas e views de Shorts estimadas pelas views públicas. O número oficial vem do YouTube Analytics (ver <a href="#sources">Fontes de dados</a>).</div>` : ""}
       </div>
-      <div class="card goal-card">
-        <div class="goal-top"><div><div class="goal-name">YPP · nível inicial</div><div class="goal-req">Clubes de canais, Super Thanks, compras · 500 inscritos + 3 envios em 90 dias + um caminho</div></div><span class="pill ${lowDone ? "ok" : ""}">${lowDone ? "✓ elegível" : "em andamento"}</span></div>
-        ${meter({ label: "Inscritos", value: subs, goal: 500, color: ytColor, sub: eta(m, "youtube", 500) })}
-        ${meter({ label: "Envios públicos (90 dias)", value: uploads90, goal: 3, color: ytColor })}
-        ${meter({ label: "Horas de exibição (12 meses)", value: hours, goal: 3000, color: ytColor, fmtV: hoursFmt, est: hoursEst })}
+      <div class="card goal">
+        <div class="goal-top"><div><div class="goal-name">YPP · nível inicial</div><div class="goal-req">Clubes de canais, Super Thanks e compras</div></div>${pill(lowDone)}</div>
+        ${meter({ label: "Inscritos", value: subs, goal: 500, color: ytC, sub: eta(m, "youtube", 500) })}
+        ${meter({ label: "Envios públicos (90 dias)", value: uploads90, goal: 3, color: ytC })}
+        ${meter({ label: "Horas de exibição (12 meses)", value: hours, goal: 3000, color: ytC, fmtV: hoursFmt, est: hoursEst })}
         <div class="or">ou</div>
-        ${meter({ label: "Views de Shorts (90 dias)", value: shorts90, goal: 3e6, color: shColor, fmtV: fmtC, est: shortsEst })}
+        ${meter({ label: "Views de Shorts (90 dias)", value: shorts90, goal: 3e6, color: shC, fmtV: fmtC, est: shortsEst })}
       </div>
-      <div class="card goal-card">
-        <div class="goal-top"><div><div class="goal-name">TikTok Creator Rewards</div><div class="goal-req">Paga por views qualificadas de vídeos com mais de 1 minuto · 10 mil seguidores + 100 mil views em 30 dias</div></div><span class="pill ${tkDone ? "ok" : ""}">${tkDone ? "✓ elegível" : "em andamento"}</span></div>
-        ${meter({ label: "Seguidores", value: tkFollowers, goal: 10000, color: tkColor, sub: isNum(tkFollowers) ? eta(m, "tiktok", 10000) : "lance em manual.json ou ligue a API" })}
-        ${meter({ label: "Views nos últimos 30 dias", value: tk30, goal: 100000, color: tkColor, fmtV: fmtC, est: tk30Est, sub: tk30Est ? "soma dos vídeos postados no período" : "" })}
-        <div class="meter-sub" style="margin-top:-4px">${tkRecent.length ? `<b style="color:var(--ink)">${tkLong} de ${tkRecent.length}</b> vídeos dos últimos 30 dias têm mais de 1 minuto (só esses geram receita).` : "Sem vídeos do TikTok registrados nos últimos 30 dias."}</div>
-        <div class="goal-foot">Também exige conta pessoal, 18+ e país elegível — confirme no TikTok Studio se o programa aparece para a conta.</div>
+      <div class="card goal">
+        <div class="goal-top"><div><div class="goal-name">TikTok Creator Rewards</div><div class="goal-req">Paga por views de vídeos com mais de 1 minuto</div></div>${pill(tkDone)}</div>
+        ${meter({ label: "Seguidores", value: tk.followers, goal: 10000, color: tkC, sub: isNum(tk.followers) ? eta(m, "tiktok", 10000) : "lance em manual.json ou ligue a API" })}
+        ${meter({ label: "Views nos últimos 30 dias", value: tk30, goal: 100000, color: tkC, fmtV: fmtC, est: tk30Est, sub: tk30Est ? "soma dos vídeos postados no período" : "" })}
+        <div class="meter-sub">${tkRecent.length ? `<b style="color:var(--ink)">${tkLong} de ${tkRecent.length}</b> vídeos dos últimos 30 dias têm mais de 1 minuto.` : "Sem vídeos do TikTok registrados nos últimos 30 dias."}</div>
+        <div class="goal-foot">Também exige conta pessoal, 18+ e país elegível. Confirme no TikTok Studio se o programa aparece para a conta.</div>
       </div>`;
-  }
-
-  function renderGrowth(m) {
-    const s = startKey(m);
-    // Seguidores
-    const fSeries = NET_ORDER.map((n) => ({ key: n, label: NETS[n].label, color: NETS[n].color, points: followerRows(m, n).filter((r) => r.date >= s).map((r) => ({ k: r.date, v: r.followers })) })).filter((x) => x.points.length);
-    const fEl = $("#ch-followers");
-    const npts = Math.max(0, ...fSeries.map((x) => x.points.length));
-    const legendHtml = fSeries.length > 1 ? fSeries.map((x) => `<span><i class="sw" style="background:${x.color}"></i>${x.label}</span>`).join("") : "";
-    const note = fSeries.length && npts < 3 ? `<span class="muted">· histórico começou agora (${npts} leitura${npts > 1 ? "s" : ""}); a curva se forma com as próximas coletas</span>` : "";
-    $("#lg-followers").innerHTML = legendHtml + note;
-    if (!fSeries.length) fEl.innerHTML = `<div class="empty"><div><b>Sem leituras de seguidores no período.</b><br>Cada execução do coletor (ou cada snapshot em <code>manual.json</code>) adiciona um ponto.</div></div>`;
-    else lineChart(fEl, fSeries);
-    // Views por dia
-    const maps = NET_ORDER.map((n) => [n, viewsByDay(m, n)]);
-    const allKeys = [...new Set(maps.flatMap(([, mp]) => [...mp.keys()]))].filter((k) => k >= s).sort();
-    const vEl = $("#ch-views");
-    // preenche dias sem leitura para o eixo ficar contínuo
-    let keys = allKeys;
-    if (allKeys.length > 1) { keys = []; for (let d = dateOf(allKeys[0]); keyOf(d) <= allKeys.at(-1); d = addDays(d, 1)) keys.push(keyOf(d)); }
-    const vSeries = maps.filter(([, mp]) => [...mp.values()].some((v) => v > 0)).map(([n, mp]) => ({ key: n, label: NETS[n].label, color: NETS[n].color, values: keys.map((k) => mp.get(k) || 0) }));
-    $("#lg-views").innerHTML = vSeries.length > 1 ? vSeries.map((x) => `<span><i class="sw" style="background:${x.color}"></i>${x.label}</span>`).join("") : vSeries.length ? `<span class="card-sub">${vSeries[0].label}</span>` : "";
-    if (!vSeries.length || !keys.length) {
-      vEl.innerHTML = `<div class="empty"><div><b>Ainda não há views diárias.</b><br>Elas aparecem a partir da segunda coleta (diferença entre totais) ou na hora com o YouTube Analytics ligado.</div></div>`;
-      $("#tbl-views").innerHTML = "";
-    } else {
-      stackedColumns(vEl, keys, vSeries);
-      const rows = keys.slice().reverse().filter((_, i) => i < 60).map((k, i) => `<tr><td>${dLong(k)}</td>${vSeries.map((x) => `<td class="r">${fmt(x.values[keys.length - 1 - i])}</td>`).join("")}</tr>`).join("");
-      $("#tbl-views").innerHTML = `<details class="data"><summary>Ver em tabela</summary><div class="tbl-wrap" style="max-height:260px"><table><thead><tr><th>Dia</th>${vSeries.map((x) => `<th class="r">${x.label}</th>`).join("")}</tr></thead><tbody>${rows}</tbody></table></div></details>`;
-    }
-    const growthTotal = NET_ORDER.map((n) => gainedBetween(m, n, s, m.refKey)).filter(isNum);
-    $("#growth-aside").textContent = growthTotal.length ? `${sum(growthTotal, (x) => x) >= 0 ? "+" : ""}${fmt(sum(growthTotal, (x) => x))} seguidores ${state.period ? `em ${state.period} dias` : "no histórico"}` : "";
   }
 
   function renderPlatforms(m) {
     const vids = m.videos.filter((v) => inPeriod(m, v.pub));
     $("#plat-aside").textContent = state.period ? `vídeos publicados nos últimos ${state.period} dias` : "todos os vídeos";
-    $("#platforms").innerHTML = PLAT_ORDER.map((p) => {
+    $("#plats").innerHTML = PLAT_ORDER.map((p) => {
       const meta = PLAT[p];
       const list = vids.filter((v) => v.platform === p);
-      const everHad = m.videos.some((v) => v.platform === p);
+      const head = `<div class="plat-h"><i class="sw" style="background:${meta.color}"></i><span class="card-title">${meta.label}</span>${list.length ? `<span class="card-sub" style="margin-left:auto">${list.length} vídeo${list.length > 1 ? "s" : ""}</span>` : ""}</div>`;
       if (!list.length) {
-        const why = everHad ? `Nenhum vídeo publicado ${state.period ? `nos últimos ${state.period} dias` : ""}.` : p === "reels" ? "Instagram ainda não ligado. Lance Reels em <code>manual.json</code> ou configure a Graph API." : p === "tiktok" ? "API do TikTok sem métricas ainda. Lance os vídeos em <code>manual.json</code> enquanto o escopo <code>video.list</code> não é aprovado." : "Sem vídeos nesta plataforma.";
-        return `<div class="card plat off" style="--pc:${meta.color}"><div class="plat-h"><i class="sw" style="background:${meta.color}"></i><span class="card-title">${meta.label}</span></div><div class="card-sub" style="line-height:1.55">${why}</div></div>`;
+        const ever = m.videos.some((v) => v.platform === p);
+        const why = ever ? `Nenhum vídeo publicado ${state.period ? `nos últimos ${state.period} dias` : ""}.` : p === "reels" ? "Instagram ainda não ligado. Lance Reels em <code>manual.json</code> ou configure a Graph API." : p === "tiktok" ? "Sem métricas por vídeo ainda. Lance em <code>manual.json</code> até o escopo <code>video.list</code> ser aprovado." : "Sem vídeos nesta plataforma.";
+        return `<div class="card plat">${head}<div class="card-sub" style="line-height:1.55">${why}</div></div>`;
       }
       const views = sum(list, (v) => v.views);
-      const med = median(list.map((v) => v.views));
-      const eng = (() => { const w = list.filter((v) => v.views > 0); const tv = sum(w, (v) => v.views); return tv ? (sum(w, (v) => (v.likes || 0) + (v.comments || 0) + (v.shares || 0)) / tv) * 100 : null; })();
+      const w = list.filter((v) => v.views > 0);
+      const tv = sum(w, (v) => v.views);
+      const eng = tv ? (sum(w, (v) => (v.likes || 0) + (v.comments || 0) + (v.shares || 0)) / tv) * 100 : null;
       const retL = list.filter((v) => isNum(v.avgViewPct) && v.views > 0);
       const ret = retL.length ? sum(retL, (v) => v.avgViewPct * v.views) / sum(retL, (v) => v.views) : null;
       const watchL = list.filter((v) => isNum(v.avgWatchSec));
-      const watch = watchL.length ? median(watchL.map((v) => v.avgWatchSec)) : null;
       const fgL = list.filter((v) => isNum(v.followersGained));
       const fg = fgL.length ? sum(fgL, (v) => v.followersGained) : null;
-      const per1k = isNum(fg) && views ? (fg / sum(fgL, (v) => v.views)) * 1000 : null;
-      return `<div class="card plat" style="--pc:${meta.color}">
-        <div class="plat-h"><i class="sw" style="background:${meta.color}"></i><span class="card-title">${meta.label}</span><span class="card-sub" style="margin-left:auto">${list.length} vídeo${list.length > 1 ? "s" : ""}</span></div>
-        <div><div class="plat-big num">${fmtC(views)}</div><div class="card-sub">views · mediana ${fmt(med)} por vídeo</div></div>
+      const per1k = isNum(fg) && sum(fgL, (v) => v.views) ? (fg / sum(fgL, (v) => v.views)) * 1000 : null;
+      return `<div class="card plat">${head}
+        <div><div class="plat-big num">${fmtC(views)}</div><div class="card-sub">views · mediana ${fmt(median(list.map((v) => v.views)))} por vídeo</div></div>
         ${spark(list, meta.color)}
         <div class="plat-stats">
           <div>Retenção média<b class="num">${pct(ret, 0)}</b></div>
-          <div>Tempo médio assistido<b class="num">${dur(watch)}</b></div>
+          <div>Tempo assistido<b class="num">${watchL.length ? dur(median(watchL.map((v) => v.avgWatchSec))) : "—"}</b></div>
           <div>Engajamento<b class="num">${pct(eng)}</b></div>
-          <div>Seguidores ganhos<b class="num">${isNum(fg) ? fmt(fg) : "—"}${isNum(per1k) ? `<span class="card-sub" style="font-weight:400"> · ${fmt1(per1k)}/mil views</span>` : ""}</b></div>
-        </div>
-      </div>`;
+          <div>Seguidores<b class="num">${isNum(fg) ? "+" + fmt(fg) : "—"}${isNum(per1k) ? ` <span class="card-sub" style="font-weight:400">${fmt1(per1k)}/mil views</span>` : ""}</b></div>
+        </div></div>`;
     }).join("");
   }
 
   function renderHighlights(m) {
-    const ref = m.refDate;
     const pool = m.videos.filter((v) => inPeriod(m, v.pub) && isNum(v.views));
-    const el = $("#highlights");
-    if (pool.length < 2) {
-      el.innerHTML = `<div class="card"><div class="empty"><div><b>Poucos vídeos no período para comparar.</b><br>Troque o período para “Tudo” ou espere mais publicações.</div></div></div>`;
-      return;
-    }
-    // Agrupa o mesmo gancho postado em várias redes
+    const el = $("#hl");
+    if (pool.length < 2) { el.innerHTML = `<div class="card" style="grid-column:1/-1">${empty("<b>Poucos vídeos no período para comparar.</b><br>Troque o período para “Tudo”.")}</div>`; return; }
     const groups = new Map();
     for (const v of pool) {
-      const g = groups.get(v.key) || { key: v.key, case: v.case, by: {}, views: 0, retW: 0, retV: 0, fg: null, first: v.pub, title: v.title, hasHook: !!v.hook };
+      const g = groups.get(v.key) || { key: v.key, case: v.case, by: {}, views: 0, retW: 0, retV: 0, fg: null, first: v.pub, hasHook: !!v.hook };
       g.by[v.platform] = (g.by[v.platform] || 0) + v.views;
       g.views += v.views;
       if (isNum(v.avgViewPct)) { g.retW += v.avgViewPct * v.views; g.retV += v.views; }
@@ -1020,37 +1113,30 @@
       g.case = g.case || v.case;
       groups.set(v.key, g);
     }
-    const all = [...groups.values()];
-    const sorted = all.slice().sort((a, b) => b.views - a.views);
+    const sorted = [...groups.values()].sort((a, b) => b.views - a.views);
     const top = sorted.slice(0, 5);
-    // Para os piores, só conta quem já teve 3 dias para rodar
-    const matureKey = keyOf(addDays(ref, -3));
+    const matureKey = keyOf(addDays(m.refDate, -3));
     const bottom = sorted.filter((g) => !top.includes(g) && g.first <= matureKey).slice(-5).reverse();
-    const rankOf = (g) => sorted.indexOf(g);
-    const topMax = sorted[0].views || 1;
-    const bottomMax = Math.max(1, ...bottom.map((g) => g.views));
-    const usedPlats = PLAT_ORDER.filter((p) => pool.some((v) => v.platform === p));
-    const legend = usedPlats.length > 1 ? `<div class="legend">${usedPlats.map((p) => `<span><i class="sw" style="background:${PLAT[p].color}"></i>${PLAT[p].short}</span>`).join("")}</div>` : "";
-    const anyHook = all.some((g) => g.hasHook);
+    const used = PLAT_ORDER.filter((p) => pool.some((v) => v.platform === p));
+    const legend = used.length > 1 ? `<div class="legend">${used.map((p) => `<span><i class="sw" style="background:${PLAT[p].color}"></i>${PLAT[p].short}</span>`).join("")}</div>` : "";
+    const anyHook = sorted.some((g) => g.hasHook);
     const item = (max) => (g) => {
       const parts = PLAT_ORDER.filter((p) => g.by[p]).map((p) => ({ v: g.by[p], color: PLAT[p].color, label: PLAT[p].short }));
       const meta = [g.case && `<span>${esc(g.case)}</span>`, `<span>${dShort(g.first)}</span>`, g.retV ? `<span>retenção ${pct(g.retW / g.retV, 0)}</span>` : "", isNum(g.fg) ? `<span>+${fmt(g.fg)} seguidores</span>` : ""].filter(Boolean).join("");
-      return `<li><span class="n">${String(rankOf(g) + 1).padStart(2, "0")}</span><span class="hook">“${esc(g.key)}”</span><span class="hook-meta">${meta}</span><span class="bar-row">${segBar(parts, max, 78)}<span class="bar-val num">${fmtC(g.views)}</span></span></li>`;
+      return `<li><span class="n">${sorted.indexOf(g) + 1}</span><span class="t">${anyHook ? `“${esc(g.key)}”` : esc(g.key)}</span><span class="m">${meta}</span><span class="bar-row">${segBar(parts, max, 78)}<span class="bar-val num">${fmtC(g.views)}</span></span></li>`;
     };
     const noun = anyHook ? "Ganchos" : "Vídeos";
     let html = `
-      <div class="card"><div class="card-h"><span class="card-title">${noun} que pegaram</span><span class="card-sub">views somadas em todas as redes</span></div>${legend}<ol class="rank">${top.map(item(topMax)).join("")}</ol></div>
-      <div class="card"><div class="card-h"><span class="card-title">${noun} que não pegaram</span><span class="card-sub">menos views (3+ dias no ar)</span></div>${legend}${bottom.length ? `<ol class="rank">${bottom.map(item(bottomMax)).join("")}</ol>` : `<div class="empty">Ainda não há vídeos suficientes para um “pior”.</div>`}</div>`;
-
-    // Casos (episódios)
+      <div class="card"><div class="card-h"><span class="card-title">${noun} com mais views</span><span class="card-sub">somando todas as redes</span></div>${legend}<ol class="rank">${top.map(item(sorted[0].views || 1)).join("")}</ol></div>
+      <div class="card"><div class="card-h"><span class="card-title">${noun} com menos views</span><span class="card-sub">com 3+ dias no ar</span></div>${legend}${bottom.length ? `<ol class="rank">${bottom.map(item(Math.max(1, ...bottom.map((g) => g.views)))).join("")}</ol>` : empty("Ainda não há vídeos suficientes.")}</div>`;
     const cases = new Map();
     for (const v of pool) if (v.case) { const c = cases.get(v.case) || { name: v.case, by: {}, views: 0 }; c.by[v.platform] = (c.by[v.platform] || 0) + v.views; c.views += v.views; cases.set(v.case, c); }
     const caseList = [...cases.values()].sort((a, b) => b.views - a.views).slice(0, 8);
     if (caseList.length >= 2) {
-      const cmax = caseList[0].views || 1;
-      html += `<div class="card"><div class="card-h"><span class="card-title">Casos</span><span class="card-sub">views somadas do episódio e dos cortes</span></div>${legend}<ol class="rank">${caseList.map((c, i) => `<li><span class="n">${String(i + 1).padStart(2, "0")}</span><span style="font-weight:600">${esc(c.name)}</span><span class="bar-row">${segBar(PLAT_ORDER.filter((p) => c.by[p]).map((p) => ({ v: c.by[p], color: PLAT[p].color, label: PLAT[p].short })), cmax, 78)}<span class="bar-val num">${fmtC(c.views)}</span></span></li>`).join("")}</ol></div>`;
+      html += `<div class="card"><div class="card-h"><span class="card-title">Casos</span><span class="card-sub">episódio + cortes</span></div>${legend}<ol class="rank">${caseList.map((c, i) => `<li><span class="n">${i + 1}</span><span class="t">${esc(c.name)}</span><span class="bar-row">${segBar(PLAT_ORDER.filter((p) => c.by[p]).map((p) => ({ v: c.by[p], color: PLAT[p].color, label: PLAT[p].short })), caseList[0].views || 1, 78)}<span class="bar-val num">${fmtC(c.views)}</span></span></li>`).join("")}</ol></div>`;
     }
-    html += `<div class="card"><div class="card-h"><span class="card-title">O que os números dizem</span><span class="card-sub">gerado a partir dos vídeos do período</span></div><ul class="insights">${insights(pool).map((t) => `<li><span>${t}</span></li>`).join("") || "<li><span>Poucos dados para tirar conclusões ainda.</span></li>"}</ul></div>`;
+    const ins = insights(pool);
+    html += `<div class="card"><div class="card-h"><span class="card-title">Leituras do período</span></div>${ins.length ? `<ul class="insights">${ins.map((t) => `<li>${t}</li>`).join("")}</ul>` : empty("Poucos dados para tirar conclusões ainda.")}</div>`;
     el.innerHTML = html;
   }
 
@@ -1058,93 +1144,40 @@
     const out = [];
     const byPlat = PLAT_ORDER.map((p) => ({ p, list: pool.filter((v) => v.platform === p) })).filter((x) => x.list.length >= 2);
     if (byPlat.length >= 2) {
-      const ranked = byPlat.map((x) => ({ ...x, med: median(x.list.map((v) => v.views)) })).sort((a, b) => b.med - a.med);
-      const a = ranked[0], b = ranked.at(-1);
-      if (b.med > 0) out.push(`<b>${PLAT[a.p].label}</b> é onde cada vídeo rende mais: mediana de <b>${fmt(a.med)}</b> views, ${fmt1(a.med / b.med)}× a de ${PLAT[b.p].label} (${fmt(b.med)}).`);
-      else out.push(`<b>${PLAT[a.p].label}</b> é onde cada vídeo rende mais: mediana de <b>${fmt(a.med)}</b> views por vídeo.`);
+      const r = byPlat.map((x) => ({ ...x, med: median(x.list.map((v) => v.views)) })).sort((a, b) => b.med - a.med);
+      const a = r[0], b = r.at(-1);
+      out.push(b.med > 0 ? `<b>${PLAT[a.p].label}</b> rende mais por vídeo: mediana de <b>${fmt(a.med)}</b> views, ${fmt1(a.med / b.med)}× a de ${PLAT[b.p].label} (${fmt(b.med)}).` : `<b>${PLAT[a.p].label}</b> rende mais por vídeo: mediana de <b>${fmt(a.med)}</b> views.`);
     }
     const withRet = pool.filter((v) => isNum(v.avgViewPct) && v.platform !== "yt_long");
     if (withRet.length >= 6) {
       const cut = median(withRet.map((v) => v.avgViewPct));
       const hi = median(withRet.filter((v) => v.avgViewPct >= cut).map((v) => v.views));
       const lo = median(withRet.filter((v) => v.avgViewPct < cut).map((v) => v.views));
-      if (lo > 0 && hi >= lo * 1.2) out.push(`Cortes que seguram mais de <b>${pct(cut, 0)}</b> da duração têm mediana de <b>${fmt(hi)}</b> views, contra ${fmt(lo)} dos demais (${fmt1(hi / lo)}×). Os primeiros 3 segundos decidem.`);
+      if (lo > 0 && hi >= lo * 1.2) out.push(`Cortes que seguram mais de <b>${pct(cut, 0)}</b> da duração têm mediana de <b>${fmt(hi)}</b> views, contra ${fmt(lo)} dos demais (${fmt1(hi / lo)}×).`);
     }
     const tk = pool.filter((v) => v.platform === "tiktok" && isNum(v.durationSec));
-    if (tk.length >= 3) {
-      const over = tk.filter((v) => v.durationSec > 60).length;
-      out.push(over === tk.length ? `Todos os <b>${tk.length}</b> vídeos do TikTok no período passam de 1 minuto — todos contam para o Creator Rewards.` : `<b>${tk.length - over} de ${tk.length}</b> vídeos do TikTok têm 1 minuto ou menos e não contariam para o Creator Rewards.`);
-    }
+    if (tk.length >= 3) { const over = tk.filter((v) => v.durationSec > 60).length; out.push(over === tk.length ? `Todos os <b>${tk.length}</b> vídeos do TikTok no período passam de 1 minuto e contam para o Creator Rewards.` : `<b>${tk.length - over} de ${tk.length}</b> vídeos do TikTok têm 1 minuto ou menos e não contam para o Creator Rewards.`); }
     const fgPlat = PLAT_ORDER.map((p) => { const l = pool.filter((v) => v.platform === p && isNum(v.followersGained) && v.views > 0); const tv = sum(l, (v) => v.views); return { p, per1k: tv >= 200 ? (sum(l, (v) => v.followersGained) / tv) * 1000 : null }; }).filter((x) => isNum(x.per1k)).sort((a, b) => b.per1k - a.per1k);
-    if (fgPlat.length >= 2) out.push(`Para ganhar seguidores, <b>${PLAT[fgPlat[0].p].label}</b> converte melhor: <b>${fmt1(fgPlat[0].per1k)}</b> por mil views (${PLAT[fgPlat.at(-1).p].short}: ${fmt1(fgPlat.at(-1).per1k)}).`);
+    if (fgPlat.length >= 2) out.push(`<b>${PLAT[fgPlat[0].p].label}</b> converte mais views em seguidores: <b>${fmt1(fgPlat[0].per1k)}</b> por mil views (${PLAT[fgPlat.at(-1).p].short}: ${fmt1(fgPlat.at(-1).per1k)}).`);
     const longs = pool.filter((v) => v.platform === "yt_long" && isNum(v.avgViewPct));
-    if (longs.length >= 2) out.push(`Os vídeos longos seguram em média <b>${pct(sum(longs, (v) => v.avgViewPct) / longs.length, 0)}</b> da duração (≈ ${dur(median(longs.map((v) => v.avgWatchSec)))} por view). Cada ponto a mais acelera as 4.000 horas.`);
+    if (longs.length >= 2) out.push(`Os vídeos longos seguram em média <b>${pct(sum(longs, (v) => v.avgViewPct) / longs.length, 0)}</b> da duração (≈ ${dur(median(longs.map((v) => v.avgWatchSec)))} por view).`);
     return out.slice(0, 4);
-  }
-
-  function renderSpend(m) {
-    const el = $("#spend");
-    if (!m.spend.length) {
-      el.innerHTML = `<div class="card"><div class="empty" style="margin-top:0"><div><b>Nenhum gasto lançado ainda.</b><br>Adicione uma linha por cobrança em <code>dashboard/brazil-noir/spend.json</code> — impulsionamentos (com as views e seguidores que o anúncio trouxe) e ferramentas como a voz.<br><br><code>{ "date": "2026-11-06", "category": "impulsionamento", "item": "TikTok Promote", "amount": 15, "platform": "tiktok", "results": { "views": 2900, "followers": 18 } }</code></div></div></div>`;
-      return;
-    }
-    const list = m.spend.filter((e) => inPeriod(m, e.date)).sort((a, b) => b.date.localeCompare(a.date));
-    const total = sum(list, (e) => e.amount);
-    const boosts = list.filter((e) => e.category === "impulsionamento");
-    const boostTotal = sum(boosts, (e) => e.amount);
-    const toolTotal = sum(list.filter((e) => e.category === "ferramenta"), (e) => e.amount);
-    const withRes = boosts.filter((e) => e.results);
-    const paidViews = sum(withRes, (e) => e.results.views), paidFol = sum(withRes, (e) => e.results.followers), paidSpent = sum(withRes, (e) => e.amount);
-    const s = startKey(m);
-    const gained = NET_ORDER.map((n) => gainedBetween(m, n, s, m.refKey)).filter(isNum);
-    const g = gained.length ? sum(gained, (x) => x) : null;
-
-    // Por mês (sempre todo o histórico)
-    const months = new Map();
-    for (const e of m.spend) { const k = e.date.slice(0, 7); const mo = months.get(k) || {}; const c = SPEND_CAT[e.category] ? e.category : "outro"; mo[c] = (mo[c] || 0) + e.amount; months.set(k, mo); }
-    const mkeys = [...months.keys()].sort().slice(-12);
-    const mmax = Math.max(...mkeys.map((k) => sum(Object.values(months.get(k)), (x) => x)), 1);
-    const cats = Object.keys(SPEND_CAT).filter((c) => m.spend.some((e) => (SPEND_CAT[e.category] ? e.category : "outro") === c));
-
-    el.innerHTML = `
-      <div class="spend-tiles">
-        <div><div class="kpi-label">Total ${state.period ? `(${state.period} dias)` : "(tudo)"}</div><div class="v num">${brl(total)}</div></div>
-        <div><div class="kpi-label">Impulsionamento</div><div class="v num">${brl(boostTotal)}</div></div>
-        <div><div class="kpi-label">Ferramentas</div><div class="v num">${brl(toolTotal)}</div></div>
-        <div><div class="kpi-label">Custo por mil views pagas</div><div class="v num">${paidViews ? brl((paidSpent / paidViews) * 1000) : "—"}</div></div>
-        <div><div class="kpi-label">Custo por seguidor pago</div><div class="v num">${paidFol ? brl(paidSpent / paidFol) : "—"}</div></div>
-        <div><div class="kpi-label">Custo por seguidor (geral)</div><div class="v num">${g > 0 && total ? brl(total / g) : "—"}</div></div>
-      </div>
-      <div class="grid2" style="margin-top:16px">
-        <div class="card"><div class="card-h"><span class="card-title">Por mês</span><span class="card-sub">todo o histórico</span></div>
-          <div class="legend">${cats.map((c) => `<span><i class="sw" style="background:${SPEND_CAT[c].color}"></i>${SPEND_CAT[c].label}</span>`).join("")}</div>
-          <div class="months">${mkeys.map((k) => { const mo = months.get(k); const t = sum(Object.values(mo), (x) => x); return `<div class="month"><span>${new Date(+k.slice(0, 4), +k.slice(5) - 1, 1).toLocaleDateString("pt-BR", { month: "short", year: "2-digit" }).replace(".", "")}</span><span class="bar-row">${segBar(cats.filter((c) => mo[c]).map((c) => ({ v: mo[c], color: SPEND_CAT[c].color, label: SPEND_CAT[c].label })), mmax, 74)}<span class="bar-val num">${brl(t, 0)}</span></span></div>`; }).join("")}</div>
-        </div>
-        <div class="card"><div class="card-h"><span class="card-title">Impulsionamentos</span><span class="card-sub">resultado lançado de cada anúncio</span></div>
-          ${boosts.length ? `<ul class="boosts">${boosts.map((e) => { const r = e.results || {}; return `<li><span><b style="font-weight:600">${esc(e.item)}</b>${e.note ? ` <span class="muted">· ${esc(e.note)}</span>` : ""}</span><span class="amt num">${brl(e.amount)}</span><span class="res"><span>${dShort(e.date)}</span>${e.results ? `<span><b>${fmt(r.views)}</b> views</span><span><b>${fmt(r.followers)}</b> seguidores</span>${r.views ? `<span><b>${brl((e.amount / r.views) * 1000)}</b>/mil views</span>` : ""}${r.followers ? `<span><b>${brl(e.amount / r.followers)}</b>/seguidor</span>` : ""}` : `<span>sem resultado lançado</span>`}</span></li>`; }).join("")}</ul>` : `<div class="empty">Nenhum impulsionamento no período.</div>`}
-        </div>
-      </div>
-      <div class="card" style="margin-top:16px"><div class="card-h"><span class="card-title">Todos os lançamentos</span><span class="card-sub">${list.length} no período</span></div>
-        <div class="tbl-wrap"><table><thead><tr><th>Data</th><th>Item</th><th>Categoria</th><th>Rede</th><th class="r">Valor</th></tr></thead><tbody>${list.map((e) => { const c = SPEND_CAT[e.category] ? e.category : "outro"; return `<tr><td>${dLong(e.date)}</td><td>${esc(e.item)}${e.note ? `<div class="vcase">${esc(e.note)}</div>` : ""}</td><td><span class="chip"><i class="sw" style="background:${SPEND_CAT[c].color}"></i>${SPEND_CAT[c].label}</span></td><td>${e.platform && NETS[e.platform] ? NETS[e.platform].label : "—"}</td><td class="r">${brl(e.amount)}</td></tr>`; }).join("") || `<tr><td colspan="5" class="muted">Nada no período.</td></tr>`}</tbody></table></div>
-      </div>`;
   }
 
   const COLS = [
     { key: "title", label: "Vídeo" },
     { key: "platform", label: "Plataforma" },
     { key: "pub", label: "Publicado", sort: true },
-    { key: "durationSec", label: "Duração", r: true, sort: true },
     { key: "views", label: "Views", r: true, sort: true },
     { key: "avgViewPct", label: "Retenção", r: true, sort: true },
     { key: "likes", label: "Likes", r: true, sort: true },
     { key: "comments", label: "Coment.", r: true, sort: true },
     { key: "shares", label: "Compart.", r: true, sort: true },
-    { key: "followersGained", label: "Seguid.", r: true, sort: true },
+    { key: "followersGained", label: "Seguidores", r: true, sort: true },
     { key: "engagement", label: "Engaj.", r: true, sort: true },
   ];
-
   function renderVideos(m) {
-    const el = $("#videos");
+    const el = $("#vtable");
     const inP = m.videos.filter((v) => inPeriod(m, v.pub));
     const present = PLAT_ORDER.filter((p) => inP.some((v) => v.platform === p));
     if (state.plat !== "all" && !present.includes(state.plat)) state.plat = "all";
@@ -1156,70 +1189,108 @@
         </div>
         <input class="search" type="search" placeholder="Buscar título, gancho ou caso" value="${esc(state.q)}" aria-label="Buscar vídeos">
       </div>
-      <div class="tbl-wrap" style="max-height:620px"><table><thead><tr>${COLS.map((c) => `<th class="${c.r ? "r " : ""}${c.sort ? "sortable" : ""}" data-k="${c.key}" ${state.sort.key === c.key ? `aria-sort="${state.sort.dir < 0 ? "descending" : "ascending"}"` : ""}>${c.label}</th>`).join("")}</tr></thead><tbody></tbody></table></div>`;
-    const fillRows = () => {
+      <div class="tbl-wrap" style="max-height:640px"><table><thead><tr>${COLS.map((c) => `<th class="${c.r ? "r " : ""}${c.sort ? "sortable" : ""}" data-k="${c.key}" ${state.sort.key === c.key ? `aria-sort="${state.sort.dir < 0 ? "descending" : "ascending"}"` : ""}>${c.label}</th>`).join("")}</tr></thead><tbody></tbody></table></div>`;
+    const fill = () => {
       const q = state.q.trim().toLowerCase();
       let list = inP.filter((v) => (state.plat === "all" || v.platform === state.plat) && (!q || `${v.title} ${v.hook || ""} ${v.case || ""}`.toLowerCase().includes(q)));
       const { key, dir } = state.sort;
       list = list.slice().sort((a, b) => { const x = a[key], y = b[key]; if (x == null && y == null) return 0; if (x == null) return 1; if (y == null) return -1; return (x > y ? 1 : x < y ? -1 : 0) * dir; });
       el.querySelector("tbody").innerHTML = list.map((v) => {
         const meta = PLAT[v.platform] || {};
-        const thumb = v.thumb ? `style="background-image:url('${esc(v.thumb)}')"` : `style="background:linear-gradient(135deg, var(--surface-3), var(--surface-2))"`;
-        const title = v.url ? `<a href="${esc(v.url)}" target="_blank" rel="noopener">${esc(v.title)}</a>` : esc(v.title);
         const sub = [v.hook && v.hook !== v.title ? `“${esc(v.hook)}”` : "", v.case ? esc(v.case) : ""].filter(Boolean).join(" · ");
         return `<tr>
-          <td><div class="vcell"><span class="thumb" ${thumb}></span><div><div class="vtitle">${title}</div>${sub ? `<div class="vcase">${sub}</div>` : ""}</div></div></td>
+          <td><div class="vcell">${thumb(v)}<div style="min-width:0"><div class="vtitle">${v.url ? `<a href="${esc(v.url)}" target="_blank" rel="noopener">${esc(v.title)}</a>` : esc(v.title)}</div>${sub ? `<div class="vcase">${sub}</div>` : ""}</div></div></td>
           <td><span class="chip"><i class="sw" style="background:${meta.color}"></i>${meta.short || v.platform}</span></td>
           <td>${v.pub ? dLong(v.pub) : "—"}</td>
-          <td class="r">${dur(v.durationSec)}</td>
           <td class="r"><b>${fmt(v.views)}</b></td>
           <td class="r">${isNum(v.avgViewPct) ? `<span class="ret"><span class="ret-bar"><i style="width:${Math.min(100, v.avgViewPct)}%"></i></span>${pct(v.avgViewPct, 0)}</span>` : '<span class="muted">—</span>'}</td>
-          <td class="r">${fmt(v.likes)}</td>
-          <td class="r">${fmt(v.comments)}</td>
-          <td class="r">${fmt(v.shares)}</td>
-          <td class="r">${fmt(v.followersGained)}</td>
+          <td class="r">${fmt(v.likes)}</td><td class="r">${fmt(v.comments)}</td><td class="r">${fmt(v.shares)}</td>
+          <td class="r">${isNum(v.followersGained) ? "+" + fmt(v.followersGained) : "—"}</td>
           <td class="r">${pct(v.engagement)}</td>
         </tr>`;
       }).join("") || `<tr><td colspan="${COLS.length}" class="muted" style="padding:28px;text-align:center">Nenhum vídeo ${state.period ? `publicado nos últimos ${state.period} dias` : ""}${q ? " com essa busca" : ""}.</td></tr>`;
       $("#videos-aside").textContent = `${list.length} de ${m.videos.length} vídeos`;
     };
-    fillRows();
+    fill();
     el.querySelectorAll("[data-plat]").forEach((b) => b.addEventListener("click", () => { state.plat = b.dataset.plat; renderVideos(m); }));
-    el.querySelector(".search").addEventListener("input", (e) => { state.q = e.target.value; fillRows(); });
-    el.querySelectorAll("th.sortable").forEach((th) => th.addEventListener("click", () => {
-      const k = th.dataset.k;
-      state.sort = state.sort.key === k ? { key: k, dir: -state.sort.dir } : { key: k, dir: -1 };
-      renderVideos(m);
-      const s = el.querySelector(".search"); s.focus(); s.setSelectionRange(s.value.length, s.value.length); s.blur();
-    }));
+    el.querySelector(".search").addEventListener("input", (e) => { state.q = e.target.value; fill(); });
+    el.querySelectorAll("th.sortable").forEach((th) => th.addEventListener("click", () => { const k = th.dataset.k; state.sort = state.sort.key === k ? { key: k, dir: -state.sort.dir } : { key: k, dir: -1 }; renderVideos(m); }));
+  }
+
+  function renderSpend(m) {
+    const el = $("#spendbox");
+    if (!m.spend.length) {
+      el.innerHTML = `<div class="card">${empty(`<b>Nenhum gasto lançado ainda.</b><br>Adicione uma linha por cobrança em <code>dashboard/brazil-noir/spend.json</code>: impulsionamentos (com as views e seguidores que o anúncio trouxe) e ferramentas, como a voz.<br><br><code>{ "date": "2026-11-06", "category": "impulsionamento", "item": "TikTok Promote", "amount": 15, "platform": "tiktok", "results": { "views": 2900, "followers": 18 } }</code>`).replace('class="empty"', 'class="empty" style="margin-top:0"')}</div>`;
+      return;
+    }
+    const list = m.spend.filter((e) => inPeriod(m, e.date)).sort((a, b) => b.date.localeCompare(a.date));
+    const total = sum(list, (e) => e.amount);
+    const boosts = list.filter((e) => e.category === "impulsionamento");
+    const withRes = boosts.filter((e) => e.results);
+    const paidViews = sum(withRes, (e) => e.results.views), paidFol = sum(withRes, (e) => e.results.followers), paidSpent = sum(withRes, (e) => e.amount);
+    const g = NET_ORDER.map((n) => gainedBetween(m, n, startKey(m), m.refKey)).filter(isNum);
+    const gained = g.length ? sum(g, (x) => x) : null;
+    const months = new Map();
+    for (const e of m.spend) { const k = e.date.slice(0, 7); const mo = months.get(k) || {}; const c = SPEND_CAT[e.category] ? e.category : "outro"; mo[c] = (mo[c] || 0) + e.amount; months.set(k, mo); }
+    const mkeys = [...months.keys()].sort().slice(-12);
+    const mmax = Math.max(...mkeys.map((k) => sum(Object.values(months.get(k)), (x) => x)), 1);
+    const cats = Object.keys(SPEND_CAT).filter((c) => m.spend.some((e) => (SPEND_CAT[e.category] ? e.category : "outro") === c));
+    const tile = (l, v) => `<div><div class="kpi-label">${l}</div><div class="v num">${v}</div></div>`;
+    el.innerHTML = `
+      <div class="spend-tiles">
+        ${tile(state.period ? `Total (${state.period} dias)` : "Total", brl(total))}
+        ${tile("Impulsionamento", brl(sum(boosts, (e) => e.amount)))}
+        ${tile("Ferramentas", brl(sum(list.filter((e) => e.category === "ferramenta"), (e) => e.amount)))}
+        ${tile("Custo por mil views pagas", paidViews ? brl((paidSpent / paidViews) * 1000) : "—")}
+        ${tile("Custo por seguidor pago", paidFol ? brl(paidSpent / paidFol) : "—")}
+        ${tile("Custo por seguidor (geral)", gained > 0 && total ? brl(total / gained) : "—")}
+      </div>
+      <div class="grid2" style="margin-top:16px">
+        <div class="card"><div class="card-h"><span class="card-title">Por mês</span><span class="card-sub">todo o histórico</span></div>
+          <div class="legend">${cats.map((c) => `<span><i class="sw" style="background:${SPEND_CAT[c].color}"></i>${SPEND_CAT[c].label}</span>`).join("")}</div>
+          <div class="months">${mkeys.map((k) => { const mo = months.get(k); return `<div class="month"><span>${new Date(+k.slice(0, 4), +k.slice(5) - 1, 1).toLocaleDateString("pt-BR", { month: "short", year: "2-digit" }).replace(/\./g, "").replace(/ de /g, " ")}</span><span class="bar-row">${segBar(cats.filter((c) => mo[c]).map((c) => ({ v: mo[c], color: SPEND_CAT[c].color, label: SPEND_CAT[c].label })), mmax, 74)}<span class="bar-val num">${brl(sum(Object.values(mo), (x) => x), 0)}</span></span></div>`; }).join("")}</div>
+        </div>
+        <div class="card"><div class="card-h"><span class="card-title">Impulsionamentos</span><span class="card-sub">resultado de cada anúncio</span></div>
+          ${boosts.length ? `<ul class="boosts">${boosts.map((e) => { const r = e.results || {}; return `<li><span><b style="font-weight:600">${esc(e.item)}</b>${e.note ? ` <span class="muted">· ${esc(e.note)}</span>` : ""}</span><span class="amt num">${brl(e.amount)}</span><span class="res"><span>${dShort(e.date)}</span>${e.results ? `<span><b>${fmt(r.views)}</b> views</span><span><b>${fmt(r.followers)}</b> seguidores</span>${r.views ? `<span><b>${brl((e.amount / r.views) * 1000)}</b>/mil views</span>` : ""}${r.followers ? `<span><b>${brl(e.amount / r.followers)}</b>/seguidor</span>` : ""}` : "<span>sem resultado lançado</span>"}</span></li>`; }).join("")}</ul>` : empty("Nenhum impulsionamento no período.")}
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px"><div class="card-h"><span class="card-title">Lançamentos</span><span class="card-sub">${list.length} no período</span></div>
+        <div class="tbl-wrap"><table><thead><tr><th>Data</th><th>Item</th><th>Categoria</th><th>Rede</th><th class="r">Valor</th></tr></thead><tbody>${list.map((e) => { const c = SPEND_CAT[e.category] ? e.category : "outro"; return `<tr><td>${dLong(e.date)}</td><td>${esc(e.item)}${e.note ? `<div class="vcase">${esc(e.note)}</div>` : ""}</td><td><span class="chip"><i class="sw" style="background:${SPEND_CAT[c].color}"></i>${SPEND_CAT[c].label}</span></td><td>${e.platform && NETS[e.platform] ? NETS[e.platform].label : "—"}</td><td class="r">${brl(e.amount)}</td></tr>`; }).join("") || `<tr><td colspan="5" class="muted">Nada no período.</td></tr>`}</tbody></table></div>
+      </div>`;
   }
 
   function renderSources(m) {
-    const yt = m.sources.youtube || (m.live ? "api" : null);
-    const ana = String(m.sources.youtube || "").includes("analytics");
-    const sample = m.mode === "sample";
-    const row = (state, name, what, how) => `<div class="source"><span class="dot ${state}"></span><div class="source-name">${name}<small>${what}</small></div><div class="source-how">${how}</div></div>`;
-    $("#sources").innerHTML = [
-      row(yt || sample ? "on" : "off", "YouTube · dados públicos", "inscritos, views, likes, comentários, todos os uploads",
-        yt ? `Ligado. <code>YOUTUBE_API_KEY</code> no coletor${m.live ? " e atualização ao vivo nesta página" : "; ao vivo só no domínio da Vercel (a chave é restrita por referrer)"}.` : "Defina <code>YOUTUBE_API_KEY</code> (a mesma da v1) e rode o coletor."),
-      row(ana || sample ? "on" : "off", "YouTube Analytics", "retenção, tempo assistido, horas de exibição, inscritos por vídeo, views por dia",
-        ana ? "Ligado." : "Precisa de OAuth da conta do Brazil Noir com o escopo <code>yt-analytics.readonly</code>. Gere um refresh token novo (o de upload não tem esse escopo) e salve em <code>BN_YOUTUBE_CLIENT_ID</code>, <code>BN_YOUTUBE_CLIENT_SECRET</code> e <code>BN_YOUTUBE_REFRESH_TOKEN</code>. Sem isso, horas e Shorts em 90 dias ficam estimados."),
-      row(m.sources.tiktok || sample ? "on" : m.manualUsed.tiktok ? "part" : "off", "TikTok", "seguidores, views, likes, comentários e compartilhamentos por vídeo",
-        m.sources.tiktok ? "Ligado pela Display API." : `A Display API precisa dos escopos <code>user.info.stats</code> e <code>video.list</code> aprovados no app do TikTok, e do token da conta em <code>BN_TIKTOK_ACCESS_TOKEN</code>/<code>BN_TIKTOK_REFRESH_TOKEN</code>. Retenção e seguidores por vídeo não saem pela API: copie do TikTok Studio para <code>manual.json</code>.${m.manualUsed.tiktok ? " Hoje: lançamento manual." : ""}`),
-      row(m.sources.instagram || sample ? "on" : m.manualUsed.instagram ? "part" : "off", "Instagram Reels", "seguidores, views, likes, compartilhamentos e tempo médio por Reel",
-        m.sources.instagram ? "Ligado pela Graph API." : "Conta profissional do Instagram ligada a uma página do Facebook + app da Meta com <code>instagram_basic</code> e <code>instagram_manage_insights</code>. Salve <code>BN_IG_USER_ID</code> e <code>BN_IG_ACCESS_TOKEN</code> (token de longa duração)."),
-      row(m.spend.length || sample ? "on" : "off", "Gastos", "impulsionamentos e ferramentas",
-        `Lançamento manual em <code>spend.json</code> (o TikTok Promote não tem API pública de relatório). ${m.spend.length} lançamento${m.spend.length === 1 ? "" : "s"}.`),
-      row(m.mode === "sample" ? "on" : m.daily.length > 7 ? "on" : "part", "Histórico diário", "curvas de seguidores e views por dia",
-        `Cada execução de <code>node pipeline/brazil-noir/analytics.js</code> grava um ponto do dia. Agende 1×/dia (junto do <code>run-analytics.sh</code>) para formar as curvas. Hoje: ${new Set(m.daily.map((r) => r.date)).size} dia${new Set(m.daily.map((r) => r.date)).size === 1 ? "" : "s"} registrado${new Set(m.daily.map((r) => r.date)).size === 1 ? "" : "s"}.`),
+    const f = sourceFlags(m);
+    const days = new Set(m.daily.map((r) => r.date)).size;
+    const row = (s, name, what, how) => `<div class="source"><span class="dot ${s}"></span><div class="source-name">${name}<small>${what}</small></div><div class="source-how">${how}</div></div>`;
+    $("#srcs").innerHTML = [
+      row(f.yt ? "on" : "off", "YouTube · dados públicos", "inscritos, views, likes, comentários, uploads", f.yt ? `Ligado pela <code>YOUTUBE_API_KEY</code>${m.live ? ", com atualização ao vivo nesta página" : ". Ao vivo só no domínio da Vercel (a chave é restrita por referrer)"}.` : "Defina <code>YOUTUBE_API_KEY</code> e rode o coletor."),
+      row(f.ana ? "on" : "off", "YouTube Analytics", "retenção, tempo assistido, horas de exibição, inscritos por vídeo", f.ana ? "Ligado." : "Precisa de OAuth da conta do Brazil Noir com o escopo <code>yt-analytics.readonly</code> (o token de upload não tem). Salve em <code>BN_YOUTUBE_CLIENT_ID</code>, <code>BN_YOUTUBE_CLIENT_SECRET</code> e <code>BN_YOUTUBE_REFRESH_TOKEN</code>."),
+      row(f.tk, "TikTok", "seguidores e métricas por vídeo", m.sources.tiktok ? "Ligado pela Display API." : `Precisa dos escopos <code>user.info.stats</code> e <code>video.list</code> aprovados no app do TikTok e do token em <code>BN_TIKTOK_ACCESS_TOKEN</code>/<code>BN_TIKTOK_REFRESH_TOKEN</code>. Retenção e seguidores por vídeo: copie do TikTok Studio para <code>manual.json</code>.${f.tk === "part" ? " Hoje: lançamento manual." : ""}`),
+      row(f.ig, "Instagram Reels", "seguidores e métricas por Reel", m.sources.instagram ? "Ligado pela Graph API." : "Conta profissional ligada a uma página do Facebook + app da Meta com <code>instagram_basic</code> e <code>instagram_manage_insights</code>. Salve <code>BN_IG_USER_ID</code> e <code>BN_IG_ACCESS_TOKEN</code>."),
+      row(m.spend.length || m.mode === "sample" ? "on" : "off", "Gastos", "impulsionamentos e ferramentas", `Lançamento manual em <code>spend.json</code> (o TikTok Promote não tem API pública de relatório). ${m.spend.length} lançamento${m.spend.length === 1 ? "" : "s"}.`),
+      row(m.mode === "sample" || days > 7 ? "on" : "part", "Histórico diário", "curvas de seguidores e views", `Cada <code>npm run bn:dashboard</code> grava um ponto do dia. Rode 1×/dia para formar as curvas. Hoje: ${days} dia${days === 1 ? "" : "s"}.`),
     ].join("");
+  }
+
+  // ---------- Navegação lateral: destaca a seção visível ----------
+  let spyObs;
+  function spy() {
+    spyObs?.disconnect();
+    const links = [...document.querySelectorAll("#nav a")];
+    const setActive = (id) => links.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + id));
+    spyObs = new IntersectionObserver((entries) => {
+      const vis = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      if (vis[0]) setActive(vis[0].target.id);
+    }, { rootMargin: "-80px 0px -60% 0px" });
+    links.forEach((a) => { const s = document.querySelector(a.getAttribute("href")); if (s) spyObs.observe(s); });
   }
 
   // ---------- Eventos ----------
   async function setMode(mode) {
     state.mode = mode;
     store.set("bn-mode", mode);
-    $("#main").innerHTML = `<div class="loading">Abrindo o arquivo do caso…</div>`;
+    $("#main").innerHTML = `<div class="loading">Carregando…</div>`;
     state.model = await loadModel(mode);
     render();
     if (state.model && mode === "real" && (await liveYouTube(state.model)) && state.mode === "real") render();
@@ -1232,9 +1303,8 @@
     document.documentElement.dataset.theme = next;
     store.set("bn-theme", next);
   });
-  // Redesenha os gráficos quando a largura muda
   let lastW = 0, rT;
-  new ResizeObserver(() => { const w = $("#main").clientWidth; if (Math.abs(w - lastW) < 4) return; lastW = w; clearTimeout(rT); rT = setTimeout(() => state.model && renderGrowth(state.model), 120); }).observe($("#main"));
+  new ResizeObserver(() => { const w = $("#main").clientWidth; if (Math.abs(w - lastW) < 4) return; lastW = w; clearTimeout(rT); rT = setTimeout(() => state.model && $("#ch-followers") && renderGrowth(state.model), 120); }).observe($("#main"));
 
   setMode(state.mode);
 })();
