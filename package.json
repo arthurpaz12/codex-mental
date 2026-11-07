@@ -20,7 +20,8 @@
     "insights": "node pipeline/13-performance-insights.js",
     "dashboard": "npx serve dashboard",
     "bn:dashboard": "node pipeline/brazil-noir/analytics.js",
-    "bn:dashboard:sample": "node pipeline/brazil-noir/dashboard-sample.js"
+    "bn:dashboard:sample": "node pipeline/brazil-noir/dashboard-sample.js",
+    "bn:dashboard:serve": "node pipeline/brazil-noir/dashboard-server.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.40.0",

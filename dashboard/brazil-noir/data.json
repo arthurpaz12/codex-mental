@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "mode": "real",
-  "generatedAt": "2026-11-06T17:28:04.429Z",
+  "generatedAt": "2026-11-07T18:43:23.478Z",
   "sources": {
     "youtube": "api"
   },
@@ -25,10 +25,10 @@
   },
   "accounts": {
     "youtube": {
-      "followers": 4,
-      "views": 2122,
-      "videos": 29,
-      "asOf": "2026-11-06T17:28:04.400Z"
+      "followers": 6,
+      "views": 2141,
+      "videos": 32,
+      "asOf": "2026-11-07T18:43:23.455Z"
     }
   },
   "daily": [
@@ -37,9 +37,72 @@
       "platform": "youtube",
       "followers": 4,
       "totalViews": 2122
+    },
+    {
+      "date": "2026-11-07",
+      "platform": "youtube",
+      "followers": 6,
+      "totalViews": 2141
     }
   ],
   "videos": [
+    {
+      "id": "Eowijxr8kUI",
+      "platform": "yt_shorts",
+      "title": "The tunnel",
+      "case": null,
+      "publishedAt": "2026-11-07T15:00:07Z",
+      "durationSec": 85,
+      "url": "https://www.youtube.com/shorts/Eowijxr8kUI",
+      "thumb": "https://i.ytimg.com/vi/Eowijxr8kUI/mqdefault.jpg",
+      "views": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": null,
+      "avgWatchSec": null,
+      "avgViewPct": null,
+      "followersGained": null,
+      "watchHours": null,
+      "source": "youtube-data-api"
+    },
+    {
+      "id": "NUcDOEV4FQs",
+      "platform": "yt_shorts",
+      "title": "the vault",
+      "case": null,
+      "publishedAt": "2026-11-06T17:43:10Z",
+      "durationSec": 80,
+      "url": "https://www.youtube.com/shorts/NUcDOEV4FQs",
+      "thumb": "https://i.ytimg.com/vi/NUcDOEV4FQs/mqdefault.jpg",
+      "views": 4,
+      "likes": 0,
+      "comments": 0,
+      "shares": null,
+      "avgWatchSec": null,
+      "avgViewPct": null,
+      "followersGained": null,
+      "watchHours": null,
+      "source": "youtube-data-api"
+    },
+    {
+      "id": "EFyMgF4L9cE",
+      "platform": "yt_long",
+      "title": "They Dug 80 Meters Under Brazil's Central Bank — and Took R$164 Million",
+      "case": null,
+      "publishedAt": "2026-11-06T17:37:23Z",
+      "durationSec": 548,
+      "url": "https://www.youtube.com/watch?v=EFyMgF4L9cE",
+      "thumb": "https://i.ytimg.com/vi/EFyMgF4L9cE/mqdefault.jpg",
+      "views": 6,
+      "likes": 0,
+      "comments": 0,
+      "shares": null,
+      "avgWatchSec": null,
+      "avgViewPct": null,
+      "followersGained": null,
+      "watchHours": null,
+      "source": "youtube-data-api"
+    },
     {
       "id": "MNgzF0C4DDk",
       "platform": "yt_shorts",
@@ -68,7 +131,7 @@
       "durationSec": 84,
       "url": "https://www.youtube.com/watch?v=3ICicwF99a8",
       "thumb": "https://i.ytimg.com/vi/3ICicwF99a8/mqdefault.jpg",
-      "views": 20,
+      "views": 21,
       "likes": 0,
       "comments": 0,
       "shares": null,
@@ -391,7 +454,7 @@
       "durationSec": 49,
       "url": "https://www.youtube.com/watch?v=Nr8P84a5bsw",
       "thumb": "https://i.ytimg.com/vi/Nr8P84a5bsw/mqdefault.jpg",
-      "views": 29,
+      "views": 30,
       "likes": 0,
       "comments": 0,
       "shares": null,
@@ -448,7 +511,7 @@
       "durationSec": 57,
       "url": "https://www.youtube.com/watch?v=f3sMWwwopvU",
       "thumb": "https://i.ytimg.com/vi/f3sMWwwopvU/mqdefault.jpg",
-      "views": 19,
+      "views": 20,
       "likes": 0,
       "comments": 0,
       "shares": null,
@@ -581,7 +644,7 @@
       "durationSec": 66,
       "url": "https://www.youtube.com/watch?v=DK1D47KeVk0",
       "thumb": "https://i.ytimg.com/vi/DK1D47KeVk0/mqdefault.jpg",
-      "views": 200,
+      "views": 205,
       "likes": 0,
       "comments": 0,
       "shares": null,

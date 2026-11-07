@@ -305,6 +305,36 @@
   .boosts .res { grid-column: 1 / -1; font-size: 12px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 12px; }
   .boosts .res b { color: var(--ink-2); font-weight: 600; }
 
+  .btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border-2); background: var(--surface); color: var(--ink); border-radius: 9px; padding: 7px 12px; font-size: 13px; font-weight: 500; cursor: pointer; white-space: nowrap; }
+  .btn:hover { background: var(--surface-2); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn.primary:hover { filter: brightness(1.08); background: var(--accent); }
+  .btn:disabled { opacity: 0.55; cursor: not-allowed; }
+  .btn svg { width: 15px; height: 15px; }
+  .row-act { display: inline-flex; gap: 2px; }
+  .row-act button { border: 0; background: none; color: var(--muted); padding: 5px; border-radius: 6px; cursor: pointer; display: grid; place-items: center; }
+  .row-act button:hover { color: var(--ink); background: var(--surface-3); }
+  .row-act button.del:hover { color: var(--bad-ink); }
+  .row-act svg { width: 15px; height: 15px; }
+  .form-card { margin-bottom: 16px; border-color: var(--border-2); }
+  .form { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px 14px; margin-top: 12px; }
+  .field { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+  .field.w2 { grid-column: span 2; }
+  .field.w3 { grid-column: span 3; }
+  .field label { font-size: 12px; color: var(--muted); font-weight: 500; }
+  .field input, .field select { width: 100%; background: var(--bg); border: 1px solid var(--border-2); border-radius: 8px; padding: 8px 10px; color: var(--ink); font: inherit; font-size: 13px; }
+  .field input:focus, .field select:focus { outline: 2px solid color-mix(in srgb, var(--accent) 45%, transparent); outline-offset: 0; border-color: transparent; }
+  .field .hint { font-size: 11.5px; color: var(--muted); }
+  .boost-only { display: contents; }
+  .boost-only[hidden] { display: none; }
+  .form-actions { grid-column: 1 / -1; display: flex; align-items: center; gap: 10px; justify-content: flex-end; border-top: 1px solid var(--border); padding-top: 12px; }
+  .form-actions .msg { margin-right: auto; font-size: 12.5px; color: var(--muted); }
+  .form-actions .msg.err { color: var(--bad-ink); }
+  .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 10px; font-size: 13px; font-weight: 500; opacity: 0; transition: opacity 0.2s, transform 0.2s; z-index: 60; pointer-events: none; }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  @media (max-width: 1280px) { .form { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  @media (max-width: 640px) { .form { grid-template-columns: repeat(2, minmax(0, 1fr)); } .field.w2, .field.w3 { grid-column: 1 / -1; } }
+
   /* ---------- Fontes ---------- */
   .source { display: grid; grid-template-columns: 18px minmax(140px, 220px) 1fr; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); align-items: start; font-size: 13px; }
   .source:last-child { border-bottom: 0; }
@@ -409,6 +439,7 @@
   </div>
 </div>
 <div class="tip" id="tip" role="tooltip"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 (() => {
@@ -485,6 +516,12 @@
     q: "",
     sort: { key: "pub", dir: -1 },
     model: null,
+    api: false,
+  };
+  const ICON = {
+    plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+    edit: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>',
+    del: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v6M14 11v6"/></svg>',
   };
 
   // ---------- Dados ----------
@@ -493,7 +530,10 @@
       const raw = await getJson("data.sample.json");
       return raw ? buildModel(raw, null, { entries: raw.spend || [] }) : null;
     }
-    const [raw, manual, spend] = await Promise.all([getJson("data.json"), getJson("manual.json"), getJson("spend.json")]);
+    // Com o servidor local (atalho da área de trabalho) os gastos vêm da API, que dá id a cada linha
+    state.api = await fetch("/api/brazil-noir/health", { cache: "no-store" }).then((r) => r.ok && r.headers.get("content-type")?.includes("json")).catch(() => false);
+    const spendSrc = state.api ? fetch("/api/brazil-noir/spend", { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).catch(() => null) : getJson("spend.json");
+    const [raw, manual, spend] = await Promise.all([getJson("data.json"), getJson("manual.json"), spendSrc]);
     return buildModel(raw || { mode: "real", videos: [], daily: [], accounts: {}, sources: {} }, manual, spend);
   }
 
@@ -551,7 +591,8 @@
 
   async function liveYouTube(m) {
     if (!YOUTUBE_API_KEY || m.mode !== "real") return false;
-    const api = (path, p) => fetch(`https://www.googleapis.com/youtube/v3/${path}?${new URLSearchParams({ ...p, key: YOUTUBE_API_KEY })}`).then((r) => (r.ok ? r.json() : Promise.reject(r.status)));
+    // Pelo servidor local a consulta passa por ele (a chave só aceita o domínio da Vercel)
+    const api = (path, p) => fetch(state.api ? `/api/brazil-noir/yt/${path}?${new URLSearchParams(p)}` : `https://www.googleapis.com/youtube/v3/${path}?${new URLSearchParams({ ...p, key: YOUTUBE_API_KEY })}`).then((r) => (r.ok ? r.json() : Promise.reject(r.status)));
     try {
       const ch = (await api("channels", { part: "snippet,statistics,contentDetails", forHandle: m.channel.youtube?.handle || "ytBrazilNoir" })).items?.[0];
       if (!ch) return false;
@@ -816,7 +857,7 @@
       <section class="block" id="platforms"><div class="block-h"><h2>Plataformas</h2><span class="sub" id="plat-aside"></span></div><div class="grid4" id="plats"></div></section>
       <section class="block" id="highlights"><div class="block-h"><h2>Destaques</h2><span class="sub">o que rendeu mais e menos no período</span></div><div class="grid2" id="hl"></div></section>
       <section class="block" id="videos"><div class="block-h"><h2>Vídeos</h2><span class="right" id="videos-aside"></span></div><div class="card" id="vtable"></div></section>
-      <section class="block" id="spend"><div class="block-h"><h2>Gastos</h2><span class="sub">lançados em <code>spend.json</code></span></div><div id="spendbox"></div></section>
+      <section class="block" id="spend"><div class="block-h"><h2>Gastos</h2><span class="sub">impulsionamentos, ferramentas e outros custos do canal</span><span class="right" id="spend-btn"></span></div><div id="spend-form"></div><div id="spendbox"></div></section>
       <section class="block" id="sources"><div class="block-h"><h2>Fontes de dados</h2><span class="sub">o que está ligado e o que falta</span></div><div class="card" id="srcs"></div></section>`;
     renderFeatured(m);
     renderRecent(m);
@@ -1217,10 +1258,104 @@
     el.querySelectorAll("th.sortable").forEach((th) => th.addEventListener("click", () => { const k = th.dataset.k; state.sort = state.sort.key === k ? { key: k, dir: -state.sort.dir } : { key: k, dir: -1 }; renderVideos(m); }));
   }
 
+  // ---------- Lançamento de gastos ----------
+  const editable = (m) => m.mode === "real" && state.api;
+  function toast(text) {
+    const t = $("#toast");
+    t.textContent = text;
+    t.classList.add("show");
+    clearTimeout(toast.t);
+    toast.t = setTimeout(() => t.classList.remove("show"), 2600);
+  }
+  async function refresh() {
+    const y = scrollY;
+    const mdl = await loadModel(state.mode);
+    state.model = mdl;
+    render();
+    scrollTo(0, y);
+    if (mdl && state.mode === "real" && (await liveYouTube(mdl)) && state.model === mdl) { render(); scrollTo(0, y); }
+  }
+  function spendHeader(m) {
+    const sample = m.mode === "sample";
+    $("#spend-btn").innerHTML = `<button class="btn primary" id="new-spend" type="button" ${sample ? 'disabled title="Troque para Dados reais para lançar"' : ""}>${ICON.plus}Novo gasto</button>`;
+    $("#new-spend")?.addEventListener("click", () => openSpendForm(m, null));
+  }
+  function openSpendForm(m, entry) {
+    const box = $("#spend-form");
+    if (!state.api) {
+      box.innerHTML = `<div class="notice"><span class="tag">Só leitura</span><span>Esta página está sem o servidor local, então não consegue gravar. Abra a dashboard pelo atalho <b>Brazil Noir - Dashboard</b> da área de trabalho para lançar por aqui (ou edite <code>dashboard/brazil-noir/spend.json</code>).</span></div>`;
+      box.scrollIntoView({ block: "nearest" });
+      return;
+    }
+    const e = entry || { date: keyOf(new Date()), category: "impulsionamento", platform: "tiktok", item: "", amount: "" };
+    const items = [...new Set(["TikTok Promote", "ElevenLabs", ...m.spend.map((x) => x.item)])];
+    const vids = m.videos.slice(0, 40);
+    const opt = (val, label, cur) => `<option value="${esc(val)}" ${String(cur ?? "") === String(val) ? "selected" : ""}>${esc(label)}</option>`;
+    const r = e.results || {};
+    box.innerHTML = `<div class="card form-card">
+      <div class="card-h"><span class="card-title">${entry ? "Editar gasto" : "Novo gasto"}</span><span class="card-sub">grava em <code>spend.json</code></span></div>
+      <form class="form" id="spend-f" novalidate autocomplete="off">
+        <div class="field"><label for="f-date">Data</label><input id="f-date" name="date" type="date" required value="${esc(e.date)}"></div>
+        <div class="field"><label for="f-cat">Categoria</label><select id="f-cat" name="category">${Object.entries(SPEND_CAT).map(([k, c]) => opt(k, c.label, e.category)).join("")}</select></div>
+        <div class="field w2"><label for="f-item">Item</label><input id="f-item" name="item" list="f-items" required maxlength="120" placeholder="ex.: TikTok Promote, ElevenLabs" value="${esc(e.item)}"><datalist id="f-items">${items.map((i) => `<option value="${esc(i)}">`).join("")}</datalist></div>
+        <div class="field"><label for="f-amount">Valor (R$)</label><input id="f-amount" name="amount" type="number" inputmode="decimal" min="0.01" step="0.01" required placeholder="0,00" value="${esc(e.amount)}"></div>
+        <div class="field"><label for="f-plat">Rede</label><select id="f-plat" name="platform">${opt("", "—", e.platform)}${NET_ORDER.map((n) => opt(n, NETS[n].label, e.platform)).join("")}</select></div>
+        <div class="field w2"><label for="f-note">Observação</label><input id="f-note" name="note" maxlength="200" placeholder="opcional" value="${esc(e.note || "")}"></div>
+        <div class="boost-only" ${e.category === "impulsionamento" ? "" : "hidden"}>
+          <div class="field w2"><label for="f-video">Vídeo impulsionado</label><select id="f-video" name="videoId">${opt("", "— não informar —", e.videoId)}${vids.map((v) => opt(v.id, `${PLAT[v.platform].short} · ${v.title.slice(0, 60)}`, e.videoId)).join("")}</select></div>
+          <div class="field"><label for="f-views">Views obtidas</label><input id="f-views" name="views" type="number" min="0" step="1" placeholder="—" value="${esc(r.views ?? "")}"><span class="hint">do painel do anúncio</span></div>
+          <div class="field"><label for="f-fol">Seguidores obtidos</label><input id="f-fol" name="followers" type="number" min="0" step="1" placeholder="—" value="${esc(r.followers ?? "")}"><span class="hint">pode preencher depois</span></div>
+        </div>
+        <div class="form-actions"><span class="msg" id="f-msg"></span><button type="button" class="btn" id="f-cancel">Cancelar</button><button type="submit" class="btn primary" id="f-save">${entry ? "Salvar alterações" : "Lançar gasto"}</button></div>
+      </form></div>`;
+    const f = $("#spend-f");
+    f.category.addEventListener("change", () => { f.querySelector(".boost-only").hidden = f.category.value !== "impulsionamento"; });
+    $("#f-cancel").addEventListener("click", () => { box.innerHTML = ""; });
+    f.addEventListener("submit", async (ev) => {
+      ev.preventDefault();
+      const msg = $("#f-msg");
+      const amount = Number(String(f.amount.value).replace(",", "."));
+      if (!f.date.value || !f.item.value.trim() || !(amount > 0)) { msg.className = "msg err"; msg.textContent = "Preencha data, item e um valor maior que zero."; return; }
+      const body = {
+        date: f.date.value, category: f.category.value, item: f.item.value.trim(), amount, platform: f.platform.value || null, note: f.note.value.trim() || null,
+        ...(f.category.value === "impulsionamento" && {
+          videoId: f.videoId.value || null,
+          results: { views: f.views.value === "" ? null : Number(f.views.value), followers: f.followers.value === "" ? null : Number(f.followers.value) },
+        }),
+      };
+      $("#f-save").disabled = true;
+      msg.className = "msg"; msg.textContent = "Salvando…";
+      try {
+        const res = await fetch(`/api/brazil-noir/spend${entry ? "/" + encodeURIComponent(entry.id) : ""}`, { method: entry ? "PUT" : "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+        const out = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(out.error || `erro ${res.status}`);
+        await refresh();
+        toast(entry ? "Gasto atualizado" : `Gasto lançado: ${body.item} · ${brl(amount)}`);
+      } catch (err) {
+        $("#f-save").disabled = false;
+        msg.className = "msg err"; msg.textContent = `Não salvou: ${err.message}`;
+      }
+    });
+    box.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    (entry ? f.amount : f.item).focus({ preventScroll: true });
+  }
+  async function deleteSpend(e) {
+    if (!confirm(`Excluir o gasto "${e.item}" de ${dLong(e.date)} (${brl(e.amount)})?`)) return;
+    const res = await fetch(`/api/brazil-noir/spend/${encodeURIComponent(e.id)}`, { method: "DELETE", headers: { "Content-Type": "application/json" } });
+    if (!res.ok) { toast("Não consegui excluir"); return; }
+    await refresh();
+    toast("Gasto excluído");
+  }
+  function wireSpendRows(m) {
+    document.querySelectorAll("[data-edit-spend]").forEach((b) => b.addEventListener("click", () => openSpendForm(m, m.spend.find((x) => x.id === b.dataset.editSpend))));
+    document.querySelectorAll("[data-del-spend]").forEach((b) => b.addEventListener("click", () => deleteSpend(m.spend.find((x) => x.id === b.dataset.delSpend))));
+  }
+
   function renderSpend(m) {
     const el = $("#spendbox");
+    spendHeader(m);
     if (!m.spend.length) {
-      el.innerHTML = `<div class="card">${empty(`<b>Nenhum gasto lançado ainda.</b><br>Adicione uma linha por cobrança em <code>dashboard/brazil-noir/spend.json</code>: impulsionamentos (com as views e seguidores que o anúncio trouxe) e ferramentas, como a voz.<br><br><code>{ "date": "2026-11-06", "category": "impulsionamento", "item": "TikTok Promote", "amount": 15, "platform": "tiktok", "results": { "views": 2900, "followers": 18 } }</code>`).replace('class="empty"', 'class="empty" style="margin-top:0"')}</div>`;
+      el.innerHTML = `<div class="card">${empty(`<b>Nenhum gasto lançado ainda.</b><br>Clique em <b>Novo gasto</b> para lançar impulsionamentos (com as views e seguidores que o anúncio trouxe) e ferramentas, como a voz.${state.api ? "" : "<br>Para gravar pela página, abra pelo atalho da área de trabalho."}`).replace('class="empty"', 'class="empty" style="margin-top:0"')}</div>`;
       return;
     }
     const list = m.spend.filter((e) => inPeriod(m, e.date)).sort((a, b) => b.date.localeCompare(a.date));
@@ -1251,12 +1386,13 @@
           <div class="months">${mkeys.map((k) => { const mo = months.get(k); return `<div class="month"><span>${new Date(+k.slice(0, 4), +k.slice(5) - 1, 1).toLocaleDateString("pt-BR", { month: "short", year: "2-digit" }).replace(/\./g, "").replace(/ de /g, " ")}</span><span class="bar-row">${segBar(cats.filter((c) => mo[c]).map((c) => ({ v: mo[c], color: SPEND_CAT[c].color, label: SPEND_CAT[c].label })), mmax, 74)}<span class="bar-val num">${brl(sum(Object.values(mo), (x) => x), 0)}</span></span></div>`; }).join("")}</div>
         </div>
         <div class="card"><div class="card-h"><span class="card-title">Impulsionamentos</span><span class="card-sub">resultado de cada anúncio</span></div>
-          ${boosts.length ? `<ul class="boosts">${boosts.map((e) => { const r = e.results || {}; return `<li><span><b style="font-weight:600">${esc(e.item)}</b>${e.note ? ` <span class="muted">· ${esc(e.note)}</span>` : ""}</span><span class="amt num">${brl(e.amount)}</span><span class="res"><span>${dShort(e.date)}</span>${e.results ? `<span><b>${fmt(r.views)}</b> views</span><span><b>${fmt(r.followers)}</b> seguidores</span>${r.views ? `<span><b>${brl((e.amount / r.views) * 1000)}</b>/mil views</span>` : ""}${r.followers ? `<span><b>${brl(e.amount / r.followers)}</b>/seguidor</span>` : ""}` : "<span>sem resultado lançado</span>"}</span></li>`; }).join("")}</ul>` : empty("Nenhum impulsionamento no período.")}
+          ${boosts.length ? `<ul class="boosts">${boosts.map((e) => { const r = e.results || {}; return `<li><span><b style="font-weight:600">${esc(e.item)}</b>${e.note ? ` <span class="muted">· ${esc(e.note)}</span>` : ""}</span><span class="amt num">${brl(e.amount)}</span><span class="res"><span>${dShort(e.date)}</span>${e.results ? `<span><b>${fmt(r.views)}</b> views</span><span><b>${fmt(r.followers)}</b> seguidores</span>${r.views ? `<span><b>${brl((e.amount / r.views) * 1000)}</b>/mil views</span>` : ""}${r.followers ? `<span><b>${brl(e.amount / r.followers)}</b>/seguidor</span>` : ""}` : `<span>sem resultado lançado</span>${editable(m) && e.id ? `<button type="button" class="link" style="background:none;border:0;padding:0;cursor:pointer;text-decoration:underline" data-edit-spend="${esc(e.id)}">lançar resultado</button>` : ""}`}</span></li>`; }).join("")}</ul>` : empty("Nenhum impulsionamento no período.")}
         </div>
       </div>
       <div class="card" style="margin-top:16px"><div class="card-h"><span class="card-title">Lançamentos</span><span class="card-sub">${list.length} no período</span></div>
-        <div class="tbl-wrap"><table><thead><tr><th>Data</th><th>Item</th><th>Categoria</th><th>Rede</th><th class="r">Valor</th></tr></thead><tbody>${list.map((e) => { const c = SPEND_CAT[e.category] ? e.category : "outro"; return `<tr><td>${dLong(e.date)}</td><td>${esc(e.item)}${e.note ? `<div class="vcase">${esc(e.note)}</div>` : ""}</td><td><span class="chip"><i class="sw" style="background:${SPEND_CAT[c].color}"></i>${SPEND_CAT[c].label}</span></td><td>${e.platform && NETS[e.platform] ? NETS[e.platform].label : "—"}</td><td class="r">${brl(e.amount)}</td></tr>`; }).join("") || `<tr><td colspan="5" class="muted">Nada no período.</td></tr>`}</tbody></table></div>
+        <div class="tbl-wrap"><table><thead><tr><th>Data</th><th>Item</th><th>Categoria</th><th>Rede</th><th class="r">Valor</th>${editable(m) ? '<th class="r" aria-label="Ações"></th>' : ""}</tr></thead><tbody>${list.map((e) => { const c = SPEND_CAT[e.category] ? e.category : "outro"; return `<tr><td>${dLong(e.date)}</td><td>${esc(e.item)}${e.note ? `<div class="vcase">${esc(e.note)}</div>` : ""}</td><td><span class="chip"><i class="sw" style="background:${SPEND_CAT[c].color}"></i>${SPEND_CAT[c].label}</span></td><td>${e.platform && NETS[e.platform] ? NETS[e.platform].label : "—"}</td><td class="r">${brl(e.amount)}</td>${editable(m) ? `<td class="r"><span class="row-act">${e.id ? `<button type="button" title="Editar" aria-label="Editar" data-edit-spend="${esc(e.id)}">${ICON.edit}</button><button type="button" class="del" title="Excluir" aria-label="Excluir" data-del-spend="${esc(e.id)}">${ICON.del}</button>` : ""}</span></td>` : ""}</tr>`; }).join("") || `<tr><td colspan="${editable(m) ? 6 : 5}" class="muted">Nada no período.</td></tr>`}</tbody></table></div>
       </div>`;
+    wireSpendRows(m);
   }
 
   function renderSources(m) {
