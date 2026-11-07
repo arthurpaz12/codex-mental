@@ -77,24 +77,65 @@ const send = (res, status, body, type = "application/json; charset=utf-8") => {
 // spend.json
 // ---------------------------------------------------------------------------
 
-async function loadSpend() {
-  const data = JSON.parse(await readFile(SPEND_PATH, "utf-8"));
+const num = (v) => (v === "" || v == null ? null : Number(v));
+const text = (v, max) => String(v ?? "").trim().slice(0, max) || null;
+
+// Coleções editáveis pela página: gastos e vídeos programados
+const COLLECTIONS = {
+  spend: {
+    path: SPEND_PATH,
+    label: "gasto",
+    clean: (input) => cleanEntry(input),
+    order: (a, b) => (b.date || "").localeCompare(a.date || ""),
+    fresh: { _leia: "Gastos do Brazil Noir, em reais. Lançados pela dashboard (servidor local) ou à mão.", currency: "BRL", entries: [] },
+  },
+  schedule: {
+    path: join(ROOT, "brazil-noir", "schedule.json"),
+    label: "programado",
+    clean: (input) => cleanSchedule(input),
+    order: (a, b) => (a.at || "").localeCompare(b.at || ""),
+    fresh: {
+      _leia: "Vídeos programados do Brazil Noir (YouTube Studio, TikTok, Reels). Lançados pela dashboard (servidor local) ou à mão. at = data e hora local (AAAA-MM-DDTHH:MM). platforms: yt_long | yt_shorts | tiktok | reels. kind: corte | episodio. Quando o vídeo sai com o mesmo título, a dashboard marca como publicado sozinha.",
+      entries: [],
+    },
+  },
+};
+
+async function loadColl(name) {
+  const c = COLLECTIONS[name];
+  let data;
+  try { data = JSON.parse(await readFile(c.path, "utf-8")); } catch { data = structuredClone(c.fresh); }
   data.entries = Array.isArray(data.entries) ? data.entries : [];
-  // Lançamentos antigos (editados à mão) ganham id para poderem ser editados pela página
+  // Lançamentos editados à mão ganham id para poderem ser editados pela página
   let changed = false;
   for (const e of data.entries) if (!e.id) { e.id = randomUUID().slice(0, 8); changed = true; }
-  if (changed) await saveSpend(data);
+  if (changed) await saveColl(name, data);
   return data;
 }
 
-async function saveSpend(data) {
-  data.entries.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
-  const tmp = SPEND_PATH + ".tmp";
+async function saveColl(name, data) {
+  const c = COLLECTIONS[name];
+  data.entries.sort(c.order);
+  const tmp = c.path + ".tmp";
   await writeFile(tmp, JSON.stringify(data, null, 2) + "\n");
-  await rename(tmp, SPEND_PATH); // grava inteiro ou nada
+  await rename(tmp, c.path); // grava inteiro ou nada
 }
 
-const num = (v) => (v === "" || v == null ? null : Number(v));
+const SCHED_PLATS = ["yt_long", "yt_shorts", "tiktok", "reels"];
+function cleanSchedule(input) {
+  const e = {
+    at: String(input.at || "").slice(0, 16),
+    title: text(input.title, 140),
+    platforms: [...new Set(Array.isArray(input.platforms) ? input.platforms : [])].filter((p) => SCHED_PLATS.includes(p)),
+    kind: input.kind === "episodio" ? "episodio" : "corte",
+    case: text(input.case, 80),
+    note: text(input.note, 200),
+  };
+  if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(e.at)) throw new Error("Data e hora inválidas");
+  if (!e.title) throw new Error("Informe o título");
+  if (!e.platforms.length) throw new Error("Escolha pelo menos uma rede");
+  return e;
+}
 
 function cleanEntry(input) {
   const e = {
@@ -156,34 +197,35 @@ async function api(req, res, path) {
     }
   }
 
-  const m = /^\/api\/brazil-noir\/spend(?:\/([\w-]+))?$/.exec(path);
+  const m = /^\/api\/brazil-noir\/(spend|schedule)(?:\/([\w-]+))?$/.exec(path);
   if (!m) return send(res, 404, { error: "Não encontrado" });
-  const id = m[1];
+  const [, name, id] = m;
+  const coll = COLLECTIONS[name];
 
-  if (req.method === "GET" && !id) return send(res, 200, await loadSpend());
+  if (req.method === "GET" && !id) return send(res, 200, await loadColl(name));
   if (!["POST", "PUT", "DELETE"].includes(req.method)) return send(res, 405, { error: "Método não suportado" });
   if (!writeAllowed(req)) return send(res, 403, { error: "Escrita permitida só pela página local" });
 
   try {
-    const data = await loadSpend();
+    const data = await loadColl(name);
     if (req.method === "POST" && !id) {
-      const entry = { id: randomUUID().slice(0, 8), ...cleanEntry(await readBody(req)) };
+      const entry = { id: randomUUID().slice(0, 8), ...coll.clean(await readBody(req)) };
       data.entries.push(entry);
-      await saveSpend(data);
-      console.log(`+ gasto ${entry.date} ${entry.item} R$ ${entry.amount}`);
+      await saveColl(name, data);
+      console.log(`+ ${coll.label} ${entry.id}`);
       return send(res, 201, entry);
     }
     const idx = data.entries.findIndex((e) => e.id === id);
     if (!id || idx < 0) return send(res, 404, { error: "Lançamento não encontrado" });
     if (req.method === "PUT") {
-      data.entries[idx] = { id, ...cleanEntry(await readBody(req)) };
-      await saveSpend(data);
-      console.log(`~ gasto ${id} atualizado`);
+      data.entries[idx] = { id, ...coll.clean(await readBody(req)) };
+      await saveColl(name, data);
+      console.log(`~ ${coll.label} ${id} atualizado`);
       return send(res, 200, data.entries[idx]);
     }
-    const [removed] = data.entries.splice(idx, 1);
-    await saveSpend(data);
-    console.log(`- gasto ${removed.date} ${removed.item}`);
+    data.entries.splice(idx, 1);
+    await saveColl(name, data);
+    console.log(`- ${coll.label} ${id}`);
     return send(res, 200, { ok: true });
   } catch (e) {
     return send(res, 400, { error: e.message });

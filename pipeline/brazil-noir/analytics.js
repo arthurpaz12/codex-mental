@@ -5,7 +5,8 @@
  *
  *   YouTube público   YOUTUBE_API_KEY                         inscritos, views, todos os uploads
  *   YouTube Analytics BN_YOUTUBE_CLIENT_ID/SECRET/REFRESH_TOKEN retenção, horas assistidas, inscritos
- *                     (token com escopo yt-analytics.readonly) ganhos por vídeo, série diária
+ *                     (token com escopos yt-analytics.readonly ganhos por vídeo, série diária e
+ *                     e youtube.readonly)                       vídeos agendados no YouTube Studio
  *   TikTok            BN_TIKTOK_ACCESS_TOKEN (+ REFRESH_TOKEN,  seguidores, views/likes/coment./
  *                     TIKTOK_CLIENT_KEY/SECRET) escopos        compartilhamentos por vídeo
  *                     user.info.stats + video.list
@@ -220,6 +221,40 @@ async function collectYouTubeAnalytics(yt) {
   }
 }
 
+// Vídeos agendados no YouTube Studio (privados com data de publicação).
+// A chave pública não enxerga vídeo privado: precisa do OAuth do canal com
+// o escopo youtube.readonly (o mesmo token do YouTube Analytics).
+async function collectYouTubeScheduled() {
+  let token;
+  try { token = await ytAnalyticsToken(); } catch { return null; }
+  if (!token) return null;
+  const get = async (path, params) => {
+    const res = await fetch(`https://www.googleapis.com/youtube/v3/${path}?${new URLSearchParams(params)}`, { headers: { Authorization: `Bearer ${token}` } });
+    if (!res.ok) throw new Error(`${path} ${res.status}`);
+    return res.json();
+  };
+  try {
+    const ch = (await get("channels", { part: "contentDetails", mine: "true" })).items?.[0];
+    const pl = await get("playlistItems", { part: "contentDetails", playlistId: ch.contentDetails.relatedPlaylists.uploads, maxResults: 50 });
+    const ids = pl.items.map((i) => i.contentDetails.videoId);
+    if (!ids.length) return [];
+    const vids = (await get("videos", { part: "snippet,status,contentDetails", id: ids.join(",") })).items;
+    const now = Date.now();
+    const out = vids
+      .filter((v) => v.status.privacyStatus === "private" && v.status.publishAt && new Date(v.status.publishAt) > now)
+      .map((v) => {
+        const durationSec = isoDurationToSec(v.contentDetails.duration);
+        const isShort = durationSec <= SHORT_MAX_SEC;
+        return { id: v.id, platform: isShort ? "yt_shorts" : "yt_long", title: v.snippet.title.replace(/\s*#shorts\b/i, "").trim(), at: v.status.publishAt, durationSec, thumb: v.snippet.thumbnails?.medium?.url || null, source: "youtube" };
+      });
+    console.log(`   ✅ YouTube: ${out.length} vídeo(s) agendado(s)`);
+    return out;
+  } catch (e) {
+    console.warn(`   ⚠️  YouTube agendados: ${e.message} (o token precisa do escopo youtube.readonly)`);
+    return null;
+  }
+}
+
 // ---------------------------------------------------------------------------
 // TikTok — Display API (user.info.stats + video.list)
 // ---------------------------------------------------------------------------
@@ -417,6 +452,7 @@ export async function collectBrazilNoir() {
     collectInstagram(),
   ]);
   const yta = await collectYouTubeAnalytics(yt);
+  const ytScheduled = await collectYouTubeScheduled();
 
   // Mantém vídeos de fontes que falharam desta vez (não apaga dado bom)
   const keepFrom = (platforms) => (prev.videos || []).filter((v) => platforms.includes(v.platform));
@@ -473,7 +509,10 @@ export async function collectBrazilNoir() {
   daily.sort((a, b) => (a.date + a.platform).localeCompare(b.date + b.platform));
   videos.sort((a, b) => (b.publishedAt || "").localeCompare(a.publishedAt || ""));
 
-  const out = { schema: 1, mode: "real", generatedAt: new Date().toISOString(), sources, channel, accounts, daily, videos };
+  // Agendados do YouTube: se a consulta falhou agora, mantém os anteriores que ainda não saíram
+  const scheduled = ytScheduled ?? (prev.scheduled || []).filter((s) => new Date(s.at) > Date.now());
+
+  const out = { schema: 1, mode: "real", generatedAt: new Date().toISOString(), sources, channel, accounts, daily, videos, scheduled };
   writeFileSync(OUT_PATH, JSON.stringify(out, null, 2) + "\n");
   console.log(`✅ [Brazil Noir] ${videos.length} vídeos, ${daily.length} linhas diárias → ${OUT_PATH}`);
   return { videos: videos.length, sources };

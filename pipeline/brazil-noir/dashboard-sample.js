@@ -184,6 +184,19 @@ const spend = [
   { date: "2026-11-02", category: "impulsionamento", item: "TikTok Promote", note: "Corte do Eloá", amount: 25.0, platform: "tiktok", videoId: tk("ep06-c1")?.id, results: { views: 4200, followers: 33 } },
 ];
 
+// Programados de exemplo — mesmo formato do schedule.json (hora local)
+const CUTS = ["tiktok", "yt_shorts", "reels"];
+const schedule = [
+  { id: "s1", at: "2026-11-01T09:00", kind: "corte", title: "Isabella Nardoni — corte 1", platforms: CUTS, case: "Isabella Nardoni" },
+  { id: "s2", at: "2026-11-03T09:00", kind: "corte", title: "Isabella Nardoni — corte 2", platforms: CUTS, case: "Isabella Nardoni" },
+  { id: "s3", at: "2026-11-05T19:00", kind: "corte", title: "Isabella Nardoni — bastidores", platforms: ["yt_shorts"], case: "Isabella Nardoni", note: "teste de formato" },
+  { id: "s4", at: "2026-11-06T19:00", kind: "episodio", title: "The Lawyer in the Sunken Car: The Mércia Nakashima Case", platforms: ["yt_long"], case: "Mércia Nakashima" },
+  { id: "s5", at: "2026-11-07T12:00", kind: "corte", title: "Mércia Nakashima — corte 1", platforms: CUTS, case: "Mércia Nakashima" },
+  { id: "s6", at: "2026-11-09T12:00", kind: "corte", title: "Mércia Nakashima — corte 2", platforms: CUTS, case: "Mércia Nakashima" },
+  { id: "s7", at: "2026-11-11T12:00", kind: "corte", title: "Mércia Nakashima — corte 3", platforms: CUTS, case: "Mércia Nakashima" },
+  { id: "s8", at: "2026-11-13T19:00", kind: "episodio", title: "The Park Maniac: Brazil's Model-Hunting Killer", platforms: ["yt_long"], case: "Maníaco do Parque" },
+];
+
 const out = {
   schema: 1,
   mode: "sample",
@@ -199,6 +212,7 @@ const out = {
   daily,
   videos: videos.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt)),
   spend,
+  schedule,
 };
 
 writeFileSync(OUT_PATH, JSON.stringify(out, null, 1) + "\n");

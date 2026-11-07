@@ -11,6 +11,11 @@ Página estática em `dashboard/brazil-noir/` (no ar em `/brazil-noir` do mesmo 
 | `data.sample.json` | `node pipeline/brazil-noir/dashboard-sample.js` | dados inventados, botão **Exemplo** no topo |
 | `manual.json` | você | snapshots de seguidores, vídeos e correções que a API não dá |
 | `spend.json` | você, pela página ou à mão | gastos (impulsionamentos e ferramentas) |
+| `schedule.json` | você, pela página ou à mão | vídeos programados (YouTube, TikTok, Reels); viram "publicado" sozinhos quando o vídeo sai com o mesmo título |
+
+## Acesso
+
+Na Vercel, `/brazil-noir` só abre com login (`dashboard/middleware.js`). Configure `BN_DASH_USER` e `BN_DASH_PASSWORD` em **Settings → Environment Variables** do projeto e faça um redeploy. Sem essas variáveis a dashboard fica bloqueada para todos. O servidor local (atalho) não pede login, porque só escuta no próprio computador.
 
 A página lê `manual.json` e `spend.json` direto: editou, salvou, recarregou. No ar, precisa de commit + deploy.
 
@@ -34,7 +39,7 @@ Ele só escuta em `127.0.0.1` e só aceita escrita vinda da própria página. Na
 | Fonte | Status | Para ligar |
 |---|---|---|
 | YouTube público (inscritos, views, likes, comentários, todos os uploads) | **ligado** | `YOUTUBE_API_KEY` no `.env` (a mesma da v1). No ar, a página também atualiza isso ao vivo |
-| YouTube Analytics (retenção, tempo assistido, horas p/ o YPP, inscritos por vídeo, views por dia) | falta | OAuth da conta do Brazil Noir com escopo `https://www.googleapis.com/auth/yt-analytics.readonly`. O refresh token de upload não tem esse escopo: gere um novo e salve em `BN_YOUTUBE_CLIENT_ID`, `BN_YOUTUBE_CLIENT_SECRET`, `BN_YOUTUBE_REFRESH_TOKEN` |
+| YouTube Analytics e agendados (retenção, tempo assistido, horas p/ o YPP, inscritos por vídeo, views por dia, vídeos agendados no Studio) | falta | OAuth da conta do Brazil Noir com os escopos `https://www.googleapis.com/auth/yt-analytics.readonly` e `https://www.googleapis.com/auth/youtube.readonly`. O refresh token de upload não tem esse escopo: gere um novo e salve em `BN_YOUTUBE_CLIENT_ID`, `BN_YOUTUBE_CLIENT_SECRET`, `BN_YOUTUBE_REFRESH_TOKEN` |
 | TikTok (seguidores, views/likes/comentários/compartilhamentos) | manual | Escopos `user.info.stats` e `video.list` aprovados no app do TikTok + token da conta em `BN_TIKTOK_ACCESS_TOKEN` / `BN_TIKTOK_REFRESH_TOKEN` (`TIKTOK_CLIENT_KEY/SECRET` já existem). Retenção e seguidores por vídeo não saem pela API: copie do TikTok Studio para `manual.json` |
 | Instagram Reels | não ligado | Conta profissional ligada a uma página do Facebook + app da Meta com `instagram_basic` e `instagram_manage_insights`. Salve `BN_IG_USER_ID` e `BN_IG_ACCESS_TOKEN` (longa duração) |
 | Gastos | pela página | Botão **Novo gasto** (servidor local) ou edição de `spend.json`. O TikTok Promote não tem API pública de relatório |

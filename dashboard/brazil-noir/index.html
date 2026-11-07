@@ -180,6 +180,32 @@
   .perf.down { color: var(--bad-ink); background: color-mix(in srgb, var(--bad-ink) 10%, transparent); }
   .perf.mid { color: var(--muted); background: var(--surface-3); }
 
+  .tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--border); margin: -4px 0 4px; }
+  .tabs button { border: 0; background: none; padding: 8px 10px; font-size: 13px; font-weight: 500; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; display: inline-flex; gap: 6px; align-items: center; }
+  .tabs button:hover { color: var(--ink); }
+  .tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+  .tabs .count { font-size: 11px; font-weight: 600; background: var(--surface-3); color: var(--ink-2); border-radius: 999px; padding: 0 6px; }
+  .tabs .spacer { flex: 1; }
+  .when-chip { font-size: 12px; font-weight: 600; color: var(--ink); }
+  .soon { font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-ink); white-space: nowrap; }
+  .kind { font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 999px; background: var(--surface-3); color: var(--ink-2); }
+  .agenda-day { margin-top: 14px; }
+  .agenda-day:first-child { margin-top: 4px; }
+  .agenda-day h4 { margin: 0 0 6px; font-size: 12px; font-weight: 600; color: var(--muted); }
+  .agenda-row { display: grid; grid-template-columns: 54px 104px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 9px 0; border-top: 1px solid var(--border); }
+  .agenda-row .time { font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .agenda-row .thumb { width: 104px; }
+  .agenda-row .t { font-size: 13.5px; font-weight: 500; line-height: 1.35; }
+  .agenda-row .m { font-size: 12px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 3px 10px; align-items: center; margin-top: 3px; }
+  .st { font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 999px; white-space: nowrap; }
+  .st.ok { color: var(--good-ink); background: color-mix(in srgb, var(--good-ink) 12%, transparent); }
+  .st.warn { color: var(--warn-ink); background: color-mix(in srgb, var(--warn-ink) 14%, transparent); }
+  .st.mid { color: var(--muted); background: var(--surface-3); }
+  .checks { display: flex; flex-wrap: wrap; gap: 6px 14px; padding-top: 6px; }
+  .checks label { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-2); margin: 0; cursor: pointer; }
+  .checks input { width: auto; accent-color: var(--accent); }
+  @media (max-width: 640px) { .agenda-row { grid-template-columns: 48px minmax(0, 1fr) auto; } .agenda-row .thumb { display: none; } }
+
   .thumb { position: relative; aspect-ratio: 16 / 9; border-radius: 8px; overflow: hidden; background: var(--surface-3); flex: none; }
   .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .thumb.ph { background: radial-gradient(120% 90% at 20% 15%, color-mix(in srgb, var(--pc) 45%, #000) 0%, #101012 70%); display: flex; align-items: flex-end; padding: 8px 9px; }
@@ -396,6 +422,7 @@
     <nav class="nav" id="nav" aria-label="Seções">
       <div class="nav-label">Canal</div>
       <a href="#overview" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Visão geral</a>
+      <a href="#schedule"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4M12 13v3l2 1.5"/></svg>Programados</a>
       <a href="#growth"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>Crescimento</a>
       <a href="#money"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.5-1-1.6-1.5-3-1.5-1.7 0-3 .9-3 2.2 0 3 6 1.6 6 4.6 0 1.3-1.3 2.2-3 2.2-1.4 0-2.6-.6-3.1-1.6M12 6.5v11"/></svg>Monetização</a>
       <a href="#platforms"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg>Plataformas</a>
@@ -529,16 +556,39 @@
   async function loadModel(mode) {
     if (mode === "sample") {
       const raw = await getJson("data.sample.json");
-      return raw ? buildModel(raw, null, { entries: raw.spend || [] }) : null;
+      return raw ? buildModel(raw, null, { entries: raw.spend || [] }, { entries: raw.schedule || [] }) : null;
     }
     // Com o servidor local (atalho da área de trabalho) os gastos vêm da API, que dá id a cada linha
     state.api = await fetch("/api/brazil-noir/health", { cache: "no-store" }).then((r) => r.ok && r.headers.get("content-type")?.includes("json")).catch(() => false);
-    const spendSrc = state.api ? fetch("/api/brazil-noir/spend", { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).catch(() => null) : getJson("spend.json");
-    const [raw, manual, spend] = await Promise.all([getJson("data.json"), getJson("manual.json"), spendSrc]);
-    return buildModel(raw || { mode: "real", videos: [], daily: [], accounts: {}, sources: {} }, manual, spend);
+    const coll = (name) => (state.api ? fetch(`/api/brazil-noir/${name}`, { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).catch(() => null) : getJson(`${name}.json`));
+    const [raw, manual, spend, schedule] = await Promise.all([getJson("data.json"), getJson("manual.json"), coll("spend"), coll("schedule")]);
+    return buildModel(raw || { mode: "real", videos: [], daily: [], accounts: {}, sources: {} }, manual, spend, schedule);
   }
 
-  function buildModel(raw, manual, spendFile) {
+  // Agenda: o que foi programado à mão + o que o coletor achou agendado no YouTube Studio.
+  // Quando sai um vídeo com o mesmo título na mesma rede, o item vira "publicado".
+  const normTitle = (s) => String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/#shorts/g, "").replace(/[^a-z0-9]+/g, " ").trim();
+  function buildSchedule(m, scheduleFile, ytScheduled) {
+    const items = [];
+    for (const e of scheduleFile?.entries || []) {
+      if (!e?.at || !e.title) continue;
+      items.push({ ...e, platforms: (e.platforms || []).filter((p) => PLAT[p]), when: new Date(e.at), source: "manual" });
+    }
+    for (const s of ytScheduled || []) {
+      if (items.some((i) => i.ytId === s.id)) continue;
+      items.push({ id: "yt-" + s.id, ytId: s.id, title: s.title, platforms: [s.platform], kind: s.platform === "yt_long" ? "episodio" : "corte", when: new Date(s.at), thumb: s.thumb, durationSec: s.durationSec, source: "youtube" });
+    }
+    for (const it of items) {
+      const t = normTitle(it.title);
+      it.matches = it.platforms.map((p) => m.videos.find((v) => v.platform === p && (normTitle(v.title) === t || (it.ytId && v.id === it.ytId)))).filter(Boolean);
+      it.published = it.matches.length > 0;
+      const c = m.videos.find((v) => v.case && normTitle(v.title) === t);
+      if (!it.case && c) it.case = c.case;
+    }
+    return items.filter((i) => !isNaN(i.when)).sort((a, b) => a.when - b.when);
+  }
+
+  function buildModel(raw, manual, spendFile, scheduleFile) {
     const m = {
       mode: raw.mode || "real",
       generatedAt: raw.generatedAt || null,
@@ -577,6 +627,9 @@
     finalizeVideos(m);
     m.refDate = m.mode === "sample" && m.generatedAt ? new Date(m.generatedAt) : new Date();
     m.refKey = keyOf(m.refDate);
+    m.scheduleFile = scheduleFile;
+    m.ytScheduled = raw.scheduled || [];
+    m.schedule = buildSchedule(m, scheduleFile, m.ytScheduled);
     return m;
   }
 
@@ -620,6 +673,7 @@
       m.channel.youtube = { ...(m.channel.youtube || {}), avatar: ch.snippet.thumbnails?.medium?.url };
       m.live = true;
       finalizeVideos(m);
+      m.schedule = buildSchedule(m, m.scheduleFile, m.ytScheduled);
       return true;
     } catch { return false; }
   }
@@ -837,6 +891,7 @@
   // ---------- Render ----------
   function render() {
     const m = state.model;
+    state.pendingRender = false;
     document.querySelectorAll("#mode-seg button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.mode === state.mode)));
     document.querySelectorAll("#period-seg button").forEach((b) => b.setAttribute("aria-pressed", String(+b.dataset.period === state.period)));
     if (!m) {
@@ -849,6 +904,7 @@
         <div class="hero"><div class="card feat" id="feat"></div><div class="card recent" id="recent"></div></div>
         <div class="kpis" id="kpis"></div>
       </section>
+      <section class="block" id="schedule"><div class="block-h"><h2>Programados</h2><span class="sub">o que já está agendado no YouTube, TikTok e Reels</span><span class="right" id="sched-btn"></span></div><div id="sched-form"></div><div class="grid2" id="sched"></div></section>
       <section class="block" id="growth"><div class="block-h"><h2>Crescimento</h2><span class="sub">seguidores e views ao longo do tempo</span><span class="right" id="growth-aside"></span></div>
         <div class="grid2">
           <div class="card"><div class="card-h"><span class="card-title">Seguidores por rede</span></div><div class="legend" id="lg-followers"></div><div class="chart" id="ch-followers"></div></div>
@@ -863,6 +919,7 @@
     renderFeatured(m);
     renderRecent(m);
     renderKpis(m);
+    renderSchedule(m);
     renderGrowth(m);
     renderGoals(m);
     renderPlatforms(m);
@@ -978,8 +1035,23 @@
       return r >= 1.5 ? `<span class="perf up">▲ ${fmt1(r)}× a mediana</span>` : r <= 0.6 ? `<span class="perf down">▼ abaixo do normal</span>` : `<span class="perf mid">na média</span>`;
     };
     const lead = (g) => g.items.find((x) => ytId(x)) || g.items[0];
-    el.innerHTML = `
-      <div class="card-h"><span class="card-title">Publicados recentemente</span><a class="link" href="#videos">Ver todos</a></div>
+    const upcoming = m.schedule.filter((i) => i.when > m.refDate);
+    if (!state.sideTab) state.sideTab = "recent";
+    const tabs = `<div class="tabs" role="tablist">
+        <button role="tab" data-side="recent" aria-selected="${state.sideTab === "recent"}">Publicados</button>
+        <button role="tab" data-side="next" aria-selected="${state.sideTab === "next"}">Programados <span class="count">${upcoming.length}</span></button>
+        <span class="spacer"></span><a class="link" style="align-self:center" href="${state.sideTab === "next" ? "#schedule" : "#videos"}">${state.sideTab === "next" ? "Ver agenda" : "Ver todos"}</a>
+      </div>`;
+    const wire = () => el.querySelectorAll("[data-side]").forEach((b) => b.addEventListener("click", () => { state.sideTab = b.dataset.side; renderRecent(m); }));
+    if (state.sideTab === "next") {
+      el.innerHTML = tabs + (upcoming.length ? `<ul class="rlist">${upcoming.slice(0, 6).map((it) => `<li>${schedThumb(it)}<div style="min-width:0">
+          <div class="r-title">${esc(it.title)}</div>
+          <div class="r-meta"><span class="when-chip">${whenLabel(it.when)}</span><span class="soon">${untilLabel(it.when, m.refDate)}</span>${it.kind === "episodio" ? '<span class="kind">Episódio</span>' : ""}</div>
+          <div class="r-plats">${it.platforms.map((p) => `<span class="chip"><i class="sw" style="background:${PLAT[p].color}"></i>${PLAT[p].short}</span>`).join("")}</div>
+        </div></li>`).join("")}</ul>` : empty(`Nada programado.${m.mode === "real" ? '<br><a class="link" href="#schedule">Programar um vídeo</a>' : ""}`));
+      return wire();
+    }
+    el.innerHTML = tabs + `
       ${recent.length ? `<ul class="rlist">${recent.map((g) => {
         const v = lead(g);
         return `<li>${thumb(v)}<div style="min-width:0">
@@ -988,6 +1060,112 @@
           <div class="r-plats">${PLAT_ORDER.map((p) => g.items.filter((x) => x.platform === p)).filter((l) => l.length).map((l) => `<span class="chip"><i class="sw" style="background:${PLAT[l[0].platform].color}"></i>${PLAT[l[0].platform].short} ${fmtC(sum(l, (x) => x.views))}</span>`).join("")}</div>
         </div></li>`;
       }).join("")}</ul>` : empty("Nenhum vídeo publicado ainda.")}`;
+    wire();
+  }
+
+  // ---------- Programados ----------
+  const whenLabel = (d) => `${d.toLocaleDateString("pt-BR", { weekday: "short", day: "2-digit", month: "short" }).replace(/\./g, "").replace(/ de /g, " ")} · ${d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}`;
+  const timeLabel = (d) => d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+  function untilLabel(d, ref) {
+    const days = daysBetween(keyOf(ref), keyOf(d));
+    if (days <= 0) { const min = Math.round((d - ref) / 6e4); return min < 60 ? `em ${Math.max(1, min)} min` : `hoje, em ${Math.round(min / 60)} h`; }
+    return days === 1 ? "amanhã" : `em ${days} dias`;
+  }
+  function schedThumb(it) {
+    const v = it.matches?.[0];
+    if (v) return thumb(v);
+    return thumb({ id: it.ytId || "", platform: it.platforms[0] || "tiktok", durationSec: it.durationSec, case: it.case, title: it.title, thumb: it.thumb });
+  }
+  function schedStatus(it, ref) {
+    if (it.published) return `<span class="st ok">✓ publicado</span>`;
+    const hours = (ref - it.when) / 36e5;
+    const onYt = it.platforms.some((p) => p.startsWith("yt_"));
+    if (onYt && hours > 2) return `<span class="st warn" title="Não achei um vídeo com esse título no YouTube">não apareceu no YouTube</span>`;
+    return `<span class="st mid" title="TikTok e Reels não têm como ser conferidos pela API">sem confirmação</span>`;
+  }
+
+  function renderSchedule(m) {
+    const ref = m.refDate;
+    const canEdit = m.mode === "real";
+    $("#sched-btn").innerHTML = `<button class="btn primary" id="new-sched" type="button" ${canEdit ? "" : 'disabled title="Troque para Dados reais para programar"'}>${ICON.plus}Programar vídeo</button>`;
+    $("#new-sched")?.addEventListener("click", () => openScheduleForm(m, null));
+    const upcoming = m.schedule.filter((i) => i.when > ref);
+    const past = m.schedule.filter((i) => i.when <= ref && ref - i.when < 7 * 864e5).reverse();
+    const actions = (it) => (it.source === "manual" && editable(m) && it.id
+      ? `<span class="row-act"><button type="button" title="Editar" aria-label="Editar" data-edit-sched="${esc(it.id)}">${ICON.edit}</button><button type="button" class="del" title="Excluir" aria-label="Excluir" data-del-sched="${esc(it.id)}">${ICON.del}</button></span>`
+      : it.source === "youtube" ? `<span class="st mid" title="Agendado no YouTube Studio; edite por lá">YouTube Studio</span>` : "");
+    const row = (it, extra) => `<div class="agenda-row"><span class="time">${timeLabel(it.when)}</span>${schedThumb(it)}<div style="min-width:0">
+        <div class="t">${esc(it.title)}</div>
+        <div class="m">${it.platforms.map((p) => `<span class="chip"><i class="sw" style="background:${PLAT[p].color}"></i>${PLAT[p].short}</span>`).join("")}${it.kind === "episodio" ? '<span class="kind">Episódio</span>' : ""}${it.case ? `<span>${esc(it.case)}</span>` : ""}${it.note ? `<span>${esc(it.note)}</span>` : ""}</div>
+      </div><span style="display:flex;gap:8px;align-items:center;justify-content:flex-end;flex-wrap:wrap">${extra || ""}${actions(it)}</span></div>`;
+    const byDay = new Map();
+    for (const it of upcoming) { const k = keyOf(it.when); if (!byDay.has(k)) byDay.set(k, []); byDay.get(k).push(it); }
+    const dayTitle = (k) => {
+      const d = daysBetween(m.refKey, k);
+      const name = dateOf(k).toLocaleDateString("pt-BR", { weekday: "long", day: "2-digit", month: "long" });
+      return d === 0 ? `Hoje · ${name}` : d === 1 ? `Amanhã · ${name}` : name.charAt(0).toUpperCase() + name.slice(1);
+    };
+    $("#sched").innerHTML = `
+      <div class="card"><div class="card-h"><span class="card-title">Próximos</span><span class="card-sub">${upcoming.length} programado${upcoming.length === 1 ? "" : "s"}</span></div>
+        ${upcoming.length ? [...byDay].map(([k, list]) => `<div class="agenda-day"><h4>${dayTitle(k)}</h4>${list.map((it) => row(it)).join("")}</div>`).join("") : empty(`<b>Nada programado.</b><br>Use <b>Programar vídeo</b> para registrar o que você agendou no YouTube Studio, no TikTok ou no Instagram.${m.ytScheduled.length || m.mode === "sample" ? "" : "<br>Com o OAuth do YouTube ligado, os agendados do Studio aparecem sozinhos."}`)}
+      </div>
+      <div class="card"><div class="card-h"><span class="card-title">Últimos 7 dias</span><span class="card-sub">o que estava programado e já passou</span></div>
+        ${past.length ? past.map((it) => row(it, schedStatus(it, ref))).join("") : empty("Nada programado nos últimos 7 dias.")}
+      </div>`;
+    document.querySelectorAll("[data-edit-sched]").forEach((b) => b.addEventListener("click", () => openScheduleForm(m, m.scheduleFile.entries.find((x) => x.id === b.dataset.editSched))));
+    document.querySelectorAll("[data-del-sched]").forEach((b) => b.addEventListener("click", async () => {
+      const e = m.scheduleFile.entries.find((x) => x.id === b.dataset.delSched);
+      if (!e || !confirm(`Excluir o programado "${e.title}" (${whenLabel(new Date(e.at))})?`)) return;
+      const res = await fetch(`/api/brazil-noir/schedule/${encodeURIComponent(e.id)}`, { method: "DELETE", headers: { "Content-Type": "application/json" } });
+      if (!res.ok) return toast("Não consegui excluir");
+      await refresh();
+      toast("Programado excluído");
+    }));
+  }
+
+  function openScheduleForm(m, entry) {
+    const box = $("#sched-form");
+    if (!state.api) {
+      box.innerHTML = `<div class="notice"><span class="tag">Só leitura</span><span>Esta página está sem o servidor local, então não consegue gravar. Abra a dashboard pelo atalho <b>Brazil Noir - Dashboard</b> da área de trabalho para programar por aqui.</span></div>`;
+      box.scrollIntoView({ block: "nearest" });
+      return;
+    }
+    const e = entry || { at: `${keyOf(addDays(new Date(), 1))}T19:00`, kind: "corte", platforms: ["tiktok", "yt_shorts", "reels"], title: "", case: "" };
+    const cases = [...new Set(m.videos.map((v) => v.case).concat(m.schedule.map((i) => i.case)).filter(Boolean))];
+    box.innerHTML = `<div class="card form-card">
+      <div class="card-h"><span class="card-title">${entry ? "Editar programado" : "Programar vídeo"}</span><span class="card-sub">grava em <code>schedule.json</code></span></div>
+      <form class="form" id="sched-f" novalidate autocomplete="off">
+        <div class="field"><label for="s-at">Data e hora</label><input id="s-at" name="at" type="datetime-local" required value="${esc(e.at)}"></div>
+        <div class="field"><label for="s-kind">Tipo</label><select id="s-kind" name="kind"><option value="corte" ${e.kind !== "episodio" ? "selected" : ""}>Corte</option><option value="episodio" ${e.kind === "episodio" ? "selected" : ""}>Episódio</option></select></div>
+        <div class="field w2"><label for="s-title">Título (igual ao do post)</label><input id="s-title" name="title" required maxlength="140" placeholder="o mesmo título usado na rede" value="${esc(e.title)}"></div>
+        <div class="field"><label for="s-case">Caso</label><input id="s-case" name="case" list="s-cases" maxlength="80" placeholder="opcional" value="${esc(e.case || "")}"><datalist id="s-cases">${cases.map((c) => `<option value="${esc(c)}">`).join("")}</datalist></div>
+        <div class="field"><label for="s-note">Observação</label><input id="s-note" name="note" maxlength="200" placeholder="opcional" value="${esc(e.note || "")}"></div>
+        <div class="field w3"><label>Redes</label><div class="checks">${PLAT_ORDER.map((p) => `<label><input type="checkbox" name="platforms" value="${p}" ${e.platforms?.includes(p) ? "checked" : ""}>${p === "yt_long" ? "YouTube longo" : PLAT[p].short}</label>`).join("")}</div></div>
+        <div class="form-actions"><span class="msg" id="s-msg"></span><button type="button" class="btn" id="s-cancel">Cancelar</button><button type="submit" class="btn primary" id="s-save">${entry ? "Salvar alterações" : "Programar"}</button></div>
+      </form></div>`;
+    const f = $("#sched-f");
+    $("#s-cancel").addEventListener("click", () => { box.innerHTML = ""; flushRender(); });
+    f.addEventListener("submit", async (ev) => {
+      ev.preventDefault();
+      const msg = $("#s-msg");
+      const platforms = [...f.querySelectorAll('input[name="platforms"]:checked')].map((x) => x.value);
+      if (!f.at.value || !f.title.value.trim() || !platforms.length) { msg.className = "msg err"; msg.textContent = "Preencha data e hora, título e pelo menos uma rede."; return; }
+      const body = { at: f.at.value.slice(0, 16), kind: f.kind.value, title: f.title.value.trim(), platforms, case: f.case.value.trim() || null, note: f.note.value.trim() || null };
+      $("#s-save").disabled = true;
+      msg.className = "msg"; msg.textContent = "Salvando…";
+      try {
+        const res = await fetch(`/api/brazil-noir/schedule${entry ? "/" + encodeURIComponent(entry.id) : ""}`, { method: entry ? "PUT" : "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+        const out = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(out.error || `erro ${res.status}`);
+        await refresh();
+        toast(entry ? "Programado atualizado" : `Programado: ${whenLabel(new Date(body.at))}`);
+      } catch (err) {
+        $("#s-save").disabled = false;
+        msg.className = "msg err"; msg.textContent = `Não salvou: ${err.message}`;
+      }
+    });
+    box.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    f.title.focus({ preventScroll: true });
   }
 
   function renderKpis(m) {
@@ -1274,7 +1452,7 @@
     state.model = mdl;
     render();
     scrollTo(0, y);
-    if (mdl && state.mode === "real" && (await liveYouTube(mdl)) && state.model === mdl) { render(); scrollTo(0, y); }
+    if (mdl && state.mode === "real" && (await liveYouTube(mdl)) && state.model === mdl) liveRender();
   }
   function spendHeader(m) {
     const sample = m.mode === "sample";
@@ -1311,7 +1489,7 @@
       </form></div>`;
     const f = $("#spend-f");
     f.category.addEventListener("change", () => { f.querySelector(".boost-only").hidden = f.category.value !== "impulsionamento"; });
-    $("#f-cancel").addEventListener("click", () => { box.innerHTML = ""; });
+    $("#f-cancel").addEventListener("click", () => { box.innerHTML = ""; flushRender(); });
     f.addEventListener("submit", async (ev) => {
       ev.preventDefault();
       const msg = $("#f-msg");
@@ -1402,7 +1580,7 @@
     const row = (s, name, what, how) => `<div class="source"><span class="dot ${s}"></span><div class="source-name">${name}<small>${what}</small></div><div class="source-how">${how}</div></div>`;
     $("#srcs").innerHTML = [
       row(f.yt ? "on" : "off", "YouTube · dados públicos", "inscritos, views, likes, comentários, uploads", f.yt ? `Ligado pela <code>YOUTUBE_API_KEY</code>${m.live ? ", com atualização ao vivo nesta página" : ". Ao vivo só no domínio da Vercel (a chave é restrita por referrer)"}.` : "Defina <code>YOUTUBE_API_KEY</code> e rode o coletor."),
-      row(f.ana ? "on" : "off", "YouTube Analytics", "retenção, tempo assistido, horas de exibição, inscritos por vídeo", f.ana ? "Ligado." : "Precisa de OAuth da conta do Brazil Noir com o escopo <code>yt-analytics.readonly</code> (o token de upload não tem). Salve em <code>BN_YOUTUBE_CLIENT_ID</code>, <code>BN_YOUTUBE_CLIENT_SECRET</code> e <code>BN_YOUTUBE_REFRESH_TOKEN</code>."),
+      row(f.ana ? "on" : "off", "YouTube Analytics e agendados", "retenção, tempo assistido, horas de exibição, inscritos por vídeo, vídeos agendados no Studio", f.ana ? "Ligado." : "Precisa de OAuth da conta do Brazil Noir com os escopos <code>yt-analytics.readonly</code> e <code>youtube.readonly</code> (o token de upload não tem). Salve em <code>BN_YOUTUBE_CLIENT_ID</code>, <code>BN_YOUTUBE_CLIENT_SECRET</code> e <code>BN_YOUTUBE_REFRESH_TOKEN</code>."),
       row(f.tk, "TikTok", "seguidores e métricas por vídeo", m.sources.tiktok ? "Ligado pela Display API." : `Precisa dos escopos <code>user.info.stats</code> e <code>video.list</code> aprovados no app do TikTok e do token em <code>BN_TIKTOK_ACCESS_TOKEN</code>/<code>BN_TIKTOK_REFRESH_TOKEN</code>. Retenção e seguidores por vídeo: copie do TikTok Studio para <code>manual.json</code>.${f.tk === "part" ? " Hoje: lançamento manual." : ""}`),
       row(f.ig, "Instagram Reels", "seguidores e métricas por Reel", m.sources.instagram ? "Ligado pela Graph API." : "Conta profissional ligada a uma página do Facebook + app da Meta com <code>instagram_basic</code> e <code>instagram_manage_insights</code>. Salve <code>BN_IG_USER_ID</code> e <code>BN_IG_ACCESS_TOKEN</code>."),
       row(m.spend.length || m.mode === "sample" ? "on" : "off", "Gastos", "impulsionamentos e ferramentas", `Lançamento manual em <code>spend.json</code> (o TikTok Promote não tem API pública de relatório). ${m.spend.length} lançamento${m.spend.length === 1 ? "" : "s"}.`),
@@ -1423,6 +1601,15 @@
     links.forEach((a) => { const s = document.querySelector(a.getAttribute("href")); if (s) spyObs.observe(s); });
   }
 
+  // Atualização ao vivo não redesenha a tela com um formulário aberto (perderia o que foi digitado)
+  function liveRender() {
+    if (document.querySelector("#spend-f, #sched-f")) { state.pendingRender = true; return; }
+    const y = scrollY;
+    render();
+    scrollTo(0, y);
+  }
+  function flushRender() { if (state.pendingRender) { state.pendingRender = false; liveRender(); } }
+
   // ---------- Eventos ----------
   async function setMode(mode) {
     state.mode = mode;
@@ -1430,7 +1617,7 @@
     $("#main").innerHTML = `<div class="loading">Carregando…</div>`;
     state.model = await loadModel(mode);
     render();
-    if (state.model && mode === "real" && (await liveYouTube(state.model)) && state.mode === "real") render();
+    if (state.model && mode === "real" && (await liveYouTube(state.model)) && state.mode === "real") liveRender();
   }
   document.querySelectorAll("#mode-seg button").forEach((b) => b.addEventListener("click", () => b.dataset.mode !== state.mode && setMode(b.dataset.mode)));
   document.querySelectorAll("#period-seg button").forEach((b) => b.addEventListener("click", () => { state.period = +b.dataset.period; store.set("bn-period", String(state.period)); render(); }));

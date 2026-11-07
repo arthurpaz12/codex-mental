@@ -3260,5 +3260,98 @@
     "followers": 33
    }
   }
+ ],
+ "schedule": [
+  {
+   "id": "s1",
+   "at": "2026-11-01T09:00",
+   "kind": "corte",
+   "title": "Isabella Nardoni — corte 1",
+   "platforms": [
+    "tiktok",
+    "yt_shorts",
+    "reels"
+   ],
+   "case": "Isabella Nardoni"
+  },
+  {
+   "id": "s2",
+   "at": "2026-11-03T09:00",
+   "kind": "corte",
+   "title": "Isabella Nardoni — corte 2",
+   "platforms": [
+    "tiktok",
+    "yt_shorts",
+    "reels"
+   ],
+   "case": "Isabella Nardoni"
+  },
+  {
+   "id": "s3",
+   "at": "2026-11-05T19:00",
+   "kind": "corte",
+   "title": "Isabella Nardoni — bastidores",
+   "platforms": [
+    "yt_shorts"
+   ],
+   "case": "Isabella Nardoni",
+   "note": "teste de formato"
+  },
+  {
+   "id": "s4",
+   "at": "2026-11-06T19:00",
+   "kind": "episodio",
+   "title": "The Lawyer in the Sunken Car: The Mércia Nakashima Case",
+   "platforms": [
+    "yt_long"
+   ],
+   "case": "Mércia Nakashima"
+  },
+  {
+   "id": "s5",
+   "at": "2026-11-07T12:00",
+   "kind": "corte",
+   "title": "Mércia Nakashima — corte 1",
+   "platforms": [
+    "tiktok",
+    "yt_shorts",
+    "reels"
+   ],
+   "case": "Mércia Nakashima"
+  },
+  {
+   "id": "s6",
+   "at": "2026-11-09T12:00",
+   "kind": "corte",
+   "title": "Mércia Nakashima — corte 2",
+   "platforms": [
+    "tiktok",
+    "yt_shorts",
+    "reels"
+   ],
+   "case": "Mércia Nakashima"
+  },
+  {
+   "id": "s7",
+   "at": "2026-11-11T12:00",
+   "kind": "corte",
+   "title": "Mércia Nakashima — corte 3",
+   "platforms": [
+    "tiktok",
+    "yt_shorts",
+    "reels"
+   ],
+   "case": "Mércia Nakashima"
+  },
+  {
+   "id": "s8",
+   "at": "2026-11-13T19:00",
+   "kind": "episodio",
+   "title": "The Park Maniac: Brazil's Model-Hunting Killer",
+   "platforms": [
+    "yt_long"
+   ],
+   "case": "Maníaco do Parque"
+  }
  ]
 }
