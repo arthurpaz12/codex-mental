@@ -13,6 +13,21 @@ Página estática em `dashboard/brazil-noir/` (no ar em `/brazil-noir` do mesmo 
 | `spend.json` | você, pela página ou à mão | gastos (impulsionamentos e ferramentas). **Fora do git**: fica só no computador |
 | `schedule.json` | você, pela página ou à mão | vídeos programados (YouTube, TikTok, Reels); viram "publicado" sozinhos quando o vídeo sai com o mesmo título. **Fora do git**: fica só no computador |
 
+## Publicar no YouTube pela agenda
+
+1. **Autorizar uma vez neste computador:** coloque `BN_YOUTUBE_CLIENT_ID` e `BN_YOUTUBE_CLIENT_SECRET` no `.env` (os mesmos do pipeline) e rode `npm run bn:youtube:auth`. O navegador abre a tela do Google; entre na conta do canal e marque todas as permissões (subir vídeos, ler os agendados e o Analytics). O token fica em `BN_YOUTUBE_REFRESH_TOKEN` no `.env`.
+2. **Planejar:** em **Programados → Planejar episódio** (ou `npm run bn:youtube -- plan ep03 --at "2026-11-12 20:00"`). Cria o episódio e os 3 cortes, um por dia, como **rascunho**, com título, descrição, tags e thumbnail tirados de `youtube.txt` e `shorts/postagem.txt`. Episódio que já está no YouTube fica bloqueado.
+3. **Revisar:** confira títulos e horários na agenda; dá para editar cada item.
+4. **Aprovar e subir:** o botão em cada item (ou `npm run bn:youtube -- approve <id>` + `upload <id>`). Sobe como **privado com data de publicação**; o YouTube publica sozinho na hora. O item passa a mostrar "✓ agendado no YouTube".
+
+Detalhes:
+- `upload --dry-run` mostra o que seria enviado, sem enviar.
+- Os cortes saem com `#Shorts` e, se o episódio já estiver no YouTube, com o link dele na descrição. Ligar o Short ao episódio em "Vídeo relacionado" ainda é manual no YouTube Studio (a API não faz).
+- Os vídeos vão marcados como conteúdo alterado/sintético (voz sintética e cenas recriadas de casos reais). Para desligar num item, coloque `"syntheticMedia": false` nele.
+- Depois de subir, mudar horário ou título é no YouTube Studio; a agenda não altera o que já está lá.
+- Cota da API: cada vídeo gasta 1.600 de 10.000 unidades por dia (cerca de 6 vídeos por dia).
+- TikTok e Reels ficam na agenda como lembrete: as APIs deles não agendam.
+
 ## Acesso
 
 Na Vercel, `/brazil-noir` só abre com login (`dashboard/middleware.js`). Configure `BN_DASH_USER` e `BN_DASH_PASSWORD` em **Settings → Environment Variables** do projeto e faça um redeploy. Sem essas variáveis a dashboard fica bloqueada para todos. O servidor local (atalho) não pede login, porque só escuta no próprio computador.

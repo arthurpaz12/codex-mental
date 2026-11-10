@@ -21,7 +21,9 @@
     "dashboard": "npx serve dashboard",
     "bn:dashboard": "node pipeline/brazil-noir/analytics.js",
     "bn:dashboard:sample": "node pipeline/brazil-noir/dashboard-sample.js",
-    "bn:dashboard:serve": "node pipeline/brazil-noir/dashboard-server.js"
+    "bn:dashboard:serve": "node pipeline/brazil-noir/dashboard-server.js",
+    "bn:youtube:auth": "node pipeline/brazil-noir/youtube-auth.js",
+    "bn:youtube": "node pipeline/brazil-noir/youtube-schedule.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.40.0",

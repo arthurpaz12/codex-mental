@@ -33,6 +33,46 @@ const PLATFORMS = ["tiktok", "youtube", "instagram"];
 const LOCAL_HOSTS = new Set([`127.0.0.1:${PORT}`, `localhost:${PORT}`]);
 
 const DATA_PATH = join(ROOT, "brazil-noir", "data.json");
+const REPO = resolve(ROOT, "..");
+const EPISODES = join(REPO, "longform", "episodes");
+const SCHEDULER = join(__dirname, "youtube-schedule.js");
+// O que veio do planejamento/upload e o formulário da página não edita: fica preservado
+const SCHEDULE_KEEP = ["yt", "description", "tags", "caption", "hashtags", "credits", "episodeRef", "thumbnail", "syntheticMedia", "status"];
+
+// Credenciais do YouTube presentes no .env? (só checa os nomes, nunca expõe valores)
+async function youtubeReady() {
+  const env = await readFile(join(REPO, ".env"), "utf-8").catch(() => "");
+  return ["BN_YOUTUBE_CLIENT_ID", "BN_YOUTUBE_CLIENT_SECRET", "BN_YOUTUBE_REFRESH_TOKEN"].every((k) => new RegExp(`^${k}=.+`, "m").test(env));
+}
+
+// Roda o youtube-schedule.js e devolve a saída
+function runScheduler(args) {
+  return new Promise((done) => {
+    const child = spawn(process.execPath, [SCHEDULER, ...args], { cwd: REPO, windowsHide: true });
+    let out = "";
+    child.stdout.on("data", (d) => (out += d));
+    child.stderr.on("data", (d) => (out += d));
+    child.on("exit", (code) => done({ ok: code === 0, log: out.replace(/\r[^\n]*/g, "").trim() }));
+    child.on("error", (e) => done({ ok: false, log: e.message }));
+  });
+}
+
+// Episódios prontos em longform/episodes (pasta com .mp4 e youtube.txt)
+async function listEpisodes() {
+  const { readdir, stat } = await import("fs/promises");
+  const out = [];
+  for (const d of (await readdir(EPISODES).catch(() => [])).sort()) {
+    const dir = join(EPISODES, d);
+    if (!(await stat(dir)).isDirectory()) continue;
+    const files = await readdir(dir);
+    const video = files.find((f) => /\.mp4$/i.test(f));
+    const shorts = (await readdir(join(dir, "shorts")).catch(() => [])).filter((f) => /\.mp4$/i.test(f)).sort();
+    const yt = files.includes("youtube.txt") ? await readFile(join(dir, "youtube.txt"), "utf-8").catch(() => "") : "";
+    const title = /^TITLE:\s*\n(.+)/m.exec(yt)?.[1].trim() || null;
+    out.push({ id: d, title, ready: !!video && !!yt, video: video ? `longform/episodes/${d}/${video}` : null, shorts: shorts.map((f) => `longform/episodes/${d}/shorts/${f}`) });
+  }
+  return out;
+}
 const COLLECTOR = join(__dirname, "analytics.js");
 const COLLECT_EVERY_MS = 6 * 3600 * 1000;
 const YT_REFERER = "https://codex-mental.vercel.app/";
@@ -131,6 +171,13 @@ function cleanSchedule(input) {
     case: text(input.case, 80),
     note: text(input.note, 200),
   };
+  const file = text(input.file, 300);
+  if (file) {
+    const abs = resolve(REPO, file);
+    if (!abs.startsWith(EPISODES + sep) || !/\.mp4$/i.test(abs)) throw new Error("Arquivo de vídeo inválido");
+    e.file = file;
+  }
+  if (["rascunho", "aprovado"].includes(input.status)) e.status = input.status;
   if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(e.at)) throw new Error("Data e hora inválidas");
   if (!e.title) throw new Error("Informe o título");
   if (!e.platforms.length) throw new Error("Escolha pelo menos uma rede");
@@ -179,7 +226,32 @@ async function readBody(req) {
 }
 
 async function api(req, res, path) {
-  if (path === "/api/brazil-noir/health") return send(res, 200, { ok: true, writable: true, youtubeProxy: !!(await ytKey()), lastCollect, collecting });
+  if (path === "/api/brazil-noir/health") return send(res, 200, { ok: true, writable: true, youtubeProxy: !!(await ytKey()), youtubeUpload: await youtubeReady(), lastCollect, collecting });
+
+  if (path === "/api/brazil-noir/episodes" && req.method === "GET") return send(res, 200, await listEpisodes());
+
+  // Planejar episódio (cria rascunhos) e aprovar + subir um item da agenda para o YouTube
+  const ytAct = /^\/api\/brazil-noir\/(plan|schedule\/([\w-]+)\/youtube)$/.exec(path);
+  if (ytAct) {
+    if (req.method !== "POST") return send(res, 405, { error: "Método não suportado" });
+    if (!writeAllowed(req)) return send(res, 403, { error: "Escrita permitida só pela página local" });
+    let body;
+    try { body = await readBody(req); } catch (e) { return send(res, 400, { error: e.message }); }
+    if (ytAct[1] === "plan") {
+      if (!/^[\w-]+$/.test(body.episode || "") || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(body.at || "")) return send(res, 400, { error: "Escolha o episódio e o horário" });
+      const args = ["plan", body.episode, "--at", body.at.replace("T", " ")];
+      if (/^\d{2}:\d{2}$/.test(body.shortsTime || "")) args.push("--shorts-time", body.shortsTime);
+      const r = await runScheduler(args);
+      return send(res, r.ok ? 200 : 400, r.ok ? r : { error: r.log });
+    }
+    if (!(await youtubeReady())) return send(res, 409, { error: "Falta autorizar o YouTube neste computador (npm run bn:youtube:auth)" });
+    const id = ytAct[2];
+    const ap = await runScheduler(["approve", id]);
+    if (!ap.ok) return send(res, 400, { error: ap.log });
+    console.log(`↑ subindo ${id} para o YouTube`);
+    const up = await runScheduler(["upload", id]);
+    return send(res, up.ok ? 200 : 400, up.ok ? up : { error: up.log });
+  }
 
   // Repasse para a YouTube Data API com o referer liberado na chave
   const yt = /^\/api\/brazil-noir\/yt\/(\w+)$/.exec(path);
@@ -218,7 +290,11 @@ async function api(req, res, path) {
     const idx = data.entries.findIndex((e) => e.id === id);
     if (!id || idx < 0) return send(res, 404, { error: "Lançamento não encontrado" });
     if (req.method === "PUT") {
-      data.entries[idx] = { id, ...coll.clean(await readBody(req)) };
+      const prev = data.entries[idx];
+      const kept = name === "schedule" ? Object.fromEntries(SCHEDULE_KEEP.filter((k) => prev[k] !== undefined).map((k) => [k, prev[k]])) : {};
+      const next = coll.clean(await readBody(req));
+      if (name === "schedule" && !next.file && prev.file) next.file = prev.file;
+      data.entries[idx] = { id, ...kept, ...next };
       await saveColl(name, data);
       console.log(`~ ${coll.label} ${id} atualizado`);
       return send(res, 200, data.entries[idx]);

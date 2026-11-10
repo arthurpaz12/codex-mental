@@ -559,7 +559,9 @@
       return raw ? buildModel(raw, null, { entries: raw.spend || [] }, { entries: raw.schedule || [] }) : null;
     }
     // Com o servidor local (atalho da área de trabalho) os gastos vêm da API, que dá id a cada linha
-    state.api = await fetch("/api/brazil-noir/health", { cache: "no-store" }).then((r) => r.ok && r.headers.get("content-type")?.includes("json")).catch(() => false);
+    const health = await fetch("/api/brazil-noir/health", { cache: "no-store" }).then((r) => (r.ok && r.headers.get("content-type")?.includes("json") ? r.json() : null)).catch(() => null);
+    state.api = !!health;
+    state.ytUpload = !!health?.youtubeUpload;
     const coll = (name) => (state.api ? fetch(`/api/brazil-noir/${name}`, { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).catch(() => null) : getJson(`${name}.json`));
     const [raw, manual, spend, schedule] = await Promise.all([getJson("data.json"), getJson("manual.json"), coll("spend"), coll("schedule")]);
     return buildModel(raw || { mode: "real", videos: [], daily: [], accounts: {}, sources: {} }, manual, spend, schedule);
@@ -572,7 +574,7 @@
     const items = [];
     for (const e of scheduleFile?.entries || []) {
       if (!e?.at || !e.title) continue;
-      items.push({ ...e, platforms: (e.platforms || []).filter((p) => PLAT[p]), when: new Date(e.at), source: "manual" });
+      items.push({ ...e, platforms: (e.platforms || []).filter((p) => PLAT[p]), when: new Date(e.at), source: "manual", ytId: e.yt?.id });
     }
     for (const s of ytScheduled || []) {
       if (items.some((i) => i.ytId === s.id)) continue;
@@ -906,7 +908,7 @@
         <div class="hero"><div class="card feat" id="feat"></div><div class="card recent" id="recent"></div></div>
         <div class="kpis" id="kpis"></div>
       </section>
-      <section class="block" id="schedule"><div class="block-h"><h2>Programados</h2><span class="sub">o que já está agendado no YouTube, TikTok e Reels</span><span class="right" id="sched-btn"></span></div><div id="sched-form"></div><div class="grid2" id="sched"></div></section>
+      <section class="block" id="schedule"><div class="block-h"><h2>Programados</h2><span class="sub">o que já está agendado no YouTube, TikTok e Reels</span><span class="right" id="sched-btn"></span></div><div id="sched-form"></div><div id="sched" style="display:grid;gap:16px"></div></section>
       <section class="block" id="growth"><div class="block-h"><h2>Crescimento</h2><span class="sub">seguidores e views ao longo do tempo</span><span class="right" id="growth-aside"></span></div>
         <div class="grid2">
           <div class="card"><div class="card-h"><span class="card-title">Seguidores por rede</span></div><div class="legend" id="lg-followers"></div><div class="chart" id="ch-followers"></div></div>
@@ -1089,8 +1091,12 @@
   function renderSchedule(m) {
     const ref = m.refDate;
     const canEdit = m.mode === "real";
-    $("#sched-btn").innerHTML = `<button class="btn primary" id="new-sched" type="button" ${canEdit ? "" : 'disabled title="Troque para Dados reais para programar"'}>${ICON.plus}Programar vídeo</button>`;
+    $("#sched-btn").innerHTML = `<span style="display:inline-flex;gap:8px;flex-wrap:wrap">
+        <button class="btn" id="plan-ep" type="button" ${canEdit ? "" : "disabled"}>Planejar episódio</button>
+        <button class="btn primary" id="new-sched" type="button" ${canEdit ? "" : 'disabled title="Troque para Dados reais para programar"'}>${ICON.plus}Programar vídeo</button>
+      </span>`;
     $("#new-sched")?.addEventListener("click", () => openScheduleForm(m, null));
+    $("#plan-ep")?.addEventListener("click", () => openPlanForm(m));
     const upcoming = m.schedule.filter((i) => i.when > ref);
     const past = m.schedule.filter((i) => i.when <= ref && ref - i.when < 7 * 864e5).reverse();
     const actions = (it) => (it.source === "manual" && editable(m) && it.id
@@ -1098,8 +1104,8 @@
       : it.source === "youtube" ? `<span class="st mid" title="Agendado no YouTube Studio; edite por lá">YouTube Studio</span>` : "");
     const row = (it, extra) => `<div class="agenda-row"><span class="time">${timeLabel(it.when)}</span>${schedThumb(it)}<div style="min-width:0">
         <div class="t">${esc(it.title)}</div>
-        <div class="m">${it.platforms.map((p) => `<span class="chip"><i class="sw" style="background:${PLAT[p].color}"></i>${PLAT[p].short}</span>`).join("")}${it.kind === "episodio" ? '<span class="kind">Episódio</span>' : ""}${it.case ? `<span>${esc(it.case)}</span>` : ""}${it.note ? `<span>${esc(it.note)}</span>` : ""}</div>
-      </div><span style="display:flex;gap:8px;align-items:center;justify-content:flex-end;flex-wrap:wrap">${extra || ""}${actions(it)}</span></div>`;
+        <div class="m">${it.platforms.map((p) => `<span class="chip"><i class="sw" style="background:${PLAT[p].color}"></i>${PLAT[p].short}</span>`).join("")}${it.kind === "episodio" ? '<span class="kind">Episódio</span>' : ""}${it.case ? `<span>${esc(it.case)}</span>` : ""}${it.note ? `<span>${esc(it.note)}</span>` : ""}${it.file ? `<span title="${esc(it.file)}">🎞 ${esc(it.file.split("/").pop())}</span>` : ""}</div>
+      </div><span style="display:flex;gap:8px;align-items:center;justify-content:flex-end;flex-wrap:wrap">${extra ?? ytAction(it)}${actions(it)}</span></div>`;
     const byDay = new Map();
     for (const it of upcoming) { const k = keyOf(it.when); if (!byDay.has(k)) byDay.set(k, []); byDay.get(k).push(it); }
     const dayTitle = (k) => {
@@ -1114,6 +1120,7 @@
       <div class="card"><div class="card-h"><span class="card-title">Últimos 7 dias</span><span class="card-sub">o que estava programado e já passou</span></div>
         ${past.length ? past.map((it) => row(it, schedStatus(it, ref))).join("") : empty("Nada programado nos últimos 7 dias.")}
       </div>`;
+    document.querySelectorAll("[data-yt-up]").forEach((b) => b.addEventListener("click", () => uploadToYouTube(m, b)));
     document.querySelectorAll("[data-edit-sched]").forEach((b) => b.addEventListener("click", () => openScheduleForm(m, m.scheduleFile.entries.find((x) => x.id === b.dataset.editSched))));
     document.querySelectorAll("[data-del-sched]").forEach((b) => b.addEventListener("click", async () => {
       const e = m.scheduleFile.entries.find((x) => x.id === b.dataset.delSched);
@@ -1123,6 +1130,83 @@
       await refresh();
       toast("Programado excluído");
     }));
+  }
+
+  // Situação do item no YouTube e o botão de subir
+  function ytAction(it) {
+    if (it.source !== "manual") return "";
+    if (it.yt?.id) return `<a class="st ok" href="${esc(it.yt.url)}" target="_blank" rel="noopener" title="Privado até ${esc(whenLabel(it.when))}; o YouTube publica sozinho">✓ agendado no YouTube</a>`;
+    const onYt = it.platforms.some((p) => p.startsWith("yt_"));
+    if (!onYt || !it.file || it.when <= new Date()) return it.status === "rascunho" ? '<span class="st warn">rascunho</span>' : "";
+    const chip = it.status === "rascunho" ? '<span class="st warn" title="Aguardando sua revisão">rascunho</span>' : it.status === "aprovado" ? '<span class="st mid">aprovado</span>' : "";
+    if (!editable(state.model)) return chip;
+    const label = it.status === "aprovado" ? "Subir pro YouTube" : "Aprovar e subir";
+    const dis = state.ytUpload ? "" : 'disabled title="Falta autorizar o YouTube neste computador: npm run bn:youtube:auth"';
+    return `${chip}<button type="button" class="btn" style="padding:4px 10px;font-size:12px" data-yt-up="${esc(it.id)}" ${dis}>${label}</button>`;
+  }
+
+  async function uploadToYouTube(m, btn) {
+    const e = m.scheduleFile.entries.find((x) => x.id === btn.dataset.ytUp);
+    if (!e) return;
+    if (!confirm(`Subir "${e.title}" para o YouTube?\n\nEle fica privado e o YouTube publica sozinho em ${whenLabel(new Date(e.at))}.`)) return;
+    const box = $("#sched-form");
+    btn.disabled = true;
+    btn.textContent = "Subindo… pode levar alguns minutos";
+    try {
+      const res = await fetch(`/api/brazil-noir/schedule/${encodeURIComponent(e.id)}/youtube`, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(out.error || `erro ${res.status}`);
+      await refresh();
+      toast("Agendado no YouTube");
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = "Tentar de novo";
+      box.innerHTML = `<div class="notice"><span class="tag">YouTube</span><span style="white-space:pre-wrap">Não subiu: ${esc(err.message)}</span></div>`;
+      box.scrollIntoView({ block: "nearest" });
+    }
+  }
+
+  async function openPlanForm(m) {
+    const box = $("#sched-form");
+    if (!state.api) return openScheduleForm(m, null);
+    const eps = await fetch("/api/brazil-noir/episodes", { cache: "no-store" }).then((r) => r.json()).catch(() => []);
+    const planned = new Set((m.scheduleFile?.entries || []).map((e) => e.file).filter(Boolean));
+    const published = (ep) => !!ep.title && m.videos.some((v) => v.platform === "yt_long" && normTitle(v.title) === normTitle(ep.title));
+    const opts = eps.map((ep) => {
+      const inAgenda = ep.video && planned.has(ep.video);
+      const why = !ep.ready ? " — ainda em produção" : inAgenda ? " — já está na agenda" : published(ep) ? " — já está no YouTube" : "";
+      return `<option value="${esc(ep.id)}" ${!ep.ready || inAgenda || published(ep) ? "disabled" : ""}>${esc(ep.id)}${why}</option>`;
+    }).join("");
+    const firstFree = eps.find((ep) => ep.ready && !(ep.video && planned.has(ep.video)) && !published(ep));
+    box.innerHTML = `<div class="card form-card">
+      <div class="card-h"><span class="card-title">Planejar episódio</span><span class="card-sub">cria o episódio e os 3 cortes como rascunho, com título, descrição e tags dos textos da produção</span></div>
+      <form class="form" id="plan-f" novalidate>
+        <div class="field w2"><label for="p-ep">Episódio</label><select id="p-ep" name="episode">${opts || '<option value="">nenhum episódio em longform/episodes</option>'}</select></div>
+        <div class="field"><label for="p-at">Episódio sai em</label><input id="p-at" name="at" type="datetime-local" value="${keyOf(addDays(new Date(), 1))}T20:00"></div>
+        <div class="field"><label for="p-st">Cortes (1 por dia, às)</label><input id="p-st" name="shortsTime" type="time" value="20:00"></div>
+        <div class="form-actions"><span class="msg" id="p-msg">Nada sobe agora: você revisa e depois aprova.</span><button type="button" class="btn" id="p-cancel">Cancelar</button><button type="submit" class="btn primary" id="p-save">Criar rascunhos</button></div>
+      </form></div>`;
+    const f = $("#plan-f");
+    if (firstFree) f.episode.value = firstFree.id;
+    $("#p-cancel").addEventListener("click", () => { box.innerHTML = ""; flushRender(); });
+    f.addEventListener("submit", async (ev) => {
+      ev.preventDefault();
+      const msg = $("#p-msg");
+      if (!f.episode.value || !f.at.value) { msg.className = "msg err"; msg.textContent = "Escolha o episódio e o horário."; return; }
+      $("#p-save").disabled = true;
+      msg.className = "msg"; msg.textContent = "Criando…";
+      try {
+        const res = await fetch("/api/brazil-noir/plan", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ episode: f.episode.value, at: f.at.value, shortsTime: f.shortsTime.value }) });
+        const out = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(out.error || `erro ${res.status}`);
+        await refresh();
+        toast("Rascunhos criados: revise e aprove");
+      } catch (err) {
+        $("#p-save").disabled = false;
+        msg.className = "msg err"; msg.textContent = `Não criou: ${err.message}`;
+      }
+    });
+    box.scrollIntoView({ block: "nearest", behavior: "smooth" });
   }
 
   function openScheduleForm(m, entry) {
@@ -1136,6 +1220,7 @@
     const cases = [...new Set(m.videos.map((v) => v.case).concat(m.schedule.map((i) => i.case)).filter(Boolean))];
     box.innerHTML = `<div class="card form-card">
       <div class="card-h"><span class="card-title">${entry ? "Editar programado" : "Programar vídeo"}</span><span class="card-sub">grava em <code>schedule.json</code></span></div>
+      ${entry?.yt?.id ? `<div class="notice" style="margin:10px 0 0"><span class="tag">YouTube</span><span>Este vídeo já está agendado no YouTube. Mudar aqui só altera a agenda; para mudar horário ou título no YouTube, edite no YouTube Studio.</span></div>` : ""}
       <form class="form" id="sched-f" novalidate autocomplete="off">
         <div class="field"><label for="s-at">Data e hora</label><input id="s-at" name="at" type="datetime-local" required value="${esc(e.at)}"></div>
         <div class="field"><label for="s-kind">Tipo</label><select id="s-kind" name="kind"><option value="corte" ${e.kind !== "episodio" ? "selected" : ""}>Corte</option><option value="episodio" ${e.kind === "episodio" ? "selected" : ""}>Episódio</option></select></div>
@@ -1605,7 +1690,7 @@
 
   // Atualização ao vivo não redesenha a tela com um formulário aberto (perderia o que foi digitado)
   function liveRender() {
-    if (document.querySelector("#spend-f, #sched-f")) { state.pendingRender = true; return; }
+    if (document.querySelector("#spend-f, #sched-f, #plan-f")) { state.pendingRender = true; return; }
     const y = scrollY;
     render();
     scrollTo(0, y);
