@@ -15,7 +15,7 @@ Página estática em `dashboard/brazil-noir/` (no ar em `/brazil-noir` do mesmo 
 
 ## Publicar no YouTube pela agenda
 
-1. **Autorizar uma vez neste computador:** coloque `BN_YOUTUBE_CLIENT_ID` e `BN_YOUTUBE_CLIENT_SECRET` no `.env` (os mesmos do pipeline) e rode `npm run bn:youtube:auth`. O navegador abre a tela do Google; entre na conta do canal e marque todas as permissões (subir vídeos, ler os agendados e o Analytics). O token fica em `BN_YOUTUBE_REFRESH_TOKEN` no `.env`.
+1. **Autorizar uma vez neste computador:** no Google Cloud (mesmo projeto do pipeline), em **APIs e serviços → Credenciais**, crie um **ID do cliente OAuth** do tipo **App para computador** e baixe o JSON (fica em Downloads como `client_secret_*.json`). Rode `npm run bn:youtube:auth`: ele acha o JSON, grava `BN_YOUTUBE_CLIENT_ID`/`SECRET` no `.env` e abre a autorização. (Também aceita `-- --client "caminho.json"`, ou as duas variáveis já no `.env`.) O navegador abre a tela do Google; entre na conta do canal e marque todas as permissões (subir vídeos, ler os agendados e o Analytics). O token fica em `BN_YOUTUBE_REFRESH_TOKEN` no `.env`.
 2. **Planejar:** em **Programados → Planejar episódio** (ou `npm run bn:youtube -- plan ep03 --at "2026-11-12 20:00"`). Cria o episódio e os 3 cortes, um por dia, como **rascunho**, com título, descrição, tags e thumbnail tirados de `youtube.txt` e `shorts/postagem.txt`. Episódio que já está no YouTube fica bloqueado.
 3. **Revisar:** confira títulos e horários na agenda; dá para editar cada item.
 4. **Aprovar e subir:** o botão em cada item (ou `npm run bn:youtube -- approve <id>` + `upload <id>`). Sobe como **privado com data de publicação**; o YouTube publica sozinho na hora. O item passa a mostrar "✓ agendado no YouTube".

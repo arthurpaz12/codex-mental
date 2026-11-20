@@ -8,8 +8,9 @@
  *   youtube.readonly         ler os vídeos agendados no YouTube Studio
  *   yt-analytics.readonly    retenção, horas assistidas, inscritos por vídeo
  *
- * Precisa, no .env do codex-mental: BN_YOUTUBE_CLIENT_ID e BN_YOUTUBE_CLIENT_SECRET
- * (o mesmo cliente OAuth que o pipeline já usa para publicar).
+ * Precisa do cliente OAuth do Google Cloud: o JSON baixado em Credenciais
+ * (client_secret_*.json na pasta Downloads, ou --client <arquivo>), ou
+ * BN_YOUTUBE_CLIENT_ID e BN_YOUTUBE_CLIENT_SECRET já no .env do codex-mental.
  * Se o Google responder "redirect_uri_mismatch", cadastre
  * http://127.0.0.1:8765/callback como URI de redirecionamento do cliente
  * (ou use um cliente do tipo "App para computador").
@@ -21,7 +22,8 @@ import "dotenv/config";
 import { createServer } from "http";
 import { spawn } from "child_process";
 import { randomBytes, createHash } from "crypto";
-import { readFileSync, writeFileSync, existsSync } from "fs";
+import { readFileSync, writeFileSync, existsSync, readdirSync, statSync } from "fs";
+import { homedir } from "os";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -42,11 +44,36 @@ function updateEnvVar(key, value) {
   writeFileSync(ENV_PATH, content);
 }
 
-const clientId = process.env.BN_YOUTUBE_CLIENT_ID;
-const clientSecret = process.env.BN_YOUTUBE_CLIENT_SECRET;
+// Cliente OAuth: do JSON baixado do Google Cloud (--client <arquivo>, ou o
+// client_secret_*.json mais recente da pasta Downloads) ou do .env.
+// O JSON é lido e gravado no .env; o segredo nunca é mostrado na tela.
+function clientFromJson() {
+  const i = process.argv.indexOf("--client");
+  let file = i > 0 ? process.argv[i + 1] : null;
+  if (!file) {
+    const downloads = join(homedir(), "Downloads");
+    const found = existsSync(downloads) ? readdirSync(downloads).filter((f) => /^client_secret.*\.json$/i.test(f)).map((f) => join(downloads, f)) : [];
+    file = found.sort((a, b) => statSync(b).mtimeMs - statSync(a).mtimeMs)[0];
+    if (!file) return null;
+  }
+  if (!existsSync(file)) { console.error(`❌ Arquivo não encontrado: ${file}`); process.exit(1); }
+  const json = JSON.parse(readFileSync(file, "utf-8"));
+  const c = json.installed || json.web;
+  if (!c?.client_id || !c?.client_secret) { console.error(`❌ ${file} não parece um cliente OAuth do Google (faltam client_id/client_secret).`); process.exit(1); }
+  if (json.web) console.warn("⚠️  Esse cliente é do tipo \"Aplicativo da Web\". Se o Google reclamar de redirect_uri, crie um do tipo \"App para computador\".");
+  updateEnvVar("BN_YOUTUBE_CLIENT_ID", c.client_id);
+  updateEnvVar("BN_YOUTUBE_CLIENT_SECRET", c.client_secret);
+  console.log(`🔑 Cliente OAuth lido de ${file} e salvo no .env.`);
+  return { id: c.client_id, secret: c.client_secret };
+}
+
+const fromJson = clientFromJson();
+const clientId = fromJson?.id || process.env.BN_YOUTUBE_CLIENT_ID;
+const clientSecret = fromJson?.secret || process.env.BN_YOUTUBE_CLIENT_SECRET;
 if (!clientId || !clientSecret) {
-  console.error(`❌ Falta BN_YOUTUBE_CLIENT_ID e/ou BN_YOUTUBE_CLIENT_SECRET em ${ENV_PATH}`);
-  console.error("   Copie do .env do outro computador (são os mesmos do pipeline) e rode de novo.");
+  console.error("❌ Não achei o cliente OAuth do Google.");
+  console.error("   Baixe o JSON do cliente no Google Cloud (Credenciais → seu cliente → Baixar JSON)");
+  console.error("   e deixe na pasta Downloads, ou rode: npm run bn:youtube:auth -- --client \"caminho\\do\\arquivo.json\"");
   process.exit(1);
 }
 
