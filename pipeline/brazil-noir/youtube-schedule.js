@@ -174,6 +174,10 @@ async function accessToken() {
   });
   const data = await res.json();
   if (!data.access_token) throw new Error(`Google recusou o token: ${data.error_description || data.error}`);
+  // Trava: só sobe no canal do Brazil Noir.
+  const mine = await (await fetch("https://www.googleapis.com/youtube/v3/channels?part=snippet&mine=true", { headers: { Authorization: `Bearer ${data.access_token}` } })).json();
+  const ch = mine.items?.[0]?.snippet;
+  if ((ch?.customUrl || "").toLowerCase() !== "@ytbrazilnoir") throw new Error(`O token do .env é do canal ${ch ? `${ch.title} (${ch.customUrl || "sem @"})` : "desconhecido"}, não do Brazil Noir. Rode \`npm run bn:youtube:auth\` e escolha o canal Brazil Noir.`);
   return data.access_token;
 }
 

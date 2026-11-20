@@ -165,6 +165,10 @@ async function ytAnalyticsToken() {
   });
   const data = await res.json();
   if (!data.access_token) throw new Error(`token Google: ${JSON.stringify(data).slice(0, 200)}`);
+  // Não mistura números de outro canal na dashboard do Brazil Noir.
+  const mine = await (await fetch("https://www.googleapis.com/youtube/v3/channels?part=snippet&mine=true", { headers: { Authorization: `Bearer ${data.access_token}` } })).json();
+  const handle = (mine.items?.[0]?.snippet?.customUrl || "").toLowerCase();
+  if (handle !== `@${CHANNEL.youtube.handle.toLowerCase()}`) throw new Error(`token do .env é de outro canal (${handle || "desconhecido"}), não do Brazil Noir`);
   return data.access_token;
 }
 

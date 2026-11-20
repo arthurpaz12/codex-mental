@@ -30,6 +30,7 @@ import { fileURLToPath } from "url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ENV_PATH = join(__dirname, "../../.env");
 const PORT = 8765;
+const EXPECTED_HANDLE = "@ytbrazilnoir";
 const REDIRECT = `http://127.0.0.1:${PORT}/callback`;
 const SCOPES = [
   "https://www.googleapis.com/auth/youtube.upload",
@@ -88,7 +89,7 @@ const authUrl = "https://accounts.google.com/o/oauth2/v2/auth?" + new URLSearchP
   response_type: "code",
   scope: SCOPES.join(" "),
   access_type: "offline",
-  prompt: "consent",
+  prompt: "select_account consent",
   include_granted_scopes: "true",
   code_challenge: challenge,
   code_challenge_method: "S256",
@@ -111,6 +112,15 @@ const server = createServer(async (req, res) => {
     });
     const data = await r.json();
     if (!data.refresh_token) throw new Error(data.error_description || data.error || "o Google não devolveu refresh_token");
+    // Só aceita o canal do Brazil Noir: um token de outro canal subiria vídeo no lugar errado.
+    const mine = await (await fetch("https://www.googleapis.com/youtube/v3/channels?part=snippet&mine=true", { headers: { Authorization: `Bearer ${data.access_token}` } })).json();
+    const ch = mine.items?.[0]?.snippet;
+    if (!ch || (ch.customUrl || "").toLowerCase() !== EXPECTED_HANDLE) {
+      const nome = ch ? `${ch.title} (${ch.customUrl || "sem @"})` : "nenhum canal";
+      done(400, `Esse login é do canal <b>${nome}</b>, não do Brazil Noir. Nada foi salvo. Rode de novo e, na tela do Google, escolha o canal Brazil Noir.`);
+      console.error(`❌ Canal errado: ${nome}. Nada foi salvo. Rode de novo e escolha o canal Brazil Noir.`);
+      return finish(1);
+    }
     updateEnvVar("BN_YOUTUBE_REFRESH_TOKEN", data.refresh_token);
     const granted = (data.scope || "").split(" ").map((s) => s.split("/").pop());
     done(200, "Pronto! O canal foi autorizado. Pode fechar esta aba.");
