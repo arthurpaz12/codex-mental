@@ -64,7 +64,11 @@ Sem YouTube Analytics, as horas de exibição e as views de Shorts em 90 dias ap
 
 ## Regras usadas nas metas
 
-- **YouTube Partner Program (anúncios):** 1.000 inscritos + 4.000 h de exibição pública de vídeos longos em 12 meses, **ou** 10 mi de views de Shorts em 90 dias.
+- **YouTube Partner Program (anúncios):** 1.000 inscritos + 8.000 h de exibição pública de vídeos longos em 12 meses, **ou** 20 mi de views de Shorts em 90 dias. É a regra para canais novos a partir de 01/02/2027; antes eram 4.000 h ou 10 mi.
+
+## Métricas por vídeo (YouTube Analytics)
+
+Retenção (% e tempo médio), horas assistidas, inscritos ganhos, impressões da miniatura + CTR, "Assistiram" (engagedViews ÷ views: nos Shorts, quem não deslizou) e a origem dos views dos vídeos longos (feed de Shorts, sugeridos, busca...). Cada métrica é opcional: se a API não entregar alguma, o coletor avisa e segue. A curva de retenção segundo a segundo e o "exibidos x deslizados" exato do Studio não estão na API.
 - **YPP nível inicial:** 500 inscritos + 3 envios públicos em 90 dias + 3.000 h em 12 meses **ou** 3 mi de views de Shorts em 90 dias.
 - **TikTok Creator Rewards:** 10 mil seguidores + 100 mil views em 30 dias; só vídeos com mais de 1 minuto geram receita (conta pessoal, 18+, país elegível).
 

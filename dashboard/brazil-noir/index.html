@@ -156,9 +156,12 @@
   .feat-title a:hover { text-decoration: underline; }
   .feat-meta { font-size: 13px; color: var(--muted); margin-top: 4px; display: flex; flex-wrap: wrap; gap: 4px 12px; }
   .feat-hook { font-size: 13px; color: var(--ink-2); border-left: 2px solid var(--border-2); padding-left: 10px; }
-  .feat-stats { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
-  .feat-stats > div { padding: 10px 12px; border-right: 1px solid var(--border); min-width: 0; }
-  .feat-stats > div:last-child { border-right: 0; }
+  .feat-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  /* linhas entre as células sem depender de quantas cabem por linha */
+  .feat-stats > div { padding: 10px 12px; min-width: 0; box-shadow: 1px 0 0 var(--border), 0 1px 0 var(--border); }
+  .feat-traffic { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 12.5px; color: var(--muted); }
+  .feat-traffic > span:first-child { margin-right: 2px; }
+  .feat-traffic b { font-weight: 600; color: var(--ink); margin-left: 4px; }
   .feat-stats span { display: block; font-size: 11.5px; color: var(--muted); white-space: nowrap; }
   .feat-stats b { display: block; font-size: 17px; font-weight: 600; margin-top: 2px; }
   .feat-cmp { font-size: 13px; color: var(--ink-2); }
@@ -373,7 +376,7 @@
   footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
   /* ---------- Responsivo ---------- */
-  @media (max-width: 1280px) { .kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); } .feat-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); } .feat-stats > div:nth-child(3) { border-right: 0; } .feat-stats > div:nth-child(-n+3) { border-bottom: 1px solid var(--border); } }
+  @media (max-width: 1280px) { .kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   @media (max-width: 1180px) {
     .hero { grid-template-columns: 1fr; }
     .grid3, .grid4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -642,6 +645,8 @@
       v.net = PLAT[v.platform]?.net;
       v.pub = pubKey(v.publishedAt);
       v.engagement = isNum(v.views) && v.views > 0 ? (((v.likes || 0) + (v.comments || 0) + (v.shares || 0)) / v.views) * 100 : null;
+      // % das views que passaram dos primeiros segundos (Shorts: o contrário de deslizar)
+      v.engagedPct = isNum(v.engagedViews) && v.views > 0 ? Math.min(100, (v.engagedViews / v.views) * 100) : null;
       v.key = (v.hook || v.title || v.id).trim();
     }
     m.videos.sort((a, b) => (b.pub || "").localeCompare(a.pub || "") || (b.views || 0) - (a.views || 0));
@@ -1009,13 +1014,30 @@
           ${stat("Comentários", fmt(v.comments))}
           ${stat("Compart.", fmt(v.shares))}
           ${stat("Seguidores", isNum(v.followersGained) ? "+" + fmt(v.followersGained) : "—")}
+          ${isNum(v.impressions) ? stat("Impressões", `${fmtC(v.impressions)} <span class="muted" style="display:inline;font-size:12px;font-weight:500">CTR ${pct(v.ctr)}</span>`) : ""}
+          ${isNum(v.engagedPct) && v.platform === "yt_shorts" ? stat("Assistiram", `${pct(v.engagedPct, 0)} <span class="muted" style="display:inline;font-size:12px;font-weight:500">não deslizaram</span>`) : ""}
         </div>
+        ${trafficLine(v)}
         ${cmp}
       </div>`;
     el.querySelector(".play")?.addEventListener("click", () => {
       $("#feat-media").innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="${esc(v.title)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
     });
     el.querySelectorAll("[data-fm]").forEach((b) => b.addEventListener("click", () => { state.featMetric = b.dataset.fm; renderFeatured(m); }));
+  }
+
+  // Origem dos views (YouTube Analytics, insightTrafficSourceType)
+  const TRAFFIC = {
+    SHORTS: "Feed de Shorts", SHORTS_CONTENT_LINKS: "Link num Short", RELATED_VIDEO: "Sugeridos", YT_SEARCH: "Busca",
+    SUBSCRIBER: "Início e inscrições", YT_CHANNEL: "Página do canal", NOTIFICATION: "Notificações", END_SCREEN: "Tela final",
+    PLAYLIST: "Playlists", YT_PLAYLIST_PAGE: "Playlists", HASHTAGS: "Hashtags", EXT_URL: "Fora do YouTube",
+    NO_LINK_OTHER: "Direto ou desconhecido", NO_LINK_EMBEDDED: "Incorporado", YT_OTHER_PAGE: "Outras páginas", ADVERTISING: "Anúncios",
+  };
+  function trafficLine(v) {
+    const t = Object.entries(v.traffic || {}).sort((a, b) => b[1] - a[1]);
+    const total = sum(t, (x) => x[1]);
+    if (!total) return "";
+    return `<div class="feat-traffic"><span>De onde vêm os views</span>${t.slice(0, 5).map(([k, n]) => `<span class="chip">${esc(TRAFFIC[k] || k)} <b class="num">${pct((n / total) * 100, 0)}</b></span>`).join("")}</div>`;
   }
 
   // Recentes: o mesmo corte postado em várias redes no mesmo dia vira uma linha
@@ -1334,7 +1356,8 @@
     const subs = yt.followers;
     const ytC = NETS.youtube.color, shC = PLAT.yt_shorts.color, tkC = NETS.tiktok.color;
     const hoursFmt = (v) => fmt(v) + " h";
-    const fullDone = subs >= 1000 && (hours >= 4000 || shorts90 >= 1e7);
+    // Regra nova para canais que entram no YPP a partir de 01/02/2027: 8.000 h ou 20 mi de views de Shorts
+    const fullDone = subs >= 1000 && (hours >= 8000 || shorts90 >= 2e7);
     const lowDone = subs >= 500 && uploads90 >= 3 && (hours >= 3000 || shorts90 >= 3e6);
     const tkDaily = viewsByDay(m, "tiktok");
     let tk30 = null, tk30Est = false;
@@ -1349,9 +1372,10 @@
       <div class="card goal">
         <div class="goal-top"><div><div class="goal-name">YouTube Partner Program</div><div class="goal-req">Receita de anúncios · 1.000 inscritos + um dos caminhos</div></div>${pill(fullDone)}</div>
         ${meter({ label: "Inscritos", value: subs, goal: 1000, color: ytC, sub: eta(m, "youtube", 1000) })}
-        ${meter({ label: "Horas de exibição (12 meses)", value: hours, goal: 4000, color: ytC, fmtV: hoursFmt, est: hoursEst, sub: "só vídeos longos públicos" })}
+        ${meter({ label: "Horas de exibição (12 meses)", value: hours, goal: 8000, color: ytC, fmtV: hoursFmt, est: hoursEst, sub: "só vídeos longos públicos" })}
         <div class="or">ou</div>
-        ${meter({ label: "Views de Shorts (90 dias)", value: shorts90, goal: 1e7, color: shC, fmtV: fmtC, est: shortsEst })}
+        ${meter({ label: "Views de Shorts (90 dias)", value: shorts90, goal: 2e7, color: shC, fmtV: fmtC, est: shortsEst })}
+        <div class="goal-foot">Regra para canais novos a partir de 01/02/2027: 8.000 h ou 20 mi de views de Shorts (antes eram 4.000 h ou 10 mi).</div>
         ${hoursEst ? `<div class="goal-foot">Horas e views de Shorts estimadas pelas views públicas. O número oficial vem do YouTube Analytics (ver <a href="#sources">Fontes de dados</a>).</div>` : ""}
       </div>
       <div class="card goal">
@@ -1468,7 +1492,16 @@
     if (fgPlat.length >= 2) out.push(`<b>${PLAT[fgPlat[0].p].label}</b> converte mais views em seguidores: <b>${fmt1(fgPlat[0].per1k)}</b> por mil views (${PLAT[fgPlat.at(-1).p].short}: ${fmt1(fgPlat.at(-1).per1k)}).`);
     const longs = pool.filter((v) => v.platform === "yt_long" && isNum(v.avgViewPct));
     if (longs.length >= 2) out.push(`Os vídeos longos seguram em média <b>${pct(sum(longs, (v) => v.avgViewPct) / longs.length, 0)}</b> da duração (≈ ${dur(median(longs.map((v) => v.avgWatchSec)))} por view).`);
-    return out.slice(0, 4);
+    const tr = pool.filter((v) => v.platform === "yt_long" && v.traffic);
+    const trTot = sum(tr, (v) => sum(Object.values(v.traffic), (n) => n));
+    if (trTot >= 20) {
+      const fromShorts = sum(tr, (v) => (v.traffic.SHORTS || 0) + (v.traffic.SHORTS_CONTENT_LINKS || 0));
+      out.push(`<b>${pct((fromShorts / trTot) * 100, 0)}</b> dos views dos vídeos longos vieram de Shorts (feed ou link num Short).`);
+    }
+    const sh = pool.filter((v) => v.platform === "yt_shorts" && isNum(v.engagedViews) && v.views > 0);
+    const shV = sum(sh, (v) => v.views);
+    if (shV >= 50) out.push(`Nos Shorts, <b>${pct((sum(sh, (v) => v.engagedViews) / shV) * 100, 0)}</b> das views passaram dos primeiros segundos; o resto deslizou.`);
+    return out.slice(0, 6);
   }
 
   const COLS = [
@@ -1482,6 +1515,7 @@
     { key: "shares", label: "Compart.", r: true, sort: true },
     { key: "followersGained", label: "Seguidores", r: true, sort: true },
     { key: "engagement", label: "Engaj.", r: true, sort: true },
+    { key: "engagedPct", label: "Assistiram", r: true, sort: true },
   ];
   function renderVideos(m) {
     const el = $("#vtable");
@@ -1514,6 +1548,7 @@
           <td class="r">${fmt(v.likes)}</td><td class="r">${fmt(v.comments)}</td><td class="r">${fmt(v.shares)}</td>
           <td class="r">${isNum(v.followersGained) ? "+" + fmt(v.followersGained) : "—"}</td>
           <td class="r">${pct(v.engagement)}</td>
+          <td class="r" ${v.platform === "yt_shorts" ? 'title="Views que não deslizaram nos primeiros segundos"' : ""}>${isNum(v.engagedPct) ? pct(v.engagedPct, 0) : '<span class="muted">—</span>'}</td>
         </tr>`;
       }).join("") || `<tr><td colspan="${COLS.length}" class="muted" style="padding:28px;text-align:center">Nenhum vídeo ${state.period ? `publicado nos últimos ${state.period} dias` : ""}${q ? " com essa busca" : ""}.</td></tr>`;
       $("#videos-aside").textContent = `${list.length} de ${m.videos.length} vídeos`;

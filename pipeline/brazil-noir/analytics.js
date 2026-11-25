@@ -80,16 +80,21 @@ function caseFromTopic(topic) {
 // YouTube — Data API v3 (chave simples)
 // ---------------------------------------------------------------------------
 
+// Sem YOUTUBE_API_KEY (caso deste PC), usa o OAuth do canal, que também lê a Data API.
+let oauthForData = null;
 async function ytGet(path, params) {
-  const qs = new URLSearchParams({ ...params, key: process.env.YOUTUBE_API_KEY });
-  const res = await fetch(`https://www.googleapis.com/youtube/v3/${path}?${qs}`, { headers: { Referer: YT_REFERER } });
+  const key = process.env.YOUTUBE_API_KEY;
+  if (!key && !oauthForData) oauthForData = await ytAnalyticsToken();
+  const qs = new URLSearchParams(key ? { ...params, key } : params);
+  const headers = key ? { Referer: YT_REFERER } : { Authorization: `Bearer ${oauthForData}` };
+  const res = await fetch(`https://www.googleapis.com/youtube/v3/${path}?${qs}`, { headers });
   if (!res.ok) throw new Error(`YouTube ${path} ${res.status}: ${(await res.text()).slice(0, 200)}`);
   return res.json();
 }
 
 async function collectYouTube(legacy) {
-  if (!process.env.YOUTUBE_API_KEY) {
-    console.log("   ⏭️  YouTube: sem YOUTUBE_API_KEY — pulando");
+  if (!process.env.YOUTUBE_API_KEY && !process.env.BN_YOUTUBE_REFRESH_TOKEN) {
+    console.log("   ⏭️  YouTube: sem YOUTUBE_API_KEY nem OAuth do canal — pulando");
     return null;
   }
   const ch = (await ytGet("channels", { part: "snippet,statistics,contentDetails", forHandle: CHANNEL.youtube.handle })).items?.[0];
@@ -106,8 +111,10 @@ async function collectYouTube(legacy) {
 
   const videos = [];
   for (let i = 0; i < ids.length; i += 50) {
-    const batch = await ytGet("videos", { part: "snippet,statistics,contentDetails", id: ids.slice(i, i + 50).join(",") });
+    const batch = await ytGet("videos", { part: "snippet,statistics,contentDetails,status", id: ids.slice(i, i + 50).join(",") });
     for (const v of batch.items) {
+      // Pelo OAuth a lista traz também privados e agendados: esses ficam na agenda, não aqui
+      if (v.status && v.status.privacyStatus !== "public") continue;
       const durationSec = isoDurationToSec(v.contentDetails.duration);
       const title = v.snippet.title;
       // Vertical ≤ 3 min = Short. A API não diz a proporção, então usamos o
@@ -211,14 +218,33 @@ async function collectYouTubeAnalytics(yt) {
     try {
       const byType12 = await ytReport(token, { startDate: daysAgo(365), endDate: end, dimensions: "creatorContentType", metrics: "views,estimatedMinutesWatched" });
       const byType90 = await ytReport(token, { startDate: daysAgo(90), endDate: end, dimensions: "creatorContentType", metrics: "views" });
-      const vod = byType12.find((r) => r.creatorContentType === "VIDEO_ON_DEMAND");
+      // A API devolve "videoOnDemand" e "shorts" (a documentação mostra em maiúsculas)
+      const type = (rows, t) => rows.find((r) => String(r.creatorContentType).replace(/_/g, "").toLowerCase() === t);
+      const vod = type(byType12, "videoondemand");
       longHours12m = vod ? vod.estimatedMinutesWatched / 60 : 0;
-      shortsViews90d = byType90.find((r) => r.creatorContentType === "SHORTS")?.views ?? 0;
+      shortsViews90d = type(byType90, "shorts")?.views ?? 0;
     } catch (e) {
       console.warn(`   ⚠️  YouTube Analytics (creatorContentType): ${e.message}`);
     }
-    console.log(`   ✅ YouTube Analytics: ${perVideo.length} vídeos, ${daily.length} dias`);
-    return { perVideo, daily, longHours12m, shortsViews90d };
+    // Métricas que nem todo canal/projeto tem: cada uma é opcional
+    const optional = async (label, params) => {
+      try { return await ytReport(token, params); } catch (e) { console.warn(`   ⚠️  YouTube Analytics (${label}): ${e.message.slice(0, 160)}`); return null; }
+    };
+    const byVideo = { startDate: start, endDate: end, dimensions: "video", sort: "-views", maxResults: 200 };
+    // engagedViews: views que passaram dos primeiros segundos (nos Shorts, o oposto de "deslizou")
+    const engaged = await optional("engagedViews", { ...byVideo, metrics: "views,engagedViews" });
+    // Impressões e CTR da miniatura não saem pela API (testado em 25/11/26: "query is not supported"):
+    // ficam no YouTube Studio. Se um dia vierem, preencha v.impressions / v.ctr que a página já mostra.
+    const impressions = null;
+    // De onde vêm os views de cada vídeo longo (Shorts, sugeridos, busca, navegação...)
+    const traffic = {};
+    const longIds = (yt?.videos || []).filter((v) => v.platform === "yt_long" && v.publishedAt >= LONGFORM_ERA).map((v) => v.id);
+    for (const id of longIds) {
+      const rows = await optional(`tráfego ${id}`, { startDate: start, endDate: end, dimensions: "insightTrafficSourceType", filters: `video==${id}`, metrics: "views" });
+      if (rows) traffic[id] = Object.fromEntries(rows.filter((r) => r.views > 0).map((r) => [r.insightTrafficSourceType, r.views]));
+    }
+    console.log(`   ✅ YouTube Analytics: ${perVideo.length} vídeos, ${daily.length} dias${engaged ? ", engajados" : ""}${impressions ? ", impressões" : ""}, origem de ${Object.keys(traffic).length} longos`);
+    return { perVideo, daily, longHours12m, shortsViews90d, engaged, impressions, traffic };
   } catch (e) {
     console.warn(`   ⚠️  YouTube Analytics: ${e.message} (o refresh token precisa do escopo yt-analytics.readonly)`);
     return null;
@@ -476,6 +502,13 @@ export async function collectBrazilNoir() {
         v.followersGained = r.subscribersGained;
         v.watchHours = r.estimatedMinutesWatched / 60;
         v.shares = r.shares;
+      }
+      const eng = new Map((yta.engaged || []).map((r) => [r.video, r]));
+      const imp = new Map((yta.impressions || []).map((r) => [r.video, r]));
+      for (const v of yt.videos) {
+        if (eng.has(v.id)) v.engagedViews = eng.get(v.id).engagedViews;
+        if (imp.has(v.id)) { v.impressions = imp.get(v.id).videoThumbnailImpressions; v.ctr = imp.get(v.id).videoThumbnailImpressionsClickRate; }
+        if (yta.traffic[v.id]) v.traffic = yta.traffic[v.id];
       }
       // Reconstrói inscritos acumulados de trás pra frente a partir do total atual
       let subs = yt.account.followers;
